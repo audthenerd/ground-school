@@ -1,8 +1,8 @@
-# Extend The OpenMAIC Product (Cookbook)
+# Extend The Ground School Product (Cookbook)
 
 ## Scope
 
-You are working **inside a fork of the OpenMAIC product** (the Next.js app at the repo root), customizing it in place. If instead you want to consume `@openmaic/*` in a separate app, use [extend-sdk.md](extend-sdk.md) instead.
+You are working **inside a fork of the Ground School product** (the Next.js app at the repo root), customizing it in place. If instead you want to consume `@openmaic/*` in a separate app, use [extend-sdk.md](extend-sdk.md) instead.
 
 Entry points below are given as **file + symbol name** (not line numbers — they drift). Read the file, then jump to the symbol. The `@/*` path alias is anchored at the repo root.
 
@@ -20,7 +20,7 @@ Two distinct cases:
   4. Optional, legacy only: to also accept `<PREFIX>_API_KEY` / `_BASE_URL` / `_MODELS` from the environment without `openmaic.yml`, add a `PREFIX: 'your-id'` entry to `LLM_ENV_MAP` in `lib/server/provider-config.ts`. That path is deprecated.
   5. A new token plan (one key, several capabilities) is one entry in `lib/config/token-plan-presets.ts`; it becomes a preset whose recommended models fill the slots it covers in the first-run setup.
 
-**Gotcha:** OpenMAIC has **no hardcoded model fallback**. If no model is assigned to the `llm` slot (or the more specific slot a call uses), generation fails with `No model is configured for <slot>` rather than picking a vendor — always assign one.
+**Gotcha:** Ground School has **no hardcoded model fallback**. If no model is assigned to the `llm` slot (or the more specific slot a call uses), generation fails with `No model is configured for <slot>` rather than picking a vendor — always assign one.
 
 ## Task 2 — Server-Side Persistence (PostgreSQL / S3)
 

@@ -33,7 +33,7 @@ export type { PptxFiles, ZipParseLimits } from './parser/ZipParser';
 export type { PresentationData } from './model/Presentation';
 export type { MediaMode } from './serializer/RenderContext';
 
-// PPTX → OpenMAIC canvas pipeline. The aliased `Slide` export below
+// PPTX → Ground School canvas pipeline. The aliased `Slide` export below
 // shadows the adapter-level `Slide` above; consumers wanting the raw
 // pptxtojson Slide shape should import from './adapter/types' directly.
 export {

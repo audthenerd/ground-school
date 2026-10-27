@@ -365,7 +365,7 @@ function renderComment(result, context) {
     items.map((r) => `- [#${r.number}](${root}/${kind}/${r.number}): ${safeText(r.reason)}`);
   return [
     MARKER,
-    '**OpenMAIC automated triage**',
+    '**Ground School automated triage**',
     '',
     safeText(result.summary),
     '',

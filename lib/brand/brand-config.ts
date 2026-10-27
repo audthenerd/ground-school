@@ -25,10 +25,10 @@ export interface BrandConfig {
 
 /** The default brand: the product itself, with no vendor overrides. */
 export const DEFAULT_BRAND: BrandConfig = {
-  productName: 'OpenMAIC',
-  shortName: 'OpenMAIC',
+  productName: 'Ground School',
+  shortName: 'Ground School',
   logoSrc: '/logo-horizontal.png',
   logoHasWordmark: true,
-  markSrc: '/openmaic-mark.png',
+  markSrc: '/ground-school-mark.png',
   themeColor: '#722ed1',
 };

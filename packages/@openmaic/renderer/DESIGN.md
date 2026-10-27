@@ -5,7 +5,7 @@
 
 ## 1. 目标
 
-把 OpenMAIC 主仓 `components/maic-renderer/` 中的只读画布部分抽成独立 workspace 包，让任意 React + Tailwind 4 项目都能"装包 → 传 Slide → 直接渲染"。
+把 Ground School 主仓 `components/maic-renderer/` 中的只读画布部分抽成独立 workspace 包，让任意 React + Tailwind 4 项目都能"装包 → 传 Slide → 直接渲染"。
 
 **v1 范围限定为只读画布**（对应主仓 `Editor/ScreenCanvas.tsx` 子树）。编辑能力（`Editor/Canvas/*`、`Operate/*`、ProseMirror live editor）留给 v2。
 
@@ -21,7 +21,7 @@
 | D1 | 范围 | 分两步：v1 只读 + v2 编辑 | 闭环最小，风险可控 |
 | D2 | 数据 API | **纯 Props 主**；同时导出可选 Provider | 上手最快，进阶用户也照顾到 |
 | D3 | 样式 | **要求消费者使用 Tailwind 4** | 工作量最小，跟主仓工程实践一致 |
-| D4 | 特效层 | **包含**，4 个全做成可选 props，默认关 | 还原"OpenMAIC 同款画布"必备，但默认零负担 |
+| D4 | 特效层 | **包含**，4 个全做成可选 props，默认关 | 还原"Ground School 同款画布"必备，但默认零负担 |
 | D5 | 业务耦合元素 | **暴露 renderImage / renderVideo 插槽**，包内默认渲原生标签 | 包不感知业务，消费者按需注入 |
 | D6 | i18n | 包不带文案 | UI 文案下放给消费者 |
 | D7 | ProseMirror | v1 不依赖 | 只读用 dangerouslySetInnerHTML 就够，体积大幅缩小 |

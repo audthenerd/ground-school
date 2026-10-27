@@ -565,7 +565,7 @@ describe('instrumentation registration', () => {
     vi.resetModules();
     vi.unstubAllEnvs();
     // register() refuses to boot without a database; these cases start past it.
-    vi.stubEnv('DATABASE_URL', 'postgres://collector-registration/openmaic');
+    vi.stubEnv('DATABASE_URL', 'postgres://collector-registration/ground_school');
   });
 
   it('starts the schedule on the Node.js server runtime', async () => {

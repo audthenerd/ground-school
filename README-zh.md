@@ -1,9 +1,9 @@
 <!-- <p align="center">
-  <img src="assets/logo-horizontal.png" alt="OpenMAIC" width="420"/>
+  <img src="assets/logo-horizontal.png" alt="Ground School" width="420"/>
 </p> -->
 
 <p align="center">
-  <img src="assets/banner.png" alt="OpenMAIC Banner" width="680"/>
+  <img src="assets/banner.png" alt="Ground School Banner" width="680"/>
 </p>
 
 <p align="center">
@@ -72,7 +72,7 @@
 
 ## 📖 项目简介
 
-**OpenMAIC**（Open Multi-Agent Interactive Classroom）是一个开源的 AI 互动课堂平台，能够将任何主题或文档转化为丰富的互动学习体验。基于多智能体协作引擎，它可以自动生成演示幻灯片、测验、交互式模拟实验和项目制学习活动——由 AI 教师和 AI 同学进行语音讲解、白板绘图，并与你展开实时讨论。内置 OpenMAIC Skill，可以在 [OpenClaw](https://github.com/openclaw/openclaw) 以及 Codex、DeepSeek、WorkBuddy 等 Agent 工作台中使用，直接在飞书、Slack、Telegram 等聊天应用或 IDE 里生成课堂。
+**Ground School**（Open Multi-Agent Interactive Classroom）是一个开源的 AI 互动课堂平台，能够将任何主题或文档转化为丰富的互动学习体验。基于多智能体协作引擎，它可以自动生成演示幻灯片、测验、交互式模拟实验和项目制学习活动——由 AI 教师和 AI 同学进行语音讲解、白板绘图，并与你展开实时讨论。内置 Ground School Skill，可以在 [OpenClaw](https://github.com/openclaw/openclaw) 以及 Codex、DeepSeek、WorkBuddy 等 Agent 工作台中使用，直接在飞书、Slack、Telegram 等聊天应用或 IDE 里生成课堂。
 
 https://github.com/user-attachments/assets/f4a2f1be-6615-4330-aea1-b86ccf42045e
 
@@ -83,7 +83,7 @@ https://github.com/user-attachments/assets/f4a2f1be-6615-4330-aea1-b86ccf42045e
 - **丰富的场景类型** — 幻灯片、测验、HTML 交互式模拟、项目制学习（PBL）
 - **白板 & 语音** — 智能体实时绘制图表、书写公式、语音讲解
 - **[灵活导出](packages/docs/content/docs/getting-started.zh-cn.mdx#导出课堂)** — 保留全部场景的 `.pptx`、能离线播放整堂课的单个 `.html` 文件，或用于迁移到其他部署的课堂 ZIP
-- **[Agent 工作台集成](#-agent-工作台集成)** — OpenMAIC Skill 支持 OpenClaw、Codex、DeepSeek、WorkBuddy 等，在飞书、Slack、Telegram 等 20+ 聊天应用或 IDE 里直接生成课堂
+- **[Agent 工作台集成](#-agent-工作台集成)** — Ground School Skill 支持 OpenClaw、Codex、DeepSeek、WorkBuddy 等，在飞书、Slack、Telegram 等 20+ 聊天应用或 IDE 里直接生成课堂
 
 ## 🚀 快速开始
 
@@ -97,7 +97,7 @@ https://github.com/user-attachments/assets/f4a2f1be-6615-4330-aea1-b86ccf42045e
 
 ```bash
 git clone https://github.com/THU-MAIC/OpenMAIC.git
-cd OpenMAIC
+cd Ground School
 pnpm install
 ```
 
@@ -137,7 +137,7 @@ slots:
 **支持的服务商：** OpenAI、Azure OpenAI、Anthropic、Amazon Bedrock、Google Gemini、DeepSeek、通义千问 Qwen、Kimi、MiniMax、Grok (xAI)、OpenRouter、TokenDance、豆包、腾讯混元 / TokenHub、小米 MiMo、智谱 GLM、Ollama、[Lemonade](#lemonade-local-ai) 与 [FunASR](#funasr-local-asr)（本地），以及任何兼容 OpenAI API 的服务。
 
 > [!TIP]
-> **推荐配置：** 打开全部模态时 OpenMAIC 效果最好——配图、语音讲解、视频片段、联网检索与网页抓取都会参与生成。Token Plan 可以用一个 Key 配置该套餐支持的能力（见下方示例），默认模型选 `deepseek-v4.1-flash` 这类速度快、长上下文的模型即可。
+> **推荐配置：** 打开全部模态时 Ground School 效果最好——配图、语音讲解、视频片段、联网检索与网页抓取都会参与生成。Token Plan 可以用一个 Key 配置该套餐支持的能力（见下方示例），默认模型选 `deepseek-v4.1-flash` 这类速度快、长上下文的模型即可。
 
 <details>
 <summary><b>更多示例</b>：Token Plan、小米 MiMo 与智谱 GLM、Amazon Bedrock</summary>
@@ -219,10 +219,10 @@ pnpm db:up
 然后取消 `.env.local` 中本地 `DATABASE_URL` 那一行的注释：
 
 ```env
-DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic
+DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school
 ```
 
-`pnpm db:up` 会在 `127.0.0.1:5432` 上启动一个开发用 PostgreSQL（可用 `OPENMAIC_DB_PORT` 换端口）。它是单独的 Compose 项目 `openmaic-dev-db`（本机所有检出共用），有自己的容器和数据卷，不会影响 `docker compose up` 栈的数据库。`pnpm db:down` 停止它并保留数据。也可以使用任何其他 PostgreSQL。
+`pnpm db:up` 会在 `127.0.0.1:5432` 上启动一个开发用 PostgreSQL（可用 `OPENMAIC_DB_PORT` 换端口）。它是单独的 Compose 项目 `ground-school-dev-db`（本机所有检出共用），有自己的容器和数据卷，不会影响 `docker compose up` 栈的数据库。`pnpm db:down` 停止它并保留数据。也可以使用任何其他 PostgreSQL。
 
 ### 4. 启动
 
@@ -248,7 +248,7 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-打开 **http://localhost:3000**。整套服务是两个容器：应用和 PostgreSQL。课程、生成的媒体和运行时会话保存在命名卷 `openmaic-postgres` 与 `openmaic-data` 中，`docker compose down` 和重新构建后依然保留；`docker compose down -v` 会删除它们。如需用 `openmaic.yml` 配置模型，请从 `openmaic.example.yml` 复制出该文件，并取消 `docker-compose.yml` 中对应挂载行的注释；否则启动后在模型设置里接入模型服务即可。
+打开 **http://localhost:3000**。整套服务是两个容器：应用和 PostgreSQL。课程、生成的媒体和运行时会话保存在命名卷 `ground-school-postgres` 与 `ground-school-data` 中，`docker compose down` 和重新构建后依然保留；`docker compose down -v` 会删除它们。如需用 `openmaic.yml` 配置模型，请从 `openmaic.example.yml` 复制出该文件，并取消 `docker-compose.yml` 中对应挂载行的注释；否则启动后在模型设置里接入模型服务即可。
 
 Compose 文件默认是**个人安装**：以[单用户模式](#服务端持久化postgresql)运行（所有浏览器看到同一个课程库），且只监听 `127.0.0.1:3000`。要让其他机器访问，请先加上保护：
 
@@ -291,7 +291,7 @@ docker compose up --build
 docker build \
   --build-arg ALPINE_MIRROR=mirrors.tuna.tsinghua.edu.cn \
   --build-arg NPM_REGISTRY=https://registry.npmmirror.com \
-  -t openmaic:local .
+  -t ground-school:local .
 ```
 
 这些参数不会加速 Docker Hub 拉取，包括 Dockerfile frontend 和
@@ -303,7 +303,7 @@ store；缓存只用于提升性能，不是正确完成构建的必要条件。
 
 ### Vercel 部署（1.1.x 及以前）
 
-Serverless 部署支持到 OpenMAIC 1.1.x。从 1.2.0 起，课程生成在服务端一个比请求存活更久的进程中运行，因此 OpenMAIC 需要常驻的 Node.js 进程和 PostgreSQL（[Docker 部署](#docker-部署)或 `pnpm start`）；不再支持 Vercel 等 Serverless 平台，仓库中也不再提供 `vercel.json`。在 Vercel 上部署 1.1.x：
+Serverless 部署支持到 Ground School 1.1.x。从 1.2.0 起，课程生成在服务端一个比请求存活更久的进程中运行，因此 Ground School 需要常驻的 Node.js 进程和 PostgreSQL（[Docker 部署](#docker-部署)或 `pnpm start`）；不再支持 Vercel 等 Serverless 平台，仓库中也不再提供 `vercel.json`。在 Vercel 上部署 1.1.x：
 
 1. 在 GitHub 上 fork 本仓库，取消勾选 **Copy the `main` branch only**。
 2. 在 fork 中把默认分支设为 `release/1.1.x`（**Settings → General → Default branch**）。
@@ -313,7 +313,7 @@ Serverless 部署支持到 OpenMAIC 1.1.x。从 1.2.0 起，课程生成在服�
 
 ### 服务端持久化（PostgreSQL）
 
-OpenMAIC 把课程保存在服务端。课程文档、文件夹、对话历史、学习者会话和生成的媒体保存在 PostgreSQL 中（媒体也可放在 S3），由应用自身在 `/api/persistence` 提供服务。浏览器只保留属于该设备的数据，如设置、播放进度和缓存；**设置 → 清除本地缓存**不会动服务端的任何数据。
+Ground School 把课程保存在服务端。课程文档、文件夹、对话历史、学习者会话和生成的媒体保存在 PostgreSQL 中（媒体也可放在 S3），由应用自身在 `/api/persistence` 提供服务。浏览器只保留属于该设备的数据，如设置、播放进度和缓存；**设置 → 清除本地缓存**不会动服务端的任何数据。
 
 - **必须提供 `DATABASE_URL`。** 没有它服务会输出修复方法并以退出码 `1` 退出。Compose 会自动设置；本地开发可用 [`pnpm db:up`](#3-启动数据库) 启动数据库。
 - **旧版本保存在浏览器中的课程**会在每个浏览器首次打开升级后的应用时自动导入一次，浏览器中的原始数据保持不变。
@@ -330,7 +330,7 @@ OpenMAIC 把课程保存在服务端。课程文档、文件夹、对话历史�
 
 请在首次启动 1.2.0 之前设置好身份模式：1.1.x 以文件形式保存的课堂会导入给届时配置的所有者。各类部署的升级步骤见[从 1.1.x 升级](packages/docs/content/docs/deployment.zh-cn.mdx)。
 
-为他人运行 OpenMAIC，或把它嵌入自己的产品？[Hosting and identity](packages/docs/content/docs/hosting.mdx)（英文）介绍了：
+为他人运行 Ground School，或把它嵌入自己的产品？[Hosting and identity](packages/docs/content/docs/hosting.mdx)（英文）介绍了：
 
 - [谁能读写存储的数据](packages/docs/content/docs/hosting.mdx#who-can-read-and-write-stored-data)，以及已移除的 `PERSISTENCE_DEV_TOKEN`；
 - [资产回收、配额与 S3 出站](packages/docs/content/docs/hosting.mdx#asset-storage)（`ASSET_*`）；
@@ -352,9 +352,9 @@ ACCESS_CODE=your-secret-code
 
 ### 可选：Lemonade（本地 AI 服务商）
 
-OpenMAIC 支持将 Lemonade 作为本地 OpenAI 兼容服务商使用，可用于 LLM、图像生成、TTS 和 ASR，不需要 API Key。
+Ground School 支持将 Lemonade 作为本地 OpenAI 兼容服务商使用，可用于 LLM、图像生成、TTS 和 ASR，不需要 API Key。
 
-本地启动 Lemonade 后，在 OpenMAIC 中配置：
+本地启动 Lemonade 后，在 Ground School 中配置：
 
 ```yaml
 providers:
@@ -384,7 +384,7 @@ slots:
 
 ### 可选：FunASR（本地语音识别）
 
-OpenMAIC 可以通过 FunASR 的 OpenAI 兼容服务完成本地转写。内置 provider 支持 SenseVoiceSmall、Paraformer 和 Fun-ASR-Nano，无需 API Key。
+Ground School 可以通过 FunASR 的 OpenAI 兼容服务完成本地转写。内置 provider 支持 SenseVoiceSmall、Paraformer 和 Fun-ASR-Nano，无需 API Key。
 
 ```bash
 python -m pip install torch torchaudio
@@ -394,7 +394,7 @@ python -m pip install vllm
 funasr-server --device cuda --model fun-asr-nano
 ```
 
-将 OpenMAIC 指向该服务：
+将 Ground School 指向该服务：
 
 ```yaml
 providers:
@@ -442,9 +442,9 @@ slots:
 
 ### 可选：VoxCPM2（自托管 TTS，支持音色克隆）
 
-[VoxCPM2](https://github.com/OpenBMB/VoxCPM) 是 OpenBMB 开源的 TTS 模型，支持声音克隆。OpenMAIC 自带适配器，把 VoxCPM 跑在自己机器上即可对接。
+[VoxCPM2](https://github.com/OpenBMB/VoxCPM) 是 OpenBMB 开源的 TTS 模型，支持声音克隆。Ground School 自带适配器，把 VoxCPM 跑在自己机器上即可对接。
 
-**1. 部署 VoxCPM 后端。** 三种部署形态，背后是同一套 OpenMAIC 适配器，在 `openmaic.yml` 中用 `options.backend` 选择（见第 2 步）。
+**1. 部署 VoxCPM 后端。** 三种部署形态，背后是同一套 Ground School 适配器，在 `openmaic.yml` 中用 `options.backend` 选择（见第 2 步）。
 
 | 后端 | 接口 | 适用场景 |
 | --- | --- | --- |
@@ -454,7 +454,7 @@ slots:
 
 每种后端的具体启动步骤见 [VoxCPM 仓库](https://github.com/OpenBMB/VoxCPM)。
 
-**2. 在 OpenMAIC 中配置。** VoxCPM2 运行在你自己的网络中，因此由部署在 `openmaic.yml` 中配置（不需要 API Key）；工作区不能在 **设置 → 模型服务** 中添加它：
+**2. 在 Ground School 中配置。** VoxCPM2 运行在你自己的网络中，因此由部署在 `openmaic.yml` 中配置（不需要 API Key）；工作区不能在 **设置 → 模型服务** 中添加它：
 
 ```yaml
 providers:
@@ -594,7 +594,7 @@ AI 教师可以主动操作界面引导学生——高亮关键区域、设置�
 
 ### 课堂生成
 
-描述你想学习的内容，或附上参考材料。OpenMAIC 的两阶段流水线自动完成剩余工作：
+描述你想学习的内容，或附上参考材料。Ground School 的两阶段流水线自动完成剩余工作：
 
 | 阶段 | 说明 |
 |------|------|
@@ -675,7 +675,7 @@ AI 老师配合聚光灯和激光笔动作进行语音讲解——如同真实�
 <tr>
 <td valign="top">
 
-OpenMAIC 的技能包（`skills/openmaic/`）采用标准 SKILL.md 格式，可被各类 Agent 工作台加载——除了 OpenClaw，也包括 **Codex**、**DeepSeek**、**WorkBuddy** 等。它是一份引导式 SOP：覆盖在线体验、本地部署、课堂生成和基于 `@openmaic/*` SDK 的二次开发。
+Ground School 的技能包（`skills/openmaic/`）采用标准 SKILL.md 格式，可被各类 Agent 工作台加载——除了 OpenClaw，也包括 **Codex**、**DeepSeek**、**WorkBuddy** 等。它是一份引导式 SOP：覆盖在线体验、本地部署、课堂生成和基于 `@openmaic/*` SDK 的二次开发。
 
 其中 [OpenClaw](https://github.com/openclaw/openclaw) 是一个连接你日常使用的消息平台（飞书、Slack、Discord、Telegram、WhatsApp 等）的个人 AI 助手。通过这个集成，你可以**直接在聊天应用中生成和查看互动课堂**，无需碰命令行。
 
@@ -693,7 +693,7 @@ OpenMAIC 的技能包（`skills/openmaic/`）采用标准 SKILL.md 格式，可�
 - **托管模式** — 在 [open.maic.chat](https://open.maic.chat/) 获取访问码，保存到配置文件，即可直接生成课堂——无需本地部署
 - **本地部署模式** — clone、安装依赖、配置 API Key、启动服务——Skill 逐步引导你完成
 - **跟踪进度** — 自动轮询异步生成任务，完成后把链接发给你
-- **二次开发** — 引导你在 OpenMAIC 基础上做二开：基于 `@openmaic/*` SDK 构建自己的应用（详见 skill 内的 extend 系列文档）
+- **二次开发** — 引导你在 Ground School 基础上做二开：基于 `@openmaic/*` SDK 构建自己的应用（详见 skill 内的 extend 系列文档）
 
 每一步都会先征求你的确认，不会黑盒执行。
 
@@ -730,7 +730,7 @@ clawhub install openmaic
           // 托管模式：粘贴从 open.maic.chat 获取的访问码
           "accessCode": "sk-xxx",
           // 本地部署模式：本地仓库路径和地址
-          "repoDir": "/path/to/OpenMAIC",
+          "repoDir": "/path/to/Ground School",
           "url": "http://localhost:3000"
         }
       }
@@ -754,7 +754,7 @@ clawhub install openmaic
 
 导入课堂 ZIP 会先将包内音频、图片、视频及封面保存到服务器资源池，再保存课程，因此其他浏览器无需导入端的本地缓存即可读取这些资源。ZIP 也可用于在部署之间迁移课程：从一处导出，在另一处导入。
 
-**离线 / 内网课堂：** 导出课堂（`.maic.zip`）或资源包时，OpenMAIC 会把互动场景引用的外部资源（KaTeX、Three.js 含 `three/addons`、Tailwind CDN、Google Fonts、图片）以 `data:` URI 形式内联进导出的 HTML。导出的课程在导入到内网/离线实例后即可完全离线播放，播放时不再访问任何公网 CDN。导出时无法抓取的资源（如开启了 CORS 限制的图床）会被记录并保留为原始 URL。本功能上线*之前*导出的课堂仍引用 CDN，需要重新导出才能离线播放。
+**离线 / 内网课堂：** 导出课堂（`.maic.zip`）或资源包时，Ground School 会把互动场景引用的外部资源（KaTeX、Three.js 含 `three/addons`、Tailwind CDN、Google Fonts、图片）以 `data:` URI 形式内联进导出的 HTML。导出的课程在导入到内网/离线实例后即可完全离线播放，播放时不再访问任何公网 CDN。导出时无法抓取的资源（如开启了 CORS 限制的图床）会被记录并保留为原始 URL。本功能上线*之前*导出的课堂仍引用 CDN，需要重新导出才能离线播放。
 
 ### 更多功能
 
@@ -812,7 +812,7 @@ clawhub install openmaic
 ### 项目结构
 
 ```
-OpenMAIC/
+Ground School/
 ├── app/                        # Next.js App Router
 │   ├── api/                    #   服务端 API 路由（26 个端点组）
 │   │   ├── generate/           #     图片、视频、TTS 与音色注册
@@ -855,7 +855,7 @@ OpenMAIC/
 │   └── ...                     #   audio, roundtable, stage, ai-elements
 │
 ├── packages/                   # 工作区子包
-│   ├── @openmaic/              #   OpenMAIC SDK 系列（已发布至 npm）
+│   ├── @openmaic/              #   Ground School SDK 系列（已发布至 npm）
 │   │   ├── dsl/                #     课程 DSL 定义与资产清单
 │   │   ├── generation/         #     两阶段课堂生成流水线
 │   │   ├── renderer/           #     课程渲染
@@ -868,7 +868,7 @@ OpenMAIC/
 ├── render-service/             # MP4 视频导出渲染服务（Chromium + FFmpeg，独立容器）
 │
 ├── skills/                     # OpenClaw / ClawHub skills
-│   └── openmaic/               #   OpenMAIC 引导式 SOP skill
+│   └── openmaic/               #   Ground School 引导式 SOP skill
 │       ├── SKILL.md            #   轻量路由层 + 确认规则
 │       └── references/         #   按需加载的 SOP 分段（生成、部署、二开等）
 │
@@ -902,7 +902,7 @@ OpenMAIC/
 
 ## 📝 引用
 
-如果 OpenMAIC 对您的研究有帮助，请考虑引用：
+如果 Ground School 对您的研究有帮助，请考虑引用：
 
 ```bibtex
 @Article{JCST-2509-16000,

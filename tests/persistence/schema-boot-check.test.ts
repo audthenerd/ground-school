@@ -36,9 +36,9 @@ describe('schema check at startup', () => {
   it('verifies every store the application knows, on a pool of its own it then closes', async () => {
     verifySchemaMigrations.mockResolvedValue(undefined);
 
-    await startSchemaBootCheck(' postgres://db/openmaic ', poolFactory);
+    await startSchemaBootCheck(' postgres://db/ground_school ', poolFactory);
 
-    expect(poolFactory).toHaveBeenCalledWith('postgres://db/openmaic');
+    expect(poolFactory).toHaveBeenCalledWith('postgres://db/ground_school');
     expect(verifySchemaMigrations).toHaveBeenCalledWith(pool, APP_SCHEMA_STORES);
     expect(end).toHaveBeenCalledOnce();
     expect(on).toHaveBeenCalledWith('error', expect.any(Function));
@@ -51,7 +51,7 @@ describe('schema check at startup', () => {
       const refusal = named(name);
       verifySchemaMigrations.mockRejectedValue(refusal);
 
-      await startSchemaBootCheck('postgres://db/openmaic', poolFactory);
+      await startSchemaBootCheck('postgres://db/ground_school', poolFactory);
 
       expect(exitOnBootFailure).toHaveBeenCalledWith(refusal);
     },
@@ -60,7 +60,7 @@ describe('schema check at startup', () => {
   it('leaves any other failure to the stores, and says so', async () => {
     verifySchemaMigrations.mockRejectedValue(new Error('connect ECONNREFUSED'));
 
-    await startSchemaBootCheck('postgres://db/openmaic', poolFactory);
+    await startSchemaBootCheck('postgres://db/ground_school', poolFactory);
 
     expect(exitOnBootFailure).not.toHaveBeenCalled();
     expect(console.error).toHaveBeenCalledWith(

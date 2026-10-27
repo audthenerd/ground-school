@@ -1,6 +1,6 @@
 # @openmaic/editor
 
-Composable slide-editing package for OpenMAIC.
+Composable slide-editing package for Ground School.
 
 - `@openmaic/editor/core`: document operations, transactions, and undo/redo history.
 - `@openmaic/editor/react`: editable slide interaction surface and rich-text editors.

@@ -1,9 +1,9 @@
 ---
 title: デプロイ
-description: OpenMAIC を Docker でデプロイするか、自分のホストで pnpm start により実行します。
+description: Ground School を Docker でデプロイするか、自分のホストで pnpm start により実行します。
 ---
 
-OpenMAIC は Next.js アプリケーションで、常駐する Node.js プロセスと PostgreSQL が必要です。授業の生成はサーバー側で行われます。各生成はデータベースに記録され、サーバープロセス内のワーカーが実行します。ブラウザがページを離れても生成は続き、プロセスが停止した場合は別のプロセス（または再起動した同じプロセス）が最後に完了したステップから引き継ぎます。サポートするデプロイ方法は次の 2 つです。
+Ground School は Next.js アプリケーションで、常駐する Node.js プロセスと PostgreSQL が必要です。授業の生成はサーバー側で行われます。各生成はデータベースに記録され、サーバープロセス内のワーカーが実行します。ブラウザがページを離れても生成は続き、プロセスが停止した場合は別のプロセス（または再起動した同じプロセス）が最後に完了したステップから引き継ぎます。サポートするデプロイ方法は次の 2 つです。
 
 - **Docker Compose**（推奨）：アプリと PostgreSQL の 2 つのコンテナ。
 - **Docker イメージまたは `pnpm start`**：自分で運用する PostgreSQL と組み合わせます。
@@ -15,9 +15,9 @@ OpenMAIC は Next.js アプリケーションで、常駐する Node.js プロ�
 リポジトリには本番向けの `Dockerfile` が含まれています。イメージは Node.js 22 を使用しています。ビルドして実行します：
 
 ```bash
-docker build -t openmaic .
+docker build -t ground-school .
 
-docker run --env-file .env.local -e DATABASE_URL=postgres://user:password@db-host:5432/openmaic -v openmaic-data:/app/data -p 3000:3000 openmaic
+docker run --env-file .env.local -e DATABASE_URL=postgres://user:password@db-host:5432/ground_school -v ground-school-data:/app/data -p 3000:3000 ground-school
 ```
 
 リポジトリにある Docker Compose 設定の利用を推奨します：
@@ -28,7 +28,7 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-デフォルトの Compose デプロイは OpenMAIC アプリと PostgreSQL の 2 つのコンテナを起動し、両者の間の `DATABASE_URL` を設定して、`openmaic-data` と `openmaic-postgres` ボリュームをマウントします。その他のプロバイダーや機能は必要に応じて設定してください。詳細は[設定説明](./configuration.mdx)を参照してください。
+デフォルトの Compose デプロイは Ground School アプリと PostgreSQL の 2 つのコンテナを起動し、両者の間の `DATABASE_URL` を設定して、`ground-school-data` と `ground-school-postgres` ボリュームをマウントします。その他のプロバイダーや機能は必要に応じて設定してください。詳細は[設定説明](./configuration.mdx)を参照してください。
 
 モデルの設定方法は 2 通りあります。個人利用のインストールでは、スタックを起動してアプリを開き、モデル設定でモデルサービスを接続します。設定はデータベースに保存されます。ファイルで管理するデプロイでは、`openmaic.example.yml` を `openmaic.yml` にコピーし、キーを `.env.local` に置いてファイルをマウントします（後述）。[設定説明](./configuration.mdx#モデルとプロバイダー)を参照してください。
 
@@ -52,7 +52,7 @@ docker compose --profile video-export up --build
 
 ```yaml
 services:
-  openmaic:
+  ground-school:
     volumes:
       - ./openmaic.yml:/app/openmaic.yml:ro
 ```
@@ -68,7 +68,7 @@ Docker コンテナ内の `localhost` はコンテナ自身を指します。ホ
 ```bash
 pnpm install
 pnpm build
-DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # デフォルトでポート 3000 をリッスンします
+DATABASE_URL=postgres://user:password@db-host:5432/ground_school pnpm start      # デフォルトでポート 3000 をリッスンします
 ```
 
 プロセスマネージャー（systemd、pm2、コンテナなど）で常時稼働させ、停止時に再起動されるようにしてください。TLS 終端は nginx や Caddy などを前段に置いてください。授業と生成された授業メディアは PostgreSQL（または S3）に保存されるため、データディレクトリと同じ `OPENMAIC_SECRET_KEY` もあわせて共有すれば、複数のインスタンスで 1 つのデータベースを共有できます（下記参照）。
@@ -81,15 +81,15 @@ DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # �
 | --- | --- | --- |
 | `DATABASE_URL` | 同梱の PostgreSQL を指すよう設定済み | 必須。未設定ならサーバーは起動時に終了します |
 | ID モード | シングルユーザー（`docker-compose.defaults.env` の `OWNER_SINGLE_USER=true`） | 未設定ならブラウザごとに匿名オーナーになります |
-| `OPENMAIC_SECRET_KEY` | 任意。生成されたシークレットは `openmaic-data` ボリュームに保存されます | 複数インスタンスの場合、または永続的な `data/` ディレクトリがない場合は必須 |
-| データディレクトリ | `/app/data` にマウントした `openmaic-data` ボリューム | 作業ディレクトリの永続的な `data/` ディレクトリ。すべてのインスタンスで共有 |
+| `OPENMAIC_SECRET_KEY` | 任意。生成されたシークレットは `ground-school-data` ボリュームに保存されます | 複数インスタンスの場合、または永続的な `data/` ディレクトリがない場合は必須 |
+| データディレクトリ | `/app/data` にマウントした `ground-school-data` ボリューム | 作業ディレクトリの永続的な `data/` ディレクトリ。すべてのインスタンスで共有 |
 | モデル | `openmaic.yml` または **設定 → モデル** | 同左 |
 
 **ID モード**は授業の所有者を決めます。未設定の場合、ブラウザごとに別々の匿名オーナーとなり、別のブラウザでは空のライブラリが表示されます。個人利用では `OWNER_SINGLE_USER=true`、1 つのチームで 1 つのライブラリを共有する場合は `ACCESS_CODE` とあわせて `PERSISTENCE_SHARED_OWNER_ID` を設定し、実際のアカウントが必要な場合はオーナー認証メソッドを登録してください。詳しくは [Owner identity](./hosting.mdx#owner-identity) と `.env.example` を参照してください。
 
 匿名モードでは、オーナー cookie は本番環境で `Secure` 属性付きになり、`ACCESS_CODE` の cookie も同様です。ブラウザが `Secure` cookie を保存するのは HTTPS か `http://localhost` の場合だけです（Safari は localhost でも保存しません）。そのため、プレーンな HTTP で提供するデプロイでは `COOKIE_SECURE=0`（値は正確に `0`）を設定する必要があります。設定しないと、リクエストごとに新しいオーナーになって書き込みが `403` で失敗し、アクセスコードも繰り返し求められます。TLS がない場合 cookie は平文で送られるため、信頼できるネットワークでのみ行ってください。
 
-`localhost` 以外のアドレス（LAN IP、Tailscale IP、MagicDNS 名）でのプレーンな HTTP もセキュアコンテキストではないため、ブラウザには Web Locks API がありません。OpenMAIC はその場合も保存しますが、同じコースの複数タブ間の調整は行われません。2 つのタブが同じチャットを変更した場合は、最後の保存が優先されます。また、一方のタブで削除したチャットは、もう一方のタブで編集中だった場合でも削除されたままになります。ネットワーク内のスマートフォンやタブレットから使う場合は、サーバーの前に `tailscale serve` を置くなどして HTTPS を使うことをおすすめします。
+`localhost` 以外のアドレス（LAN IP、Tailscale IP、MagicDNS 名）でのプレーンな HTTP もセキュアコンテキストではないため、ブラウザには Web Locks API がありません。Ground School はその場合も保存しますが、同じコースの複数タブ間の調整は行われません。2 つのタブが同じチャットを変更した場合は、最後の保存が優先されます。また、一方のタブで削除したチャットは、もう一方のタブで編集中だった場合でも削除されたままになります。ネットワーク内のスマートフォンやタブレットから使う場合は、サーバーの前に `tailscale serve` を置くなどして HTTPS を使うことをおすすめします。
 
 **`OPENMAIC_SECRET_KEY`** はモデル設定に保存されたプロバイダーキーを暗号化します。未設定の場合、各インスタンスが `data/instance-secret.key` に独自のシークレットを作成するため、データベースを共有するインスタンス同士で保存済みキーを読み取れません。データベースのバックアップと一緒に保管してください。[シークレットと OPENMAIC_SECRET_KEY](./configuration.mdx#シークレットと-openmaic_secret_key) を参照してください。
 
@@ -111,19 +111,19 @@ DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # �
 
 ## サーバー側永続化（PostgreSQL）
 
-OpenMAIC は授業、チャット履歴、学習の進捗、生成メディアを PostgreSQL に保存するため、**`DATABASE_URL` は必須**です。未設定の場合、サーバーは `[boot] Invalid server configuration; the server will not start: DATABASE_URL is not set. ...` と対処方法を出力し、終了コード `1` で終了します。永続化用の HTTP API は OpenMAIC に組み込まれており、追加の永続化サービスは不要です。
+Ground School は授業、チャット履歴、学習の進捗、生成メディアを PostgreSQL に保存するため、**`DATABASE_URL` は必須**です。未設定の場合、サーバーは `[boot] Invalid server configuration; the server will not start: DATABASE_URL is not set. ...` と対処方法を出力し、終了コード `1` で終了します。永続化用の HTTP API は Ground School に組み込まれており、追加の永続化サービスは不要です。
 
-`docker compose up` はアプリの横で PostgreSQL を起動し、`DATABASE_URL` を設定します。ローカル開発では、`pnpm db:up` が同じサービス定義から独立した開発用データベース（専用の Compose プロジェクトとボリューム `openmaic-dev-db`。このマシン上のすべてのチェックアウトで共有。スタックのデータベースには影響しません）を `127.0.0.1`（ポート `OPENMAIC_DB_PORT`、既定 `5432`）で起動し、`pnpm db:down` で停止します。その後 `.env.local` に接続情報を設定します：
+`docker compose up` はアプリの横で PostgreSQL を起動し、`DATABASE_URL` を設定します。ローカル開発では、`pnpm db:up` が同じサービス定義から独立した開発用データベース（専用の Compose プロジェクトとボリューム `ground-school-dev-db`。このマシン上のすべてのチェックアウトで共有。スタックのデータベースには影響しません）を `127.0.0.1`（ポート `OPENMAIC_DB_PORT`、既定 `5432`）で起動し、`pnpm db:down` で停止します。その後 `.env.local` に接続情報を設定します：
 
 ```bash
-DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic
+DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school
 ```
 
 永続化専用の認証情報はありません。各リクエストはオーナー解決で得られたオーナー（既定ではブラウザごとの匿名 Cookie）に帰属し、ランタイムセッションとメディアはそのオーナーごとに分離されます。既定の識別はブラウザを分離するだけで誰も認証しないため、実ユーザー向けのデプロイでは自前のアカウントに基づくオーナー認証メソッドを登録してください。以前のリリースの `PERSISTENCE_DEV_TOKEN` / `NEXT_PUBLIC_PERSISTENCE_TOKEN` は削除され無視されます。旧来のブラウザ生成の学習者キーで保存されたランタイムセッションにはアクセスできなくなります。`PERSISTENCE_DEV_TOKEN` が唯一のアクセス制御だった場合は、アップグレード前に `ACCESS_CODE` やゲートウェイで保護するか、オーナー認証メソッドを登録してください。
 
-PostgreSQL のデータは `openmaic-postgres` ボリュームに保存されます。`PERSISTENCE_POSTGRES_PASSWORD` はデータベースディレクトリ初回初期化時にのみパスワードを設定し、その後の環境変数変更では既存ユーザーのパスワードは自動的に変更されません。
+PostgreSQL のデータは `ground-school-postgres` ボリュームに保存されます。`PERSISTENCE_POSTGRES_PASSWORD` はデータベースディレクトリ初回初期化時にのみパスワードを設定し、その後の環境変数変更では既存ユーザーのパスワードは自動的に変更されません。
 
-`OPENMAIC_SECRET_KEY` を設定していない場合、`openmaic-data` ボリュームには `instance-secret.key` も保存されます。これは自動生成されたインスタンスシークレットで、モデル設定に保存されたプロバイダーのキーを暗号化します。データベースと一緒にバックアップしてください。これがないと、保存済みのキーを再入力する必要があります。複数のレプリカで動かす場合や、永続ボリュームがない・ファイルシステムが読み取り専用の場合は、代わりに `OPENMAIC_SECRET_KEY` を設定してください（全レプリカで同じ値）。[シークレットと OPENMAIC_SECRET_KEY](./configuration.mdx#シークレットと-openmaic_secret_key) を参照してください。
+`OPENMAIC_SECRET_KEY` を設定していない場合、`ground-school-data` ボリュームには `instance-secret.key` も保存されます。これは自動生成されたインスタンスシークレットで、モデル設定に保存されたプロバイダーのキーを暗号化します。データベースと一緒にバックアップしてください。これがないと、保存済みのキーを再入力する必要があります。複数のレプリカで動かす場合や、永続ボリュームがない・ファイルシステムが読み取り専用の場合は、代わりに `OPENMAIC_SECRET_KEY` を設定してください（全レプリカで同じ値）。[シークレットと OPENMAIC_SECRET_KEY](./configuration.mdx#シークレットと-openmaic_secret_key) を参照してください。
 
 以前のリリースでは授業をブラウザ（IndexedDB）に保存できました。このモードは廃止され、`NEXT_PUBLIC_PERSISTENCE` ビルド変数は無視されます。その方法でブラウザに保存された授業は、そのブラウザでアップグレード後のアプリを初めて開いたときに自動的にサーバーへ移されます。一方向のインポーターが、それらを（チャット、学習の進捗、フォルダー、メディアとともに）サーバーがそのブラウザについて解決した所有者にコピーし、ブラウザ内の元のデータには手を加えません。インポートはブラウザごとに一度だけです。サーバーはそのブラウザを、アップグレード後のアプリを最初に読み込んだ所有者に紐付け、統合（サインイン時に匿名の所有者がアカウントに統合されること）によって紐付けはアカウントに移ります。サーバーはそれ以外の所有者のためのインポーターの要求を拒否します。それ以外に同じブラウザを後から使う所有者には何もインポートされません。操作は不要で、UI も表示されません。問題があればブラウザのコンソールに `[legacy-browser-import]` という接頭辞で記録されます。
 
@@ -138,7 +138,7 @@ PostgreSQL のデータは `openmaic-postgres` ボリュームに保存されま
 
 1.2.0 を初めて起動する前に：
 
-- **データディレクトリを残してください。** 1.2.0 は作業ディレクトリに同じ `data/` がある状態で（または同じ `OPENMAIC_CLASSROOMS_DIR` で）起動します。Compose では同じ `openmaic-data` ボリュームを使います。1.1.x が `data/classrooms` にファイルとして保存した授業は、起動後にバックグラウンドで一度だけデータベースへインポートされます。このディレクトリなしで起動したサーバーにはインポートするものがありません。
+- **データディレクトリを残してください。** 1.2.0 は作業ディレクトリに同じ `data/` がある状態で（または同じ `OPENMAIC_CLASSROOMS_DIR` で）起動します。Compose では同じ `ground-school-data` ボリュームを使います。1.1.x が `data/classrooms` にファイルとして保存した授業は、起動後にバックグラウンドで一度だけデータベースへインポートされます。このディレクトリなしで起動したサーバーにはインポートするものがありません。
 - **ID モードを先に設定してください。** インポートされた授業は、その起動時に設定されているオーナーのものになります。シングルユーザー（`OWNER_SINGLE_USER=true`）またはチーム共有オーナー（`PERSISTENCE_SHARED_OWNER_ID`）が設定されていればそのオーナー、そうでなければ（匿名モード）専用オーナー `system:legacy-classrooms` です。後者の場合、授業は以前のリンクから読み取り専用で開け、どのライブラリにも表示されません。各授業のインポートは一度だけなので、匿名モードでインポートされた授業は、後から ID モードを設定しても `system:legacy-classrooms` のままです。
 - **モデルを列挙してください。** サーバー管理の認証情報を使い、選択されたモデルを上流へ送るプロバイダー（チャット、画像、動画、音声合成、音声認識、モデルベースの Web 検索）には、明示的なモデルリスト（`*_MODELS`、または `openmaic.yml`・`server-providers.yml` のプロバイダー配下の `models`）が必要です。リストがない場合、認可されるのは既定・フォールバック・スロットで参照されるモデルだけで、リストのないこうしたプロバイダーは起動ログに表示されます。Tavily やドキュメントパーサーなど、モデル選択のないサービスにリストは不要です。[モデル認可](./configuration.mdx#サーバー管理プロバイダーのモデル認可)を参照してください。
 - **render-service はアプリと一緒に更新してください。** MP4 動画エクスポートを使っている場合は、すべての render-service インスタンスをアプリと同時か、それより先に更新してください。レンダリングジョブはオーナーに紐づき、新旧バージョンが混在すると安全側に失敗します（リクエストを拒否します）。
@@ -148,7 +148,7 @@ PostgreSQL のデータは `openmaic-postgres` ボリュームに保存されま
 
 ## Vercel（1.1.x まで）
 
-サーバーレスでのデプロイは OpenMAIC 1.1.x までサポートされ、`release/1.1.x` ブランチを Vercel にデプロイする手順は[リポジトリの README](https://github.com/THU-MAIC/OpenMAIC#vercel-deployment-up-to-11x) にあります。このようなデプロイは、後でデータを失わずに常駐ホストへ移行できます。新しいホストの `DATABASE_URL` を（使っていた場合は）元のデータベースに向け、同じアドレスで公開してください。ブラウザはサイトごとにデータを保存しており、訪問者のブラウザにある授業は、各ブラウザがアップグレード後のアプリを初めて開いたときにインポートされます。
+サーバーレスでのデプロイは Ground School 1.1.x までサポートされ、`release/1.1.x` ブランチを Vercel にデプロイする手順は[リポジトリの README](https://github.com/THU-MAIC/OpenMAIC#vercel-deployment-up-to-11x) にあります。このようなデプロイは、後でデータを失わずに常駐ホストへ移行できます。新しいホストの `DATABASE_URL` を（使っていた場合は）元のデータベースに向け、同じアドレスで公開してください。ブラウザはサイトごとにデータを保存しており、訪問者のブラウザにある授業は、各ブラウザがアップグレード後のアプリを初めて開いたときにインポートされます。
 
 ## オプション：MP4 動画エクスポート
 
@@ -160,7 +160,7 @@ PostgreSQL のデータは `openmaic-postgres` ボリュームに保存されま
 docker compose --profile video-export up --build
 ```
 
-Compose は `RENDER_SERVICE_URL` を通じて OpenMAIC とレンダリングサービスを接続します。このプロファイルを有効にしないか、レンダリングサービスが利用できない場合は、エクスポートはプロジェクト ZIP のダウンロードにフォールバックし、ローカル CLI でのレンダリングを想定します。レンダリングサービスは分離されたネットワークで動作し、起動時に `NET_ADMIN` 権限が必要です。詳細や独立デプロイ方法はリポジトリの [`render-service/README.md`](https://github.com/THU-MAIC/OpenMAIC/blob/main/render-service/README.md) を参照してください。アップグレード時は、レンダリングサービスをアプリと同時か、それより先に更新してください。
+Compose は `RENDER_SERVICE_URL` を通じて Ground School とレンダリングサービスを接続します。このプロファイルを有効にしないか、レンダリングサービスが利用できない場合は、エクスポートはプロジェクト ZIP のダウンロードにフォールバックし、ローカル CLI でのレンダリングを想定します。レンダリングサービスは分離されたネットワークで動作し、起動時に `NET_ADMIN` 権限が必要です。詳細や独立デプロイ方法はリポジトリの [`render-service/README.md`](https://github.com/THU-MAIC/OpenMAIC/blob/main/render-service/README.md) を参照してください。アップグレード時は、レンダリングサービスをアプリと同時か、それより先に更新してください。
 
 ## 環境変数
 

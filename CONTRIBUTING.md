@@ -1,6 +1,6 @@
-# Contributing to OpenMAIC
+# Contributing to Ground School
 
-Thank you for your interest in contributing to OpenMAIC! This guide will help you get started and ensure a smooth collaboration.
+Thank you for your interest in contributing to Ground School! This guide will help you get started and ensure a smooth collaboration.
 
 ## How to Contribute
 
@@ -34,7 +34,7 @@ To avoid duplicate effort, please **comment on an issue** to claim it before you
 ```bash
 # Clone the repository
 git clone https://github.com/THU-MAIC/OpenMAIC.git
-cd OpenMAIC
+cd Ground School
 
 # Install dependencies
 pnpm install
@@ -47,7 +47,7 @@ cp .env.example .env.local
 # shared by every checkout on this machine;
 # set OPENMAIC_DB_PORT for another port), then uncomment the local
 # DATABASE_URL line in .env.local:
-#   DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic
+#   DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school
 pnpm db:up
 
 # Start the development server (it refuses to start without DATABASE_URL)
@@ -191,7 +191,7 @@ AI-assisted PRs are held to the same quality standard as any other PR. Community
 ## Project Structure
 
 ```
-OpenMAIC/
+Ground School/
 ├── app/              # Next.js app router pages and API routes
 ├── components/       # React components
 ├── lib/              # Shared utilities and core logic (i18n in lib/i18n/locales/)
@@ -219,4 +219,4 @@ Please report security vulnerabilities through [GitHub Security Advisories](http
 
 ## License
 
-By contributing to OpenMAIC, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+By contributing to Ground School, you agree that your contributions will be licensed under the [MIT License](LICENSE).

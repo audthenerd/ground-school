@@ -21,9 +21,9 @@ describe('searchWithFirecrawl', () => {
           data: {
             web: [
               {
-                title: 'OpenMAIC',
+                title: 'Ground School',
                 url: 'https://github.com/THU-MAIC/OpenMAIC',
-                description: '  ## OpenMAIC\n\nOpen multi-agent   interactive classroom.  ',
+                description: '  ## Ground School\n\nOpen multi-agent   interactive classroom.  ',
                 position: 1,
               },
               {
@@ -45,7 +45,7 @@ describe('searchWithFirecrawl', () => {
     );
 
     const result = await searchWithFirecrawl({
-      query: '  OpenMAIC web search  ',
+      query: '  Ground School web search  ',
       apiKey: 'fc-key',
       maxResults: 5,
     });
@@ -59,7 +59,7 @@ describe('searchWithFirecrawl', () => {
           Authorization: 'Bearer fc-key',
         },
         body: JSON.stringify({
-          query: 'OpenMAIC web search',
+          query: 'Ground School web search',
           limit: 5,
           origin: 'openmaic',
         }),
@@ -67,12 +67,12 @@ describe('searchWithFirecrawl', () => {
     );
     expect(result).toMatchObject({
       answer: '',
-      query: 'OpenMAIC web search',
+      query: 'Ground School web search',
       sources: [
         {
-          title: 'OpenMAIC',
+          title: 'Ground School',
           url: 'https://github.com/THU-MAIC/OpenMAIC',
-          content: '## OpenMAIC Open multi-agent interactive classroom.',
+          content: '## Ground School Open multi-agent interactive classroom.',
           score: 1,
         },
         {

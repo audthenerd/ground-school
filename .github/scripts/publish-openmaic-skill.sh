@@ -23,7 +23,7 @@ source_commit="$(git rev-parse HEAD)"
 publish_args=(
   skills/openmaic
   --slug openmaic
-  --name OpenMAIC
+  --name Ground School
   --owner wyuc
   --source-repo "$SOURCE_REPO"
   --source-commit "$source_commit"

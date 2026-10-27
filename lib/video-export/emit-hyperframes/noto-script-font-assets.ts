@@ -34,7 +34,7 @@ export const NOTO_SCRIPT_FONT_PLANS = {
       },
     ] as const,
     licenses: [{ path: 'LICENSES/Noto-Sans-OFL-1.1.txt', content: NOTO_SANS_OFL_LICENSE }] as const,
-    requiredFontLoads: [{ family: 'OpenMAIC Noto Sans Cyrillic', text: 'Привет Ёж Ԁ' }] as const,
+    requiredFontLoads: [{ family: 'Ground School Noto Sans Cyrillic', text: 'Привет Ёж Ԁ' }] as const,
     coverage: [
       [769, 769],
       [1024, 1327],
@@ -61,7 +61,7 @@ export const NOTO_SCRIPT_FONT_PLANS = {
     licenses: [
       { path: 'LICENSES/Noto-Sans-Arabic-OFL-1.1.txt', content: NOTO_SANS_ARABIC_OFL_LICENSE },
     ] as const,
-    requiredFontLoads: [{ family: 'OpenMAIC Noto Sans Arabic', text: 'العربية' }] as const,
+    requiredFontLoads: [{ family: 'Ground School Noto Sans Arabic', text: 'العربية' }] as const,
     coverage: [
       [1536, 1791],
       [1872, 1919],

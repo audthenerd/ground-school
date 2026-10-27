@@ -1,9 +1,9 @@
 ---
 title: 部署
-description: 用 Docker 部署 OpenMAIC，或在你自己的主機上用 pnpm start 執行。
+description: 用 Docker 部署 Ground School，或在你自己的主機上用 pnpm start 執行。
 ---
 
-OpenMAIC 是一個 Next.js 應用程式，需要一個常駐的 Node.js 行程和 PostgreSQL。課程產生在伺服器端進行：每次產生都以紀錄的形式儲存在資料庫中，由伺服器行程內的 worker 執行；瀏覽器離開頁面後產生仍會繼續，行程結束後由另一個行程（或重新啟動後的同一行程）從最近完成的步驟接手。支援兩種部署方式：
+Ground School 是一個 Next.js 應用程式，需要一個常駐的 Node.js 行程和 PostgreSQL。課程產生在伺服器端進行：每次產生都以紀錄的形式儲存在資料庫中，由伺服器行程內的 worker 執行；瀏覽器離開頁面後產生仍會繼續，行程結束後由另一個行程（或重新啟動後的同一行程）從最近完成的步驟接手。支援兩種部署方式：
 
 - **Docker Compose**（建議）：應用程式和 PostgreSQL 兩個容器。
 - **Docker 映像檔或 `pnpm start`**，搭配你自己執行的 PostgreSQL。
@@ -15,9 +15,9 @@ OpenMAIC 是一個 Next.js 應用程式，需要一個常駐的 Node.js 行程�
 儲存庫中提供適合正式環境的 `Dockerfile`。映像內部使用 Node.js 22，建置及執行方式如下：
 
 ```bash
-docker build -t openmaic .
+docker build -t ground-school .
 
-docker run --env-file .env.local -e DATABASE_URL=postgres://user:password@db-host:5432/openmaic -v openmaic-data:/app/data -p 3000:3000 openmaic
+docker run --env-file .env.local -e DATABASE_URL=postgres://user:password@db-host:5432/ground_school -v ground-school-data:/app/data -p 3000:3000 ground-school
 ```
 
 建議使用儲存庫中的 Docker Compose 設定：
@@ -28,7 +28,7 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-預設 Compose 部署會啟動 OpenMAIC 應用程式和 PostgreSQL 兩個容器，自動設定兩者之間的 `DATABASE_URL`，並掛載 `openmaic-data` 與 `openmaic-postgres` 資料卷。其他 provider 與功能可依需求設定，詳見[設定說明](./configuration.mdx)。
+預設 Compose 部署會啟動 Ground School 應用程式和 PostgreSQL 兩個容器，自動設定兩者之間的 `DATABASE_URL`，並掛載 `ground-school-data` 與 `ground-school-postgres` 資料卷。其他 provider 與功能可依需求設定，詳見[設定說明](./configuration.mdx)。
 
 模型有兩種設定方式。個人安裝時，啟動服務後開啟應用程式，在模型設定中連接模型服務，設定儲存在資料庫中。若希望以檔案方式管理部署，把 `openmaic.example.yml` 複製為 `openmaic.yml`，key 放在 `.env.local` 中，再掛載該檔案（見下文）。詳見[設定說明](./configuration.mdx#模型與供應商)。
 
@@ -52,7 +52,7 @@ docker compose --profile video-export up --build
 
 ```yaml
 services:
-  openmaic:
+  ground-school:
     volumes:
       - ./openmaic.yml:/app/openmaic.yml:ro
 ```
@@ -68,7 +68,7 @@ Docker 容器中的 `localhost` 指向容器本身。若 Ollama、Lemonade、Vox
 ```bash
 pnpm install
 pnpm build
-DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # 預設監聽 3000 連接埠
+DATABASE_URL=postgres://user:password@db-host:5432/ground_school pnpm start      # 預設監聽 3000 連接埠
 ```
 
 請用行程管理器（systemd、pm2 或容器）保持服務執行並在結束後自動重新啟動，可在前方使用 nginx 或 Caddy 終止 TLS。課程和產生的課程媒體儲存在 PostgreSQL（或 S3）中，因此多個實例可以共用同一個資料庫，前提是它們同時共用資料目錄和相同的 `OPENMAIC_SECRET_KEY`（見下文）。
@@ -81,15 +81,15 @@ DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # �
 | --- | --- | --- |
 | `DATABASE_URL` | 已指向內建的 PostgreSQL | 必填；沒有它服務會在啟動時結束 |
 | 身分模式 | 單一使用者（`docker-compose.defaults.env` 中的 `OWNER_SINGLE_USER=true`） | 未設定時，每個瀏覽器是一個匿名擁有者 |
-| `OPENMAIC_SECRET_KEY` | 選用：產生的金鑰儲存在 `openmaic-data` 卷中 | 多個實例，或沒有持久化 `data/` 目錄時必填 |
-| 資料目錄 | 掛載在 `/app/data` 的 `openmaic-data` 卷 | 工作目錄下持久化的 `data/` 目錄，所有實例共用 |
+| `OPENMAIC_SECRET_KEY` | 選用：產生的金鑰儲存在 `ground-school-data` 卷中 | 多個實例，或沒有持久化 `data/` 目錄時必填 |
+| 資料目錄 | 掛載在 `/app/data` 的 `ground-school-data` 卷 | 工作目錄下持久化的 `data/` 目錄，所有實例共用 |
 | 模型 | `openmaic.yml` 或 **設定 → 模型** | 同左 |
 
 **身分模式**決定課程歸誰所有。未設定時，每個瀏覽器都是獨立的匿名擁有者，換一個瀏覽器看到的是空的課程庫。個人安裝請設定 `OWNER_SINGLE_USER=true`；一個團隊共用一個課程庫時，設定 `PERSISTENCE_SHARED_OWNER_ID` 並搭配 `ACCESS_CODE`；需要真實帳號時，註冊擁有者驗證方法。詳見 [Owner identity](./hosting.mdx#owner-identity) 和 `.env.example`。
 
 匿名模式下，擁有者 cookie 在正式環境中帶有 `Secure` 標記，`ACCESS_CODE` 的 cookie 也是如此。瀏覽器只在 HTTPS 或 `http://localhost` 上儲存 `Secure` cookie（Safari 連 localhost 也不儲存），因此透過純 HTTP 提供服務的部署必須設定 `COOKIE_SECURE=0`（必須正好是 `0`）：否則每個請求都會成為新的擁有者，寫入以 `403` 失敗，存取碼也會被反覆要求輸入。沒有 TLS 時 cookie 以明文傳輸，只應在可信任的網路中這樣做。
 
-在 `localhost` 以外的位址上使用純 HTTP（區域網路 IP、Tailscale IP 或 MagicDNS 網域）同樣不是安全環境，瀏覽器沒有 Web Locks API。OpenMAIC 在這種情況下仍會儲存，但同一課程的多個分頁之間不做協調：若兩個分頁修改同一個對話，以最後一次儲存為準；在一個分頁刪除的對話會保持刪除，即使另一個分頁當時仍在編輯它。在區域網路內用手機或平板存取時，建議使用 HTTPS，例如在服務前面用 `tailscale serve`。
+在 `localhost` 以外的位址上使用純 HTTP（區域網路 IP、Tailscale IP 或 MagicDNS 網域）同樣不是安全環境，瀏覽器沒有 Web Locks API。Ground School 在這種情況下仍會儲存，但同一課程的多個分頁之間不做協調：若兩個分頁修改同一個對話，以最後一次儲存為準；在一個分頁刪除的對話會保持刪除，即使另一個分頁當時仍在編輯它。在區域網路內用手機或平板存取時，建議使用 HTTPS，例如在服務前面用 `tailscale serve`。
 
 **`OPENMAIC_SECRET_KEY`** 用於加密在模型設定中儲存的供應商 key。未設定時，每個實例會在 `data/instance-secret.key` 中產生自己的金鑰，共用資料庫的實例之間就無法讀取彼此儲存的 key。請把它和資料庫備份放在一起，見[金鑰與 OPENMAIC_SECRET_KEY](./configuration.mdx#金鑰與-openmaic_secret_key)。
 
@@ -111,19 +111,19 @@ DATABASE_URL=postgres://user:password@db-host:5432/openmaic pnpm start      # �
 
 ## 伺服器端持久化（PostgreSQL）
 
-OpenMAIC 把課程、對話紀錄、學習進度和產生的媒體儲存在 PostgreSQL 中，**必須提供 `DATABASE_URL`**：沒有它服務會輸出 `[boot] Invalid server configuration; the server will not start: DATABASE_URL is not set. ...` 及修復方法，並以結束碼 `1` 結束。持久化 HTTP API 內嵌在 OpenMAIC 中，不需要額外的 persistence 服務。
+Ground School 把課程、對話紀錄、學習進度和產生的媒體儲存在 PostgreSQL 中，**必須提供 `DATABASE_URL`**：沒有它服務會輸出 `[boot] Invalid server configuration; the server will not start: DATABASE_URL is not set. ...` 及修復方法，並以結束碼 `1` 結束。持久化 HTTP API 內嵌在 Ground School 中，不需要額外的 persistence 服務。
 
-`docker compose up` 會在應用程式旁啟動 PostgreSQL 並為其設定 `DATABASE_URL`。本機開發時，`pnpm db:up` 以同一服務定義啟動一個獨立的開發資料庫（單獨的 Compose 專案與資料卷 `openmaic-dev-db`，本機所有檢出共用，不會影響該堆疊的資料庫），並發布到 `127.0.0.1`（連接埠 `OPENMAIC_DB_PORT`，預設 `5432`）；`pnpm db:down` 可將其停止。然後在 `.env.local` 中設定連線：
+`docker compose up` 會在應用程式旁啟動 PostgreSQL 並為其設定 `DATABASE_URL`。本機開發時，`pnpm db:up` 以同一服務定義啟動一個獨立的開發資料庫（單獨的 Compose 專案與資料卷 `ground-school-dev-db`，本機所有檢出共用，不會影響該堆疊的資料庫），並發布到 `127.0.0.1`（連接埠 `OPENMAIC_DB_PORT`，預設 `5432`）；`pnpm db:down` 可將其停止。然後在 `.env.local` 中設定連線：
 
 ```bash
-DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic
+DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school
 ```
 
 持久化不再有單獨的憑證：每個請求都歸屬於所有者解析得出的所有者（預設是每個瀏覽器一個的匿名 cookie），執行時工作階段和媒體按該所有者分區。預設身分只隔離瀏覽器、並不驗證任何人，面向真實使用者的部署應註冊基於自有帳號體系的所有者驗證方法。早期版本使用的 `PERSISTENCE_DEV_TOKEN` / `NEXT_PUBLIC_PERSISTENCE_TOKEN` 已移除並被忽略；以舊的瀏覽器自行產生學習者 key 儲存的執行時工作階段將無法再存取。如果 `PERSISTENCE_DEV_TOKEN` 曾是唯一的存取門檻，請在升級前以 `ACCESS_CODE` 或閘道保護部署，或註冊所有者驗證方法。
 
-PostgreSQL 資料儲存在 `openmaic-postgres` volume 中。`PERSISTENCE_POSTGRES_PASSWORD` 只會在資料庫目錄首次初始化時設定密碼，之後修改環境變數不會自動修改已有資料庫使用者密碼。
+PostgreSQL 資料儲存在 `ground-school-postgres` volume 中。`PERSISTENCE_POSTGRES_PASSWORD` 只會在資料庫目錄首次初始化時設定密碼，之後修改環境變數不會自動修改已有資料庫使用者密碼。
 
-除非設定了 `OPENMAIC_SECRET_KEY`，`openmaic-data` 資料卷中還儲存著 `instance-secret.key`，也就是自動產生的實例金鑰，用於加密模型設定中儲存的供應商 key。請把它和資料庫一起備份：沒有它，已儲存的 key 需要重新填寫。如果執行多個副本、沒有持久化資料卷或檔案系統唯讀，請改為設定 `OPENMAIC_SECRET_KEY`（所有副本使用同一個值）；參見 [金鑰與 OPENMAIC_SECRET_KEY](./configuration.mdx#金鑰與-openmaic_secret_key)。
+除非設定了 `OPENMAIC_SECRET_KEY`，`ground-school-data` 資料卷中還儲存著 `instance-secret.key`，也就是自動產生的實例金鑰，用於加密模型設定中儲存的供應商 key。請把它和資料庫一起備份：沒有它，已儲存的 key 需要重新填寫。如果執行多個副本、沒有持久化資料卷或檔案系統唯讀，請改為設定 `OPENMAIC_SECRET_KEY`（所有副本使用同一個值）；參見 [金鑰與 OPENMAIC_SECRET_KEY](./configuration.mdx#金鑰與-openmaic_secret_key)。
 
 早期版本可以把課程儲存在瀏覽器（IndexedDB）中。該模式已移除，`NEXT_PUBLIC_PERSISTENCE` 建置變數會被忽略。以這種方式儲存在瀏覽器中的課程，會在該瀏覽器首次開啟升級後的應用程式時自動搬到伺服器：單向匯入器把它們（連同對話、學習進度、資料夾和媒體）複製給伺服器為該瀏覽器解析出的擁有者，瀏覽器中的原始資料保持不變。每個瀏覽器只匯入一次：伺服器把該瀏覽器綁定給第一個載入升級後應用程式的擁有者，認領會把綁定帶到帳號（匿名擁有者在登入時被認領進帳號）。伺服器會拒絕匯入器為其他擁有者發出的請求，因此之後在同一瀏覽器中使用的其他擁有者不會得到任何匯入。整個過程無需操作，也沒有介面提示；如有問題，會以 `[legacy-browser-import]` 前綴記錄在瀏覽器主控台中。
 
@@ -138,7 +138,7 @@ PostgreSQL 資料儲存在 `openmaic-postgres` volume 中。`PERSISTENCE_POSTGRE
 
 首次啟動 1.2.0 之前：
 
-- **保留資料目錄。** 啟動 1.2.0 時，工作目錄裡要有原本的 `data/`（或使用相同的 `OPENMAIC_CLASSROOMS_DIR`）；使用 Compose 時沿用同一個 `openmaic-data` 卷。1.1.x 以檔案形式儲存在 `data/classrooms` 下的課堂，會在啟動後於背景匯入資料庫一次；沒有這個目錄的伺服器沒有可匯入的內容。
+- **保留資料目錄。** 啟動 1.2.0 時，工作目錄裡要有原本的 `data/`（或使用相同的 `OPENMAIC_CLASSROOMS_DIR`）；使用 Compose 時沿用同一個 `ground-school-data` 卷。1.1.x 以檔案形式儲存在 `data/classrooms` 下的課堂，會在啟動後於背景匯入資料庫一次；沒有這個目錄的伺服器沒有可匯入的內容。
 - **先設定身分模式。** 匯入時，這些課堂歸屬於那次啟動時設定的擁有者：設定了單一使用者（`OWNER_SINGLE_USER=true`）或團隊共用擁有者（`PERSISTENCE_SHARED_OWNER_ID`）時歸它們所有；否則（匿名模式）歸專用擁有者 `system:legacy-classrooms`，此時它們只能透過原連結以唯讀方式開啟，也不會出現在任何課程庫中。每個課堂只匯入一次，所以在匿名模式下匯入的課堂，之後即使再設定身分模式，也仍然屬於 `system:legacy-classrooms`。
 - **列出模型。** 每個使用伺服器端託管憑證、並把所選模型送往上游的供應商（對話、圖像、影片、語音合成、語音辨識、基於模型的網路搜尋）都需要明確的模型清單（`*_MODELS`，或 `openmaic.yml`、`server-providers.yml` 中該供應商下的 `models`）。沒有清單時，只有預設模型、備援模型和槽位引用的模型獲得授權；啟動日誌會逐一列出這類缺少清單的供應商。Tavily、文件解析器等沒有模型選擇的服務不需要清單。請見[模型授權](./configuration.mdx#伺服器端託管供應商的模型授權)。
 - **算繪服務與應用程式一起升級。** 如果使用 MP4 影片匯出，請在升級應用程式的同時或之前升級所有 render-service 執行個體：算繪工作綁定到擁有者，新舊版本混用時會安全失敗（拒絕請求）。
@@ -148,7 +148,7 @@ PostgreSQL 資料儲存在 `openmaic-postgres` volume 中。`PERSISTENCE_POSTGRE
 
 ## Vercel（1.1.x 及以前）
 
-Serverless 部署支援到 OpenMAIC 1.1.x，[儲存庫 README](https://github.com/THU-MAIC/OpenMAIC#vercel-deployment-up-to-11x) 說明了如何在 Vercel 上部署 `release/1.1.x` 分支。這樣的部署之後可以遷移到常駐主機而不遺失資料：把新主機的 `DATABASE_URL` 指向原本使用的資料庫（如果有用），並沿用同一個存取位址——瀏覽器按網站儲存資料，訪客瀏覽器中的課程會在每個瀏覽器首次開啟升級後的應用程式時匯入。
+Serverless 部署支援到 Ground School 1.1.x，[儲存庫 README](https://github.com/THU-MAIC/OpenMAIC#vercel-deployment-up-to-11x) 說明了如何在 Vercel 上部署 `release/1.1.x` 分支。這樣的部署之後可以遷移到常駐主機而不遺失資料：把新主機的 `DATABASE_URL` 指向原本使用的資料庫（如果有用），並沿用同一個存取位址——瀏覽器按網站儲存資料，訪客瀏覽器中的課程會在每個瀏覽器首次開啟升級後的應用程式時匯入。
 
 ## 選用：MP4 影片匯出
 
@@ -160,7 +160,7 @@ Serverless 部署支援到 OpenMAIC 1.1.x，[儲存庫 README](https://github.co
 docker compose --profile video-export up --build
 ```
 
-Compose 會透過 `RENDER_SERVICE_URL` 讓 OpenMAIC 連線至渲染服務。若未啟用此 profile，或渲染服務無法使用，匯出功能會改為下載專案 ZIP，以供本機 CLI 渲染。渲染服務使用隔離網路，啟動時需要 `NET_ADMIN` capability；其他限制與獨立部署方式請見儲存庫中的 [`render-service/README.md`](https://github.com/THU-MAIC/OpenMAIC/blob/main/render-service/README.md)。升級時，請在升級應用程式的同時或之前升級算繪服務。
+Compose 會透過 `RENDER_SERVICE_URL` 讓 Ground School 連線至渲染服務。若未啟用此 profile，或渲染服務無法使用，匯出功能會改為下載專案 ZIP，以供本機 CLI 渲染。渲染服務使用隔離網路，啟動時需要 `NET_ADMIN` capability；其他限制與獨立部署方式請見儲存庫中的 [`render-service/README.md`](https://github.com/THU-MAIC/OpenMAIC/blob/main/render-service/README.md)。升級時，請在升級應用程式的同時或之前升級算繪服務。
 
 ## 環境變數
 

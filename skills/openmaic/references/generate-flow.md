@@ -4,10 +4,10 @@
 
 - Repo path is confirmed
 - Startup mode has been chosen
-- OpenMAIC is healthy at the selected `url`
+- Ground School is healthy at the selected `url`
 - Provider keys are configured
 
-> **Live Demo mode**: If using the OpenMAIC Live Demo (open.maic.chat), all
+> **Live Demo mode**: If using the Ground School Live Demo (open.maic.chat), all
 > preconditions (repo, startup, provider keys) are already satisfied.
 > Include `Authorization: Bearer <access-code>` header on all requests below.
 > See [live-demo.md](live-demo.md) for details.
@@ -227,7 +227,7 @@ A `failed` job carries `error`, naming the step that failed when there is one (f
 - Prefer fewer poll attempts over aggressive polling. Long-running jobs are more likely to survive agent-loop limits if the tool-call cadence stays low.
 - Within a single agent turn, cap active polling to about 10 minutes. If the job is still not finished, tell the user it is still running and include the `jobId` and `pollUrl` so a later turn can continue checking without resubmitting.
 - Report progress to the user only when `status`, `step`, or visible progress meaningfully changes. Do not spam every poll result.
-- Do not try to recover from auth, provider, model, or base URL errors by changing request parameters. Tell the user to fix OpenMAIC server-side config and retry only after they confirm.
+- Do not try to recover from auth, provider, model, or base URL errors by changing request parameters. Tell the user to fix Ground School server-side config and retry only after they confirm.
 - On `failed`, surface the server error and include the `jobId`.
 - On `succeeded`, read `result.classroomId` and `result.url` from the final poll response, and also read `result.warning` before telling the user the classroom is ready.
   - If `result.warning` is set, quote it in the same update: some images or videos could not be generated (for example the provider refused them, or the owner's asset storage is full) and show a placeholder, or some speech clips were left without narration because the owner's asset storage refused them. The classroom URL is still usable. The retryable images and videos can be retried with `POST {url}/api/generation-runs/{runId}/retry` and `{ "commandId": "<a new unique id>", "media": { "elementId": "<id>" } }`, where the element ids and their states are in `GET {url}/api/generation-runs/{runId}` under `media`.

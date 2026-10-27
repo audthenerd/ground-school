@@ -79,7 +79,7 @@ beforeEach(() => {
   vi.spyOn(console, 'info').mockImplementation(() => {});
   vi.stubEnv('NEXT_RUNTIME', 'nodejs');
   vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
-  vi.stubEnv('DATABASE_URL', 'postgres://boot/openmaic');
+  vi.stubEnv('DATABASE_URL', 'postgres://boot/ground_school');
   vi.stubEnv('MATERIALS_POOL_BACKFILL', '');
 });
 

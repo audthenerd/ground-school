@@ -1,6 +1,6 @@
 # @openmaic/renderer
 
-React component for rendering PPTist-style `Slide` JSON. Extracted from [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC).
+React component for rendering PPTist-style `Slide` JSON. Extracted from [Ground School](https://github.com/THU-MAIC/OpenMAIC).
 
 > `@openmaic/renderer` is the read-only canvas package. Editing lives in the
 > separate `@openmaic/editor` package, which depends on this renderer.

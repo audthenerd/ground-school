@@ -1,9 +1,9 @@
 <!-- <p align="center">
-  <img src="assets/logo-horizontal.png" alt="OpenMAIC" width="420"/>
+  <img src="assets/logo-horizontal.png" alt="Ground School" width="420"/>
 </p> -->
 
 <p align="center">
-  <img src="assets/banner.png" alt="OpenMAIC Banner" width="680"/>
+  <img src="assets/banner.png" alt="Ground School Banner" width="680"/>
 </p>
 
 <p align="center">
@@ -71,7 +71,7 @@ Full history in the [changelog](CHANGELOG.md).
 
 ## 📖 Overview
 
-**OpenMAIC** (Open Multi-Agent Interactive Classroom) is an open-source AI platform that turns any topic or document into a rich, interactive classroom experience. Powered by multi-agent orchestration, it generates slides, quizzes, interactive simulations, and project-based learning activities — all delivered by AI teachers and AI classmates who can speak, draw on a whiteboard, and engage in real-time discussions with you. The built-in OpenMAIC Skill works with [OpenClaw](https://github.com/openclaw/openclaw) as well as agent workbenches such as Codex, DeepSeek, and WorkBuddy, so you can generate classrooms from messaging apps like Feishu, Slack, or Telegram, or right inside your IDE.
+**Ground School** (Open Multi-Agent Interactive Classroom) is an open-source AI platform that turns any topic or document into a rich, interactive classroom experience. Powered by multi-agent orchestration, it generates slides, quizzes, interactive simulations, and project-based learning activities — all delivered by AI teachers and AI classmates who can speak, draw on a whiteboard, and engage in real-time discussions with you. The built-in Ground School Skill works with [OpenClaw](https://github.com/openclaw/openclaw) as well as agent workbenches such as Codex, DeepSeek, and WorkBuddy, so you can generate classrooms from messaging apps like Feishu, Slack, or Telegram, or right inside your IDE.
 
 https://github.com/user-attachments/assets/8f3f1e5f-1468-4e93-8054-afeeea683a61
 
@@ -82,7 +82,7 @@ https://github.com/user-attachments/assets/8f3f1e5f-1468-4e93-8054-afeeea683a61
 - **Rich scene types** — Slides, quizzes, interactive HTML simulations, and project-based learning (PBL)
 - **Whiteboard & TTS** — Agents draw diagrams, write formulas, and explain out loud
 - **[Export anywhere](packages/docs/content/docs/getting-started.mdx#export-a-classroom)** — A `.pptx` that keeps every scene, one offline `.html` file that plays the whole lesson, or a classroom ZIP to move it to another deployment
-- **[Agent workbench integration](#-agent-workbench-integration)** — The OpenMAIC Skill supports OpenClaw, Codex, DeepSeek, WorkBuddy, and more — generate classrooms from Feishu, Slack, Telegram, 20+ messaging apps, or your IDE
+- **[Agent workbench integration](#-agent-workbench-integration)** — The Ground School Skill supports OpenClaw, Codex, DeepSeek, WorkBuddy, and more — generate classrooms from Feishu, Slack, Telegram, 20+ messaging apps, or your IDE
 
 ## 🚀 Quick Start
 
@@ -97,7 +97,7 @@ https://github.com/user-attachments/assets/8f3f1e5f-1468-4e93-8054-afeeea683a61
 
 ```bash
 git clone https://github.com/THU-MAIC/OpenMAIC.git
-cd OpenMAIC
+cd Ground School
 pnpm install
 ```
 
@@ -137,7 +137,7 @@ The slots you write are the server's defaults; users can change them, or connect
 **Providers:** OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Google Gemini, DeepSeek, Qwen, Kimi, MiniMax, Grok (xAI), OpenRouter, TokenDance, Doubao, Tencent Hunyuan/TokenHub, Xiaomi MiMo, GLM (Zhipu), Ollama, [Lemonade](#lemonade-local-ai) and [FunASR](#funasr-local-asr) (local), and any OpenAI-compatible API.
 
 > [!TIP]
-> **Recommended setup:** OpenMAIC is at its best with every modality turned on — generated illustrations, narration, video clips, web search, and web fetch. A token plan configures the capabilities it supports with one key (see the examples below). Choose a fast long-context model such as `deepseek-v4.1-flash` as the default.
+> **Recommended setup:** Ground School is at its best with every modality turned on — generated illustrations, narration, video clips, web search, and web fetch. A token plan configures the capabilities it supports with one key (see the examples below). Choose a fast long-context model such as `deepseek-v4.1-flash` as the default.
 
 <details>
 <summary><b>More examples</b>: token plans, Xiaomi MiMo and GLM, Amazon Bedrock</summary>
@@ -219,10 +219,10 @@ pnpm db:up
 Then uncomment the local `DATABASE_URL` line in `.env.local`:
 
 ```env
-DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic
+DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school
 ```
 
-`pnpm db:up` starts a development PostgreSQL on `127.0.0.1:5432` (set `OPENMAIC_DB_PORT` for another port). It is its own Compose project, `openmaic-dev-db`, shared by every checkout on this machine, with its own container and volume, so it never touches the database of a `docker compose up` stack. `pnpm db:down` stops it and keeps the data. Any other PostgreSQL works too.
+`pnpm db:up` starts a development PostgreSQL on `127.0.0.1:5432` (set `OPENMAIC_DB_PORT` for another port). It is its own Compose project, `ground-school-dev-db`, shared by every checkout on this machine, with its own container and volume, so it never touches the database of a `docker compose up` stack. `pnpm db:down` stops it and keeps the data. Any other PostgreSQL works too.
 
 ### 4. Run
 
@@ -254,7 +254,7 @@ cp .env.example .env.local
 docker compose up --build
 ```
 
-Open **http://localhost:3000**. The stack is two containers, the app and PostgreSQL. Courses, generated media and runtime sessions live in the named volumes `openmaic-postgres` and `openmaic-data`, which survive `docker compose down` and rebuilds; `docker compose down -v` deletes them. To configure models with `openmaic.yml`, create it from `openmaic.example.yml` and uncomment its mount in `docker-compose.yml`; otherwise connect a model service in the model settings once the app is running.
+Open **http://localhost:3000**. The stack is two containers, the app and PostgreSQL. Courses, generated media and runtime sessions live in the named volumes `ground-school-postgres` and `ground-school-data`, which survive `docker compose down` and rebuilds; `docker compose down -v` deletes them. To configure models with `openmaic.yml`, create it from `openmaic.example.yml` and uncomment its mount in `docker-compose.yml`; otherwise connect a model service in the model settings once the app is running.
 
 The Compose file is a **personal installation**: it runs in [single-user mode](#server-backed-persistence-postgresql) (every browser sees one shared library) and listens on `127.0.0.1:3000` only. To serve other machines, protect it first:
 
@@ -299,7 +299,7 @@ For a direct image build:
 docker build \
   --build-arg ALPINE_MIRROR=mirrors.tuna.tsinghua.edu.cn \
   --build-arg NPM_REGISTRY=https://registry.npmmirror.com \
-  -t openmaic:local .
+  -t ground-school:local .
 ```
 
 These arguments do not accelerate Docker Hub pulls, including the Dockerfile
@@ -312,8 +312,8 @@ the cache only improves performance and is not required for a correct build.
 
 ### Vercel Deployment (up to 1.1.x)
 
-Serverless deployment is supported up to OpenMAIC 1.1.x. From 1.2.0, course
-generation runs on the server in a process that outlives requests, so OpenMAIC
+Serverless deployment is supported up to Ground School 1.1.x. From 1.2.0, course
+generation runs on the server in a process that outlives requests, so Ground School
 needs a long-running Node.js process with PostgreSQL (the
 [Docker deployment](#docker-deployment) or `pnpm start`); Vercel and other
 serverless hosts are not supported, and the repository no longer ships a
@@ -333,7 +333,7 @@ for every kind of deployment.
 
 ### Server-backed persistence (PostgreSQL)
 
-OpenMAIC keeps courses on the server. Course documents, folders, chat history, learner sessions and generated media live in PostgreSQL (media optionally in S3), served by the app itself at `/api/persistence`. The browser keeps only what belongs to the device, such as settings, playback position and caches; **Settings → Clear Local Cache** never touches the server.
+Ground School keeps courses on the server. Course documents, folders, chat history, learner sessions and generated media live in PostgreSQL (media optionally in S3), served by the app itself at `/api/persistence`. The browser keeps only what belongs to the device, such as settings, playback position and caches; **Settings → Clear Local Cache** never touches the server.
 
 - **`DATABASE_URL` is required.** Without it the server prints the fix and exits with code `1`. Compose sets it for you; for development, [`pnpm db:up`](#3-start-the-database) starts a database.
 - **Courses an older build kept in the browser** are imported once per browser, automatically, the first time it opens the upgraded app. The browser copy is left untouched.
@@ -350,7 +350,7 @@ OpenMAIC keeps courses on the server. Course documents, folders, chat history, l
 
 Set the mode before the first start of 1.2.0: classrooms that 1.1.x saved as files are imported for the owner configured then. See [Upgrading from 1.1.x](packages/docs/content/docs/deployment.mdx#upgrading-from-11x) for every kind of deployment.
 
-Running OpenMAIC for other people, or embedding it in your own product? [Hosting and identity](packages/docs/content/docs/hosting.mdx) covers:
+Running Ground School for other people, or embedding it in your own product? [Hosting and identity](packages/docs/content/docs/hosting.mdx) covers:
 
 - [who can read and write stored data](packages/docs/content/docs/hosting.mdx#who-can-read-and-write-stored-data), and the removed `PERSISTENCE_DEV_TOKEN`;
 - [asset collection, quotas and S3 egress](packages/docs/content/docs/hosting.mdx#asset-storage) (`ASSET_*`);
@@ -375,7 +375,7 @@ The Pro workbench, a course-building surface entered from the home page, is off 
 ```env
 NEXT_PUBLIC_PRO_WORKBENCH_ENABLED=true
 OPENMAIC_AGENT_RUNTIME_ENABLED=true
-DATABASE_URL=postgres://openmaic:openmaic-dev@postgres:5432/openmaic
+DATABASE_URL=postgres://ground_school:ground_school-dev@postgres:5432/ground_school
 ```
 
 The agent runs on the `agent` slot, which follows the default chat model unless assigned and needs a model with tool calling:
@@ -394,9 +394,9 @@ The `agent` slot must not set `thinking.effort`. Its routes, the `DEFAULT_MODEL`
 
 ### Optional: Lemonade (Local AI Provider)
 
-OpenMAIC supports Lemonade as a local, OpenAI-compatible provider for LLMs, image generation, TTS, and ASR. No API key is required.
+Ground School supports Lemonade as a local, OpenAI-compatible provider for LLMs, image generation, TTS, and ASR. No API key is required.
 
-Run Lemonade locally, then point OpenMAIC to it:
+Run Lemonade locally, then point Ground School to it:
 
 ```yaml
 providers:
@@ -426,7 +426,7 @@ With the legacy variables, the same is `LEMONADE_BASE_URL`, `TTS_LEMONADE_BASE_U
 
 ### Optional: FunASR (Local Speech Recognition)
 
-OpenMAIC can transcribe locally through FunASR's OpenAI-compatible server. The built-in provider supports SenseVoiceSmall, Paraformer, and Fun-ASR-Nano and requires no API key.
+Ground School can transcribe locally through FunASR's OpenAI-compatible server. The built-in provider supports SenseVoiceSmall, Paraformer, and Fun-ASR-Nano and requires no API key.
 
 ```bash
 python -m pip install torch torchaudio
@@ -436,7 +436,7 @@ python -m pip install vllm
 funasr-server --device cuda --model fun-asr-nano
 ```
 
-Point OpenMAIC at the server:
+Point Ground School at the server:
 
 ```yaml
 providers:
@@ -454,7 +454,7 @@ Use `funasr-server --device cpu --model sensevoice` for a CPU-only setup. See th
 
 ### Optional: Local Audio and Video Extraction
 
-OpenMAIC can extract timestamped transcripts and prepared video keyframes locally. Install the system `ffmpeg` package so both `ffmpeg` and `ffprobe` are executable on `PATH`, then assign the `asr` slot (for example FunASR, Lemonade, or OpenAI) as above. The application resolves the executables at extraction time; ffmpeg is not an npm dependency and is not required to start or use OpenMAIC.
+Ground School can extract timestamped transcripts and prepared video keyframes locally. Install the system `ffmpeg` package so both `ffmpeg` and `ffprobe` are executable on `PATH`, then assign the `asr` slot (for example FunASR, Lemonade, or OpenAI) as above. The application resolves the executables at extraction time; ffmpeg is not an npm dependency and is not required to start or use Ground School.
 
 If the executables are unavailable, the local extractor is skipped. A configured AliDocMind provider remains available as the cloud extraction path. When neither local ffmpeg extraction nor AliDocMind is available, audio/video materials are marked failed with an actionable setup message instead of hanging or completing with an empty transcript.
 
@@ -490,9 +490,9 @@ Without `openmaic.yml`, the legacy variables `PDF_MINERU_CLOUD_API_KEY` or `PDF_
 
 ### Optional: VoxCPM2 (Self-Hosted TTS with Voice Cloning)
 
-[VoxCPM2](https://github.com/OpenBMB/VoxCPM) is an open-source TTS model from OpenBMB with voice cloning. OpenMAIC ships an adapter; run VoxCPM on your own hardware and OpenMAIC will talk to it.
+[VoxCPM2](https://github.com/OpenBMB/VoxCPM) is an open-source TTS model from OpenBMB with voice cloning. Ground School ships an adapter; run VoxCPM on your own hardware and Ground School will talk to it.
 
-**1. Run a VoxCPM backend.** Three deployment styles, all behind the same OpenMAIC adapter. You pick which one with `options.backend` in `openmaic.yml` (step 2).
+**1. Run a VoxCPM backend.** Three deployment styles, all behind the same Ground School adapter. You pick which one with `options.backend` in `openmaic.yml` (step 2).
 
 | Backend | Endpoint | When to use |
 | --- | --- | --- |
@@ -502,7 +502,7 @@ Without `openmaic.yml`, the legacy variables `PDF_MINERU_CLOUD_API_KEY` or `PDF_
 
 See the [VoxCPM repo](https://github.com/OpenBMB/VoxCPM) for backend setup.
 
-**2. Point OpenMAIC at it.** VoxCPM2 runs on your own network, so the deployment configures it in `openmaic.yml` (no API key required); workspaces cannot add it in **Settings → Model Services**:
+**2. Point Ground School at it.** VoxCPM2 runs on your own network, so the deployment configures it in `openmaic.yml` (no API key required); workspaces cannot add it in **Settings → Model Services**:
 
 ```yaml
 providers:
@@ -524,7 +524,7 @@ Without `openmaic.yml`, the legacy `TTS_VOXCPM_BASE_URL=http://localhost:8000/v1
 
 <img src="assets/voxcpm/voxcpm-voice-manager.png" width="85%" alt="VoxCPM2 VoxCPM Voices section with Auto, Prompt and Clone modes" />
 
-- **Auto Voice** (default): OpenMAIC generates a voice prompt from each agent's persona at synthesis time. No setup required.
+- **Auto Voice** (default): Ground School generates a voice prompt from each agent's persona at synthesis time. No setup required.
 - **Prompt voice**: describe the voice in natural language, e.g. *"warm female teacher voice, calm and encouraging, mid-pitch"*.
 - **Clone voice**: upload a short reference audio clip or record one in the browser. The clip is stored in this browser (IndexedDB) and sent to your VoxCPM backend on each synthesis.
 
@@ -534,7 +534,7 @@ Without `openmaic.yml`, the legacy `TTS_VOXCPM_BASE_URL=http://localhost:8000/v1
 
 ### Agent Workbench and Pro Mode (v1.0.0)
 
-The workbench adds a conversational course-building agent to OpenMAIC.
+The workbench adds a conversational course-building agent to Ground School.
 Its durable sessions can be resumed after a worker restart, accept follow-up
 instructions while running, and stream a replayable event history to the chat
 surface.
@@ -582,7 +582,7 @@ vendor.
 
 ### Pluggable Storage
 
-OpenMAIC stores course documents, learner runtime records and assets on the
+Ground School stores course documents, learner runtime records and assets on the
 server, in PostgreSQL. The `@openmaic/storage` package defines swappable stores
 for those primitives — PostgreSQL-backed documents, learner runtime, assets,
 durable agent sessions, session materials, and user skills, plus browser
@@ -704,7 +704,7 @@ If you are looking for a version with richer functionality, stronger interactivi
 Describe what you want to learn or attach reference materials. PDF, Word,
 PowerPoint, spreadsheet, text, image, audio, and video inputs can enter the
 material pipeline; configured extractors turn supported sources into content
-for generation. OpenMAIC's classic two-stage pipeline handles the rest:
+for generation. Ground School's classic two-stage pipeline handles the rest:
 
 | Stage | What Happens |
 |-------|-------------|
@@ -787,7 +787,7 @@ Choose a role and collaborate with AI agents on structured projects with milesto
 <tr>
 <td valign="top">
 
-The OpenMAIC skill package (`skills/openmaic/`) uses the standard SKILL.md format and can be loaded by various agent workbenches — besides OpenClaw, this includes **Codex**, **DeepSeek**, **WorkBuddy**, and others. It is a guided SOP covering the live demo, local setup, classroom generation, and secondary development on top of the `@openmaic/*` SDK.
+The Ground School skill package (`skills/openmaic/`) uses the standard SKILL.md format and can be loaded by various agent workbenches — besides OpenClaw, this includes **Codex**, **DeepSeek**, **WorkBuddy**, and others. It is a guided SOP covering the live demo, local setup, classroom generation, and secondary development on top of the `@openmaic/*` SDK.
 
 [OpenClaw](https://github.com/openclaw/openclaw) is a personal AI assistant that connects to the messaging platforms you already use (Feishu, Slack, Discord, Telegram, WhatsApp, etc.). With this integration, you can **generate and view interactive classrooms directly from your chat app** without ever touching a terminal.
 
@@ -805,7 +805,7 @@ Just tell your agent assistant what you want to learn — it handles everything 
 - **Hosted mode** — Grab an access code from [open.maic.chat](https://open.maic.chat/), save it in your config, and generate classrooms instantly — no local setup required
 - **Self-hosted mode** — Clone, install dependencies, configure API keys, and start the server — the skill guides you through each step
 - **Track progress** — Poll the async generation job and send you the link when ready
-- **Secondary development** — Guide you through building on top of OpenMAIC: create your own app with the `@openmaic/*` SDK (see the extend docs inside the skill)
+- **Secondary development** — Guide you through building on top of Ground School: create your own app with the `@openmaic/*` SDK (see the extend docs inside the skill)
 
 Every step asks for your confirmation first. No black-box automation.
 
@@ -842,7 +842,7 @@ Optional config in `~/.openclaw/openclaw.json`:
           // Hosted mode: paste your access code from open.maic.chat
           "accessCode": "sk-xxx",
           // Self-hosted mode: local repo path and URL
-          "repoDir": "/path/to/OpenMAIC",
+          "repoDir": "/path/to/Ground School",
           "url": "http://localhost:3000"
         }
       }
@@ -866,7 +866,7 @@ See [Exporting a classroom](packages/docs/content/docs/getting-started.mdx#expor
 
 Importing a classroom ZIP stores its embedded audio, images, video, and posters in the server asset pool before saving the course, so other browsers resolve those assets without the importing browser's cache. A ZIP is also a way to move a course between deployments: export it from one and import it on the other.
 
-**Offline / intranet classrooms:** When you export a classroom (`.maic.zip`) or a Resource Pack, OpenMAIC inlines the external assets referenced by interactive scenes (KaTeX, Three.js incl. `three/addons`, Tailwind CDN, Google Fonts, images) into the exported HTML as `data:` URIs. The exported course then plays fully offline after import into an air-gapped/intranet instance — no public CDN is contacted at playback time. Assets that can't be fetched at export time (e.g. CORS-restricted image hosts) are reported and left as URLs. Classrooms exported *before* this feature still reference CDNs and must be re-exported to gain offline support.
+**Offline / intranet classrooms:** When you export a classroom (`.maic.zip`) or a Resource Pack, Ground School inlines the external assets referenced by interactive scenes (KaTeX, Three.js incl. `three/addons`, Tailwind CDN, Google Fonts, images) into the exported HTML as `data:` URIs. The exported course then plays fully offline after import into an air-gapped/intranet instance — no public CDN is contacted at playback time. Assets that can't be fetched at export time (e.g. CORS-restricted image hosts) are reported and left as URLs. Classrooms exported *before* this feature still reference CDNs and must be re-exported to gain offline support.
 
 ### And More
 
@@ -926,7 +926,7 @@ We welcome contributions from the community! Whether it's bug reports, feature i
 ### Project Structure
 
 ```
-OpenMAIC/
+Ground School/
 ├── app/                        # Next.js App Router
 │   ├── api/                    #   Generation, media, persistence, and agent APIs
 │   │   ├── agent/              #     Durable session, event, material, and skill control plane
@@ -977,7 +977,7 @@ OpenMAIC/
 │   ├── @openmaic/dsl/          #   Versioned course/slide data contract and validators
 │   ├── @openmaic/renderer/     #   React renderer for the slide DSL
 │   ├── @openmaic/editor/       #   Composable slide editing core and React surface
-│   ├── @openmaic/importer/     #   PPTX → OpenMAIC slide importer
+│   ├── @openmaic/importer/     #   PPTX → Ground School slide importer
 │   ├── @openmaic/generation/   #   Generation contracts, pipeline, and prompt assets
 │   ├── @openmaic/storage/      #   Browser, HTTP, PostgreSQL, and S3 persistence primitives
 │   ├── pptxgenjs/              #   Customized PowerPoint generation
@@ -986,7 +986,7 @@ OpenMAIC/
 ├── render-service/             # MP4 video export render service (Chromium + FFmpeg, standalone container)
 │
 ├── skills/                     # OpenClaw / ClawHub skills
-│   └── openmaic/               #   Guided OpenMAIC setup & generation SOP
+│   └── openmaic/               #   Guided Ground School setup & generation SOP
 │       ├── SKILL.md            #   Thin router with confirmation rules
 │       └── references/         #   On-demand SOP sections (generation, deployment, extending, …)
 │
@@ -1022,7 +1022,7 @@ This project is licensed under the MIT License, so commercial use is permitted f
 
 ## 📝 Citation
 
-If you find OpenMAIC useful in your research, please consider citing:
+If you find Ground School useful in your research, please consider citing:
 
 ```bibtex
 @Article{JCST-2509-16000,

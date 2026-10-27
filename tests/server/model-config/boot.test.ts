@@ -47,7 +47,7 @@ beforeEach(async () => {
   vi.spyOn(process, 'once').mockReturnValue(process);
   vi.stubEnv('NEXT_RUNTIME', 'nodejs');
   vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
-  vi.stubEnv('DATABASE_URL', 'postgres://boot/openmaic');
+  vi.stubEnv('DATABASE_URL', 'postgres://boot/ground_school');
 });
 
 afterEach(() => {

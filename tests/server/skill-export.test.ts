@@ -58,7 +58,7 @@ function skillMarkdown(body: string): string {
 }
 
 describe('skill export zips', () => {
-  it('packages the shipped OpenMAIC skill verbatim under openmaic/', async () => {
+  it('packages the shipped Ground School skill verbatim under openmaic/', async () => {
     const zip = await buildOpenClawSkillZip();
     expect(zip).not.toBeNull();
     const loaded = await JSZip.loadAsync(zip!);

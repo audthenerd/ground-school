@@ -265,7 +265,7 @@ describe('shipped skill constraints', () => {
     }
   });
 
-  it('ships the K-12 core-literacy skill as an OpenMAIC-native classroom flow', async () => {
+  it('ships the K-12 core-literacy skill as an Ground School-native classroom flow', async () => {
     const root = join(process.cwd(), 'skills/agent-runtime/k12-core-literacy-planning');
     const md = readFileSync(join(root, 'SKILL.md'), 'utf8');
     const skill = (await listSkills()).find(
@@ -1337,29 +1337,29 @@ describe('toPosixPath', () => {
   });
 
   it('converts Windows backslashes to forward slashes', () => {
-    const windowsPath = 'C:\\repo\\OpenMAIC\\skills\\agent-runtime\\build-personal-skill';
+    const windowsPath = 'C:\\repo\\Ground School\\skills\\agent-runtime\\build-personal-skill';
     const posix = windowsPath.split('\\').join('/');
-    expect(posix).toBe('C:/repo/OpenMAIC/skills/agent-runtime/build-personal-skill');
+    expect(posix).toBe('C:/repo/Ground School/skills/agent-runtime/build-personal-skill');
   });
 
   it('handles mixed separators', () => {
-    const mixed = 'C:\\repo/OpenMAIC\\skills/SKILL.md';
+    const mixed = 'C:\\repo/Ground School\\skills/SKILL.md';
     const posix = mixed.split('\\').join('/');
-    expect(posix).toBe('C:/repo/OpenMAIC/skills/SKILL.md');
+    expect(posix).toBe('C:/repo/Ground School/skills/SKILL.md');
   });
 });
 
 describe('normalizeSkillFileInfo', () => {
   it('normalizes both path and name from a Windows-shaped FileInfo', () => {
     const info = {
-      name: 'C:\\repo\\OpenMAIC\\skills\\agent-runtime\\quiz\\SKILL.md',
-      path: 'C:\\repo\\OpenMAIC\\skills\\agent-runtime\\quiz\\SKILL.md',
+      name: 'C:\\repo\\Ground School\\skills\\agent-runtime\\quiz\\SKILL.md',
+      path: 'C:\\repo\\Ground School\\skills\\agent-runtime\\quiz\\SKILL.md',
       isFile: true,
       isDirectory: false,
       size: 1024,
     };
     const result = normalizeSkillFileInfo(info);
-    expect(result.path).toBe('C:/repo/OpenMAIC/skills/agent-runtime/quiz/SKILL.md');
+    expect(result.path).toBe('C:/repo/Ground School/skills/agent-runtime/quiz/SKILL.md');
     expect(result.name).toBe('SKILL.md');
   });
 

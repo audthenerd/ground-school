@@ -2,7 +2,7 @@
 
 ## Scope
 
-You are building a **separate app** that consumes `@openmaic/*` packages via `npm install` — not working inside the OpenMAIC monorepo. If you are customizing the OpenMAIC product itself, use [extend-cookbook.md](extend-cookbook.md) instead.
+You are building a **separate app** that consumes `@openmaic/*` packages via `npm install` — not working inside the Ground School monorepo. If you are customizing the Ground School product itself, use [extend-cookbook.md](extend-cookbook.md) instead.
 
 The SDK is early-stage (`0.x`). Versions below are current as of this writing — confirm against the registry when you install.
 
@@ -39,7 +39,7 @@ The SDK is early-stage (`0.x`). Versions below are current as of this writing �
    import { SlideCanvas } from '@openmaic/renderer';
    import type { Slide } from '@openmaic/dsl';
    ```
-   For a working example of props/usage, read `components/slide-renderer/SlideThumbnail.tsx` in the OpenMAIC repo.
+   For a working example of props/usage, read `components/slide-renderer/SlideThumbnail.tsx` in the Ground School repo.
 
 ## Precise Import Paths
 

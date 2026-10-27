@@ -3,7 +3,7 @@ title: Configuration
 description: Models and providers (openmaic.yml and the model settings), access control, feature flags and other server options.
 ---
 
-OpenMAIC has three configuration sources, and each has one job:
+Ground School has three configuration sources, and each has one job:
 
 | Source | Written by | Holds | Takes effect |
 | --- | --- | --- | --- |
@@ -230,7 +230,7 @@ allowUserKeys: false
 
 - Keys in `openmaic.yml` come from the environment through `${VAR}`. They are never stored in the database and never sent to the browser.
 - Keys a workspace enters in the model settings are stored in the database, encrypted with AES-256-GCM under the instance secret `OPENMAIC_SECRET_KEY`.
-- When `OPENMAIC_SECRET_KEY` is unset, the server creates a random secret on first use in `data/instance-secret.key` (inside the `openmaic-data` volume with Docker Compose) and uses it from then on.
+- When `OPENMAIC_SECRET_KEY` is unset, the server creates a random secret on first use in `data/instance-secret.key` (inside the `ground-school-data` volume with Docker Compose) and uses it from then on.
 
 Keep the secret with the database backups: keys saved under a lost or changed secret cannot be read and have to be entered again (the model settings mark them). Set `OPENMAIC_SECRET_KEY` explicitly when more than one instance shares the database, or when the server has no persistent data directory (a container without the data volume); any string works, for example the output of `openssl rand -base64 32`.
 
@@ -417,7 +417,7 @@ Then remove `MODEL_ROUTES`, `DEFAULT_MODEL` and `MODEL_FALLBACK`.
 
 ```yaml
 services:
-  openmaic:
+  ground-school:
     volumes:
       - ./openmaic.yml:/app/openmaic.yml:ro
 ```
@@ -655,7 +655,7 @@ slots:
   image: comfyui
 ```
 
-Place workflow JSON exported in API format in OpenMAIC's `public/` directory. Use filenames matching `comfyui-*.json` or containing `workflow`; OpenMAIC discovers these files automatically and offers them as workflows. With Docker, add the workflow before building the image or mount an individual workflow file into `/app/public/` in the container. Because the provider is declared by the deployment, a ComfyUI server on the host or a private network does not need `ALLOW_LOCAL_NETWORKS`.
+Place workflow JSON exported in API format in Ground School's `public/` directory. Use filenames matching `comfyui-*.json` or containing `workflow`; Ground School discovers these files automatically and offers them as workflows. With Docker, add the workflow before building the image or mount an individual workflow file into `/app/public/` in the container. Because the provider is declared by the deployment, a ComfyUI server on the host or a private network does not need `ALLOW_LOCAL_NETWORKS`.
 
 ### Video generation providers
 
@@ -665,7 +665,7 @@ Video generation providers use `VIDEO_<PROVIDER>_API_KEY` and optionally `VIDEO_
 
 ### Document and media parsing
 
-The exact course-material formats depend on the selected parser. OpenMAIC currently supports text, PDF, Office documents, images, and some audio/video formats; supported formats and capabilities vary by provider.
+The exact course-material formats depend on the selected parser. Ground School currently supports text, PDF, Office documents, images, and some audio/video formats; supported formats and capabilities vary by provider.
 
 ```bash
 # MinerU self-hosted
@@ -684,7 +684,7 @@ ALIDOCMIND_ACCESS_KEY_SECRET=
 ALIDOCMIND_BASE_URL=       # optional override
 ```
 
-`unpdf` is built into OpenMAIC and supports basic PDF parsing. For Office documents, images, and material requiring OCR, table, formula, or layout analysis, select a compatible MinerU or AliDocMind provider.
+`unpdf` is built into Ground School and supports basic PDF parsing. For Office documents, images, and material requiring OCR, table, formula, or layout analysis, select a compatible MinerU or AliDocMind provider.
 
 AliDocMind document parsing supports PDF, DOCX, PPTX, XLSX, and PNG, JPG/JPEG, BMP, and GIF. Audio and video material is currently supported only through AliDocMind: MP4, MOV, AVI, MKV, and WMV for video; MP3, WAV, and AAC for audio. M4A is not supported.
 

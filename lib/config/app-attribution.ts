@@ -6,7 +6,7 @@
  * API key, but the per-request header takes precedence. The value only needs
  * to be URL-form and unique + stable for the app; it does not need to be
  * reachable. Sending it lets TokenDance recognize that a request originates
- * from an OpenMAIC deployment, which is what their partner program and
+ * from an Ground School deployment, which is what their partner program and
  * support flow key off (see the matching `aff=openmaic` signup links).
  *
  * Attribution is app-level and aggregate; no user-identifying data is added.

@@ -55,9 +55,9 @@ describe('searchWithMiniMax', () => {
         JSON.stringify({
           organic: [
             {
-              title: 'OpenMAIC',
+              title: 'Ground School',
               link: 'https://github.com/THU-MAIC/OpenMAIC',
-              snippet: 'OpenMAIC project repository.',
+              snippet: 'Ground School project repository.',
               date: '2026-05-31',
             },
             {
@@ -90,7 +90,7 @@ describe('searchWithMiniMax', () => {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer minimax-key',
-          'MM-API-Source': 'OpenMAIC',
+          'MM-API-Source': 'Ground School',
         },
         body: JSON.stringify({ q: 'MiniMax Token Plan' }),
       }),
@@ -99,9 +99,9 @@ describe('searchWithMiniMax', () => {
     expect(result.answer).toBe('');
     expect(result.sources).toEqual([
       {
-        title: 'OpenMAIC',
+        title: 'Ground School',
         url: 'https://github.com/THU-MAIC/OpenMAIC',
-        content: 'OpenMAIC project repository.',
+        content: 'Ground School project repository.',
         score: 0,
       },
       {

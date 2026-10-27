@@ -1,5 +1,5 @@
 /**
- * High-level entry: parsed pptxtojson(-pro) JSON → OpenMAIC canvas `Slide[]`.
+ * High-level entry: parsed pptxtojson(-pro) JSON → Ground School canvas `Slide[]`.
  *
  * `parsedToSlides` is the transform-only path: it never touches the parser
  * source under `../src`, which keeps `pdfjs-dist`'s dynamic `require()` out
@@ -52,7 +52,7 @@ export interface ImportPptxOptions {
 }
 
 /**
- * Convert a pre-parsed pptxtojson(-pro) `Output` JSON into OpenMAIC slides.
+ * Convert a pre-parsed pptxtojson(-pro) `Output` JSON into Ground School slides.
  *
  * Resolves after every queued upload has settled, so `Slide` elements
  * either hold the uploaded URL or fall back to the original base64.
@@ -147,7 +147,7 @@ export function normalizeImportedSlides(
 }
 
 /**
- * Parse a .pptx file and convert it into OpenMAIC canvas slides.
+ * Parse a .pptx file and convert it into Ground School canvas slides.
  *
  * Convenience wrapper for environments that can bundle `pptxtojson-pro/src`
  * (Node, Vite, etc.). Inside Next/Turbopack, prefer URL-loading `parse`

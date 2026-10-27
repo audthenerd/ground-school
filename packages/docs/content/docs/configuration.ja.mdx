@@ -3,7 +3,7 @@ title: 設定
 description: モデルとプロバイダー（openmaic.yml とモデル設定）、アクセス制御、機能フラグ、その他のサーバーオプション。
 ---
 
-OpenMAIC には 3 つの設定ソースがあり、それぞれが 1 つの役割だけを担います。
+Ground School には 3 つの設定ソースがあり、それぞれが 1 つの役割だけを担います。
 
 | ソース | 書く人 | 内容 | 反映タイミング |
 | --- | --- | --- | --- |
@@ -230,7 +230,7 @@ allowUserKeys: false
 
 - `openmaic.yml` のキーは `${VAR}` で環境変数から読み込まれ、データベースに保存されることもブラウザーに送られることもありません。
 - ワークスペースがモデル設定で入力したキーはデータベースに保存され、インスタンスシークレット `OPENMAIC_SECRET_KEY` を使って AES-256-GCM で暗号化されます。
-- `OPENMAIC_SECRET_KEY` が未設定の場合、サーバーは初回使用時に `data/instance-secret.key`（Docker Compose では `openmaic-data` ボリューム内）にランダムなシークレットを作成し、以降それを使います。
+- `OPENMAIC_SECRET_KEY` が未設定の場合、サーバーは初回使用時に `data/instance-secret.key`（Docker Compose では `ground-school-data` ボリューム内）にランダムなシークレットを作成し、以降それを使います。
 
 シークレットはデータベースのバックアップと一緒に保管してください。失われたり変更されたりしたシークレットで保存されたキーは読み取れず、再入力が必要です（モデル設定に表示されます）。複数のインスタンスが同じデータベースを共有する場合や、サーバーに永続的なデータディレクトリがない場合（データボリュームをマウントしていないコンテナなど）は、`OPENMAIC_SECRET_KEY` を明示的に設定してください。任意の文字列を使えます（例：`openssl rand -base64 32` の出力）。
 
@@ -417,7 +417,7 @@ slots:
 
 ```yaml
 services:
-  openmaic:
+  ground-school:
     volumes:
       - ./openmaic.yml:/app/openmaic.yml:ro
 ```
@@ -655,7 +655,7 @@ slots:
   image: comfyui
 ```
 
-API 形式でエクスポートしたワークフロー JSON を OpenMAIC の `public/` ディレクトリに置きます。ファイル名は `comfyui-*.json` に一致するか `workflow` を含む必要があり、OpenMAIC はこれらを自動的に検出してワークフローとして提供します。Docker では、イメージをビルドする前にワークフローを追加するか、個々のワークフローファイルをコンテナ内の `/app/public/` にマウントしてください。プロバイダーはデプロイで宣言されているため、ホストやプライベートネットワーク上の ComfyUI に `ALLOW_LOCAL_NETWORKS` は不要です。
+API 形式でエクスポートしたワークフロー JSON を Ground School の `public/` ディレクトリに置きます。ファイル名は `comfyui-*.json` に一致するか `workflow` を含む必要があり、Ground School はこれらを自動的に検出してワークフローとして提供します。Docker では、イメージをビルドする前にワークフローを追加するか、個々のワークフローファイルをコンテナ内の `/app/public/` にマウントしてください。プロバイダーはデプロイで宣言されているため、ホストやプライベートネットワーク上の ComfyUI に `ALLOW_LOCAL_NETWORKS` は不要です。
 
 ### 動画生成プロバイダー
 
@@ -684,7 +684,7 @@ ALIDOCMIND_ACCESS_KEY_SECRET=
 ALIDOCMIND_BASE_URL=       # 任意の上書き
 ```
 
-`unpdf` は OpenMAIC に組み込み済みで、基本的な PDF 解析に使えます。Office 文書、画像、OCR、表、数式、レイアウト解析が必要な教材は MinerU または AliDocMind の互換 provider を選択してください。
+`unpdf` は Ground School に組み込み済みで、基本的な PDF 解析に使えます。Office 文書、画像、OCR、表、数式、レイアウト解析が必要な教材は MinerU または AliDocMind の互換 provider を選択してください。
 
 AliDocMind のドキュメント解析は PDF、DOCX、PPTX、XLSX、PNG、JPG/JPEG、BMP、GIF に対応します。現在の音声・動画素材は AliDocMind でのみ解析可能で、動画は MP4、MOV、AVI、MKV、WMV、音声は MP3、WAV、AAC に対応し、M4A は非対応です。
 

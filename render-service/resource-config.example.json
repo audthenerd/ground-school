@@ -1,5 +1,5 @@
 {
-  "projectRoot": "/var/lib/openmaic/renders",
+  "projectRoot": "/var/lib/ground-school/renders",
   "stateRoot": "/run/openmaic-resource",
   "owner": {
     "workerUid": 1001,

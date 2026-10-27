@@ -259,7 +259,7 @@ describe('asset byte egress', () => {
     const { url } = await serve(stubStore({ indirect }), { byteEgress: REDIRECT });
 
     const response = await fetch(`${url}/assets/ast_example/content`, {
-      headers: { accept: 'Application/Vnd.OpenMAIC.Asset-Descriptor+JSON' },
+      headers: { accept: 'Application/Vnd.Ground School.Asset-Descriptor+JSON' },
     });
 
     expect(response.status).toBe(200);

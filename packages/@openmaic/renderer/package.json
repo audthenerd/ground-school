@@ -1,7 +1,7 @@
 {
   "name": "@openmaic/renderer",
   "version": "0.2.0",
-  "description": "React component for rendering PPTist-style Slide JSON, extracted from OpenMAIC.",
+  "description": "React component for rendering PPTist-style Slide JSON, extracted from Ground School.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

@@ -22,7 +22,7 @@ describe('searchWithDoubao', () => {
             ResultCount: 3,
             WebResults: [
               {
-                Title: 'OpenMAIC',
+                Title: 'Ground School',
                 Url: 'https://github.com/THU-MAIC/OpenMAIC',
                 Snippet: 'short blurb',
                 Summary: 'a longer, query-relevant summary',
@@ -48,7 +48,7 @@ describe('searchWithDoubao', () => {
     );
 
     const result = await searchWithDoubao({
-      query: 'OpenMAIC token plan',
+      query: 'Ground School token plan',
       apiKey: 'ark-key',
       maxResults: 10,
     });
@@ -62,18 +62,18 @@ describe('searchWithDoubao', () => {
           Authorization: 'Bearer ark-key',
         },
         body: JSON.stringify({
-          Query: 'OpenMAIC token plan',
+          Query: 'Ground School token plan',
           SearchType: 'web',
           Count: 10,
           NeedSummary: true,
         }),
       }),
     );
-    expect(result.query).toBe('OpenMAIC token plan');
+    expect(result.query).toBe('Ground School token plan');
     expect(result.answer).toBe('');
     expect(result.sources).toEqual([
       {
-        title: 'OpenMAIC',
+        title: 'Ground School',
         url: 'https://github.com/THU-MAIC/OpenMAIC',
         content: 'a longer, query-relevant summary',
         score: 0.95,

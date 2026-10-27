@@ -8,14 +8,14 @@ const faces = [
   {
     package: 'noto-sans-sc',
     subset: 'chinese-simplified',
-    family: 'OpenMAIC Noto Sans SC',
+    family: 'Ground School Noto Sans SC',
     licenseExport: 'NOTO_SANS_SC_OFL_LICENSE',
     filename: 'noto-sans-sc-chinese-simplified-400-normal.woff2',
   },
   {
     package: 'noto-sans-kr',
     subset: 'korean',
-    family: 'OpenMAIC Noto Sans KR',
+    family: 'Ground School Noto Sans KR',
     licenseExport: 'NOTO_SANS_KR_OFL_LICENSE',
     filename: 'noto-sans-kr-korean-400-normal.woff2',
   },

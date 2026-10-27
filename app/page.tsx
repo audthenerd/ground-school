@@ -27,6 +27,9 @@ import {
   X,
   Presentation,
   Loader2,
+  Plane,
+  Radio,
+  Navigation,
 } from 'lucide-react';
 import { useI18n } from '@/lib/hooks/use-i18n';
 import { LanguageSwitcher } from '@/components/language-switcher';
@@ -636,7 +639,7 @@ function HomePage() {
   };
 
   return (
-    <div className="min-h-[100dvh] w-full bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex flex-col items-center p-4 pt-16 md:p-8 md:pt-16 overflow-x-hidden">
+    <div className="ground-home min-h-[100dvh] w-full flex flex-col items-center px-4 pb-4 pt-20 md:px-8 md:pb-8 md:pt-20 overflow-x-hidden">
       <input
         ref={fileInputRef}
         type="file"
@@ -653,15 +656,15 @@ function HomePage() {
           className="hidden"
         />
       )}
-      {/* ═══ Top-right pill (unchanged) ═══ */}
+      {/* ═══ Flight deck controls ═══ */}
       <div
         ref={toolbarRef}
-        className="fixed top-4 right-4 z-50 flex items-center gap-1 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md px-2 py-1.5 rounded-full border border-gray-100/50 dark:border-gray-700/50 shadow-sm"
+        className="ground-toolbar fixed top-4 right-4 z-50 flex items-center gap-1 px-2 py-1.5 rounded-full"
       >
         {/* Language Selector */}
         <LanguageSwitcher onOpen={() => setThemeOpen(false)} />
 
-        <div className="w-[1px] h-4 bg-gray-200 dark:bg-gray-700" />
+        <div className="w-px h-4 bg-slate-300/70 dark:bg-slate-600/70" />
 
         {/* Theme Selector */}
         <div className="relative">
@@ -669,7 +672,7 @@ function HomePage() {
             onClick={() => {
               setThemeOpen(!themeOpen);
             }}
-            className="p-2 rounded-full text-gray-400 dark:text-gray-500 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-200 hover:shadow-sm transition-all"
+            className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-white/80 dark:hover:bg-slate-700 hover:text-primary transition-all"
           >
             {theme === 'light' && <Sun className="w-4 h-4" />}
             {theme === 'dark' && <Moon className="w-4 h-4" />}
@@ -723,13 +726,13 @@ function HomePage() {
           )}
         </div>
 
-        <div className="w-[1px] h-4 bg-gray-200 dark:bg-gray-700" />
+        <div className="w-px h-4 bg-slate-300/70 dark:bg-slate-600/70" />
 
         {/* Settings Button */}
         <div className="relative">
           <button
             onClick={() => setSettingsOpen(true)}
-            className="p-2 rounded-full text-gray-400 dark:text-gray-500 hover:bg-white dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-200 hover:shadow-sm transition-all group"
+            className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-white/80 dark:hover:bg-slate-700 hover:text-primary transition-all group"
           >
             <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
           </button>
@@ -744,32 +747,36 @@ function HomePage() {
         initialSection={settingsSection}
       />
 
-      {/* ═══ Background Decor ═══ */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: '4s' }}
-        />
-        <div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: '6s' }}
-        />
+      {/* ═══ Airfield / plotting background ═══ */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="ground-grid absolute inset-0" />
+        <div className="ground-radar absolute left-1/2 top-[34%] size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full" />
+        <div className="ground-runway absolute left-1/2 top-0 h-[42rem] w-[11rem] -translate-x-1/2" />
+        <div className="absolute left-[5%] top-[18%] hidden items-center gap-2 text-[10px] font-semibold tracking-[0.24em] text-slate-400/70 xl:flex dark:text-slate-500/80">
+          <Navigation className="size-3.5" /> COURSE VECTOR 031°
+        </div>
+        <div className="absolute right-[6%] top-[44%] hidden items-center gap-2 text-[10px] font-semibold tracking-[0.24em] text-slate-400/70 xl:flex dark:text-slate-500/80">
+          <Radio className="size-3.5" /> COMMS ONLINE
+        </div>
       </div>
 
       {/* ═══ Hero section: title + input (centered, wider) ═══ */}
       <div
         className={cn(
-          'relative z-20 w-full max-w-[800px] flex flex-col items-center mt-[10vh]',
+          'relative z-20 w-full max-w-[860px] flex flex-col items-center mt-[5vh] md:mt-[7vh]',
           heroEnter('fade-in slide-in-from-bottom-5 duration-600'),
         )}
       >
         {/* ── Logo ── */}
-        <div className="relative" data-pro-morph="lockup">
+        <div className="relative flex flex-col items-center" data-pro-morph="lockup">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 shadow-sm dark:border-sky-800/70 dark:bg-sky-950/60 dark:text-sky-300">
+            <Plane className="size-3.5" /> Flight training operations
+          </div>
           <img
             src="/logo-horizontal.png"
-            alt="OpenMAIC"
+            alt="Ground School"
             className={cn(
-              'h-12 md:h-16 mb-2 -ml-2 md:-ml-3',
+              'h-12 md:h-16 mb-2 -ml-2 md:-ml-3 drop-shadow-[0_10px_24px_rgba(15,42,68,0.12)]',
               heroEnter('fade-in zoom-in-90 duration-500 delay-100'),
             )}
           />
@@ -786,7 +793,7 @@ function HomePage() {
         {/* ── Slogan ── */}
         <p
           className={cn(
-            'text-sm text-muted-foreground/60 mb-8',
+            'max-w-lg text-center text-sm font-medium tracking-wide text-slate-500 dark:text-slate-400 mb-8',
             heroEnter('fade-in duration-300 delay-250'),
           )}
         >
@@ -797,8 +804,15 @@ function HomePage() {
         <div className={cn('w-full', heroEnter('fade-in zoom-in-97 duration-300 delay-350'))}>
           <div
             data-pro-morph="composer"
-            className="w-full rounded-2xl border border-border/60 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-xl shadow-black/[0.03] dark:shadow-black/20 transition-shadow focus-within:shadow-2xl focus-within:shadow-violet-500/[0.06]"
+            className="ground-composer w-full overflow-hidden rounded-[22px] transition-all focus-within:-translate-y-0.5"
           >
+            <div className="ground-composer-header flex h-9 items-center justify-between px-4 text-[9px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
+              <span className="flex items-center gap-2">
+                <span className="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_0_3px_rgba(16,185,129,0.12)]" />{' '}
+                Mission briefing
+              </span>
+              <span className="font-mono text-[9px] text-slate-400">GS / SORTIE 001</span>
+            </div>
             {/* ── Greeting + Profile + Agents ── */}
             <div className="relative z-20 flex items-start justify-between">
               <GreetingBar />
@@ -811,7 +825,7 @@ function HomePage() {
             <textarea
               ref={textareaRef}
               placeholder={t('upload.requirementPlaceholder')}
-              className="w-full resize-none border-0 bg-transparent px-4 pt-1 pb-2 text-[13px] leading-relaxed placeholder:text-muted-foreground/40 focus:outline-none min-h-[140px] max-h-[300px]"
+              className="w-full resize-none border-0 bg-transparent px-5 pt-2 pb-3 text-[14px] leading-relaxed placeholder:text-slate-400/75 focus:outline-none min-h-[148px] max-h-[300px]"
               value={form.requirement}
               onChange={(e) => updateForm('requirement', e.target.value)}
               onKeyDown={handleKeyDown}
@@ -819,7 +833,7 @@ function HomePage() {
             />
 
             {/* Toolbar row */}
-            <div className="px-3 pb-3 flex items-end gap-2">
+            <div className="ground-composer-footer px-3 py-3 flex items-end gap-2">
               <div className="flex-1 min-w-0">
                 <GenerationToolbar
                   courseMaterials={courseMaterials.materials}
@@ -869,7 +883,7 @@ function HomePage() {
                 className={cn(
                   'shrink-0 h-8 rounded-lg flex items-center justify-center gap-1.5 transition-all px-3',
                   canGenerate && !preparingGenerate
-                    ? 'bg-primary text-primary-foreground hover:opacity-90 shadow-sm cursor-pointer'
+                    ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-[0_7px_18px_rgba(234,117,45,0.24)] cursor-pointer'
                     : 'bg-muted text-muted-foreground/40 cursor-not-allowed',
                 )}
               >
@@ -956,19 +970,19 @@ function HomePage() {
           action surface across root, folder, and empty. Until the library and
           folder reads resolve, the section shows a skeleton of its own layout
           (server-rendered, so it is on screen before the page's scripts run). */}
-      <div className="relative z-10 mt-10 w-full max-w-6xl flex flex-col items-center">
+      <div className="relative z-10 mt-12 w-full max-w-6xl flex flex-col items-center">
         {/* Trigger — divider-line with centered text. Fixed height keeps the
               bar geometrically stable when the New-folder action or the folder
               path appears/disappears (entering vs leaving a folder). */}
-        <div className="group w-full flex items-center gap-4 h-9">
-          <div className="flex-1 h-px bg-border/40 group-hover:bg-border/70 transition-colors" />
-          <div className="shrink-0 flex items-center gap-3 text-[13px] text-muted-foreground/60 select-none">
+        <div className="group w-full flex items-center gap-4 h-10">
+          <div className="ground-divider flex-1 h-px transition-colors" />
+          <div className="ground-library-nav shrink-0 flex items-center gap-3 rounded-full px-3 py-1.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400 select-none">
             <button
               onClick={() => {
                 if (currentFolderId) setCurrentFolderId(undefined);
                 else persistRecentOpen(!recentOpen);
               }}
-              className="flex items-center gap-2 hover:text-foreground/70 transition-colors cursor-pointer"
+              className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
             >
               <Clock className="size-3.5" />
               {t('classroom.recentClassrooms')}
@@ -1118,7 +1132,7 @@ function HomePage() {
               </button>
             )}
           </div>
-          <div className="flex-1 h-px bg-border/40 group-hover:bg-border/70 transition-colors" />
+          <div className="ground-divider flex-1 h-px transition-colors" />
         </div>
 
         {/* Expandable content. Present from the first render, so it does not
@@ -1312,8 +1326,10 @@ function HomePage() {
       />
 
       {/* Footer — flows with content, at the very end */}
-      <div className="mt-auto pt-12 pb-4 text-center text-xs text-muted-foreground/40">
-        OpenMAIC Open Source Project
+      <div className="relative z-10 mt-auto flex items-center gap-3 pt-14 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
+        <span className="h-px w-8 bg-current opacity-40" />
+        Ground School · Flight learning system
+        <span className="h-px w-8 bg-current opacity-40" />
       </div>
     </div>
   );

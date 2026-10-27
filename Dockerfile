@@ -116,7 +116,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # The app persists classrooms, classroom media, and usage records under
-# ./data, which docker-compose.yml mounts as the openmaic-data named volume.
+# ./data, which docker-compose.yml mounts as the ground-school-data named volume.
 # Nothing above creates the directory, so on first run Docker materializes
 # the mountpoint as root:root and every write from the unprivileged runtime
 # user fails with EACCES — classroom persistence silently stores nothing

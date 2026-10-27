@@ -19,7 +19,7 @@
 
 **实现说明**：主入口为 TypeScript 实现（`src/`），构建产物为 `dist/`；输出 JSON 格式与文档及原示例一致。原 JavaScript 实现位于 `src1/`，仅作输出格式与逻辑参考，不参与构建。
 
-**OpenMAIC 扩展**：在 `parse()`（PPTX → 中间 JSON）之上新增了完整的 import pipeline —— `importPptx()` 直接吃 `.pptx` 文件、吐 OpenMAIC 画布需要的 `Slide[]`，并可选地把所有 base64 图片 / blob 媒体转交给你提供的 OSS 上传函数。详见下方「🚀 进阶用法」。
+**Ground School 扩展**：在 `parse()`（PPTX → 中间 JSON）之上新增了完整的 import pipeline —— `importPptx()` 直接吃 `.pptx` 文件、吐 Ground School 画布需要的 `Slide[]`，并可选地把所有 base64 图片 / blob 媒体转交给你提供的 OSS 上传函数。详见下方「🚀 进阶用法」。
 
 > 与其他的pptx文件解析工具的最大区别在于：
 > 1. 直接运行在浏览器端；
@@ -81,11 +81,11 @@ async function func() {
 func()
 ```
 
-# 🚀 进阶用法：PPTX → OpenMAIC 画布 `Slide[]`
+# 🚀 进阶用法：PPTX → Ground School 画布 `Slide[]`
 
 `parse()` 只完成「PPTX → 可读 JSON」这一步，元素的字段还是 PPT 语义（`type: 'text' | 'shape' | 'image' …`、单位 `pt`、媒体是 base64 / `blob:` URL）。
 
-如果你需要的最终产物是 **OpenMAIC 画布直接可渲染的 `Slide[]`**（`PPTTextElement` / `PPTShapeElement` / `PPTImageElement` 等、单位 `px`、媒体替换为 OSS URL），用 `importPptx()`。
+如果你需要的最终产物是 **Ground School 画布直接可渲染的 `Slide[]`**（`PPTTextElement` / `PPTShapeElement` / `PPTImageElement` 等、单位 `px`、媒体替换为 OSS URL），用 `importPptx()`。
 
 ## 🔑 API 一览
 
@@ -96,7 +96,7 @@ func()
 | `normalizeImportedSlides(slides)` | `(Slide[]) => Slide[]` | DSL 合同边界：补默认值、丢弃无法修复的元素（`console.warn` 上报）。`parsedToSlides` / `importPptx` 已自动应用；直接调用 `transformParsedToSlides` 的消费方需要自己跑一遍以获得相同的输出契约 |
 | `OssUpload` | `(blob: Blob, filename: string, dir?: string) => Promise<string>` | 上传回调签名 |
 | `ImportPptxOptions` | `{ upload?: OssUpload }` | 选项对象 |
-| `CanvasSlide` | OpenMAIC `Slide` 类型 | 用于消费方做类型注解 |
+| `CanvasSlide` | Ground School `Slide` 类型 | 用于消费方做类型注解 |
 
 `importPptx` 内部就是 `parse(buffer, { mediaMode: 'base64' })` + `parsedToSlides(...)`，两者任选其一即可。
 
@@ -219,7 +219,7 @@ const slides = await parsedToSlides(json, { upload });
 
 ## 🧪 在 Next.js (Turbopack) 里用
 
-`maic-importer` 源码依赖 `pdfjs-dist`，其动态 `require()` 模式会被 Turbopack 拒绝。OpenMAIC 的做法：
+`maic-importer` 源码依赖 `pdfjs-dist`，其动态 `require()` 模式会被 Turbopack 拒绝。Ground School 的做法：
 
 1. `pnpm run build` 把整个包（含 importPptx）打成 `dist/`。
 2. `scripts/sync-maic-importer.mjs` 把 `dist/` 复制到 `public/vendor/maic-importer/`。

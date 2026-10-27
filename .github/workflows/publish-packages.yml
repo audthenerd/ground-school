@@ -87,12 +87,12 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: openmaic
+          POSTGRES_DB: ground_school
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U postgres -d openmaic"
+          --health-cmd "pg_isready -U postgres -d ground_school"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -205,7 +205,7 @@ jobs:
       # the tests for exactly that reason.
       - name: Test & typecheck
         env:
-          PG_CONTRACT_URL: postgresql://postgres:postgres@localhost:5432/openmaic
+          PG_CONTRACT_URL: postgresql://postgres:postgres@localhost:5432/ground_school
           STORAGE_PG_CONTRACT_REQUIRED: "1"
           STORAGE_VITEST_RESULTS: ${{ runner.temp }}/storage-vitest.json
           STORAGE_PG_BASELINE: ${{ runner.temp }}/storage-pg-baseline.json

@@ -1,10 +1,10 @@
-# Extend Or Build On OpenMAIC (二次开发)
+# Extend Or Build On Ground School (二次开发)
 
 ## Charter
 
 Secondary development is a confirmation-heavy, **read-before-modify** guidance flow — not a generation flow. Help the user understand the existing code first, then make targeted changes. Default to **not** editing source under `packages/@openmaic/*`; consume those packages as-is. (Modifying the SDK itself is a different, heavier path — see the last section of [extend-sdk.md](extend-sdk.md).)
 
-This reference takes priority over the `accessCode` auto-shortcut in Phase 0: if the user's intent is to extend / build on / customize OpenMAIC or consume the `@openmaic/*` SDK, enter this flow **even when a stored `accessCode` exists**. A returning Live Demo user who now wants to do 二开 should be routed here, not silently sent back to Live Demo.
+This reference takes priority over the `accessCode` auto-shortcut in Phase 0: if the user's intent is to extend / build on / customize Ground School or consume the `@openmaic/*` SDK, enter this flow **even when a stored `accessCode` exists**. A returning Live Demo user who now wants to do 二开 should be routed here, not silently sent back to Live Demo.
 
 ## Secondary-Development Rules
 
@@ -14,7 +14,7 @@ This reference takes priority over the `accessCode` auto-shortcut in Phase 0: if
 
 ## Development Environment (Same As Local Deployment)
 
-二开的开发环境本质上就是 OpenMAIC **本地部署环境**——同一套工具链、同一个仓库、同一次 `pnpm install`、同一套 provider key 和启动方式。所以**环境搭建不要在这里另搞一套**：走标准本地部署流程拿到一个能跑的实例，二开只在其上加几个增量。
+二开的开发环境本质上就是 Ground School **本地部署环境**——同一套工具链、同一个仓库、同一次 `pnpm install`、同一套 provider key 和启动方式。所以**环境搭建不要在这里另搞一套**：走标准本地部署流程拿到一个能跑的实例，二开只在其上加几个增量。
 
 **在哪里拿代码（按需选，不强制 fork）：**
 
@@ -36,18 +36,18 @@ This reference takes priority over the `accessCode` auto-shortcut in Phase 0: if
 
 Ask the user which of these they want. When unsure, offer 2–3 examples (below) and let them self-identify before loading anything.
 
-- **Customize the OpenMAIC product itself** (change a feature / UI / swap in your own provider, storage, or theme / add a page or API route / embed the renderer or editor inside the product) → Load [extend-cookbook.md](extend-cookbook.md).
+- **Customize the Ground School product itself** (change a feature / UI / swap in your own provider, storage, or theme / add a page or API route / embed the renderer or editor inside the product) → Load [extend-cookbook.md](extend-cookbook.md).
 - **Use the `@openmaic/*` SDK to build a new, standalone app** (outside this repo — `npm install @openmaic/renderer` into your own project, not a monorepo workspace) → Load [extend-sdk.md](extend-sdk.md).
 
 Typical examples to help the user pick:
 
-- "I want OpenMAIC to call my company's LLM / write to my S3 bucket / show my branding" → **cookbook** (you are modifying the product).
-- "I want to render OpenMAIC slides, or embed the slide editor, inside my own separate app" → **SDK** (you are consuming packages, not editing the product).
-- "I want to add a feature to OpenMAIC and ship it in the product" → **cookbook** (modifying the product).
+- "I want Ground School to call my company's LLM / write to my S3 bucket / show my branding" → **cookbook** (you are modifying the product).
+- "I want to render Ground School slides, or embed the slide editor, inside my own separate app" → **SDK** (you are consuming packages, not editing the product).
+- "I want to add a feature to Ground School and ship it in the product" → **cookbook** (modifying the product).
 
 ## General Gotchas
 
-Each is tagged with where it bites: **[product/fork]** (working inside the OpenMAIC repo), **[SDK]** (consuming packages in a separate app), or **[both]**.
+Each is tagged with where it bites: **[product/fork]** (working inside the Ground School repo), **[SDK]** (consuming packages in a separate app), or **[both]**.
 
 - **[product/fork] `dist/` is gitignored in a source checkout.** In a fork/monorepo, each `@openmaic/*` package ships source only; its `dist/` is produced by `postinstall` (builds `dsl → generation → storage → importer → renderer → editor` in dependency order). If you `git clean -fdx` or nuke `node_modules`, re-run `pnpm install` or the packages won't resolve. (Published npm packages — the [SDK] path — ship built `dist/`, so this does not apply there.)
 - **[product/fork] The vendor bundle is asserted before build.** `pnpm build` runs `node scripts/assert-vendor-maic-importer.mjs && next build`. That guard `stat()`s `public/vendor/maic-importer/index.js`; if missing/empty it exits 1 with an actionable message. `postinstall`'s `sync-maic-importer.mjs` step populates it — re-run `pnpm run sync:maic-importer` if you cleared it.

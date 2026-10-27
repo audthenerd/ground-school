@@ -363,7 +363,7 @@ pnpm --filter @openmaic/dsl test
 ## License
 
 MIT, matching the rest of the family (`@openmaic/dsl`, `@openmaic/importer`,
-`@openmaic/renderer`) and the OpenMAIC root, so the license policy is uniform
+`@openmaic/renderer`) and the Ground School root, so the license policy is uniform
 across the SDK.
 
 ### Current course issues

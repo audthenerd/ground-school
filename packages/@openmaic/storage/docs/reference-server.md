@@ -2,7 +2,7 @@
 
 The `@openmaic/storage/server` subpath exports a Node-only HTTP request handler implementing the [RuntimeStore HTTP contract](./runtime-http-contract.md), plus the [DocumentStore HTTP contract](./document-http-contract.md) and [AssetStore HTTP contract](./asset-http-contract.md) when their stores are supplied. It accepts injected store implementations; the runnable `@openmaic/storage/server/reference` composition creates and initializes `PgRuntimeStore`, accepts optional host-created document and asset stores, and demonstrates the required node-postgres checkout/transaction/release pattern.
 
-The OpenMAIC application also mounts these same composed handlers as an
+The Ground School application also mounts these same composed handlers as an
 app-integrated Next.js route at `/api/persistence`. That embedded route is the
 deployment form used by the repository's default Docker Compose deployment;
 it changes the Fetch/Node request boundary only, not either HTTP contract.

@@ -1,7 +1,7 @@
 {
   "name": "@openmaic/geometry",
   "version": "0.1.0",
-  "description": "Pure SVG path and shape geometry validation for OpenMAIC producers and renderers.",
+  "description": "Pure SVG path and shape geometry validation for Ground School producers and renderers.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

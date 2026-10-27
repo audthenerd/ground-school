@@ -32,7 +32,7 @@ const compose = yaml.load(readFileSync(path.join(root, 'docker-compose.yml'), 'u
   services: Record<string, ComposeService>;
   volumes: Record<string, unknown>;
 };
-const app = compose.services.openmaic;
+const app = compose.services['ground-school'];
 const postgres = compose.services.postgres;
 
 /** `KEY=value` lines of an env file, comments and blanks skipped. */
@@ -66,8 +66,8 @@ describe('docker-compose.yml', () => {
   it('starts PostgreSQL by default, with a health check and a named volume', () => {
     expect(postgres.profiles).toBeUndefined();
     expect(JSON.stringify(postgres.healthcheck?.test)).toContain('pg_isready');
-    expect(postgres.volumes).toContain('openmaic-postgres:/var/lib/postgresql/data');
-    expect(compose.volumes).toHaveProperty('openmaic-postgres');
+    expect(postgres.volumes).toContain('ground-school-postgres:/var/lib/postgresql/data');
+    expect(compose.volumes).toHaveProperty('ground-school-postgres');
     // Not published to the host: only the app on the Compose network reaches it.
     expect(postgres.ports).toBeUndefined();
   });
@@ -81,10 +81,10 @@ describe('docker-compose.yml', () => {
     expect(defaultOf(app.environment, 'DATABASE_URL')).toBeUndefined();
     // The same variable initializes the role and builds the default URL.
     expect(readEnvFile('docker-compose.defaults.env').DATABASE_URL).toBe(
-      'postgres://openmaic:${PERSISTENCE_POSTGRES_PASSWORD:-openmaic-dev}@postgres:5432/openmaic',
+      'postgres://ground_school:${PERSISTENCE_POSTGRES_PASSWORD:-ground_school-dev}@postgres:5432/ground_school',
     );
     expect(postgres.environment).toContain(
-      'POSTGRES_PASSWORD=${PERSISTENCE_POSTGRES_PASSWORD:-openmaic-dev}',
+      'POSTGRES_PASSWORD=${PERSISTENCE_POSTGRES_PASSWORD:-ground_school-dev}',
     );
   });
 
@@ -117,7 +117,7 @@ describe('docker-compose.yml', () => {
   it('defaults to single-user mode and leaves claims explicit', () => {
     const defaults = readEnvFile('docker-compose.defaults.env');
     expect(defaults).toEqual({
-      DATABASE_URL: expect.stringMatching(/@postgres:5432\/openmaic$/),
+      DATABASE_URL: expect.stringMatching(/@postgres:5432\/ground_school$/),
       OWNER_SINGLE_USER: 'true',
     });
     // An automatic claim irreversibly merges every browser's anonymous library
@@ -162,7 +162,7 @@ describe('docker-compose.db.yml (`pnpm db:up`)', () => {
   it('is a separate Compose project, so it never restarts or stops a running stack database', () => {
     // Without its own project name it would share the checkout's default
     // project (and so the stack's postgres container) with `docker compose up`.
-    expect(devDb.name).toBe('openmaic-dev-db');
+    expect(devDb.name).toBe('ground-school-dev-db');
   });
 
   it('runs the postgres service definition of docker-compose.yml, on its own data volume', () => {
@@ -171,7 +171,7 @@ describe('docker-compose.db.yml (`pnpm db:up`)', () => {
       file: 'docker-compose.yml',
       service: 'postgres',
     });
-    expect(devDb.volumes).toHaveProperty('openmaic-postgres');
+    expect(devDb.volumes).toHaveProperty('ground-school-postgres');
   });
 
   it('publishes the database on loopback only', () => {
@@ -183,19 +183,19 @@ describe('docker-compose.db.yml (`pnpm db:up`)', () => {
     // from the shell or a .env file, which would otherwise override the file's
     // `name:` and point these scripts at the stack's own database.
     expect(packageJson.scripts['db:up']).toBe(
-      'docker compose -p openmaic-dev-db -f docker-compose.db.yml up -d --wait postgres',
+      'docker compose -p ground-school-dev-db -f docker-compose.db.yml up -d --wait postgres',
     );
     expect(packageJson.scripts['db:down']).toBe(
-      'docker compose -p openmaic-dev-db -f docker-compose.db.yml stop postgres',
+      'docker compose -p ground-school-dev-db -f docker-compose.db.yml stop postgres',
     );
   });
 
   it('matches the local DATABASE_URL documented in .env.example', () => {
     const example = readFileSync(path.join(root, '.env.example'), 'utf8');
     expect(example).toContain(
-      '# DATABASE_URL=postgres://openmaic:openmaic-dev@127.0.0.1:5432/openmaic',
+      '# DATABASE_URL=postgres://ground_school:ground_school-dev@127.0.0.1:5432/ground_school',
     );
-    expect(postgres.environment).toContain('POSTGRES_USER=openmaic');
-    expect(postgres.environment).toContain('POSTGRES_DB=openmaic');
+    expect(postgres.environment).toContain('POSTGRES_USER=ground_school');
+    expect(postgres.environment).toContain('POSTGRES_DB=ground_school');
   });
 });

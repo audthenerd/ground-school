@@ -266,7 +266,7 @@ const SCRIPT_FONT_MATRIX = [
   {
     name: 'Cyrillic',
     locale: 'ru-RU' as Locale,
-    family: 'OpenMAIC Noto Sans Cyrillic',
+    family: 'Ground School Noto Sans Cyrillic',
     text: 'Привет Ёж Ԁ',
     expectedFontFiles: [
       'noto-sans-cyrillic-400-normal.woff2',
@@ -276,7 +276,7 @@ const SCRIPT_FONT_MATRIX = [
   {
     name: 'Arabic',
     locale: 'ar-SA' as Locale,
-    family: 'OpenMAIC Noto Sans Arabic',
+    family: 'Ground School Noto Sans Arabic',
     text: 'العربية',
     expectedFontFiles: ['noto-sans-arabic-arabic-400-normal.woff2'],
   },
@@ -1242,7 +1242,7 @@ describe('Quiz/PBL cover cards in a real browser', () => {
       });
       expect(surface.requiredFontLoads).toEqual(
         expect.arrayContaining([
-          expect.objectContaining({ family: 'OpenMAIC Noto Sans Cyrillic' }),
+          expect.objectContaining({ family: 'Ground School Noto Sans Cyrillic' }),
         ]),
       );
       await page.setViewportSize(frame);
@@ -1293,9 +1293,9 @@ describe('Quiz/PBL cover cards in a real browser', () => {
     await page.setViewportSize(frame);
     await page.goto(HARNESS_URL, { waitUntil: 'load' });
     for (const { character, family } of [
-      { character: '\u1d2b', family: 'OpenMAIC Noto Sans Cyrillic' },
-      { character: '\u1c89', family: 'OpenMAIC Noto Sans Cyrillic' },
-      { character: '\u0897', family: 'OpenMAIC Noto Sans Arabic' },
+      { character: '\u1d2b', family: 'Ground School Noto Sans Cyrillic' },
+      { character: '\u1c89', family: 'Ground School Noto Sans Cyrillic' },
+      { character: '\u0897', family: 'Ground School Noto Sans Arabic' },
     ]) {
       const surface = createQuizQuestionListMeasurementSurface({
         content: {
@@ -1406,9 +1406,9 @@ describe('Quiz/PBL cover cards in a real browser', () => {
       const covered = (text: string, family: string): boolean =>
         signature(text, `"${family}", monospace`) !== signature(text, 'monospace');
       return {
-        han: covered('漢字', 'OpenMAIC Noto Sans SC'),
-        kana: covered('あア', 'OpenMAIC Noto Sans SC'),
-        hangul: covered('한글', 'OpenMAIC Noto Sans KR'),
+        han: covered('漢字', 'Ground School Noto Sans SC'),
+        kana: covered('あア', 'Ground School Noto Sans SC'),
+        hangul: covered('한글', 'Ground School Noto Sans KR'),
       };
     });
     expect(cjkCoverage).toEqual({ han: true, kana: true, hangul: true });

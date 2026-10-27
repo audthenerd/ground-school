@@ -60,7 +60,7 @@ describe('the database requirement', () => {
   });
 
   it('accepts a configured DATABASE_URL', () => {
-    expect(() => requireDatabaseUrl({ DATABASE_URL: 'postgres://db/openmaic' })).not.toThrow();
+    expect(() => requireDatabaseUrl({ DATABASE_URL: 'postgres://db/ground_school' })).not.toThrow();
   });
 
   it('names the fix for development and for a deployment', () => {
@@ -86,7 +86,7 @@ describe('the database requirement', () => {
   });
 
   it('boots with DATABASE_URL set', async () => {
-    vi.stubEnv('DATABASE_URL', 'postgres://boot/openmaic');
+    vi.stubEnv('DATABASE_URL', 'postgres://boot/ground_school');
     const { register } = await import('@/instrumentation');
 
     await expect(register()).resolves.toBeUndefined();

@@ -28,7 +28,7 @@ describe('Kimi web search', () => {
   ])('selects the endpoint for %s', async (baseUrl, endpoint, coding) => {
     const signal = new AbortController().signal;
     const result = await searchWithKimi({
-      query: 'OpenMAIC',
+      query: 'Ground School',
       apiKey: 'key',
       baseUrl,
       maxResults: 3,
@@ -38,14 +38,14 @@ describe('Kimi web search', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Bearer key' },
       body: JSON.stringify({
-        text_query: 'OpenMAIC',
+        text_query: 'Ground School',
         limit: 3,
         timeout_seconds: 30,
         ...(coding ? { enable_page_crawling: true } : {}),
       }),
       signal,
     });
-    expect(result).toMatchObject({ answer: '', sources: [], query: 'OpenMAIC' });
+    expect(result).toMatchObject({ answer: '', sources: [], query: 'Ground School' });
     expect(result.responseTime).toBeGreaterThanOrEqual(0);
   });
 
@@ -54,7 +54,7 @@ describe('Kimi web search', () => {
       Response.json({
         search_results: [
           {
-            title: 'OpenMAIC',
+            title: 'Ground School',
             url: repository,
             snippet: 'Summary',
             chunks: [
@@ -65,7 +65,7 @@ describe('Kimi web search', () => {
               { text: 'Second page chunk' },
             ],
             date: '2026-10-13',
-            site_name: 'OpenMAIC',
+            site_name: 'Ground School',
           },
           { url: repository + '/issues', snippet: 'Issues', chunks: [] },
           { url: repository + '/pulls', snippet: 'Pull requests' },
@@ -73,10 +73,10 @@ describe('Kimi web search', () => {
         ],
       }),
     );
-    const result = await searchWithKimi({ query: 'OpenMAIC', apiKey: 'key' });
+    const result = await searchWithKimi({ query: 'Ground School', apiKey: 'key' });
     expect(result.sources).toEqual([
       {
-        title: 'OpenMAIC',
+        title: 'Ground School',
         url: repository,
         content: 'First page chunk\n\nSecond page chunk',
         score: 0,
@@ -95,7 +95,7 @@ describe('Kimi web search', () => {
     proxyFetchMock.mockResolvedValueOnce(
       Response.json({
         search_results: [
-          { title: 'OpenMAIC', url: repository, content: 'Full page', snippet: 'Summary' },
+          { title: 'Ground School', url: repository, content: 'Full page', snippet: 'Summary' },
           { url: repository + '/issues', content: '', snippet: 'Issues' },
           { url: repository + '/pulls' },
         ],
@@ -118,14 +118,14 @@ describe('Kimi web search', () => {
         date: '2026-10-14',
         icon: '',
         mime: 'text/html',
-        site_name: 'OpenMAIC',
+        site_name: 'Ground School',
         snippet: `Summary ${index}`,
         title: `Result ${index}`,
         url: `${repository}/issues/${index + 1}`,
       }));
       proxyFetchMock.mockResolvedValueOnce(Response.json({ search_results: items }));
       const result = await searchWithKimi({
-        query: 'OpenMAIC',
+        query: 'Ground School',
         apiKey: 'key',
         baseUrl,
         maxResults: 3,

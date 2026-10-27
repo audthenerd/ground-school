@@ -20,7 +20,7 @@ describe('searchWithExa', () => {
           requestId: 'req-1',
           results: [
             {
-              title: 'OpenMAIC',
+              title: 'Ground School',
               url: 'https://github.com/THU-MAIC/OpenMAIC',
               highlights: ['First relevant excerpt.', 'Second relevant excerpt.'],
               score: 0.94,
@@ -42,7 +42,7 @@ describe('searchWithExa', () => {
     );
 
     const result = await searchWithExa({
-      query: '  OpenMAIC web search  ',
+      query: '  Ground School web search  ',
       apiKey: 'exa-key',
       maxResults: 5,
     });
@@ -56,7 +56,7 @@ describe('searchWithExa', () => {
           Authorization: 'Bearer exa-key',
         },
         body: JSON.stringify({
-          query: 'OpenMAIC web search',
+          query: 'Ground School web search',
           type: 'auto',
           numResults: 5,
           contents: { highlights: true },
@@ -65,10 +65,10 @@ describe('searchWithExa', () => {
     );
     expect(result).toMatchObject({
       answer: '',
-      query: 'OpenMAIC web search',
+      query: 'Ground School web search',
       sources: [
         {
-          title: 'OpenMAIC',
+          title: 'Ground School',
           url: 'https://github.com/THU-MAIC/OpenMAIC',
           content: 'First relevant excerpt.\n\nSecond relevant excerpt.',
           score: 0.94,

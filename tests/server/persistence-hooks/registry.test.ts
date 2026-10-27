@@ -265,7 +265,7 @@ describe('boot validation', () => {
 
   it('fails the instrumentation register() hook, before the server serves a request', async () => {
     vi.stubEnv('NEXT_RUNTIME', 'nodejs');
-    vi.stubEnv('DATABASE_URL', 'postgres://hooks-test/openmaic');
+    vi.stubEnv('DATABASE_URL', 'postgres://hooks-test/ground_school');
     vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
     vi.stubEnv('PERSISTENCE_SHARED_OWNER_ID', '');
     vi.stubEnv('ASSET_BYTE_EGRESS', 'redirect');

@@ -1026,7 +1026,7 @@ describe('PPT element reference Route → Director → real call_agent L2', () =
   );
 
   it('resolves the request snapshot without accessing persistence even with a database', async () => {
-    vi.stubEnv('DATABASE_URL', 'postgres://element-reference-test/openmaic');
+    vi.stubEnv('DATABASE_URL', 'postgres://element-reference-test/ground_school');
     installAgentShell('Snapshot answer.');
     const { POST } = await import('@/app/api/chat/pi/route');
     const response = await POST(makeRequest(whiteboardBody()));

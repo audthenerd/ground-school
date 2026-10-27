@@ -1,4 +1,4 @@
-name: Publish OpenMAIC skill
+name: Publish Ground School skill
 
 # Required repository setup:
 # - Create a GitHub Environment named `clawhub-release`.
@@ -170,7 +170,7 @@ jobs:
           PY
           echo "CLAWHUB_CONFIG_PATH=$RUNNER_TEMP/clawhub-preview-config.json" >> "$GITHUB_ENV"
 
-      - name: Preview OpenMAIC skill publish
+      - name: Preview Ground School skill publish
         env:
           CLAWHUB: clawhub
           PUBLISH_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.version || '' }}
@@ -270,7 +270,7 @@ jobs:
       - name: Verify ClawHub authentication
         run: clawhub whoami
 
-      - name: Publish OpenMAIC skill
+      - name: Publish Ground School skill
         env:
           CLAWHUB: clawhub
           EVENT_NAME: ${{ github.event_name }}
