@@ -13,6 +13,12 @@
     "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
     "greetingWithName": "嗨，{{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "使用 Google 登录",
+    "signOut": "退出登录",
+    "signInFailed": "Google 登录失败（{{reason}}）",
+    "claimFailed": "已登录，但无法将之前的学习内容迁移到此账户"
+  },
   "toolbar": {
     "pdfParser": "解析器",
     "pdfUpload": "上传 PDF",

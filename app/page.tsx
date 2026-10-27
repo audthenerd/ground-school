@@ -73,6 +73,7 @@ import type { RunSnapshot } from '@/lib/generation-run-client/types';
 import { CourseRunStatusLabel } from '@/components/generation/course-run-status-label';
 import { useModelCapabilities } from '@/lib/model-settings/use-model-settings';
 import { useUserProfileStore, AVATAR_OPTIONS } from '@/lib/store/user-profile';
+import { useAuthSession } from '@/lib/hooks/use-auth-session';
 import {
   StageListItem,
   listStages,
@@ -770,7 +771,7 @@ function HomePage() {
         {/* ── Logo ── */}
         <div className="relative flex flex-col items-center" data-pro-morph="lockup">
           <div className="ground-kicker mb-4 inline-flex items-center gap-2 px-1 py-1 text-[10px] font-bold uppercase tracking-[0.28em]">
-            <Plane className="size-3.5" /> Flight training operations
+            <Plane className="size-3.5" /> RSAF ops immersion training
           </div>
           <div
             className={cn(
@@ -1345,7 +1346,7 @@ function HomePage() {
       {/* Footer — flows with content, at the very end */}
       <div className="relative z-10 mt-auto flex items-center gap-3 pt-14 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">
         <span className="h-px w-8 bg-current opacity-40" />
-        Ground School · Flight learning system
+        Ground School · Operations learning system
         <span className="h-px w-8 bg-current opacity-40" />
       </div>
     </div>
@@ -1367,6 +1368,7 @@ function GreetingBar() {
   const setAvatar = useUserProfileStore((s) => s.setAvatar);
   const setNickname = useUserProfileStore((s) => s.setNickname);
   const setBio = useUserProfileStore((s) => s.setBio);
+  const { session, signIn, signOut, claimAnonymousWork, refresh } = useAuthSession();
 
   const [open, setOpen] = useState(false);
   const [editingName, setEditingName] = useState(false);
@@ -1375,8 +1377,63 @@ function GreetingBar() {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const avatarInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const googleSyncedRef = useRef(false);
+  const claimStartedRef = useRef(false);
 
-  const displayName = nickname || t('profile.defaultNickname');
+  const googleName =
+    session?.authenticated === true
+      ? session.givenName || session.name || ''
+      : '';
+  const displayName = nickname || googleName || t('profile.defaultNickname');
+  const displayAvatar =
+    avatar !== AVATAR_OPTIONS[0]
+      ? avatar
+      : session?.authenticated === true && session.picture
+        ? session.picture
+        : avatar;
+  const googleConfigured = session?.configured === true;
+  const signedIn = session?.authenticated === true;
+
+  // After Google OAuth redirect: claim anonymous work and clean the URL.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const auth = params.get('auth');
+    if (!auth) return;
+    const reason = params.get('reason');
+    params.delete('auth');
+    params.delete('reason');
+    const next = params.toString();
+    const clean = next ? `${window.location.pathname}?${next}` : window.location.pathname;
+    window.history.replaceState({}, '', clean);
+
+    if (auth === 'error') {
+      toast.error(t('auth.signInFailed', { reason: reason || 'unknown' }));
+      return;
+    }
+    if (auth === 'success' && !claimStartedRef.current) {
+      claimStartedRef.current = true;
+      void (async () => {
+        await refresh();
+        const result = await claimAnonymousWork();
+        if (!result.ok) {
+          toast.error(t('auth.claimFailed'));
+        }
+      })();
+    }
+  }, [claimAnonymousWork, refresh, t]);
+
+  // Seed local profile from Google once when nickname is still empty.
+  useEffect(() => {
+    if (!signedIn || !session?.authenticated || googleSyncedRef.current) return;
+    googleSyncedRef.current = true;
+    if (!nickname.trim() && (session.givenName || session.name)) {
+      setNickname(session.givenName || session.name);
+    }
+    if (avatar === AVATAR_OPTIONS[0] && session.picture) {
+      setAvatar(session.picture);
+    }
+  }, [signedIn, session, nickname, avatar, setNickname, setAvatar]);
 
   // Click-outside to collapse
   useEffect(() => {
@@ -1452,7 +1509,7 @@ function GreetingBar() {
         >
           <div className="shrink-0 relative">
             <div className="size-8 rounded-full overflow-hidden ring-[1.5px] ring-border/30 group-hover:ring-violet-400/60 dark:group-hover:ring-violet-400/40 transition-all duration-300">
-              <img src={avatar} alt="" className="size-full object-cover" />
+              <img src={displayAvatar} alt="" className="size-full object-cover" />
             </div>
             <div className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-white dark:bg-slate-800 border border-border/40 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity">
               <Pencil className="size-[7px] text-muted-foreground/70" />
@@ -1505,7 +1562,7 @@ function GreetingBar() {
                   }}
                 >
                   <div className="size-8 rounded-full overflow-hidden ring-[1.5px] ring-violet-300/70 dark:ring-violet-500/40 transition-all duration-300">
-                    <img src={avatar} alt="" className="size-full object-cover" />
+                    <img src={displayAvatar} alt="" className="size-full object-cover" />
                   </div>
                   <motion.div
                     initial={{ scale: 0 }}
@@ -1628,6 +1685,28 @@ function GreetingBar() {
                   rows={2}
                   className="resize-none border-border/40 bg-transparent min-h-[72px] !text-[13px] !leading-relaxed placeholder:!text-[11px] placeholder:!leading-relaxed focus-visible:ring-1 focus-visible:ring-border/60"
                 />
+
+                {googleConfigured && (
+                  <div className="pt-2">
+                    {signedIn ? (
+                      <button
+                        type="button"
+                        onClick={() => void signOut()}
+                        className="w-full text-left text-[12px] font-medium text-muted-foreground hover:text-foreground px-1 py-1.5 rounded-md hover:bg-muted/60 transition-colors"
+                      >
+                        {t('auth.signOut')}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={signIn}
+                        className="w-full text-left text-[12px] font-medium text-foreground px-1 py-1.5 rounded-md hover:bg-muted/60 transition-colors"
+                      >
+                        {t('auth.signInWithGoogle')}
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

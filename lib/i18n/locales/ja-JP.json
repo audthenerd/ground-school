@@ -13,6 +13,12 @@
     "slogan": "マルチエージェント対話型教室で生成的に学ぶ",
     "greetingWithName": "こんにちは、{{name}}さん"
   },
+  "auth": {
+    "signInWithGoogle": "Google でサインイン",
+    "signOut": "サインアウト",
+    "signInFailed": "Google サインインに失敗しました（{{reason}}）",
+    "claimFailed": "サインインしましたが、以前の作業をこのアカウントに移せませんでした"
+  },
   "toolbar": {
     "pdfParser": "パーサー",
     "pdfUpload": "PDFをアップロード",

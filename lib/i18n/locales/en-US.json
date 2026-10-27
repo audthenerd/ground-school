@@ -13,6 +13,12 @@
     "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
     "greetingWithName": "Hi, {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Sign in with Google",
+    "signOut": "Sign out",
+    "signInFailed": "Google sign-in failed ({{reason}})",
+    "claimFailed": "Signed in, but could not move your previous work into this account"
+  },
   "toolbar": {
     "pdfParser": "Parser",
     "pdfUpload": "Upload PDF",
