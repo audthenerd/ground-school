@@ -10,7 +10,27 @@ import {
 import type { OwnerAuthMethod } from '@/lib/server/identity/types';
 import { resolveRequestOwner } from '@/lib/server/identity/resolve';
 import { isDocumentNavigation } from '@/lib/server/identity/navigation';
+import {
+  createGoogleSessionToken,
+  GOOGLE_SESSION_COOKIE,
+} from '@/lib/server/identity/host/google-session';
 import { middleware } from '@/middleware';
+
+const GOOGLE_SESSION_SECRET = 'd'.repeat(32);
+const GOOGLE_PROFILE = {
+  sub: 'mw-user',
+  email: 'mw@example.com',
+  name: 'Middleware User',
+  givenName: 'Middleware',
+  picture: 'https://example.com/mw.jpg',
+};
+
+function stubGoogleAuthEnv(): void {
+  vi.stubEnv('GOOGLE_OAUTH_CLIENT_ID', 'client-id');
+  vi.stubEnv('GOOGLE_OAUTH_CLIENT_SECRET', 'client-secret');
+  vi.stubEnv('AUTH_SESSION_SECRET', GOOGLE_SESSION_SECRET);
+  vi.stubEnv('AUTH_PUBLIC_ORIGIN', 'http://localhost:3000');
+}
 
 /**
  * The page request establishes the anonymous owner (middleware.ts,
@@ -197,6 +217,66 @@ describe('the page request establishes the anonymous owner', () => {
     vi.stubEnv('OWNER_SINGLE_USER', 'false');
     const response = await middleware(pageRequest());
     expect(mintedId(response.headers.get('set-cookie'))).toMatch(UUID_V4);
+  });
+});
+
+describe('Google login gate', () => {
+  it('redirects unsigned document navigations to /login when Google auth is on', async () => {
+    stubGoogleAuthEnv();
+    const response = await middleware(pageRequest('/classroom/abc'));
+    expect(response.status).toBe(307);
+    expect(response.headers.get('location')).toBe(
+      'http://localhost/login?next=%2Fclassroom%2Fabc',
+    );
+    expect(response.headers.get('set-cookie')).toBeNull();
+  });
+
+  it('answers 401 for unsigned API requests when Google auth is on', async () => {
+    stubGoogleAuthEnv();
+    const response = await middleware(new NextRequest('http://localhost/api/stages'));
+    expect(response.status).toBe(401);
+    await expect(response.json()).resolves.toMatchObject({ errorCode: 'UNAUTHORIZED' });
+  });
+
+  it('lets /login through without minting an anonymous cookie', async () => {
+    stubGoogleAuthEnv();
+    const response = await middleware(pageRequest('/login'));
+    expect(response.status).toBe(200);
+    expect(response.headers.get('x-middleware-next')).toBe('1');
+    expect(response.headers.get('set-cookie')).toBeNull();
+  });
+
+  it('sends signed-in visitors away from /login', async () => {
+    stubGoogleAuthEnv();
+    const token = createGoogleSessionToken(GOOGLE_PROFILE, GOOGLE_SESSION_SECRET);
+    const response = await middleware(
+      pageRequest('/login?next=%2Fclassroom%2Fx', {
+        cookie: `${GOOGLE_SESSION_COOKIE}=${encodeURIComponent(token)}`,
+      }),
+    );
+    expect(response.status).toBe(307);
+    expect(response.headers.get('location')).toBe('http://localhost/classroom/x');
+  });
+
+  it('lets signed-in users through to the app', async () => {
+    stubGoogleAuthEnv();
+    const token = createGoogleSessionToken(GOOGLE_PROFILE, GOOGLE_SESSION_SECRET);
+    const response = await middleware(
+      pageRequest('/', {
+        cookie: `${GOOGLE_SESSION_COOKIE}=${encodeURIComponent(token)}`,
+      }),
+    );
+    expect(response.status).toBe(200);
+    expect(response.headers.get('x-middleware-next')).toBe('1');
+    expect(response.headers.get('set-cookie')).toBeNull();
+  });
+
+  it('keeps auth and health routes public while Google auth is on', async () => {
+    stubGoogleAuthEnv();
+    const auth = await middleware(new NextRequest('http://localhost/api/auth/session'));
+    expect(auth.status).not.toBe(401);
+    const health = await middleware(new NextRequest('http://localhost/api/health'));
+    expect(health.status).not.toBe(401);
   });
 });
 

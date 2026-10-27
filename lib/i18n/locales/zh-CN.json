@@ -17,7 +17,10 @@
     "signInWithGoogle": "使用 Google 登录",
     "signOut": "退出登录",
     "signInFailed": "Google 登录失败（{{reason}}）",
-    "claimFailed": "已登录，但无法将之前的学习内容迁移到此账户"
+    "claimFailed": "已登录，但无法将之前的学习内容迁移到此账户",
+    "loginTitle": "登录以继续",
+    "loginSubtitle": "使用 Google 账号打开 Ground School。",
+    "notConfigured": "此部署未配置 Google 登录。"
   },
   "toolbar": {
     "pdfParser": "解析器",
