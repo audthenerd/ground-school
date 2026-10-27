@@ -13,6 +13,12 @@
     "slogan": "멀티 에이전트 인터랙티브 교실에서 펼치는 생성형 학습",
     "greetingWithName": "안녕하세요, {{name}}!"
   },
+  "auth": {
+    "signInWithGoogle": "Google로 로그인",
+    "signOut": "로그아웃",
+    "signInFailed": "Google 로그인 실패 ({{reason}})",
+    "claimFailed": "로그인했지만 이전 작업을 이 계정으로 옮기지 못했습니다"
+  },
   "toolbar": {
     "pdfParser": "파서",
     "pdfUpload": "PDF 업로드",

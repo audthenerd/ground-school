@@ -13,6 +13,12 @@
     "slogan": "L’apprentissage génératif en classe interactive multi-agents",
     "greetingWithName": "Bonjour, {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Se connecter avec Google",
+    "signOut": "Se déconnecter",
+    "signInFailed": "Échec de la connexion Google ({{reason}})",
+    "claimFailed": "Connecté, mais impossible de transférer votre travail précédent vers ce compte"
+  },
   "toolbar": {
     "pdfParser": "Analyseur",
     "pdfUpload": "Ajouter un PDF",

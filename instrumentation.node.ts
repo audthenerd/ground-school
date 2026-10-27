@@ -306,6 +306,19 @@ async function validateBootConfiguration(): Promise<void> {
   //
   // A registration that throws stops the process too, reported as a startup
   // failure with its stack (it is host code, not a setting).
+  //
+  // Google OAuth (optional): fully configured env registers the session
+  // method with anonymous fallback still on. Partial env fails boot.
+  {
+    const { assertGoogleAuthConfiguration, isGoogleAuthConfigured } =
+      await import('@/lib/server/identity/host/google-auth-config');
+    runConfigurationCheck(assertGoogleAuthConfiguration);
+    if (isGoogleAuthConfigured()) {
+      const { configureOwnerAuthentication } = await import('@/lib/server/identity');
+      const { googleSessionAuthMethod } = await import('@/lib/server/identity/host/google-session');
+      configureOwnerAuthentication({ methods: [googleSessionAuthMethod] });
+    }
+  }
   const { validateOwnerIdentityConfiguration } = await import('@/lib/server/identity/registry');
   runConfigurationCheck(validateOwnerIdentityConfiguration);
 

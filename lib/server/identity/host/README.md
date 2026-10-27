@@ -2,8 +2,12 @@
 
 This directory is where a deployment keeps its own owner auth methods (see
 "Owner identity" in the repository README): a session cookie, an API key, or
-a gateway-signed token such as the README's JWT recipe. Ground School ships nothing
-here.
+a gateway-signed token such as the README's JWT recipe.
+
+Ground School optionally ships a Google OAuth session method here
+(`google-session.ts`, `google-oauth.ts`, `google-auth-config.ts`), registered
+from `instrumentation.node.ts` when `GOOGLE_OAUTH_*` / `AUTH_*` env vars are
+fully set. See `.env.example`.
 
 It is the only place outside core that may read identity headers: the
 boundary test (`tests/server/identity/cookie-guard.test.ts`) fails on gateway

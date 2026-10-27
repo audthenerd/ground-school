@@ -13,6 +13,12 @@
     "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
     "greetingWithName": "Привет, {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Войти через Google",
+    "signOut": "Выйти",
+    "signInFailed": "Не удалось войти через Google ({{reason}})",
+    "claimFailed": "Вход выполнен, но не удалось перенести прежнюю работу в этот аккаунт"
+  },
   "toolbar": {
     "pdfParser": "Парсер",
     "pdfUpload": "Загрузить PDF",

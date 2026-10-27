@@ -13,6 +13,12 @@
     "slogan": "Aprendizagem Generativa em Sala de Aula Interativa Multi-Agente",
     "greetingWithName": "Olá, {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Entrar com o Google",
+    "signOut": "Sair",
+    "signInFailed": "Falha ao entrar com o Google ({{reason}})",
+    "claimFailed": "Entrou, mas não foi possível mover seu trabalho anterior para esta conta"
+  },
   "toolbar": {
     "pdfParser": "Analisador",
     "pdfUpload": "Enviar PDF",

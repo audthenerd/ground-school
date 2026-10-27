@@ -13,6 +13,12 @@
     "slogan": "Generatives Lernen im interaktiven Lernraum mit mehreren KI-Agenten",
     "greetingWithName": "Hallo, {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Mit Google anmelden",
+    "signOut": "Abmelden",
+    "signInFailed": "Google-Anmeldung fehlgeschlagen ({{reason}})",
+    "claimFailed": "Angemeldet, aber frühere Arbeit konnte nicht in dieses Konto übernommen werden"
+  },
   "toolbar": {
     "pdfParser": "Parser",
     "pdfUpload": "PDF hochladen",

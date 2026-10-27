@@ -34,7 +34,9 @@ export const NOTO_SCRIPT_FONT_PLANS = {
       },
     ] as const,
     licenses: [{ path: 'LICENSES/Noto-Sans-OFL-1.1.txt', content: NOTO_SANS_OFL_LICENSE }] as const,
-    requiredFontLoads: [{ family: 'Ground School Noto Sans Cyrillic', text: 'Привет Ёж Ԁ' }] as const,
+    requiredFontLoads: [
+      { family: 'Ground School Noto Sans Cyrillic', text: 'Привет Ёж Ԁ' },
+    ] as const,
     coverage: [
       [769, 769],
       [1024, 1327],

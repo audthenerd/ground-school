@@ -13,6 +13,12 @@
     "slogan": "Học tập sinh tạo trong lớp học tương tác đa tác nhân",
     "greetingWithName": "Chào {{name}}"
   },
+  "auth": {
+    "signInWithGoogle": "Đăng nhập bằng Google",
+    "signOut": "Đăng xuất",
+    "signInFailed": "Đăng nhập Google thất bại ({{reason}})",
+    "claimFailed": "Đã đăng nhập nhưng không thể chuyển công việc trước đó vào tài khoản này"
+  },
   "toolbar": {
     "pdfParser": "Bộ đọc PDF",
     "pdfUpload": "Tải PDF lên",

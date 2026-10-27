@@ -41,7 +41,9 @@ describe('warnIfDefaultDatabasePasswordIsPublished', () => {
   it('stays quiet on loopback, with no declared address, or with another password', () => {
     expect(run('127.0.0.1', DEFAULT_URL)).toBe(false);
     expect(run('', DEFAULT_URL)).toBe(false);
-    expect(run('0.0.0.0', 'postgres://ground_school:s3cret-long@postgres:5432/ground_school')).toBe(false);
+    expect(run('0.0.0.0', 'postgres://ground_school:s3cret-long@postgres:5432/ground_school')).toBe(
+      false,
+    );
     expect(run('0.0.0.0', '')).toBe(false);
     expect(run('0.0.0.0', 'not a url')).toBe(false);
   });

@@ -121,6 +121,20 @@ describe('the page request establishes the anonymous owner', () => {
     expect(api.headers.get('set-cookie')).toBeNull();
   });
 
+  it('does not mint a claim candidate when a Google session cookie is already present', async () => {
+    const response = await middleware(pageRequest('/', { cookie: 'gs_google_session=present' }));
+    expect(response.headers.get('set-cookie')).toBeNull();
+    expect(response.headers.get('x-middleware-request-cookie')).toBeNull();
+  });
+
+  it('lets Google auth routes through the access-code gate', async () => {
+    vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
+    const response = await middleware(new NextRequest('http://localhost/api/auth/google/callback'));
+    expect(response.status).not.toBe(401);
+    expect(response.headers.get('x-middleware-next')).toBe('1');
+    expect(response.headers.get('set-cookie')).toBeNull();
+  });
+
   it.each([
     ['an API request', '/api/stages', {}],
     ['an RSC fetch', '/classroom/x', { rsc: '1', 'sec-fetch-dest': 'empty' }],

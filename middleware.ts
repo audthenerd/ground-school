@@ -37,20 +37,29 @@ export async function middleware(request: NextRequest) {
   }
 
   // One anonymous owner per browser, established on the page response before
-  // any API request can mint its own.
-  const identity = anonymousOwnerForNavigation({
-    method: request.method,
-    headers: request.headers,
-    pathname,
-  });
+  // any API request can mint its own. Skip premint when a Google session
+  // cookie is already present (signed-in users should not mint a fresh
+  // claim candidate on every document load).
+  const hasGoogleSession = request.cookies.has('gs_google_session');
+  const identity = hasGoogleSession
+    ? undefined
+    : anonymousOwnerForNavigation({
+        method: request.method,
+        headers: request.headers,
+        pathname,
+      });
 
   const accessCode = process.env.ACCESS_CODE;
   if (!accessCode) {
     return next(request, identity);
   }
 
-  // Whitelist: access-code endpoints, health check
-  if (pathname.startsWith('/api/access-code/') || pathname === '/api/health') {
+  // Whitelist: access-code endpoints, health check, Google OAuth
+  if (
+    pathname.startsWith('/api/access-code/') ||
+    pathname.startsWith('/api/auth/') ||
+    pathname === '/api/health'
+  ) {
     return next(request, identity);
   }
 
