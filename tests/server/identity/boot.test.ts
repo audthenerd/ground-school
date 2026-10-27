@@ -33,6 +33,12 @@ let stderr: string[];
 beforeEach(() => {
   // The database requirement is checked first; these cases start past it.
   vi.stubEnv('DATABASE_URL', 'postgres://boot-test/ground_school');
+  // A fully configured Google env would register googleSessionAuthMethod
+  // during register() and replace a host registration these cases set up.
+  vi.stubEnv('GOOGLE_OAUTH_CLIENT_ID', '');
+  vi.stubEnv('GOOGLE_OAUTH_CLIENT_SECRET', '');
+  vi.stubEnv('AUTH_SESSION_SECRET', '');
+  vi.stubEnv('AUTH_PUBLIC_ORIGIN', '');
   stderr = [];
   exit = vi.spyOn(process, 'exit').mockImplementation((() => undefined) as never);
   vi.spyOn(process.stderr, 'write').mockImplementation(((
@@ -133,6 +139,17 @@ describe('owner identity validation at boot', () => {
 
     expect(exit).not.toHaveBeenCalled();
     expect(validateOwnerIdentityConfiguration()).toBe('configured');
+  });
+
+  it('fails the register() hook when Google auth is only partly set', async () => {
+    vi.stubEnv('NEXT_RUNTIME', 'nodejs');
+    vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
+    vi.stubEnv('GOOGLE_OAUTH_CLIENT_ID', 'only-id');
+    const { register } = await import('@/instrumentation');
+
+    await expect(register()).rejects.toThrow(/partially configured/);
+
+    expectBootExit(/partially configured/);
   });
 
   it.each(['OWNER_AUTHENTICATOR', 'TRUSTED_PROXY_SECRET', 'TRUSTED_PROXY_USER_HEADER'])(

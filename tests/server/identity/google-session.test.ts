@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import {
   createGoogleSessionToken,
@@ -16,6 +16,18 @@ const PROFILE = {
   givenName: 'Ada',
   picture: 'https://example.com/ada.jpg',
 };
+
+/** Cleared first so a developer's exported Google env cannot change these cases. */
+const GOOGLE_AUTH_ENV = [
+  'GOOGLE_OAUTH_CLIENT_ID',
+  'GOOGLE_OAUTH_CLIENT_SECRET',
+  'AUTH_SESSION_SECRET',
+  'AUTH_PUBLIC_ORIGIN',
+] as const;
+
+beforeEach(() => {
+  for (const name of GOOGLE_AUTH_ENV) vi.stubEnv(name, '');
+});
 
 afterEach(() => {
   vi.unstubAllEnvs();

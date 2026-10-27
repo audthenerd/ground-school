@@ -9,10 +9,7 @@ export const runtime = 'nodejs';
 export async function POST(request: Request): Promise<Response> {
   const site = request.headers.get('sec-fetch-site');
   if (site && site !== 'same-origin') {
-    return Response.json(
-      { success: false, error: 'cross-origin refused' },
-      { status: 403 },
-    );
+    return Response.json({ success: false, error: 'cross-origin refused' }, { status: 403 });
   }
   const headers = new Headers({ 'cache-control': 'no-store' });
   headers.append('Set-Cookie', clearGoogleSessionCookieHeader());

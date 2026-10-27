@@ -45,6 +45,20 @@ test.describe('Home → Generation', () => {
     }, SETTINGS_STORAGE);
   });
 
+  test('home page session probe does not block the composer', async ({ page }) => {
+    const session = page.waitForResponse(
+      (response) => new URL(response.url()).pathname === '/api/auth/session',
+    );
+    const home = new HomePage(page);
+    await home.goto();
+
+    const response = await session;
+    expect(response.status()).toBe(200);
+    await expect(home.logo).toBeVisible();
+    await expect(home.textarea).toBeVisible();
+    await expect(home.enterButton).toBeDisabled();
+  });
+
   test('home page loads with core UI elements and submits requirement', async ({
     page,
     mockApi,

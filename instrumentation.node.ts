@@ -315,8 +315,7 @@ async function validateBootConfiguration(): Promise<void> {
     runConfigurationCheck(assertGoogleAuthConfiguration);
     if (isGoogleAuthConfigured()) {
       const { configureOwnerAuthentication } = await import('@/lib/server/identity');
-      const { googleSessionAuthMethod } =
-        await import('@/lib/server/identity/host/google-session');
+      const { googleSessionAuthMethod } = await import('@/lib/server/identity/host/google-session');
       configureOwnerAuthentication({ methods: [googleSessionAuthMethod] });
     }
   }

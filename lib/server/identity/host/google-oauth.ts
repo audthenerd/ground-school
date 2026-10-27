@@ -8,10 +8,7 @@ import { createHash, randomBytes } from 'crypto';
 
 import { cookiesAreSecure } from '@/lib/server/cookie-secure';
 
-import {
-  type GoogleAuthConfig,
-  googleOAuthRedirectUri,
-} from './google-auth-config';
+import { type GoogleAuthConfig, googleOAuthRedirectUri } from './google-auth-config';
 import {
   createGoogleSessionToken,
   type GoogleSessionPayload,
@@ -31,11 +28,7 @@ export interface OAuthStatePayload {
 }
 
 function base64Url(buf: Buffer): string {
-  return buf
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '');
+  return buf.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
 export function mintOAuthState(): OAuthStatePayload {
@@ -159,10 +152,7 @@ export async function exchangeCodeForProfile(
   });
   const user = (await userRes.json()) as GoogleUserInfo;
   if (!userRes.ok || !user.sub) {
-    throw new GoogleOAuthError(
-      `userinfo HTTP ${userRes.status}`,
-      'userinfo_failed',
-    );
+    throw new GoogleOAuthError(`userinfo HTTP ${userRes.status}`, 'userinfo_failed');
   }
   if (!/^[\x21-\x7e]{1,200}$/.test(user.sub)) {
     throw new GoogleOAuthError('unusable Google sub', 'profile_unusable');

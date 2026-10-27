@@ -1380,10 +1380,7 @@ function GreetingBar() {
   const googleSyncedRef = useRef(false);
   const claimStartedRef = useRef(false);
 
-  const googleName =
-    session?.authenticated === true
-      ? session.givenName || session.name || ''
-      : '';
+  const googleName = session?.authenticated === true ? session.givenName || session.name || '' : '';
   const displayName = nickname || googleName || t('profile.defaultNickname');
   const displayAvatar =
     avatar !== AVATAR_OPTIONS[0]
