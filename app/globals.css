@@ -66,24 +66,24 @@
      a single latin-only file, which left Cyrillic and Vietnamese text to OS
      fallback fonts. */
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --background: #f4f7f8;
-  --foreground: #102a3e;
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #e96f2b;
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: #e8eff2;
-  --secondary-foreground: #16384f;
-  --muted: #eaf0f2;
-  --muted-foreground: #667d8b;
-  --accent: #e4f2f4;
-  --accent-foreground: #0a6574;
+  --background: #f1f0e9;
+  --foreground: #252525;
+  --card: #fffefa;
+  --card-foreground: #252525;
+  --popover: #fffefa;
+  --popover-foreground: #252525;
+  --primary: #3288c6;
+  --primary-foreground: #ffffff;
+  --secondary: #e9eff0;
+  --secondary-foreground: #245f8b;
+  --muted: #ebece7;
+  --muted-foreground: #687784;
+  --accent: #e7f2f9;
+  --accent-foreground: #246c9f;
   --destructive: oklch(0.58 0.22 27);
-  --border: #cedce1;
-  --input: #c6d6dc;
-  --ring: #38a6b8;
+  --border: #d8d8cf;
+  --input: #d0d4d1;
+  --ring: #3288c6;
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
@@ -101,24 +101,24 @@
 }
 
 .dark {
-  --background: #07131c;
-  --foreground: #e9f2f4;
-  --card: #0d202c;
-  --card-foreground: oklch(0.985 0 0);
-  --popover: #102633;
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: #f18a4e;
-  --primary-foreground: #111d24;
-  --secondary: #142b38;
+  --background: #101820;
+  --foreground: #eef5fa;
+  --card: #17232d;
+  --card-foreground: #eef5fa;
+  --popover: #192733;
+  --popover-foreground: #eef5fa;
+  --primary: #5ca4d5;
+  --primary-foreground: #0f1820;
+  --secondary: #1d303e;
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: #142a36;
-  --muted-foreground: #91a8b3;
-  --accent: #153846;
+  --muted: #1d2d38;
+  --muted-foreground: #96a8b4;
+  --accent: #1d3c50;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgb(122 164 178 / 24%);
-  --input: rgb(122 164 178 / 30%);
-  --ring: #49b4c2;
+  --border: rgb(130 172 198 / 22%);
+  --input: rgb(130 172 198 / 28%);
+  --ring: #5ca4d5;
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
   --chart-3: oklch(0.546 0.245 262.881);
@@ -163,46 +163,31 @@
   }
 }
 
-/* Ground School product shell -------------------------------------------------
-   A quiet flight-operations visual language shared by the landing page and the
-   global semantic tokens above: navy structure, cyan instruments, safety
-   orange actions, and plotting-paper geometry. */
+/* Ground School product shell: minimal aviation geometry, ink, blue, and space. */
 .ground-home {
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(
-      circle at 50% 22%,
-      rgb(255 255 255 / 94%) 0,
-      rgb(245 249 250 / 82%) 34%,
-      transparent 62%
-    ),
-    linear-gradient(180deg, #eef4f6 0%, #f7f9f8 58%, #edf2f3 100%);
+    radial-gradient(circle at 50% 18%, rgb(255 255 251 / 96%) 0, transparent 55%),
+    linear-gradient(180deg, #f2f1ea 0%, #f6f5ef 62%, #ebeae2 100%);
 }
 
 .dark .ground-home {
   background:
-    radial-gradient(
-      circle at 50% 22%,
-      rgb(21 55 70 / 74%) 0,
-      rgb(9 29 40 / 72%) 35%,
-      transparent 64%
-    ),
-    linear-gradient(180deg, #07141d 0%, #0a1a24 58%, #07131c 100%);
+    radial-gradient(circle at 50% 18%, rgb(29 51 66 / 78%) 0, transparent 56%),
+    linear-gradient(180deg, #111c25 0%, #101820 62%, #0d141b 100%);
 }
 
 .ground-grid {
-  opacity: 0.42;
+  opacity: 0.24;
   background-image:
-    linear-gradient(rgb(48 93 112 / 8%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(48 93 112 / 8%) 1px, transparent 1px),
-    linear-gradient(rgb(48 93 112 / 4%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(48 93 112 / 4%) 1px, transparent 1px);
+    radial-gradient(circle at 20% 30%, rgb(79 75 65 / 13%) 0 0.7px, transparent 1px),
+    linear-gradient(rgb(50 136 198 / 7%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(50 136 198 / 7%) 1px, transparent 1px);
   background-size:
-    80px 80px,
-    80px 80px,
-    16px 16px,
-    16px 16px;
+    13px 17px,
+    96px 96px,
+    96px 96px;
   mask-image: linear-gradient(to bottom, black 0%, rgb(0 0 0 / 72%) 55%, transparent 94%);
 }
 
@@ -211,27 +196,27 @@
 }
 
 .ground-radar {
-  opacity: 0.38;
-  border: 1px solid rgb(49 142 158 / 14%);
+  opacity: 0.2;
+  border: 1px solid rgb(50 136 198 / 20%);
   background:
     radial-gradient(
       circle,
       transparent 0 24%,
-      rgb(49 142 158 / 12%) 24.2% 24.45%,
+      rgb(50 136 198 / 14%) 24.2% 24.45%,
       transparent 24.7% 49%,
-      rgb(49 142 158 / 10%) 49.2% 49.45%,
+      rgb(50 136 198 / 12%) 49.2% 49.45%,
       transparent 49.7% 74%,
-      rgb(49 142 158 / 8%) 74.2% 74.45%,
+      rgb(50 136 198 / 10%) 74.2% 74.45%,
       transparent 74.7%
     ),
     conic-gradient(
       from 45deg,
       transparent 0 24.8%,
-      rgb(49 142 158 / 10%) 25% 25.15%,
+      rgb(50 136 198 / 10%) 25% 25.15%,
       transparent 25.3% 49.8%,
-      rgb(49 142 158 / 10%) 50% 50.15%,
+      rgb(50 136 198 / 10%) 50% 50.15%,
       transparent 50.3% 74.8%,
-      rgb(49 142 158 / 10%) 75% 75.15%,
+      rgb(50 136 198 / 10%) 75% 75.15%,
       transparent 75.3%
     );
 }
@@ -241,7 +226,7 @@
   background: repeating-linear-gradient(
       to bottom,
       transparent 0 48px,
-      rgb(34 91 111 / 24%) 48px 72px,
+      rgb(50 136 198 / 20%) 48px 72px,
       transparent 72px 120px
     )
     center / 2px 100% no-repeat;
@@ -250,44 +235,44 @@
 
 .ground-toolbar,
 .ground-library-nav {
-  border: 1px solid rgb(132 160 171 / 24%);
-  background: rgb(255 255 255 / 72%);
+  border: 1px solid rgb(96 122 139 / 18%);
+  background: rgb(255 255 255 / 78%);
   box-shadow:
-    0 12px 34px rgb(18 48 65 / 8%),
-    inset 0 1px 0 rgb(255 255 255 / 80%);
+    0 12px 34px rgb(32 62 82 / 8%),
+    inset 0 1px 0 rgb(255 255 255 / 90%);
   backdrop-filter: blur(18px);
 }
 
 .dark .ground-toolbar,
 .dark .ground-library-nav {
-  border-color: rgb(120 170 185 / 20%);
-  background: rgb(11 32 43 / 72%);
+  border-color: rgb(130 172 198 / 20%);
+  background: rgb(22 35 45 / 82%);
   box-shadow:
     0 16px 40px rgb(0 0 0 / 24%),
     inset 0 1px 0 rgb(255 255 255 / 5%);
 }
 
 .ground-composer {
-  border: 1px solid rgb(116 153 166 / 32%);
-  background: rgb(255 255 255 / 86%);
+  border: 1px solid rgb(111 119 117 / 23%);
+  background: rgb(255 254 249 / 92%);
   box-shadow:
-    0 26px 70px rgb(21 55 70 / 14%),
-    0 4px 14px rgb(21 55 70 / 7%),
-    inset 0 1px 0 white;
+    0 26px 70px rgb(31 67 91 / 13%),
+    0 4px 14px rgb(31 67 91 / 6%),
+    inset 0 1px 0 #fffefa;
   backdrop-filter: blur(24px);
 }
 
 .ground-composer:focus-within {
-  border-color: rgb(42 151 169 / 55%);
+  border-color: rgb(50 136 198 / 52%);
   box-shadow:
-    0 30px 80px rgb(21 55 70 / 17%),
-    0 0 0 4px rgb(42 151 169 / 8%),
+    0 30px 80px rgb(31 67 91 / 16%),
+    0 0 0 4px rgb(50 136 198 / 8%),
     inset 0 1px 0 white;
 }
 
 .dark .ground-composer {
-  border-color: rgb(112 170 185 / 28%);
-  background: rgb(10 31 42 / 88%);
+  border-color: rgb(130 172 198 / 24%);
+  background: rgb(22 35 45 / 92%);
   box-shadow:
     0 30px 80px rgb(0 0 0 / 36%),
     inset 0 1px 0 rgb(255 255 255 / 5%);
@@ -295,12 +280,27 @@
 
 .ground-composer-header,
 .ground-composer-footer {
-  background: linear-gradient(90deg, rgb(229 238 241 / 68%), rgb(246 249 249 / 38%));
-  border-color: rgb(139 168 178 / 18%);
+  background: linear-gradient(90deg, rgb(235 234 225 / 78%), rgb(250 250 245 / 50%));
+  border-color: rgb(116 142 158 / 16%);
 }
 
 .ground-composer-header {
   border-bottom-width: 1px;
+  position: relative;
+}
+.ground-composer-header::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    #337c78 0 14%,
+    #c9683f 14% 26%,
+    #783845 26% 36%,
+    transparent 36% 100%
+  );
+  opacity: 0.55;
 }
 .ground-composer-footer {
   border-top-width: 1px;
@@ -308,21 +308,46 @@
 
 .dark .ground-composer-header,
 .dark .ground-composer-footer {
-  background: linear-gradient(90deg, rgb(18 48 61 / 72%), rgb(10 32 43 / 34%));
-  border-color: rgb(115 164 179 / 14%);
+  background: linear-gradient(90deg, rgb(28 49 63 / 76%), rgb(22 35 45 / 44%));
+  border-color: rgb(130 172 198 / 14%);
 }
 
 .ground-divider {
-  background: linear-gradient(90deg, transparent, rgb(94 133 147 / 35%), transparent);
+  background: linear-gradient(90deg, transparent, rgb(90 124 145 / 34%), transparent);
+}
+
+.ground-kicker {
+  color: #3288c6;
+  border-bottom: 1px solid rgb(50 136 198 / 28%);
+}
+
+.ground-brand-stripes span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+}
+.ground-brand-stripes span:nth-child(1) {
+  background: #337c78;
+}
+.ground-brand-stripes span:nth-child(2) {
+  background: #c9683f;
+}
+.ground-brand-stripes span:nth-child(3) {
+  background: #783845;
+}
+
+.dark .ground-kicker {
+  color: #80b9df;
+  border-color: rgb(92 164 213 / 30%);
 }
 
 @media (max-width: 640px) {
   .ground-grid {
     background-size:
+      13px 17px,
       64px 64px,
-      64px 64px,
-      16px 16px,
-      16px 16px;
+      64px 64px;
   }
   .ground-radar {
     width: 34rem;

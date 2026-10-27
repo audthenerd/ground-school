@@ -769,17 +769,34 @@ function HomePage() {
       >
         {/* ── Logo ── */}
         <div className="relative flex flex-col items-center" data-pro-morph="lockup">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 shadow-sm dark:border-sky-800/70 dark:bg-sky-950/60 dark:text-sky-300">
+          <div className="ground-kicker mb-4 inline-flex items-center gap-2 px-1 py-1 text-[10px] font-bold uppercase tracking-[0.28em]">
             <Plane className="size-3.5" /> Flight training operations
           </div>
-          <img
-            src="/logo-horizontal.png"
-            alt="Ground School"
+          <div
             className={cn(
-              'h-12 md:h-16 mb-2 -ml-2 md:-ml-3 drop-shadow-[0_10px_24px_rgba(15,42,68,0.12)]',
+              'mb-2 flex items-center gap-2 md:gap-3',
               heroEnter('fade-in zoom-in-90 duration-500 delay-100'),
             )}
-          />
+          >
+            <img
+              src="/brand/ground-school-mark-minimal.svg"
+              alt="Ground School"
+              className="size-[56px] object-contain md:size-[70px]"
+            />
+            <div className="flex flex-col">
+              <span className="text-[2rem] font-black leading-[0.92] tracking-[-0.055em] text-[#252525] md:text-[2.9rem] dark:text-slate-100">
+                Ground School
+              </span>
+              <span className="mt-2 font-mono text-[8px] font-bold uppercase tracking-[0.38em] text-[#3288c6] md:text-[9px]">
+                Brief · Learn · Fly
+              </span>
+            </div>
+          </div>
+          <div className="ground-brand-stripes mb-3 flex gap-1" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
           {workbenchEntryEnabled ? (
             <div
               className="absolute left-full top-0 ml-1.5 mt-[10px] md:ml-2 md:mt-[14px]"
@@ -808,10 +825,10 @@ function HomePage() {
           >
             <div className="ground-composer-header flex h-9 items-center justify-between px-4 text-[9px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
               <span className="flex items-center gap-2">
-                <span className="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_0_3px_rgba(16,185,129,0.12)]" />{' '}
+                <span className="size-1.5 rounded-full bg-[#c9683f] shadow-[0_0_0_3px_rgba(201,104,63,0.14)]" />{' '}
                 Mission briefing
               </span>
-              <span className="font-mono text-[9px] text-slate-400">GS / SORTIE 001</span>
+              <span className="font-mono text-[9px] text-muted-foreground">GS / SORTIE 001</span>
             </div>
             {/* ── Greeting + Profile + Agents ── */}
             <div className="relative z-20 flex items-start justify-between">
@@ -825,7 +842,7 @@ function HomePage() {
             <textarea
               ref={textareaRef}
               placeholder={t('upload.requirementPlaceholder')}
-              className="w-full resize-none border-0 bg-transparent px-5 pt-2 pb-3 text-[14px] leading-relaxed placeholder:text-slate-400/75 focus:outline-none min-h-[148px] max-h-[300px]"
+              className="scrollbar-hide w-full resize-none border-0 bg-transparent px-5 pt-2 pb-3 text-[14px] leading-relaxed placeholder:text-slate-400/75 focus:outline-none min-h-[148px] max-h-[300px]"
               value={form.requirement}
               onChange={(e) => updateForm('requirement', e.target.value)}
               onKeyDown={handleKeyDown}
@@ -883,7 +900,7 @@ function HomePage() {
                 className={cn(
                   'shrink-0 h-8 rounded-lg flex items-center justify-center gap-1.5 transition-all px-3',
                   canGenerate && !preparingGenerate
-                    ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-[0_7px_18px_rgba(234,117,45,0.24)] cursor-pointer'
+                    ? 'bg-primary text-primary-foreground hover:brightness-110 shadow-[0_7px_18px_rgba(50,136,198,0.24)] cursor-pointer'
                     : 'bg-muted text-muted-foreground/40 cursor-not-allowed',
                 )}
               >
