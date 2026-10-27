@@ -278,6 +278,32 @@ describe('Google login gate', () => {
     const health = await middleware(new NextRequest('http://localhost/api/health'));
     expect(health.status).not.toBe(401);
   });
+
+  it('does not redirect brand/static asset fetches to /login', async () => {
+    stubGoogleAuthEnv();
+    const response = await middleware(
+      pageRequest('/brand/ground-school-mark-minimal.svg', {
+        'sec-fetch-dest': 'image',
+        accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+      }),
+    );
+    expect(response.status).not.toBe(307);
+    expect(response.status).not.toBe(302);
+    expect(response.headers.get('location')).toBeNull();
+  });
+
+  it('does not treat RSC fetches as gated document navigations', async () => {
+    stubGoogleAuthEnv();
+    const response = await middleware(
+      pageRequest('/classroom/x', {
+        rsc: '1',
+        'sec-fetch-dest': 'empty',
+        accept: '*/*',
+      }),
+    );
+    expect(response.headers.get('location')).toBeNull();
+    expect(response.status).not.toBe(307);
+  });
 });
 
 describe('isDocumentNavigation', () => {

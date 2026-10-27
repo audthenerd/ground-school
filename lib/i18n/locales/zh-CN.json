@@ -10,7 +10,7 @@
     "close": "关闭"
   },
   "home": {
-    "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
+    "slogan": "面向空中作战的交互式任务训练",
     "greetingWithName": "嗨，{{name}}"
   },
   "auth": {

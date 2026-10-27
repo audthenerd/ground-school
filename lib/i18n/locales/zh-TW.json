@@ -10,7 +10,7 @@
     "close": "關閉"
   },
   "home": {
-    "slogan": "多智能體互動課室中的生成式學習",
+    "slogan": "面向空中作戰的互動式任務訓練",
     "greetingWithName": "嗨，{{name}}"
   },
   "auth": {

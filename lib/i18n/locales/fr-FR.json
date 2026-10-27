@@ -10,7 +10,7 @@
     "close": "Fermer"
   },
   "home": {
-    "slogan": "L’apprentissage génératif en classe interactive multi-agents",
+    "slogan": "Formation mission interactive pour les opérations aériennes",
     "greetingWithName": "Bonjour, {{name}}"
   },
   "auth": {

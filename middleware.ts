@@ -2,13 +2,26 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { isAgentRuntimeConfigured, isProWorkbenchEnabled } from '@/lib/config/feature-flags';
 import { verifyAccessTokenEdge } from '@/lib/server/access-token-edge';
-import { isGoogleAuthConfigured } from '@/lib/server/identity/host/google-auth-config';
 import { verifyGoogleSessionTokenEdge } from '@/lib/server/identity/host/google-session-edge';
 import { GOOGLE_SESSION_COOKIE } from '@/lib/server/identity/host/google-session-shared';
 import {
   anonymousOwnerForNavigation,
+  isDocumentNavigation,
   type NavigationIdentity,
 } from '@/lib/server/identity/navigation';
+
+/**
+ * Edge middleware can only see env vars referenced as static `process.env.NAME`
+ * property accesses — dynamic `process.env[name]` is empty after bundling.
+ */
+function isGoogleAuthConfiguredInMiddleware(): boolean {
+  return (
+    !!process.env.GOOGLE_OAUTH_CLIENT_ID?.trim() &&
+    !!process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim() &&
+    !!process.env.AUTH_SESSION_SECRET?.trim() &&
+    !!process.env.AUTH_PUBLIC_ORIGIN?.trim()
+  );
+}
 
 /**
  * Let the request through, carrying the anonymous owner a page request
@@ -98,7 +111,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Require a valid Google session when OAuth env is fully configured.
-  if (isGoogleAuthConfigured()) {
+  if (isGoogleAuthConfiguredInMiddleware()) {
     const sessionSecret = process.env.AUTH_SESSION_SECRET?.trim() ?? '';
     const token = request.cookies.get(GOOGLE_SESSION_COOKIE)?.value;
     const session = await verifyGoogleSessionTokenEdge(token, sessionSecret);
@@ -119,12 +132,22 @@ export async function middleware(request: NextRequest) {
           { status: 401 },
         );
       }
-      const login = new URL('/login', request.url);
-      const returnPath = `${pathname}${request.nextUrl.search}`;
-      if (returnPath !== '/') {
-        login.searchParams.set('next', returnPath);
+      // Only document navigations go to /login. Static assets (brand SVG/PNG,
+      // etc.), RSC fetches, and other subresources must still load on /login.
+      if (
+        isDocumentNavigation({
+          method: request.method,
+          headers: request.headers,
+          pathname,
+        })
+      ) {
+        const login = new URL('/login', request.url);
+        const returnPath = `${pathname}${request.nextUrl.search}`;
+        if (returnPath !== '/') {
+          login.searchParams.set('next', returnPath);
+        }
+        return NextResponse.redirect(login);
       }
-      return NextResponse.redirect(login);
     }
   }
 
@@ -135,5 +158,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|logos/).*)'],
+  // Skip Next internals and public brand/logo assets. Other static files that
+  // still hit middleware are allowed through by the document-navigation check.
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|logos/|brand/).*)'],
 };

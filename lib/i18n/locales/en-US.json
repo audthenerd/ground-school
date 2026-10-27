@@ -10,7 +10,7 @@
     "close": "Close"
   },
   "home": {
-    "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
+    "slogan": "Interactive mission training for air operations",
     "greetingWithName": "Hi, {{name}}"
   },
   "auth": {

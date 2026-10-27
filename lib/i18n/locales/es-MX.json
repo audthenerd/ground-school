@@ -10,7 +10,7 @@
     "close": "Cerrar"
   },
   "home": {
-    "slogan": "Aprendizaje generativo en un aula interactiva multiagente",
+    "slogan": "Entrenamiento de misión interactivo para operaciones aéreas",
     "greetingWithName": "Hola, {{name}}"
   },
   "auth": {

@@ -10,7 +10,7 @@
     "close": "Schließen"
   },
   "home": {
-    "slogan": "Generatives Lernen im interaktiven Lernraum mit mehreren KI-Agenten",
+    "slogan": "Interaktives Missionstraining für Luftoperationen",
     "greetingWithName": "Hallo, {{name}}"
   },
   "auth": {
