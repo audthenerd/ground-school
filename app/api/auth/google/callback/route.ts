@@ -25,12 +25,13 @@ function readCookie(request: Request, name: string): string | undefined {
   return undefined;
 }
 
-function redirectHome(
+function redirectTo(
   configOrigin: string,
+  path: string,
   query: Record<string, string>,
   setCookies: string[],
 ): Response {
-  const url = new URL('/', configOrigin);
+  const url = new URL(path, configOrigin);
   for (const [key, value] of Object.entries(query)) {
     url.searchParams.set(key, value);
   }
@@ -40,7 +41,8 @@ function redirectHome(
 }
 
 /**
- * `GET /api/auth/google/callback` — finish Google OAuth, set session cookie, redirect home.
+ * `GET /api/auth/google/callback` — finish Google OAuth, set session cookie.
+ * Success lands on home; failures return to `/login`.
  */
 export async function GET(request: Request): Promise<Response> {
   const config = resolveGoogleAuthConfig();
@@ -55,14 +57,16 @@ export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const error = url.searchParams.get('error');
   if (error) {
-    return redirectHome(config.publicOrigin, { auth: 'error', reason: error }, [clearState]);
+    return redirectTo(config.publicOrigin, '/login', { auth: 'error', reason: error }, [
+      clearState,
+    ]);
   }
 
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
   const stored = decodeStateCookie(readCookie(request, GOOGLE_OAUTH_STATE_COOKIE));
   if (!code || !state || !stored || state !== stored.state) {
-    return redirectHome(config.publicOrigin, { auth: 'error', reason: 'invalid_state' }, [
+    return redirectTo(config.publicOrigin, '/login', { auth: 'error', reason: 'invalid_state' }, [
       clearState,
     ]);
   }
@@ -70,7 +74,7 @@ export async function GET(request: Request): Promise<Response> {
   try {
     const profile = await exchangeCodeForProfile(config, code, stored.codeVerifier);
     const sessionCookie = sessionCookieForProfile(config, profile);
-    return redirectHome(config.publicOrigin, { auth: 'success' }, [clearState, sessionCookie]);
+    return redirectTo(config.publicOrigin, '/', { auth: 'success' }, [clearState, sessionCookie]);
   } catch (err) {
     const reason =
       err instanceof GoogleOAuthError
@@ -78,6 +82,6 @@ export async function GET(request: Request): Promise<Response> {
         : err instanceof Error
           ? 'oauth_failed'
           : 'oauth_failed';
-    return redirectHome(config.publicOrigin, { auth: 'error', reason }, [clearState]);
+    return redirectTo(config.publicOrigin, '/login', { auth: 'error', reason }, [clearState]);
   }
 }

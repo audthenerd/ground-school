@@ -72,14 +72,14 @@ describe('GET /api/auth/google/callback', () => {
     expect(response.status).toBe(503);
   });
 
-  it('sends a provider error home and clears the state cookie', async () => {
+  it('sends a provider error to /login and clears the state cookie', async () => {
     configureGoogle();
     const response = await callback(
       new Request('http://localhost/api/auth/google/callback?error=access_denied'),
     );
     expect(response.status).toBe(302);
     expect(response.headers.get('location')).toBe(
-      'http://localhost:3000/?auth=error&reason=access_denied',
+      'http://localhost:3000/login?auth=error&reason=access_denied',
     );
     expect(response.headers.get('set-cookie')).toContain('Max-Age=0');
   });
@@ -93,7 +93,7 @@ describe('GET /api/auth/google/callback', () => {
       }),
     );
     expect(response.headers.get('location')).toBe(
-      'http://localhost:3000/?auth=error&reason=invalid_state',
+      'http://localhost:3000/login?auth=error&reason=invalid_state',
     );
     expect(response.headers.get('set-cookie')).not.toContain(`${GOOGLE_SESSION_COOKIE}=`);
   });

@@ -10,14 +10,17 @@
     "close": "닫기"
   },
   "home": {
-    "slogan": "멀티 에이전트 인터랙티브 교실에서 펼치는 생성형 학습",
+    "slogan": "항공 작전을 위한 인터랙티브 임무 훈련",
     "greetingWithName": "안녕하세요, {{name}}!"
   },
   "auth": {
     "signInWithGoogle": "Google로 로그인",
     "signOut": "로그아웃",
     "signInFailed": "Google 로그인 실패 ({{reason}})",
-    "claimFailed": "로그인했지만 이전 작업을 이 계정으로 옮기지 못했습니다"
+    "claimFailed": "로그인했지만 이전 작업을 이 계정으로 옮기지 못했습니다",
+    "loginTitle": "계속하려면 로그인",
+    "loginSubtitle": "Google 계정으로 Ground School을 여세요.",
+    "notConfigured": "이 배포에는 Google 로그인이 구성되지 않았습니다."
   },
   "toolbar": {
     "pdfParser": "파서",

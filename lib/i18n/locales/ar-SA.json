@@ -10,14 +10,17 @@
     "close": "إغلاق"
   },
   "home": {
-    "slogan": "التعلّم التوليدي في فصل تفاعلي متعدد الوكلاء",
+    "slogan": "تدريب تفاعلي على المهام للعمليات الجوية",
     "greetingWithName": "مرحبًا، {{name}}"
   },
   "auth": {
     "signInWithGoogle": "تسجيل الدخول عبر Google",
     "signOut": "تسجيل الخروج",
     "signInFailed": "فشل تسجيل الدخول عبر Google ({{reason}})",
-    "claimFailed": "تم تسجيل الدخول، لكن تعذر نقل عملك السابق إلى هذا الحساب"
+    "claimFailed": "تم تسجيل الدخول، لكن تعذر نقل عملك السابق إلى هذا الحساب",
+    "loginTitle": "سجّل الدخول للمتابعة",
+    "loginSubtitle": "استخدم حساب Google لفتح Ground School.",
+    "notConfigured": "تسجيل الدخول عبر Google غير مُعدّ في هذا النشر."
   },
   "toolbar": {
     "pdfParser": "محلل PDF",

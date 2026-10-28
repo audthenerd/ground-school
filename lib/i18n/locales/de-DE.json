@@ -10,14 +10,17 @@
     "close": "Schließen"
   },
   "home": {
-    "slogan": "Generatives Lernen im interaktiven Lernraum mit mehreren KI-Agenten",
+    "slogan": "Interaktives Missionstraining für Luftoperationen",
     "greetingWithName": "Hallo, {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Mit Google anmelden",
     "signOut": "Abmelden",
     "signInFailed": "Google-Anmeldung fehlgeschlagen ({{reason}})",
-    "claimFailed": "Angemeldet, aber frühere Arbeit konnte nicht in dieses Konto übernommen werden"
+    "claimFailed": "Angemeldet, aber frühere Arbeit konnte nicht in dieses Konto übernommen werden",
+    "loginTitle": "Anmelden, um fortzufahren",
+    "loginSubtitle": "Melden Sie sich mit Google an, um Ground School zu öffnen.",
+    "notConfigured": "Google-Anmeldung ist in dieser Bereitstellung nicht konfiguriert."
   },
   "toolbar": {
     "pdfParser": "Parser",

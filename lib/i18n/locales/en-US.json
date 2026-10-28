@@ -10,14 +10,17 @@
     "close": "Close"
   },
   "home": {
-    "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
+    "slogan": "Interactive mission training for air operations",
     "greetingWithName": "Hi, {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Sign in with Google",
     "signOut": "Sign out",
     "signInFailed": "Google sign-in failed ({{reason}})",
-    "claimFailed": "Signed in, but could not move your previous work into this account"
+    "claimFailed": "Signed in, but could not move your previous work into this account",
+    "loginTitle": "Sign in to continue",
+    "loginSubtitle": "Use your Google account to access Ground School.",
+    "notConfigured": "Google sign-in is not configured on this deployment."
   },
   "toolbar": {
     "pdfParser": "Parser",

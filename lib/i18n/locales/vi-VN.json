@@ -10,14 +10,17 @@
     "close": "Đóng"
   },
   "home": {
-    "slogan": "Học tập sinh tạo trong lớp học tương tác đa tác nhân",
+    "slogan": "Huấn luyện nhiệm vụ tương tác cho hoạt động không quân",
     "greetingWithName": "Chào {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Đăng nhập bằng Google",
     "signOut": "Đăng xuất",
     "signInFailed": "Đăng nhập Google thất bại ({{reason}})",
-    "claimFailed": "Đã đăng nhập nhưng không thể chuyển công việc trước đó vào tài khoản này"
+    "claimFailed": "Đã đăng nhập nhưng không thể chuyển công việc trước đó vào tài khoản này",
+    "loginTitle": "Đăng nhập để tiếp tục",
+    "loginSubtitle": "Dùng tài khoản Google để mở Ground School.",
+    "notConfigured": "Đăng nhập Google chưa được cấu hình trên bản triển khai này."
   },
   "toolbar": {
     "pdfParser": "Bộ đọc PDF",

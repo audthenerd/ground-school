@@ -775,23 +775,23 @@ function HomePage() {
           </div>
           <div
             className={cn(
-              'mb-2 flex items-center gap-2 md:gap-3',
+              'mb-2 flex flex-col items-center',
               heroEnter('fade-in zoom-in-90 duration-500 delay-100'),
             )}
           >
-            <img
-              src="/brand/ground-school-mark-minimal.svg"
-              alt="Ground School"
-              className="size-[56px] object-contain md:size-[70px]"
-            />
-            <div className="flex flex-col">
+            <div className="flex items-center gap-2 md:gap-3">
+              <img
+                src="/brand/ground-school-mark-minimal.svg"
+                alt="Ground School"
+                className="size-[56px] object-contain md:size-[70px]"
+              />
               <span className="text-[2rem] font-black leading-[0.92] tracking-[-0.055em] text-[#252525] md:text-[2.9rem] dark:text-slate-100">
                 Ground School
               </span>
-              <span className="mt-2 font-mono text-[8px] font-bold uppercase tracking-[0.38em] text-[#3288c6] md:text-[9px]">
-                Brief · Learn · Fly
-              </span>
             </div>
+            <span className="mt-2 text-center font-mono text-[8px] font-bold uppercase tracking-[0.38em] text-[#3288c6] md:text-[9px]">
+              Brief · Learn · Fly
+            </span>
           </div>
           <div className="ground-brand-stripes mb-3 flex gap-1" aria-hidden="true">
             <span />
@@ -1368,7 +1368,8 @@ function GreetingBar() {
   const setAvatar = useUserProfileStore((s) => s.setAvatar);
   const setNickname = useUserProfileStore((s) => s.setNickname);
   const setBio = useUserProfileStore((s) => s.setBio);
-  const { session, signIn, signOut, claimAnonymousWork, refresh } = useAuthSession();
+  const { session, signOut, claimAnonymousWork, refresh } = useAuthSession();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [editingName, setEditingName] = useState(false);
@@ -1683,25 +1684,20 @@ function GreetingBar() {
                   className="resize-none border-border/40 bg-transparent min-h-[72px] !text-[13px] !leading-relaxed placeholder:!text-[11px] placeholder:!leading-relaxed focus-visible:ring-1 focus-visible:ring-border/60"
                 />
 
-                {googleConfigured && (
+                {googleConfigured && signedIn && (
                   <div className="pt-2">
-                    {signedIn ? (
-                      <button
-                        type="button"
-                        onClick={() => void signOut()}
-                        className="w-full text-left text-[12px] font-medium text-muted-foreground hover:text-foreground px-1 py-1.5 rounded-md hover:bg-muted/60 transition-colors"
-                      >
-                        {t('auth.signOut')}
-                      </button>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={signIn}
-                        className="w-full text-left text-[12px] font-medium text-foreground px-1 py-1.5 rounded-md hover:bg-muted/60 transition-colors"
-                      >
-                        {t('auth.signInWithGoogle')}
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void (async () => {
+                          await signOut();
+                          router.replace('/login');
+                        })();
+                      }}
+                      className="w-full text-left text-[12px] font-medium text-muted-foreground hover:text-foreground px-1 py-1.5 rounded-md hover:bg-muted/60 transition-colors"
+                    >
+                      {t('auth.signOut')}
+                    </button>
                   </div>
                 )}
               </div>

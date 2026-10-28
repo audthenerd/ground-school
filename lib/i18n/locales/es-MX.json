@@ -10,14 +10,17 @@
     "close": "Cerrar"
   },
   "home": {
-    "slogan": "Aprendizaje generativo en un aula interactiva multiagente",
+    "slogan": "Entrenamiento de misión interactivo para operaciones aéreas",
     "greetingWithName": "Hola, {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Iniciar sesión con Google",
     "signOut": "Cerrar sesión",
     "signInFailed": "Error al iniciar sesión con Google ({{reason}})",
-    "claimFailed": "Sesión iniciada, pero no se pudo mover tu trabajo anterior a esta cuenta"
+    "claimFailed": "Sesión iniciada, pero no se pudo mover tu trabajo anterior a esta cuenta",
+    "loginTitle": "Inicia sesión para continuar",
+    "loginSubtitle": "Usa tu cuenta de Google para abrir Ground School.",
+    "notConfigured": "El inicio de sesión con Google no está configurado en esta implementación."
   },
   "toolbar": {
     "pdfParser": "Analizador",

@@ -10,14 +10,17 @@
     "close": "Закрыть"
   },
   "home": {
-    "slogan": "Generative Learning in Multi-Agent Interactive Classroom",
+    "slogan": "Интерактивная подготовка к миссиям для воздушных операций",
     "greetingWithName": "Привет, {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Войти через Google",
     "signOut": "Выйти",
     "signInFailed": "Не удалось войти через Google ({{reason}})",
-    "claimFailed": "Вход выполнен, но не удалось перенести прежнюю работу в этот аккаунт"
+    "claimFailed": "Вход выполнен, но не удалось перенести прежнюю работу в этот аккаунт",
+    "loginTitle": "Войдите, чтобы продолжить",
+    "loginSubtitle": "Войдите через Google, чтобы открыть Ground School.",
+    "notConfigured": "Вход через Google не настроен в этом развёртывании."
   },
   "toolbar": {
     "pdfParser": "Парсер",

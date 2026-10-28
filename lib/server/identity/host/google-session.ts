@@ -17,24 +17,24 @@ import {
 } from '@/lib/server/identity';
 
 import { resolveGoogleAuthConfig } from './google-auth-config';
+import {
+  GOOGLE_SESSION_COOKIE,
+  GOOGLE_SESSION_MAX_AGE_SECONDS,
+  isGoogleSessionSignatureFormatValid,
+  parseGoogleSessionPayload,
+  splitGoogleSessionToken,
+  type GoogleSessionPayload,
+} from './google-session-shared';
 
-export const GOOGLE_SESSION_COOKIE = 'gs_google_session';
+export {
+  GOOGLE_SESSION_COOKIE,
+  GOOGLE_SESSION_MAX_AGE_SECONDS,
+  type GoogleSessionPayload,
+} from './google-session-shared';
+
 export const GOOGLE_OWNER_PREFIX = 'google:';
 
-/** 30 days — long enough for a classroom session without re-prompting often. */
-export const GOOGLE_SESSION_MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
-
 const GOOGLE_ROLES: ReadonlySet<string> = new Set<string>([OWNER_ROLES.coursePublish]);
-
-export interface GoogleSessionPayload {
-  readonly sub: string;
-  readonly email: string;
-  readonly name: string;
-  readonly givenName: string;
-  readonly picture: string;
-  /** Unix seconds. */
-  readonly exp: number;
-}
 
 function readCookie(headers: Headers, name: string): string | undefined {
   const encoded = headers.get('cookie');
@@ -63,35 +63,6 @@ function encodePayload(payload: GoogleSessionPayload): string {
   return Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');
 }
 
-function decodePayload(encoded: string): GoogleSessionPayload | undefined {
-  try {
-    const raw: unknown = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8'));
-    if (!raw || typeof raw !== 'object') return undefined;
-    const obj = raw as Record<string, unknown>;
-    if (
-      typeof obj.sub !== 'string' ||
-      typeof obj.email !== 'string' ||
-      typeof obj.name !== 'string' ||
-      typeof obj.givenName !== 'string' ||
-      typeof obj.picture !== 'string' ||
-      typeof obj.exp !== 'number'
-    ) {
-      return undefined;
-    }
-    if (!obj.sub || !/^[\x21-\x7e]{1,200}$/.test(obj.sub)) return undefined;
-    return {
-      sub: obj.sub,
-      email: obj.email,
-      name: obj.name,
-      givenName: obj.givenName,
-      picture: obj.picture,
-      exp: obj.exp,
-    };
-  } catch {
-    return undefined;
-  }
-}
-
 /** Mint a signed session token for the cookie value. */
 export function createGoogleSessionToken(
   profile: Omit<GoogleSessionPayload, 'exp'>,
@@ -116,16 +87,14 @@ export function verifyGoogleSessionToken(
   nowSeconds = Math.floor(Date.now() / 1000),
 ): GoogleSessionPayload | undefined {
   if (!token) return undefined;
-  const dot = token.indexOf('.');
-  if (dot <= 0 || dot === token.length - 1) return undefined;
-  const encoded = token.slice(0, dot);
-  const signature = token.slice(dot + 1);
-  if (!/^[0-9a-f]+$/i.test(signature)) return undefined;
-  const expected = signPayload(encoded, secret);
-  const sigBuf = Buffer.from(signature, 'hex');
+  const parts = splitGoogleSessionToken(token);
+  if (!parts) return undefined;
+  if (!isGoogleSessionSignatureFormatValid(parts.signature)) return undefined;
+  const expected = signPayload(parts.encoded, secret);
+  const sigBuf = Buffer.from(parts.signature, 'hex');
   const expBuf = Buffer.from(expected, 'hex');
   if (sigBuf.length !== expBuf.length || !timingSafeEqual(sigBuf, expBuf)) return undefined;
-  const payload = decodePayload(encoded);
+  const payload = parseGoogleSessionPayload(parts.encoded);
   if (!payload) return undefined;
   if (payload.exp <= nowSeconds) return undefined;
   return payload;

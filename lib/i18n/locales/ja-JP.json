@@ -10,14 +10,17 @@
     "close": "閉じる"
   },
   "home": {
-    "slogan": "マルチエージェント対話型教室で生成的に学ぶ",
+    "slogan": "航空作戦のためのインタラクティブな任務訓練",
     "greetingWithName": "こんにちは、{{name}}さん"
   },
   "auth": {
     "signInWithGoogle": "Google でサインイン",
     "signOut": "サインアウト",
     "signInFailed": "Google サインインに失敗しました（{{reason}}）",
-    "claimFailed": "サインインしましたが、以前の作業をこのアカウントに移せませんでした"
+    "claimFailed": "サインインしましたが、以前の作業をこのアカウントに移せませんでした",
+    "loginTitle": "続行するにはサインイン",
+    "loginSubtitle": "Google アカウントで Ground School を開きます。",
+    "notConfigured": "このデプロイでは Google サインインが設定されていません。"
   },
   "toolbar": {
     "pdfParser": "パーサー",

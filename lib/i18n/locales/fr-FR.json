@@ -10,14 +10,17 @@
     "close": "Fermer"
   },
   "home": {
-    "slogan": "L’apprentissage génératif en classe interactive multi-agents",
+    "slogan": "Formation mission interactive pour les opérations aériennes",
     "greetingWithName": "Bonjour, {{name}}"
   },
   "auth": {
     "signInWithGoogle": "Se connecter avec Google",
     "signOut": "Se déconnecter",
     "signInFailed": "Échec de la connexion Google ({{reason}})",
-    "claimFailed": "Connecté, mais impossible de transférer votre travail précédent vers ce compte"
+    "claimFailed": "Connecté, mais impossible de transférer votre travail précédent vers ce compte",
+    "loginTitle": "Connectez-vous pour continuer",
+    "loginSubtitle": "Utilisez votre compte Google pour ouvrir Ground School.",
+    "notConfigured": "La connexion Google n’est pas configurée sur ce déploiement."
   },
   "toolbar": {
     "pdfParser": "Analyseur",
