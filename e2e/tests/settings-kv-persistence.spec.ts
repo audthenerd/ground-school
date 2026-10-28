@@ -29,7 +29,7 @@ test.describe('settings persistence through the KVStore', () => {
 
     const home = new HomePage(page);
     await home.goto();
-    await expect(home.textarea).toBeVisible();
+    await expect(home.briefing).toBeVisible();
 
     // The store reads the KV scope and leaves the value there.
     await expect
@@ -54,7 +54,7 @@ test.describe('settings persistence through the KVStore', () => {
 
     const home = new HomePage(page);
     await home.goto();
-    await expect(home.textarea).toBeVisible();
+    await expect(home.briefing).toBeVisible();
 
     // No migration: the raw blob is not read, and it is best-effort purged
     // (in earlier builds it held plaintext provider API keys).

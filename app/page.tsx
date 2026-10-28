@@ -39,8 +39,8 @@ import { InputGroup, InputGroupInput, InputGroupButton } from '@/components/ui/i
 import { Textarea as UITextarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { SettingsDialog } from '@/components/settings';
-import { GenerationToolbar } from '@/components/generation/generation-toolbar';
 import { AgentBar } from '@/components/agent/agent-bar';
+import { BriefingTypewriter } from '@/components/home/briefing-typewriter';
 import { useTheme } from '@/lib/hooks/use-theme';
 import {
   courseGenerationUsable,
@@ -51,16 +51,12 @@ import {
   discardGenerationRun,
   runApiErrorText,
 } from '@/lib/generation-run-client/api';
-import {
-  RunStartRefusedError,
-  startClassicRun,
-  startDefinitelyRefused,
-} from '@/lib/generation-run-client/start';
-import {
-  useCourseMaterials,
-  type CourseMaterialMessage,
-} from '@/lib/generation-run-client/use-course-materials';
+import { RunStartRefusedError, startClassicRun } from '@/lib/generation-run-client/start';
 import { useOwnerRuns } from '@/lib/generation-run-client/use-owner-runs';
+import {
+  SORTIE_INSTRUCTIONS,
+  SORTIE_REQUIREMENT,
+} from '@/lib/ground-school/sortie-briefing';
 import {
   courseRunHref,
   courseRunStatus,
@@ -102,7 +98,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useCourseThumbnails } from '@/lib/hooks/use-course-thumbnails';
 import { ThumbnailSkeleton } from '@/components/discovery/thumbnail-skeleton';
 import { useNearViewport } from '@/lib/hooks/use-near-viewport';
-import { SpeechButton } from '@/components/audio/speech-button';
 import { useImportClassroom } from '@/lib/import/use-import-classroom';
 import {
   isProWorkbenchEnabled,
@@ -110,7 +105,6 @@ import {
   shouldShowVocationalTestUi,
 } from '@/lib/config/feature-flags';
 import { useImportPptx } from '@/lib/import/use-import-pptx';
-import { InteractiveModeButton } from '@/components/generation/interactive-mode-button';
 import { ProBadge } from '@/components/workbench/ProBadge';
 import { arrivedByProSwap, startProSwap } from '@/lib/workbench/pro-swap';
 import {
@@ -121,7 +115,6 @@ import {
 const log = createLogger('Home');
 
 const RECENT_OPEN_STORAGE_KEY = 'recentClassroomsOpen';
-const INTERACTIVE_MODE_STORAGE_KEY = 'interactiveModeEnabled';
 
 // PPTX import is still scaffolding: `useImportPptx` has no `onImported` consumer
 // yet, so the flow only logs the parsed slides. Hide the entry point behind a
@@ -132,14 +125,10 @@ const PPTX_IMPORT_ENABLED = isPptxImportEnabled();
 let workbenchRuntimeCache: boolean | null = null;
 
 interface FormState {
-  requirement: string;
-  interactiveMode: boolean;
   vocationalTestMode: boolean;
 }
 
 const initialFormState: FormState = {
-  requirement: '',
-  interactiveMode: false,
   vocationalTestMode: false,
 };
 
@@ -217,23 +206,13 @@ function HomePage() {
     } catch {
       /* localStorage unavailable */
     }
-    try {
-      const savedInteractiveMode = localStorage.getItem(INTERACTIVE_MODE_STORAGE_KEY);
-      if (savedInteractiveMode === 'true') {
-        setForm((prev) => ({ ...prev, interactiveMode: true }));
-      }
-    } catch {
-      /* localStorage unavailable */
-    }
   }, []);
 
   const [themeOpen, setThemeOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // True while the Generate click starts the run. Doubles as the guard flag
-  // that freezes the course material set for the duration of the start and as
-  // the switch that disables the toolbar's add/remove/Retry affordances, so
-  // the run is always started from a set that cannot change under it.
+  // True while the Generate click starts the run.
   const [preparingGenerate, setPreparingGenerate] = useState(false);
+  const [briefingComplete, setBriefingComplete] = useState(false);
   const [classrooms, setClassrooms] = useState<StageListItem[]>([]);
   // First-slide thumbnails load lazily, per card near the viewport: the list
   // renders as soon as /api/stages answers, never behind every course's
@@ -260,7 +239,6 @@ function HomePage() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
   const toolbarRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -535,74 +513,30 @@ function HomePage() {
 
   const updateForm = <K extends keyof FormState>(field: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-    try {
-      if (field === 'interactiveMode')
-        localStorage.setItem(INTERACTIVE_MODE_STORAGE_KEY, String(value));
-    } catch {
-      /* ignore */
-    }
-  };
-
-  // Attached materials upload and extract at once; Generate waits for them.
-  const courseMaterials = useCourseMaterials();
-  const materialMessage = (message: CourseMaterialMessage) =>
-    message.text ?? (message.key ? t(message.key, message.values) : '');
-
-  const addCourseMaterials = async (files: File[]) => {
-    // The set is frozen while a run is being started.
-    if (preparingGenerate) return;
-    const refusal = await courseMaterials.add(files);
-    setError(refusal ? materialMessage(refusal) : null);
-  };
-
-  const removeCourseMaterial = (id: string) => {
-    if (preparingGenerate) return;
-    courseMaterials.remove(id);
   };
 
   const handleGenerate = async () => {
     // No model/provider guard here: generation is gated by `canGenerate`
     // (requires a usable provider), and under the #580 invariant a usable
     // provider always has a concrete model. State A (no usable provider)
-    // surfaces through the toolbar's single Configure-Provider affordance.
-    if (preparingGenerate) return;
-    if (!form.requirement.trim()) {
-      setError(t('upload.requirementRequired'));
-      return;
-    }
+    // keeps Enter Classroom disabled; configure a model from the header settings.
+    if (preparingGenerate || !briefingComplete) return;
 
     setError(null);
-
-    // The set is frozen while the run starts (`preparingGenerate` makes add,
-    // remove and Retry inert), from the ready materials in their order.
     setPreparingGenerate(true);
-    // The run releases the materials it is started from once it is over.
-    // Handed off before anything is awaited: a navigation in between must not
-    // delete them under the run.
-    const materialIds = courseMaterials.handOff();
     try {
-      // Nothing is started from settings that could not be read.
       const capabilities = await requireModelCapabilities();
       if (!capabilities) throw new Error(t('generation.modelSettingsUnavailable'));
-      // Nor from a material that went meanwhile: its chip shows it removed.
-      if (materialIds.length > 0 && !(await courseMaterials.verify())) {
-        throw new Error(t('toolbar.materialUnavailable'));
-      }
       const run = await startClassicRun({
-        requirement: form.requirement,
-        materialIds,
-        interactive: form.vocationalTestMode ? true : form.interactiveMode,
+        requirement: SORTIE_REQUIREMENT,
+        materialIds: [],
+        interactive: form.vocationalTestMode ? true : false,
         taskEngine: form.vocationalTestMode,
         capabilities,
       });
       router.push(`/generation-preview?run=${encodeURIComponent(run.id)}`);
     } catch (err) {
       log.error('Error starting generation:', err);
-      // Only a definitive refusal says no run holds them: they stay attached.
-      // A lost answer may hide a run that releases them when it is over.
-      if (!(err instanceof RunApiError) || startDefinitelyRefused(err)) {
-        courseMaterials.takeBack(materialIds);
-      }
       if (err instanceof RunStartRefusedError) {
         setError(t(err.reason, err.values));
       } else if (err instanceof RunApiError) {
@@ -611,8 +545,6 @@ function HomePage() {
         setError(err instanceof Error ? err.message : t('upload.generateFailed'));
       }
     } finally {
-      // Unfreeze the set once prep settles (navigation unmounts this page, so
-      // this is normally a no-op on the way out).
       setPreparingGenerate(false);
     }
   };
@@ -629,15 +561,7 @@ function HomePage() {
     return date.toLocaleDateString();
   };
 
-  // Generate waits for every attached material to be uploaded and extracted.
-  const canGenerate = !!form.requirement.trim() && hasUsableProvider && courseMaterials.allReady;
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-      e.preventDefault();
-      if (canGenerate && !preparingGenerate) handleGenerate();
-    }
-  };
+  const canGenerate = briefingComplete && hasUsableProvider;
 
   return (
     <div className="ground-home min-h-[100dvh] w-full flex flex-col items-center px-4 pb-4 pt-20 md:px-8 md:pb-8 md:pt-20 overflow-x-hidden">
@@ -839,63 +763,14 @@ function HomePage() {
               </div>
             </div>
 
-            {/* Textarea */}
-            <textarea
-              ref={textareaRef}
-              placeholder={t('upload.requirementPlaceholder')}
-              className="scrollbar-hide w-full resize-none border-0 bg-transparent px-5 pt-2 pb-3 text-[14px] leading-relaxed placeholder:text-slate-400/75 focus:outline-none min-h-[148px] max-h-[300px]"
-              value={form.requirement}
-              onChange={(e) => updateForm('requirement', e.target.value)}
-              onKeyDown={handleKeyDown}
-              rows={4}
+            <BriefingTypewriter
+              text={SORTIE_INSTRUCTIONS}
+              onComplete={() => setBriefingComplete(true)}
             />
 
-            {/* Toolbar row */}
-            <div className="ground-composer-footer px-3 py-3 flex items-end gap-2">
-              <div className="flex-1 min-w-0">
-                <GenerationToolbar
-                  courseMaterials={courseMaterials.materials}
-                  onCourseMaterialsAdd={(files) => void addCourseMaterials(files)}
-                  onCourseMaterialRemove={removeCourseMaterial}
-                  onCourseMaterialRetry={(id) => {
-                    if (!preparingGenerate) courseMaterials.retry(id);
-                  }}
-                  onPdfError={setError}
-                  materialsLocked={preparingGenerate}
-                  onSettingsOpen={(section) => {
-                    setSettingsSection(section);
-                    setSettingsOpen(true);
-                  }}
-                />
-              </div>
-
-              {/* Interactive mode toggle */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <InteractiveModeButton
-                    pressed={form.interactiveMode}
-                    label={t('toolbar.interactiveModeLabel')}
-                    onPressedChange={(pressed) => updateForm('interactiveMode', pressed)}
-                  />
-                </TooltipTrigger>
-                <TooltipContent side="top" className="text-xs">
-                  {t('toolbar.interactiveModeHint')}
-                </TooltipContent>
-              </Tooltip>
-
-              {/* Voice input */}
-              <SpeechButton
-                size="md"
-                onTranscription={(text) => {
-                  setForm((prev) => {
-                    const next = prev.requirement + (prev.requirement ? ' ' : '') + text;
-                    return { ...prev, requirement: next };
-                  });
-                }}
-              />
-
-              {/* Send button */}
+            <div className="ground-composer-footer px-3 py-3 flex items-center justify-end gap-2">
               <button
+                type="button"
                 onClick={handleGenerate}
                 disabled={!canGenerate || preparingGenerate}
                 className={cn(
@@ -960,7 +835,7 @@ function HomePage() {
                 </button>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="text-xs">
-                从当前输入框提交职教实操训练测试
+                以职教实操训练测试模式进入课堂
               </TooltipContent>
             </Tooltip>
           </motion.div>
