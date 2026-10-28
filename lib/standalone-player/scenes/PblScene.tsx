@@ -93,14 +93,14 @@ export function PblScene({
               {briefing.description}
             </p>
           )}
-          <div className="mt-4 flex flex-wrap items-center gap-3 rounded-lg bg-violet-50 px-4 py-3 text-sm text-violet-900">
+          <div className="mt-4 flex flex-wrap items-center gap-3 rounded-lg bg-primary/10 px-4 py-3 text-sm text-primary/20">
             <span className="min-w-0 flex-1">{strings.pblOnlineOnly}</span>
             {link && (
               <a
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md bg-violet-600 px-3 py-1.5 font-medium text-white hover:bg-violet-700"
+                className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 font-medium text-white hover:bg-primary"
                 data-testid="pbl-continue-online"
               >
                 {strings.pblContinueOnline}
@@ -147,7 +147,7 @@ export function PblScene({
             <ol className="space-y-4">
               {briefing.milestones.map((milestone, index) => (
                 <li key={index} className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-violet-100 text-xs font-semibold text-violet-700">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/15 text-xs font-semibold text-primary">
                     {index + 1}
                   </span>
                   <div className="min-w-0 flex-1">

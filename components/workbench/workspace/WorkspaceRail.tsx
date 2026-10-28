@@ -962,12 +962,12 @@ export function WorkspaceRail({
             that leaves Pro. Two different destinations, so two hit targets —
             never one control wearing both meanings. */}
         <HomeLink testId="pro-nav-home" onGoHome={onGoHome} className="-ml-1.5 px-1.5 py-1">
-          <img
-            src={brand.logoSrc}
-            alt=""
-            aria-hidden="true"
-            className="h-[21px] w-auto max-w-[110px] shrink-0"
-          />
+          <span className="flex max-w-[140px] shrink-0 items-center gap-1.5" aria-hidden="true">
+            <img src={brand.markSrc} alt="" className="h-[21px] w-[21px] object-contain" />
+            <span className="truncate text-[13px] font-black tracking-[-0.04em] text-[#252525] dark:text-slate-100">
+              {brand.productName}
+            </span>
+          </span>
         </HomeLink>
         <ProBadge active onToggle={onExitPro} />
         {/* THE rail's header, and therefore where the rail folds — the same

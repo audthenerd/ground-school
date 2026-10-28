@@ -417,18 +417,18 @@ const CONFETTI: ReadonlyArray<{
   drift: number;
   rotate: number;
 }> = [
-  { left: 6, color: '#a78bfa', size: 6, delay: 0.0, duration: 3.0, drift: 14, rotate: 320 },
+  { left: 6, color: '#5ca4d5', size: 6, delay: 0.0, duration: 3.0, drift: 14, rotate: 320 },
   { left: 14, color: '#67e8f9', size: 7, delay: 0.7, duration: 3.4, drift: -10, rotate: -260 },
   { left: 22, color: '#fcd34d', size: 5, delay: 1.3, duration: 2.8, drift: 8, rotate: 400 },
   { left: 30, color: '#6ee7b7', size: 6, delay: 0.4, duration: 3.2, drift: -16, rotate: -340 },
   { left: 38, color: '#f9a8d4', size: 7, delay: 1.0, duration: 3.6, drift: 12, rotate: 300 },
   { left: 46, color: '#7dd3fc', size: 5, delay: 0.2, duration: 2.9, drift: -8, rotate: -380 },
-  { left: 54, color: '#a78bfa', size: 6, delay: 1.5, duration: 3.3, drift: 16, rotate: 360 },
+  { left: 54, color: '#5ca4d5', size: 6, delay: 1.5, duration: 3.3, drift: 16, rotate: 360 },
   { left: 62, color: '#fcd34d', size: 7, delay: 0.6, duration: 3.0, drift: -12, rotate: -300 },
   { left: 70, color: '#6ee7b7', size: 5, delay: 1.1, duration: 3.5, drift: 10, rotate: 420 },
   { left: 78, color: '#67e8f9', size: 6, delay: 0.3, duration: 2.7, drift: -14, rotate: -340 },
   { left: 86, color: '#f9a8d4', size: 7, delay: 0.9, duration: 3.4, drift: 8, rotate: 320 },
-  { left: 94, color: '#a78bfa', size: 5, delay: 1.4, duration: 3.1, drift: -10, rotate: -360 },
+  { left: 94, color: '#5ca4d5', size: 5, delay: 1.4, duration: 3.1, drift: -10, rotate: -360 },
   { left: 18, color: '#fcd34d', size: 6, delay: 1.8, duration: 3.2, drift: 12, rotate: 380 },
   { left: 82, color: '#7dd3fc', size: 6, delay: 2.0, duration: 3.3, drift: -8, rotate: -320 },
 ];
@@ -546,7 +546,7 @@ function ActGoalReviewItem({
             <div className="min-w-0 flex-1">
               <span className="text-slate-200">{g.goal}</span>
               {g.skillFocus && (
-                <span className="ml-1.5 inline-block rounded bg-violet-300/[0.10] px-1.5 py-0.5 text-[10px] text-violet-200">
+                <span className="ml-1.5 inline-block rounded bg-primary/50 px-1.5 py-0.5 text-[10px] text-primary/30">
                   {g.skillFocus}
                 </span>
               )}
@@ -586,7 +586,7 @@ function ActGoalListItem({
             <div className="min-w-0 flex-1">
               <span className="text-slate-200">{g.goal}</span>
               {g.skillFocus && (
-                <span className="ml-1.5 inline-block rounded bg-violet-300/[0.10] px-1.5 py-0.5 text-[10px] text-violet-200">
+                <span className="ml-1.5 inline-block rounded bg-primary/50 px-1.5 py-0.5 text-[10px] text-primary/30">
                   {g.skillFocus}
                 </span>
               )}
@@ -645,7 +645,7 @@ function StageReviewItem({
         <span className="text-sm font-medium text-slate-100">
           {detail.milestoneTitle}
           {detail.isCoreStage && (
-            <span className="ml-1.5 rounded-full border border-violet-300/20 bg-violet-300/[0.08] px-1.5 py-0.5 text-[10px] text-violet-200">
+            <span className="ml-1.5 rounded-full border border-primary/50 bg-primary/50 px-1.5 py-0.5 text-[10px] text-primary/30">
               {t('pbl.v2.completion.coreStageBadge')}
             </span>
           )}
@@ -677,7 +677,7 @@ function StageReviewItem({
           )}
           {detail.isCoreStage && detail.coreConcept && detail.synthesisQuality && (
             <li className="text-xs text-slate-200">
-              <span className="mr-1 text-violet-300/80">+</span>
+              <span className="mr-1 text-primary/50">+</span>
               {t('pbl.v2.completion.coreConceptGrasp', {
                 concept: detail.coreConcept,
                 quality: t(`pbl.v2.completion.synthesisQuality.${detail.synthesisQuality}`),

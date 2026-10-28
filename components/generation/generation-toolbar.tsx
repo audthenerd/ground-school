@@ -255,7 +255,7 @@ export function GenerationToolbar({
   const pillCls =
     'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition-all cursor-pointer select-none whitespace-nowrap border';
   const pillMuted = `${pillCls} border-border/50 text-muted-foreground/70 hover:text-foreground hover:bg-muted/60`;
-  const pillActive = `${pillCls} border-violet-200/60 dark:border-violet-700/50 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300`;
+  const pillActive = `${pillCls} border-primary/30 dark:border-primary/50 bg-primary/15 dark:bg-primary/30 text-primary dark:text-primary`;
 
   return (
     <div className="flex items-center gap-1 flex-wrap">
@@ -394,8 +394,8 @@ export function GenerationToolbar({
                 className={cn(
                   'flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-4 transition-colors',
                   isDragging
-                    ? 'border-violet-400 bg-violet-50 dark:bg-violet-950/20'
-                    : 'border-muted-foreground/20 hover:border-violet-300',
+                    ? 'border-primary/70 bg-primary/10 dark:bg-primary/20'
+                    : 'border-muted-foreground/20 hover:border-primary/50',
                   materialsLocked ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                 )}
                 onClick={() => {
@@ -558,7 +558,7 @@ export function CourseMaterialChip({
             'size-6 shrink-0 rounded-md flex items-center justify-center',
             failed
               ? 'bg-destructive/10 text-destructive'
-              : 'bg-violet-100/70 text-violet-600 dark:bg-violet-900/30 dark:text-violet-300',
+              : 'bg-primary/15 text-primary dark:bg-primary/30 dark:text-primary',
           )}
         >
           <MaterialTypeIcon material={material} />
@@ -638,15 +638,15 @@ export function CourseMaterialChip({
         </p>
       ))}
       {material.status === 'uploading' && (
-        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-violet-500/10">
+        <div className="absolute inset-x-0 bottom-0 h-0.5 bg-primary/10">
           <div
-            className="h-full bg-violet-500 transition-[width]"
+            className="h-full bg-primary transition-[width]"
             style={{ width: `${percent}%` }}
           />
         </div>
       )}
       {material.status === 'extracting' && (
-        <div className="absolute inset-x-0 bottom-0 h-0.5 animate-pulse bg-violet-500/40" />
+        <div className="absolute inset-x-0 bottom-0 h-0.5 animate-pulse bg-primary/40" />
       )}
     </div>
   );

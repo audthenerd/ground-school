@@ -104,7 +104,7 @@ export function createDefaultSlide(id: string): Slide {
     viewportRatio: 0.5625, // 16:9
     theme: {
       backgroundColor: '#ffffff',
-      themeColors: ['#5b8def', '#8b5cf6', '#10b981', '#f59e0b'],
+      themeColors: ['#5b8def', '#3288c6', '#10b981', '#f59e0b'],
       fontColor: '#111827',
       fontName: 'Inter',
     },
@@ -183,7 +183,7 @@ export function createDefaultChartElement(id: string, chartType: ChartType): PPT
       legends: ['Series 1'],
       series: [[24, 36, 28, 42]],
     },
-    themeColors: ['#5b8def', '#8b5cf6', '#10b981', '#f59e0b'],
+    themeColors: ['#5b8def', '#3288c6', '#10b981', '#f59e0b'],
     textColor: '#333333',
     lineColor: '#d4d4d8',
   };

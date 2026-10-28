@@ -153,7 +153,7 @@ export function InlineThinkingControl({
 
   // leading-[14px]：SelectValue 带 line-clamp-1（裁切溢出），10px 字配 1 倍行高会切掉字形下半
   const selectTriggerCls =
-    'h-6 min-w-[84px] rounded-full border-0 bg-violet-100 px-2 py-0 !text-[10px] font-medium leading-[14px] text-violet-700 shadow-none focus-visible:ring-0 data-[size=sm]:h-6 dark:bg-violet-900/40 dark:text-violet-200 [&_svg]:size-3';
+    'h-6 min-w-[84px] rounded-full border-0 bg-primary/15 px-2 py-0 !text-[10px] font-medium leading-[14px] text-primary shadow-none focus-visible:ring-0 data-[size=sm]:h-6 dark:bg-primary/40 dark:text-primary/80 [&_svg]:size-3';
   const selectItemCls = 'py-1 text-xs';
   const hasAutoBudget =
     (capability.control === 'toggle-budget' || capability.control === 'budget-only') &&
@@ -179,8 +179,8 @@ export function InlineThinkingControl({
       onPointerDown={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.stopPropagation()}
     >
-      <Brain className="size-3.5 shrink-0 text-violet-500" />
-      <div className="flex min-w-0 items-center gap-0.5 rounded-full border border-violet-200/70 bg-white/65 p-0.5 dark:border-violet-800/70 dark:bg-violet-950/25">
+      <Brain className="size-3.5 shrink-0 text-primary" />
+      <div className="flex min-w-0 items-center gap-0.5 rounded-full border border-primary/30 bg-white/65 p-0.5 dark:border-primary/70 dark:bg-primary/25">
         {hasAutoBudget && (
           <Select
             value={autoBudgetMode}
@@ -278,8 +278,8 @@ export function InlineThinkingControl({
         {(capability.control === 'toggle-budget' || capability.control === 'budget-only') &&
           capability.budgetRange &&
           (!hasAutoBudget || autoBudgetMode === 'enabled') && (
-            <label className="ml-0.5 grid h-6 shrink-0 grid-cols-[auto_60px] items-stretch overflow-hidden rounded-full border border-violet-200/70 bg-background dark:border-violet-800/70">
-              <span className="grid h-[22px] shrink-0 place-items-center border-r border-violet-200/70 bg-muted/30 px-2 font-sans text-[11px] font-medium leading-[22px] text-muted-foreground dark:border-violet-800/70">
+            <label className="ml-0.5 grid h-6 shrink-0 grid-cols-[auto_60px] items-stretch overflow-hidden rounded-full border border-primary/30 bg-background dark:border-primary/70">
+              <span className="grid h-[22px] shrink-0 place-items-center border-r border-primary/30 bg-muted/30 px-2 font-sans text-[11px] font-medium leading-[22px] text-muted-foreground dark:border-primary/70">
                 {t('toolbar.thinkingBudget')}
               </span>
               <input
@@ -416,7 +416,7 @@ export function ModelPicker({
               {selectedEntry && <ProviderLogo group={selectedEntry.group} className="size-4" />}
               <span className="min-w-0 flex-1 truncate text-left font-mono">{selectedLabel}</span>
               {thinkingBadge && (
-                <span className="shrink-0 rounded-full bg-violet-100 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-violet-700 dark:bg-violet-900/40 dark:text-violet-200">
+                <span className="shrink-0 rounded-full bg-primary/15 px-1.5 py-0.5 text-[9px] font-semibold leading-none text-primary dark:bg-primary/40 dark:text-primary/80">
                   {thinkingBadge}
                 </span>
               )}
@@ -485,7 +485,7 @@ export function ModelPicker({
               className={cn(
                 'mb-1 flex min-h-9 w-full items-center gap-2 rounded-md px-2.5 py-1.5 text-left transition-colors',
                 !value
-                  ? 'bg-violet-50 text-violet-700 ring-1 ring-violet-200 dark:bg-violet-950/25 dark:text-violet-300 dark:ring-violet-800'
+                  ? 'bg-primary/10 text-primary ring-1 ring-primary/30 dark:bg-primary/25 dark:text-primary dark:ring-primary'
                   : 'hover:bg-muted/60',
               )}
             >
@@ -499,7 +499,7 @@ export function ModelPicker({
                 )}
               </span>
               {!value && (
-                <Check className="size-3.5 shrink-0 text-violet-600 dark:text-violet-400" />
+                <Check className="size-3.5 shrink-0 text-primary dark:text-primary/70" />
               )}
             </button>
           )}
@@ -543,7 +543,7 @@ export function ModelPicker({
                       className={cn(
                         'mb-0.5 flex min-h-9 w-full cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-left transition-colors',
                         isSelected
-                          ? 'bg-violet-50 text-violet-700 ring-1 ring-violet-200 dark:bg-violet-950/25 dark:text-violet-300 dark:ring-violet-800'
+                          ? 'bg-primary/10 text-primary ring-1 ring-primary/30 dark:bg-primary/25 dark:text-primary dark:ring-primary'
                           : 'hover:bg-muted/60',
                       )}
                     >
@@ -565,7 +565,7 @@ export function ModelPicker({
                         />
                       )}
                       {isSelected && (
-                        <Check className="size-3.5 shrink-0 text-violet-600 dark:text-violet-400" />
+                        <Check className="size-3.5 shrink-0 text-primary dark:text-primary/70" />
                       )}
                     </div>
                   );

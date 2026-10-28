@@ -37,7 +37,7 @@
 import { type ReactNode, useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { useI18n } from '@/lib/hooks/use-i18n';
-import { useBrand, useIsDesktop } from '@/lib/brand/brand-context';
+import { useBrand } from '@/lib/brand/brand-context';
 import { arrivedByProSwap } from '@/lib/workbench/pro-swap';
 import { cn } from '@/lib/utils/cn';
 import { ProBadge } from '@/components/workbench/ProBadge';
@@ -72,7 +72,6 @@ export function WorkspaceHome({
 }) {
   const { t } = useI18n();
   const brand = useBrand();
-  const isDesktop = useIsDesktop();
 
   // Someone who arrived through the Pro swap has just watched the surfaces
   // crossfade around a fixed lockup and the composer turn over into this face;
@@ -91,7 +90,17 @@ export function WorkspaceHome({
           plain button, not a second ProBadge: two elements answering to
           `pro-mode-exit` would be one testid too many. */}
       <div className="flex h-12 shrink-0 items-center justify-between px-4 md:hidden">
-        <img src={brand.logoSrc} alt={brand.productName} className="h-5 w-auto" />
+        <span className="flex items-center gap-1.5">
+          <img
+            src={brand.markSrc}
+            alt=""
+            aria-hidden="true"
+            className="h-5 w-5 object-contain"
+          />
+          <span className="text-sm font-black tracking-[-0.04em] text-[#252525] dark:text-slate-100">
+            {brand.productName}
+          </span>
+        </span>
         <button
           type="button"
           data-testid="pro-workspace-exit-compact"
@@ -133,15 +142,15 @@ export function WorkspaceHome({
               data-testid="pro-workspace-hero-lockup"
               data-pro-morph="lockup"
             >
-              {isDesktop && !brand.logoHasWordmark ? (
-                // A brand whose mark carries no wordmark gets the product name
-                // beside it, exactly as the classic hero does.
-                <div className="flex items-center gap-3">
-                  <img src={brand.markSrc} alt={brand.productName} className="size-11 md:size-14" />
-                  <span
-                    className="text-xl font-semibold tracking-tight md:text-2xl"
-                    style={{ color: brand.themeColor }}
-                  >
+              {!brand.logoHasWordmark ? (
+                // Same lockup as the landing page: jet mark + product name.
+                <div className="flex items-center gap-2 md:gap-3">
+                  <img
+                    src={brand.markSrc}
+                    alt={brand.productName}
+                    className="size-11 object-contain md:size-14"
+                  />
+                  <span className="text-[1.65rem] font-black leading-[0.92] tracking-[-0.055em] text-[#252525] md:text-[2.1rem] dark:text-slate-100">
                     {brand.productName}
                   </span>
                 </div>

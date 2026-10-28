@@ -38,11 +38,11 @@ export function DiscussionCard({
   const href = safeClassroomUrl(classroomUrl);
   return (
     <div
-      className="absolute right-4 top-4 z-30 w-80 max-w-[calc(100%-2rem)] rounded-xl border border-violet-200 bg-white p-4 shadow-xl"
+      className="absolute right-4 top-4 z-30 w-80 max-w-[calc(100%-2rem)] rounded-xl border border-primary/30 bg-white p-4 shadow-xl"
       role="status"
       data-testid="discussion-card"
     >
-      <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-violet-600">
+      <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary">
         <MessagesSquare className="h-4 w-4" aria-hidden="true" />
         <span className="flex-1">{strings.discussionTitle}</span>
         <button
@@ -61,7 +61,7 @@ export function DiscussionCard({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-violet-700 hover:underline"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
           data-testid="discussion-link"
         >
           {strings.discussionContinueOnline}
@@ -97,7 +97,7 @@ export function StartOverlay({
       <button
         type="button"
         onClick={onPlay}
-        className="inline-flex items-center gap-2 rounded-full bg-violet-600 px-6 py-3 text-base font-semibold text-white shadow-xl hover:bg-violet-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-violet-300"
+        className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-white shadow-xl hover:bg-primary focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/50"
         data-testid="start-playback"
         autoFocus
       >

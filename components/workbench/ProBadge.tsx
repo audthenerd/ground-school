@@ -51,15 +51,15 @@ export function ProBadge({ active, onToggle, className, testId }: ProBadgeProps)
         interactive ? 'cursor-pointer' : 'cursor-default',
         active
           ? [
-              'border-violet-500/70 bg-violet-600 text-white',
-              'shadow-[0_0_0_3px_rgba(139,92,246,0.14),0_1px_6px_rgba(109,40,217,0.35)]',
-              'dark:border-violet-400/60 dark:bg-violet-500',
+              'border-primary/70 bg-primary text-white',
+              'shadow-[0_0_0_3px_rgba(50, 136, 198,0.14),0_1px_6px_rgba(109,40,217,0.35)]',
+              'dark:border-primary/60 dark:bg-primary',
             ]
           : [
               'border-border bg-background/70 text-muted-foreground',
-              'hover:border-violet-400/70 hover:bg-violet-50/60 hover:text-violet-600',
-              'dark:hover:bg-violet-500/10',
-              'dark:hover:border-violet-400/40 dark:hover:text-violet-300',
+              'hover:border-primary/70 hover:bg-primary/10 hover:text-primary',
+              'dark:hover:bg-primary/10',
+              'dark:hover:border-primary/40 dark:hover:text-primary/50',
             ],
         className,
       )}

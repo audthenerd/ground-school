@@ -27,8 +27,9 @@ export interface BrandConfig {
 export const DEFAULT_BRAND: BrandConfig = {
   productName: 'Ground School',
   shortName: 'Ground School',
-  logoSrc: '/logo-horizontal.png',
-  logoHasWordmark: true,
-  markSrc: '/ground-school-mark.png',
-  themeColor: '#722ed1',
+  // Same lockup as the landing page: jet mark + separate product name text.
+  logoSrc: '/brand/ground-school-mark-minimal.svg',
+  logoHasWordmark: false,
+  markSrc: '/brand/ground-school-mark-minimal.svg',
+  themeColor: '#3288C6',
 };
