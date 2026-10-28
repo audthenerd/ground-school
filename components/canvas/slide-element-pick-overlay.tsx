@@ -277,7 +277,7 @@ export function ElementPickOverlay({
               key={outline.id}
               data-testid="whiteboard-element-reference-outline"
               data-element-id={outline.id}
-              className="absolute rounded-sm border-2 border-violet-500 bg-violet-400/10"
+              className="absolute rounded-sm border-2 border-primary bg-primary/10"
               style={{
                 left: outline.left,
                 top: outline.top,
@@ -342,7 +342,7 @@ export function ElementPickOverlay({
       {outlines.map((outline) => (
         <div
           key={outline.id}
-          className="absolute rounded-sm border border-violet-400/70 bg-violet-400/[0.04] pointer-events-none"
+          className="absolute rounded-sm border border-primary/70 bg-primary/[0.04] pointer-events-none"
           style={{
             left: outline.left,
             top: outline.top,
@@ -359,7 +359,7 @@ export function ElementPickOverlay({
       {fallbackElements.length > 0 && (
         <button
           type="button"
-          className="absolute bottom-3 left-3 rounded-lg border border-violet-200 bg-white/95 px-3 py-1.5 text-xs font-medium text-violet-700 shadow-lg dark:border-violet-700 dark:bg-gray-900/95 dark:text-violet-300"
+          className="absolute bottom-3 left-3 rounded-lg border border-primary/30 bg-white/95 px-3 py-1.5 text-xs font-medium text-primary shadow-lg dark:border-primary dark:bg-gray-900/95 dark:text-primary"
           onPointerDown={(event) => event.stopPropagation()}
           onClick={(event) => {
             event.preventDefault();
@@ -391,10 +391,10 @@ export function ElementPickOverlay({
                   type="button"
                   role="menuitem"
                   key={id}
-                  className="flex w-full items-start gap-2 rounded-lg px-2 py-1.5 text-left text-xs hover:bg-violet-50 dark:hover:bg-violet-950/40"
+                  className="flex w-full items-start gap-2 rounded-lg px-2 py-1.5 text-left text-xs hover:bg-primary/10 dark:hover:bg-primary/40"
                   onClick={() => pickById(id)}
                 >
-                  <span className="shrink-0 font-semibold text-violet-600 dark:text-violet-400">
+                  <span className="shrink-0 font-semibold text-primary dark:text-primary/70">
                     {presentation.typeLabel}
                   </span>
                   <span aria-hidden="true" className="shrink-0 text-gray-400">

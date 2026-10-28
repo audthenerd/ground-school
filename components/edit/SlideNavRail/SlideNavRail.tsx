@@ -341,9 +341,9 @@ export function SlideNavRail() {
           onPointerMove={handleResizeMove}
           onPointerUp={handleResizeEnd}
           onPointerCancel={handleResizeEnd}
-          className="group absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize touch-none hover:bg-violet-400/30 dark:hover:bg-violet-500/30 active:bg-violet-500/50 transition-colors"
+          className="group absolute right-0 top-0 bottom-0 w-1.5 cursor-col-resize touch-none hover:bg-primary/30 dark:hover:bg-primary/30 active:bg-primary/50 transition-colors"
         >
-          <div className="absolute right-0.5 top-1/2 -translate-y-1/2 w-0.5 h-8 rounded-full bg-gray-300 dark:bg-gray-600 group-hover:bg-violet-400 dark:group-hover:bg-violet-500 transition-colors" />
+          <div className="absolute right-0.5 top-1/2 -translate-y-1/2 w-0.5 h-8 rounded-full bg-gray-300 dark:bg-gray-600 group-hover:bg-primary/70 dark:group-hover:bg-primary transition-colors" />
         </div>
       )}
       {/* Collapse / expand control. Two forms of one toggle (stable testid):
@@ -363,7 +363,7 @@ export function SlideNavRail() {
             'absolute inset-0 z-10 flex items-center justify-center',
             'text-zinc-400/70 dark:text-zinc-500/70',
             'hover:bg-gray-100/80 hover:text-zinc-600 dark:hover:bg-gray-800/80 dark:hover:text-zinc-300',
-            'focus-visible:outline-none focus-visible:bg-gray-100/80 focus-visible:text-zinc-600 focus-visible:ring-1 focus-visible:ring-violet-400/50 dark:focus-visible:bg-gray-800/80 dark:focus-visible:text-zinc-300',
+            'focus-visible:outline-none focus-visible:bg-gray-100/80 focus-visible:text-zinc-600 focus-visible:ring-1 focus-visible:ring-primary/50 dark:focus-visible:bg-gray-800/80 dark:focus-visible:text-zinc-300',
             'active:bg-gray-200/90 active:text-zinc-700 dark:active:bg-gray-700/90 dark:active:text-zinc-200',
             'transition-colors duration-150',
           )}
@@ -381,7 +381,7 @@ export function SlideNavRail() {
             'absolute right-0 top-1/2 z-10 flex h-8 w-6 -translate-y-1/2 items-center justify-center rounded-l-md',
             'text-zinc-400/70 dark:text-zinc-500/70',
             'hover:bg-gray-100/80 hover:text-zinc-600 dark:hover:bg-gray-800/80 dark:hover:text-zinc-300',
-            'focus-visible:outline-none focus-visible:bg-gray-100/80 focus-visible:text-zinc-600 focus-visible:ring-1 focus-visible:ring-violet-400/50 dark:focus-visible:bg-gray-800/80 dark:focus-visible:text-zinc-300',
+            'focus-visible:outline-none focus-visible:bg-gray-100/80 focus-visible:text-zinc-600 focus-visible:ring-1 focus-visible:ring-primary/50 dark:focus-visible:bg-gray-800/80 dark:focus-visible:text-zinc-300',
             'active:bg-gray-200/90 active:text-zinc-700 dark:active:bg-gray-700/90 dark:active:text-zinc-200',
             'transition-colors duration-150',
           )}
@@ -408,7 +408,17 @@ export function SlideNavRail() {
             >
               {/* Desktop client: the Electron title bar already shows the brand icon + name, so the edit rail doesn't repeat it;
                   returning home is handled by the edit bar's CommandBar back arrow. */}
-              <img src={brand.logoSrc} alt={brand.productName} className="h-6 w-auto" />
+              <span className="flex items-center gap-1.5">
+                <img
+                  src={brand.markSrc}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-6 w-6 object-contain"
+                />
+                <span className="text-sm font-black tracking-[-0.04em] text-[#252525] dark:text-slate-100">
+                  {brand.productName}
+                </span>
+              </span>
             </button>
           )}
         </div>

@@ -11,7 +11,7 @@ const TYPES: { type: QuizQuestionType; labelKey: string; Icon: LucideIcon; tint:
     type: 'single',
     labelKey: 'edit.quiz.type.single',
     Icon: CircleDot,
-    tint: 'bg-violet-100 text-violet-600 dark:bg-violet-500/15 dark:text-violet-300',
+    tint: 'bg-primary/15 text-primary dark:bg-primary/15 dark:text-primary',
   },
   {
     type: 'multiple',

@@ -338,7 +338,7 @@ export function App({ data }: { data: PlayerData }) {
                     aria-current={itemIndex === index ? 'step' : undefined}
                     className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm ${
                       itemIndex === index
-                        ? 'bg-violet-50 font-medium text-violet-700'
+                        ? 'bg-primary/10 font-medium text-primary'
                         : 'text-slate-700 hover:bg-slate-50'
                     }`}
                   >
@@ -386,7 +386,7 @@ export function App({ data }: { data: PlayerData }) {
           type="button"
           onClick={() => setCaptionsOn((on) => !on)}
           className={`rounded-md p-2 hover:bg-slate-100 ${
-            captionsOn ? 'text-violet-600' : 'text-slate-400'
+            captionsOn ? 'text-primary' : 'text-slate-400'
           }`}
           aria-label={strings.captions}
           aria-pressed={captionsOn}
@@ -398,7 +398,7 @@ export function App({ data }: { data: PlayerData }) {
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200">
             <div
-              className="h-full rounded-full bg-violet-500 transition-[width] duration-300"
+              className="h-full rounded-full bg-primary transition-[width] duration-300"
               style={{ width: count > 0 ? `${((index + 1) / count) * 100}%` : '0%' }}
             />
           </div>
@@ -410,7 +410,7 @@ export function App({ data }: { data: PlayerData }) {
           type="button"
           onClick={() => navigate('next')}
           disabled={index >= count - 1}
-          className="inline-flex items-center gap-1 rounded-md bg-violet-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-white hover:bg-primary disabled:cursor-not-allowed disabled:opacity-40"
           data-testid="next"
         >
           {strings.next}

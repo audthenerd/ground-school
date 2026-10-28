@@ -50,7 +50,7 @@ export function CourseRunStatusLabel({ status }: { readonly status: CourseRunSta
         'shrink-0 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium',
         status.kind === 'paused'
           ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'
-          : 'bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400',
+          : 'bg-primary/15 text-primary dark:bg-primary/30 dark:text-primary/70',
       )}
       data-testid="course-run-status"
     >

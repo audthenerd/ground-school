@@ -14,6 +14,8 @@ describe('PBL v2 static assets', () => {
   });
 
   test('ships the Ground School mark used in the workspace header', () => {
-    expectPng('public/ground-school-mark.png');
+    const svg = readFileSync('public/brand/ground-school-mark-minimal.svg', 'utf8');
+    expect(svg).toContain('<svg');
+    expect(svg.length).toBeGreaterThan(0);
   });
 });

@@ -40,7 +40,7 @@ export function CourseGeneratingPlaceholder({
       <div className="flex max-w-sm flex-col items-center gap-3 text-center">
         <CourseRunStatusIcon
           status={status}
-          className={cn('size-8', paused ? 'text-amber-500' : 'text-violet-500')}
+          className={cn('size-8', paused ? 'text-amber-500' : 'text-primary')}
         />
         <p className="text-base font-medium">
           {paused ? t('workspace.coursePausedTitle') : t('workspace.courseGeneratingTitle')}
@@ -50,7 +50,7 @@ export function CourseGeneratingPlaceholder({
             'rounded-full px-2.5 py-0.5 text-xs font-medium',
             paused
               ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'
-              : 'bg-violet-100 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400',
+              : 'bg-primary/15 text-primary dark:bg-primary/30 dark:text-primary/70',
           )}
           data-testid="course-generating-progress"
         >
@@ -64,7 +64,7 @@ export function CourseGeneratingPlaceholder({
           target="_blank"
           rel="noopener"
           data-testid="course-generating-link"
-          className="mt-1 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-violet-700 hover:bg-violet-600/10 dark:text-violet-300 dark:hover:bg-violet-400/10"
+          className="mt-1 inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10 dark:text-primary dark:hover:bg-primary/10"
         >
           {paused ? t('workspace.openToRetry') : t('workspace.viewGenerationProgress')}
           <ExternalLink className="size-3.5" aria-hidden="true" />

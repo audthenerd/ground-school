@@ -12,7 +12,7 @@
 @source "../node_modules/@openmaic/renderer/dist/**/*.{js,cjs}";
 /* slide-renderer-demo is gitignored (local sandbox), which makes Tailwind v4's
    auto source detection skip it. Re-include it explicitly so the demo's
-   Tailwind classes (e.g. bg-violet-600) still get generated. */
+   Tailwind classes (e.g. bg-primary) still get generated. */
 @source "./slide-renderer-demo/**/*.{tsx,ts,jsx,js}";
 
 @custom-variant dark (&:is(.dark *));
@@ -92,12 +92,12 @@
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-primary: #3288c6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e7f2f9;
+  --sidebar-accent-foreground: #246c9f;
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-ring: #3288c6;
 }
 
 .dark {
@@ -126,12 +126,12 @@
   --chart-5: oklch(0.424 0.199 265.638);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-primary: #5ca4d5;
+  --sidebar-primary-foreground: #0f1820;
+  --sidebar-accent: #1d3c50;
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: #5ca4d5;
 }
 
 @layer base {
