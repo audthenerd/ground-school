@@ -25,11 +25,11 @@ test.describe('Full Happy Path', () => {
 
     // Core UI elements visible
     await expect(home.logo).toBeVisible();
-    await expect(home.textarea).toBeVisible();
+    await expect(home.briefing).toBeVisible();
     await expect(home.enterButton).toBeDisabled();
 
-    // Fill requirement text → submit button activates
-    await home.fillRequirement('讲解光合作用');
+    // Briefing finishes → submit button activates
+    await home.waitForBriefing();
     await expect(home.enterButton).toBeEnabled();
 
     // Submit → navigate to generation-preview
