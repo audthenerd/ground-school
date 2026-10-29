@@ -1,8 +1,8 @@
 /**
- * Agent profiles: generate the classroom's agents (one teacher, plus
- * assistants and students) for a course from its name and scene outlines,
- * binding each to an advertised voice. The teacher speaks with the user's
- * narrator voice whenever that voice is usable. The logic of 1.1.x's
+ * Agent profiles: generate the lesson's agents (Instructor + Wingman) for a
+ * course from its name and scene outlines, binding each to an advertised
+ * voice. The Instructor (role teacher) speaks with the user's narrator voice
+ * whenever that voice is usable. The logic of 1.1.x's
  * POST /api/generate/agent-profiles.
  */
 import { nanoid } from 'nanoid';
@@ -10,6 +10,7 @@ import { callLLM } from '@/lib/ai/llm';
 import { AGENT_COLOR_PALETTE } from '@/lib/constants/agent-defaults';
 import { normalizeVoiceDesign } from '@/lib/audio/voice-design';
 import { isQwenCloneVoice, resolveTTSModelForVoice } from '@/lib/audio/constants';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 
 import { StepRefusal, type StepContext, type StepLanguageModel } from './context';
 
@@ -169,7 +170,16 @@ export async function generateAgentProfiles(
     ? resolveNarratorVoice(narratorVoice, availableVoices)
     : undefined;
 
-  const systemPrompt = `You are an expert instructional designer. Generate agent profiles for a multi-agent classroom simulation. Decide the appropriate number of agents (typically 3-5) based on the course content and complexity. Return ONLY valid JSON, no markdown or explanation.`;
+  const systemPrompt = withGenerationSystemPrompt(
+    `Generate agent profiles for this Ground School lesson. Return ONLY valid JSON, no markdown or explanation.
+
+Roster (fixed shape — do not invent other roles):
+- Exactly 1 agent with role "teacher": the Instructor (subject authority).
+- Exactly 1 agent with role "assistant": the Wingman (curious peer learner).
+- Do NOT generate a "student" agent. The Trainee is the human learner, not a character.
+- Do NOT invent operational biography, service history, or flight-line anecdotes for either agent.
+- Personas must follow the Instructor / Wingman rules in the domain brief above.`,
+  );
 
   // Build voice list for prompt (if available)
   const binaryGenderListed = availableVoices?.some(
@@ -200,16 +210,15 @@ export async function generateAgentProfiles(
 
   const voicePrompt = voiceListStr
     ? narratorBinding
-      ? `- The teacher agent's voice is FIXED to the narrator voice "${advertisedVoiceToken(narratorBinding)}" — set by the system, so omit the "voice" field for the teacher
-  - Every OTHER agent must still be assigned a voice from this list: ${voiceListStr}
+      ? `- The Instructor (role teacher) voice is FIXED to the narrator voice "${advertisedVoiceToken(narratorBinding)}" — set by the system, so omit the "voice" field for the teacher
+  - The Wingman (role assistant) must be assigned a voice from this list: ${voiceListStr}
   - Prefer a voice whose language matches the course language directive
-  - Pick a voice that suits each agent's personality and role (e.g. lively voice for energetic student)
-${genderMatchRules}  - Try to use different voices for each non-teacher agent
-  - Never assign the fixed teacher narrator voice to any other agent`
+  - Pick a calm, clear professional voice suited to a peer engineer learning the domain — not a cartoon or class-clown voice
+${genderMatchRules}  - Never assign the fixed Instructor narrator voice to the Wingman`
       : `- Each agent should be assigned a voice that matches their persona from this list: ${voiceListStr}
   - Prefer a voice whose language matches the course language directive
-  - Pick a voice that suits the agent's personality and role (e.g. authoritative voice for teacher, lively voice for energetic student)
-${genderMatchRules}  - Try to use different voices for each agent`
+  - Instructor: clear, plain, professional authority. Wingman: curious peer, not theatrical
+${genderMatchRules}  - Use different voices for Instructor and Wingman`
     : '';
 
   // The schema example must always be an ADVERTISED token (findAdvertisedVoice
@@ -227,23 +236,24 @@ Course name: ${stageInfo.name}
 ${stageInfo.description ? `Course description: ${stageInfo.description}` : ''}
 ${sceneSummary ? `\nScene outlines:\n${sceneSummary}\n` : ''}
 Requirements:
-- Decide the appropriate number of agents based on the course content (typically 3-5)
-- Exactly 1 agent must have role "teacher", the rest can be "assistant" or "student"
-- Priority values: teacher=10 (highest), assistant=7, student=4-6
-- Each agent needs: name, role, persona (2-3 sentences describing personality and teaching/learning style)
+- Exactly 2 agents: one Instructor (role "teacher") and one Wingman (role "assistant")
+- Do not generate role "student"
+- Priority values: teacher=10, assistant=7
+- Each agent needs: name, role, persona (2-3 sentences matching the domain brief for that role)
+- Preferred display names when the language directive is English: "Instructor" and "Wingman" (or close equivalents that stay professional)
 - Language directive for this course: ${languageDirective}
   Agent names and personas must follow this language directive.
 - Each agent must be assigned one avatar from this list: ${JSON.stringify(avatarDescriptions && avatarDescriptions.length > 0 ? avatarDescriptions.map((a) => ({ path: a.path, description: a.desc })) : availableAvatars)}
-  - Pick an avatar that visually matches the agent's personality and role
-  - Try to use different avatars for each agent
+  - Pick an avatar that visually matches the agent's role
+  - Use different avatars for each agent
   - Use the "path" value as the avatar field in the output
 - Each agent must be assigned one color from this list: ${JSON.stringify(AGENT_COLOR_PALETTE)}
   - Each agent must have a different color
 - Each agent needs a "voiceDesign" object describing their VOCAL identity (not personality), written following the language directive and consistent with the persona, as short comma-free phrases:
-  - "identity": gender + age + role as one short comma-free phrase in the course language (e.g. "middle-aged male teacher" when the course language is English)
+  - "identity": gender + age + role as one short comma-free phrase in the course language (e.g. "middle-aged male instructor" when the course language is English)
   - "gender": "male" or "female" only. These two English words, never a translation, naming the same gender as identity. voiceDesign.gender is language-independent
   - "texture": pitch + vocal quality as one short comma-free phrase in the course language (e.g. "warm low-pitched slightly husky" when the course language is English)
-  - "delivery": emotion + pace as one short comma-free phrase in the course language (e.g. "calm measured encouraging" when the course language is English)
+  - "delivery": emotion + pace as one short comma-free phrase in the course language (e.g. "calm measured plain" when the course language is English)
 ${voicePrompt}
 
 Return a JSON object with this exact structure:
@@ -251,12 +261,12 @@ Return a JSON object with this exact structure:
   "agents": [
     {
       "name": "string",
-      "role": "teacher" | "assistant" | "student",
+      "role": "teacher" | "assistant",
       "persona": "string (2-3 sentences)",
       "voiceDesign": { "identity": "string", "gender": "male" | "female", "texture": "string", "delivery": "string" },
       "avatar": "string (from available list)",
       "color": "string (hex color from palette)",
-      "priority": number (10 for teacher, 7 for assistant, 4-6 for student)${voiceJsonField}
+      "priority": number (10 for teacher, 7 for assistant)${voiceJsonField}
     }
   ]
 }`;

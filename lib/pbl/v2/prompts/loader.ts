@@ -14,6 +14,7 @@
 import fs from 'fs';
 import path from 'path';
 import { interpolateVariables } from '@/lib/prompts/loader';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 
 const _cache = new Map<string, string>();
 
@@ -36,8 +37,11 @@ function readPromptFile(name: string): string {
  *
  * Snippet/conditional syntax from `lib/prompts/` is not supported here —
  * PBL v2 prompts are simple variable templates.
+ *
+ * The Ground School domain brief is prepended so Instructor / Simulator /
+ * Evaluator turns stay inside the same RSAF grounding rules as generation.
  */
 export function loadPBLV2Prompt(name: string, variables: Record<string, unknown> = {}): string {
   const template = readPromptFile(name);
-  return interpolateVariables(template, variables);
+  return withGenerationSystemPrompt(interpolateVariables(template, variables));
 }

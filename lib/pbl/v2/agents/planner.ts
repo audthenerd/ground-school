@@ -23,6 +23,7 @@ import { tool, stepCountIs } from 'ai';
 import { z } from 'zod';
 
 import { createLogger } from '@/lib/logger';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 import { normalizeProjectRuntime, normalizeScenario } from '@openmaic/generation';
 import type { ThinkingConfig } from '@/lib/types/provider';
 
@@ -132,11 +133,13 @@ export async function generatePBLV2Project(
   // only when the outline gave no directive at all.
   const contentLanguage =
     project.languageDirective || 'Match the language of the outline content above.';
-  const systemPrompt = await buildPlannerSystemPrompt(
-    input,
-    project.proficiency,
-    contentLanguage,
-    scenarioRoleplay,
+  const systemPrompt = withGenerationSystemPrompt(
+    await buildPlannerSystemPrompt(
+      input,
+      project.proficiency,
+      contentLanguage,
+      scenarioRoleplay,
+    ),
   );
 
   // Tool implementations. Each one validates its inputs, mutates
