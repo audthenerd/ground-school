@@ -37,16 +37,16 @@ describe('re-seated PBL single-call planner', () => {
 });
 
 describe('PBL planner re-seat proof', () => {
-  it('keeps the app compatibility barrel on the package function', async () => {
+  it('keeps the app entry wrapping the package single-call planner', async () => {
     const input = pblPlannerInput();
     const response = validPBLResponse();
     const appBarrel = readFileSync(
       new URL('../../../../lib/pbl/v2/agents/planner-single-call.ts', import.meta.url),
       'utf8',
     );
-    expect(appBarrel).toContain(
-      "export { generatePBLV2ProjectSingleCall } from '@openmaic/generation';",
-    );
+    expect(appBarrel).toContain("from '@openmaic/generation'");
+    expect(appBarrel).toContain('withGenerationSystemPrompt');
+    expect(appBarrel).toContain('generatePBLV2ProjectSingleCall');
     await expect(
       generatePBLV2ProjectSingleCall(input, async () => response),
     ).resolves.toMatchObject({

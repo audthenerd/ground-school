@@ -49,6 +49,7 @@ import {
 import {
   RunApiError,
   discardGenerationRun,
+  listActiveGenerationRuns,
   runApiErrorText,
 } from '@/lib/generation-run-client/api';
 import { RunStartRefusedError, startClassicRun } from '@/lib/generation-run-client/start';
@@ -57,6 +58,11 @@ import {
   SORTIE_INSTRUCTIONS,
   SORTIE_REQUIREMENT,
 } from '@/lib/ground-school/sortie-briefing';
+import {
+  SORTIE_AUTOSTART_SESSION_KEY,
+  hasSortiePresence,
+} from '@/lib/ground-school/sortie-presence';
+import { useSettingsStore } from '@/lib/store/settings';
 import {
   courseRunHref,
   courseRunStatus,
@@ -265,9 +271,13 @@ function HomePage() {
 
   // Courses being generated on the server: a card from the moment the run
   // starts, live through the owner's run stream.
-  const { runs, forget: forgetRun } = useOwnerRuns({
+  const { runs, forget: forgetRun, refresh: refreshRuns } = useOwnerRuns({
     onCourseChanged: () => void loadClassrooms(),
   });
+
+  const { status: authStatus, session: authSession, claimAnonymousWork } = useAuthSession();
+  const reviewOutlineEnabled = useSettingsStore((s) => s.reviewOutlineEnabled);
+  const sortieAutostartRef = useRef(false);
 
   const loadFolders = async () => {
     try {
@@ -515,11 +525,85 @@ function HomePage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  // After login: start the fixed RSAF Commands sortie in the background when
+  // the owner has neither a ready classroom nor an in-progress run. Stay on
+  // home (pending run card); manual Start Mission still opens the preview.
+  useEffect(() => {
+    if (sortieAutostartRef.current) return;
+    if (!hydrated || !hasUsableProvider) return;
+    if (authStatus !== 'ready' || authSession?.authenticated !== true) return;
+    // Unattended outline confirmation requires countdown/auto; wait mode stalls.
+    if (reviewOutlineEnabled) return;
+
+    let cancelled = false;
+
+    const autoStart = async () => {
+      try {
+        if (sessionStorage.getItem(SORTIE_AUTOSTART_SESSION_KEY)) return;
+
+        // Idempotent with GreetingBar's claim on ?auth=success.
+        await claimAnonymousWork();
+        if (cancelled) return;
+
+        const { runs: activeRuns } = await listActiveGenerationRuns();
+        if (cancelled) return;
+
+        if (hasSortiePresence(activeRuns, classrooms)) {
+          sessionStorage.setItem(SORTIE_AUTOSTART_SESSION_KEY, '1');
+          return;
+        }
+
+        // Reserve the slot before awaiting start (Strict Mode remount).
+        sessionStorage.setItem(SORTIE_AUTOSTART_SESSION_KEY, '1');
+        sortieAutostartRef.current = true;
+
+        const capabilities = await requireModelCapabilities();
+        if (!capabilities || cancelled) {
+          sessionStorage.removeItem(SORTIE_AUTOSTART_SESSION_KEY);
+          sortieAutostartRef.current = false;
+          return;
+        }
+
+        await startClassicRun({
+          requirement: SORTIE_REQUIREMENT,
+          materialIds: [],
+          interactive: form.vocationalTestMode,
+          taskEngine: form.vocationalTestMode,
+          capabilities,
+        });
+        if (!cancelled) refreshRuns();
+      } catch (err) {
+        log.error('Sortie auto-start failed:', err);
+        try {
+          sessionStorage.removeItem(SORTIE_AUTOSTART_SESSION_KEY);
+        } catch {
+          /* ignore */
+        }
+        sortieAutostartRef.current = false;
+      }
+    };
+
+    void autoStart();
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    hydrated,
+    hasUsableProvider,
+    authStatus,
+    authSession,
+    reviewOutlineEnabled,
+    classrooms,
+    claimAnonymousWork,
+    form.vocationalTestMode,
+    refreshRuns,
+  ]);
+
   const handleGenerate = async () => {
     // No model/provider guard here: generation is gated by `canGenerate`
     // (requires a usable provider), and under the #580 invariant a usable
     // provider always has a concrete model. State A (no usable provider)
-    // keeps Enter Classroom disabled; configure a model from the header settings.
+    // keeps Start Mission disabled; configure a model from the header settings.
     if (preparingGenerate || !briefingComplete) return;
 
     setError(null);

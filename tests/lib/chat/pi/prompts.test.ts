@@ -328,18 +328,16 @@ describe('Pi director prompt closure routing', () => {
     expect(prompt).toContain('A bare acknowledgment with no new request is closure');
   });
 
-  it('keeps concept and mechanism questions teacher-led before student reactions', () => {
+  it('keeps concept and mechanism questions Instructor-led before student reactions', () => {
     const prompt = buildDirectorPrompt(makeBody(), agents, 4);
 
-    expect(prompt).toContain('call the teacher first when available');
-    expect(prompt).toContain('Use the assistant fallback only under rule 6');
+    expect(prompt).toContain('call the Instructor (teacher) first when available');
+    expect(prompt).toContain('Use the Wingman (assistant) only under rule 6');
     expect(prompt).toContain('concept/mechanism/process questions');
-    expect(prompt).toContain('first substantive answer should come from the teacher by default');
-    expect(prompt).toContain('or a teaching assistant when the teacher is unavailable');
-    expect(prompt).toContain(
-      'Students may react after the teacher/assistant has made the core point',
-    );
-    expect(prompt).toContain('do not let a student take the first substantive explanation');
+    expect(prompt).toContain('first substantive answer should come from the Instructor by default');
+    expect(prompt).toContain('or the Wingman when the Instructor is unavailable');
+    expect(prompt).toContain('Do not let a student take the first substantive explanation');
+    expect(prompt).toContain('Ground School domain brief');
   });
 
   it('keeps every classroom agent turn inside one hard budget', () => {
@@ -663,16 +661,15 @@ describe('Pi child prompt structured output', () => {
     const prompt = buildChildPrompt(makeBody(), studentAgent, [], [], []);
 
     expect(prompt).toContain('STUDENT');
-    expect(prompt).toContain('add student-side learning value');
+    expect(prompt).toContain('learner-side value');
     expect(prompt).toContain('common misconception');
     expect(prompt).toContain('natural follow-up');
-    expect(prompt).toContain('one concrete example');
-    expect(prompt).toContain('You are NOT a teacher');
+    expect(prompt).toContain('You are NOT the Instructor');
     expect(prompt).toContain('Do not take the first substantive explanation');
-    expect(prompt).toContain('summarize the whole lesson');
-    expect(prompt).toContain('student-to-student self-chat');
+    expect(prompt).toContain('agent-to-agent self-chat');
     expect(prompt).toContain('around 40 Chinese characters');
     expect(prompt).toContain('If your response is as long as the teacher response, it is wrong');
+    expect(prompt).toContain('Ground School domain brief');
   });
 });
 
@@ -765,7 +762,8 @@ describe('buildChildPrompt whiteboard code is bounded end-to-end', () => {
     // paths. Anything larger means an unbounded dump slipped through.
     expect(large.length - small.length).toBeLessThan(20);
     // Loose absolute cap regardless of the 50k-line source.
-    expect(large.length).toBeLessThan(12000);
+    // Includes the Ground School domain brief prepended to every child prompt.
+    expect(large.length).toBeLessThan(25000);
   });
 
   it('keeps a newer persisted code block editable across requests with no ledger', () => {
@@ -828,7 +826,8 @@ describe('buildChildPrompt whiteboard code is bounded end-to-end', () => {
     expect(prompt).toContain('[id:old-code]');
     expect(prompt).toContain('more line(s) omitted');
     expect(prompt).not.toContain('old_line_4999 = 4999');
-    expect(prompt.length).toBeLessThan(12000);
+    // Includes the Ground School domain brief prepended to every child prompt.
+    expect(prompt.length).toBeLessThan(25000);
   });
 });
 
@@ -842,18 +841,18 @@ describe('Pi child prompt sections that follow the request', () => {
   };
 
   it.each([
-    ['teacher', agents[0], 'LEAD TEACHER', []],
-    ['assistant', agents[1], 'TEACHING ASSISTANT', ['LEAD TEACHER']],
+    ['teacher', agents[0], 'INSTRUCTOR (subject authority)', []],
+    ['assistant', agents[1], 'WINGMAN (curious peer learner)', ['INSTRUCTOR (subject authority)']],
     [
       'student',
       { ...agents[1], id: 'student-1', name: 'Student', role: 'student' },
-      'STUDENT',
-      ['LEAD TEACHER', 'TEACHING ASSISTANT'],
+      'STUDENT (legacy roster only — prefer Instructor + Wingman)',
+      ['INSTRUCTOR (subject authority)', 'WINGMAN (curious peer learner)'],
     ],
   ] as const)('carries only the %s role guideline', (_role, agent, expected, absent) => {
     const prompt = buildChildPrompt(makeBody(), agent, [], [], []);
 
-    expect(prompt).toContain(`Your role in this classroom: ${expected}.`);
+    expect(prompt).toContain(`Your role in this lesson: ${expected}.`);
     for (const other of absent) expect(prompt).not.toContain(other);
   });
 

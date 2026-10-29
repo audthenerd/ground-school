@@ -23,6 +23,8 @@ import type {
 import { resolveVocationalActive } from '@/lib/config/feature-flags';
 import { MAX_VISION_IMAGES } from '@/lib/constants/generation';
 import { sortDocumentImagesForVision } from '@/lib/document/bundle';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
+import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
 import { generatePBLV2Project } from '@/lib/pbl/v2/agents/planner';
 
 import {
@@ -101,6 +103,9 @@ export async function generateSceneContent(
     userPrompt: string,
     images?: Array<{ id: string; src: string }>,
   ): Promise<string> => {
+    const system = withGenerationSystemPrompt(systemPrompt, {
+      questionBankTopics: DEFAULT_SORTIE_TOPICS,
+    });
     if (images?.length && hasVision) {
       const resolvedImages = await ctx.resolveVisionImages(images);
       const result = await callLLM(
@@ -108,7 +113,7 @@ export async function generateSceneContent(
           model: languageModel,
           // A run cancels the call when it loses its lease or its course.
           abortSignal: ctx.signal,
-          system: systemPrompt,
+          system,
           messages: [
             {
               role: 'user' as const,
@@ -129,7 +134,7 @@ export async function generateSceneContent(
       {
         model: languageModel,
         abortSignal: ctx.signal,
-        system: systemPrompt,
+        system,
         prompt: userPrompt,
         maxOutputTokens: modelInfo?.outputWindow,
         maxRetries: 0,

@@ -7,14 +7,14 @@ import { HomePage } from '../pages/home.page';
  * The course model is the workspace's `llm` slot, read from the server
  * (`/api/model-config`); the browser keeps no provider state.
  *
- * State A: the workspace has no language model → Enter Classroom stays
+ * State A: the workspace has no language model → Start Mission stays
  *          disabled after the briefing. NO modelNotConfigured toast, NO
  *          forced settings dialog. Model setup is via the header settings gear.
- * State B: the llm slot names a model → Enter Classroom enables after the
+ * State B: the llm slot names a model → Start Mission enables after the
  *          briefing finishes.
  *
  * The Playwright Chromium locale is en-US, so UI strings are English
- * ("Enter Classroom").
+ * ("Start Mission").
  */
 
 const SCREENSHOT_DIR = 'e2e/screenshots';

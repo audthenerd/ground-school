@@ -18,6 +18,8 @@ import {
   logFallbackFired,
 } from '@/lib/server/llm-fallback';
 import { buildPrompt, PROMPT_IDS } from '@/lib/prompts';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
+import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
 import {
   formatImageDescription,
   formatImagePlaceholder,
@@ -510,6 +512,13 @@ async function prepareOutline(
   if (!prompts) {
     throw new StepRefusal<OutlineRefusal>('prompt-unavailable', 'Prompt template not found');
   }
+
+  prompts = {
+    system: withGenerationSystemPrompt(prompts.system, {
+      questionBankTopics: DEFAULT_SORTIE_TOPICS,
+    }),
+    user: prompts.user,
+  };
 
   ctx.log.info(
     `Generating outlines: "${requirements.requirement.substring(0, 50)}" [model=${modelString}]`,

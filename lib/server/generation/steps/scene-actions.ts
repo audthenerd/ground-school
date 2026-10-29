@@ -24,6 +24,8 @@ import type {
 import type { SpeechAction } from '@/lib/types/action';
 import type { PBLContent } from '@/lib/types/stage';
 import { normalizeLegacyPBLContent } from '@/lib/pbl/legacy/read';
+import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
+import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
 
 import { StepRefusal, type StepContext, type StepLanguageModel } from './context';
 
@@ -80,6 +82,9 @@ export async function generateSceneActions(
     userPrompt: string,
     images?: Array<{ id: string; src: string }>,
   ): Promise<string> => {
+    const system = withGenerationSystemPrompt(systemPrompt, {
+      questionBankTopics: DEFAULT_SORTIE_TOPICS,
+    });
     if (images?.length && hasVision) {
       const safeImages = await prepareVisionImages(images, log);
       const result = await callLLM(
@@ -87,7 +92,7 @@ export async function generateSceneActions(
           model: languageModel,
           // A run cancels the call when it loses its lease or its course.
           abortSignal: ctx.signal,
-          system: systemPrompt,
+          system,
           messages: [
             {
               role: 'user' as const,
@@ -108,7 +113,7 @@ export async function generateSceneActions(
       {
         model: languageModel,
         abortSignal: ctx.signal,
-        system: systemPrompt,
+        system,
         prompt: userPrompt,
         maxOutputTokens: modelInfo?.outputWindow,
         maxRetries: 0,
