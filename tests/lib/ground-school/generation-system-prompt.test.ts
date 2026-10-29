@@ -54,7 +54,7 @@ describe('question bank', () => {
     expect(bank[0]?.id).toMatch(/^Q\d+/);
   });
 
-  it('defaults the Enter Classroom sortie to RSAF Commands', () => {
+  it('defaults the Start Mission sortie to RSAF Commands', () => {
     expect([...DEFAULT_SORTIE_TOPICS]).toEqual(['RSAF Commands']);
     const commands = filterQuestionBank(DEFAULT_SORTIE_TOPICS);
     expect(commands.every((item) => item.topic === 'RSAF Commands')).toBe(true);

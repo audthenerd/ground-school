@@ -23,7 +23,7 @@ export interface QuestionBankItem {
   source: string;
 }
 
-/** Default Enter Classroom sortie: RSAF Commands foundation. */
+/** Default Start Mission sortie: RSAF Commands foundation. */
 export const DEFAULT_SORTIE_TOPICS = ['RSAF Commands'] as const;
 
 const BANK_FILENAME = 'question-bank.json';

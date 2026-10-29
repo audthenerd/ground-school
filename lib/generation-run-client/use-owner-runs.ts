@@ -22,6 +22,8 @@ export interface OwnerRunsOptions {
 export function useOwnerRuns(options: OwnerRunsOptions = {}): {
   runs: RunSnapshot[];
   forget: (runId: string) => void;
+  /** Re-read the owner's active runs (e.g. after starting a run on this tab). */
+  refresh: () => void;
 } {
   const [runs, setRuns] = useState<RunSnapshot[]>([]);
   const watcherRef = useRef<OwnerRunsWatcher | null>(null);
@@ -58,5 +60,8 @@ export function useOwnerRuns(options: OwnerRunsOptions = {}): {
   }, []);
 
   const forget = (runId: string) => watcherRef.current?.forget(runId);
-  return { runs, forget };
+  const refresh = () => {
+    void watcherRef.current?.poll();
+  };
+  return { runs, forget, refresh };
 }

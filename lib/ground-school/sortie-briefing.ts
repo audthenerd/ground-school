@@ -1,7 +1,7 @@
 /**
  * Fixed sortie briefing for Ground School home.
  *
- * Learners no longer type a topic: Enter Classroom always starts from
+ * Learners no longer type a topic: Start Mission always starts from
  * SORTIE_REQUIREMENT, and the card shows SORTIE_INSTRUCTIONS with a typewriter.
  *
  * The generation pipeline also attaches RSAF Commands question-bank objectives
@@ -18,7 +18,7 @@ export const SORTIE_INSTRUCTIONS = [
 ].join('\n');
 
 /**
- * Generation requirement sent with every Enter Classroom click.
+ * Generation requirement sent with every Start Mission click (and login auto-start).
  * Kept verbatim — do not paraphrase when editing.
  */
 export const SORTIE_REQUIREMENT = `ROLE
