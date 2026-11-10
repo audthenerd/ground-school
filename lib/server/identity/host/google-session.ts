@@ -15,6 +15,7 @@ import {
   type OwnerAuthRequest,
   type StoredOwnerDescription,
 } from '@/lib/server/identity';
+import { isAdminEmail } from '@/lib/server/identity/admin-emails';
 
 import { resolveGoogleAuthConfig } from './google-auth-config';
 import {
@@ -34,7 +35,17 @@ export {
 
 export const GOOGLE_OWNER_PREFIX = 'google:';
 
-const GOOGLE_ROLES: ReadonlySet<string> = new Set<string>([OWNER_ROLES.coursePublish]);
+const GOOGLE_BASE_ROLES: ReadonlySet<string> = new Set<string>([OWNER_ROLES.coursePublish]);
+
+const GOOGLE_ADMIN_ROLES: ReadonlySet<string> = new Set<string>([
+  OWNER_ROLES.coursePublish,
+  OWNER_ROLES.admin,
+]);
+
+/** Roles for a Google session: admins get `admin` when their email is allowlisted. */
+export function googleRolesForEmail(email: string): ReadonlySet<string> {
+  return isAdminEmail(email) ? GOOGLE_ADMIN_ROLES : GOOGLE_BASE_ROLES;
+}
 
 function readCookie(headers: Headers, name: string): string | undefined {
   const encoded = headers.get('cookie');
@@ -146,7 +157,7 @@ function authenticateWithHeaders(headers: Headers): OwnerAuthMethodResult {
     principal: {
       ownerId,
       kind: 'user',
-      roles: GOOGLE_ROLES,
+      roles: googleRolesForEmail(payload.email),
       assurance: 'verified',
       channel: 'web',
     },
@@ -164,6 +175,8 @@ export const googleSessionAuthMethod: OwnerAuthMethod = {
   },
   describeStoredOwner(ownerId: string): StoredOwnerDescription | undefined {
     if (!ownerId.startsWith(GOOGLE_OWNER_PREFIX)) return undefined;
-    return { kind: 'user', roles: GOOGLE_ROLES };
+    // Per-request admin is email-based; without a request, stored owners carry
+    // the base Google roles only.
+    return { kind: 'user', roles: GOOGLE_BASE_ROLES };
   },
 };

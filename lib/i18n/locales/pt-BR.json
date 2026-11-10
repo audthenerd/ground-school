@@ -22,6 +22,31 @@
     "loginSubtitle": "Use sua conta do Google para abrir o Ground School.",
     "notConfigured": "O login com Google não está configurado nesta implantação."
   },
+  "curriculum": {
+    "notReleased": "Classroom not released yet. An admin must approve a lesson first.",
+    "opening": "Opening classroom…",
+    "loadFailed": "Could not open the classroom. Try again."
+  },
+  "admin": {
+    "openCurriculum": "Admin curriculum",
+    "curriculumTitle": "Ground School Curriculum",
+    "curriculumSubtitle": "Generate candidate classrooms, review them, and approve one shared version for all students.",
+    "generateCandidates": "Generate candidates",
+    "generating": "Starting generation…",
+    "approve": "Approve",
+    "approving": "Approving…",
+    "approvedLive": "Live release",
+    "noRelease": "No classroom is live yet.",
+    "preview": "Preview classroom",
+    "statusReady": "Ready",
+    "statusGenerating": "Generating",
+    "statusFailed": "Failed",
+    "statusSuperseded": "Superseded",
+    "promptsTitle": "Student prompts",
+    "promptsEmpty": "No prompts logged yet.",
+    "backHome": "Back to home",
+    "forbidden": "Admin access required."
+  },
   "toolbar": {
     "pdfParser": "Analisador",
     "pdfUpload": "Enviar PDF",

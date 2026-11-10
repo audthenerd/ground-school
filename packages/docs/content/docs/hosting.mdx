@@ -529,7 +529,7 @@ configureOwnerAuthentication({
   - With the anonymous fallback on (the default), keep pre-minting: without
     it, an anonymous visitor's first API requests each mint their own owner
     again. To avoid a claim candidate beside your credential, skip
-    `anonymousOwnerForNavigation` in `middleware.ts` only for the requests your
+    `anonymousOwnerForNavigation` in `proxy.ts` only for the requests your
     methods authenticate themselves (a page request carrying your session
     cookie, say).
 - `issuesAnonymousOwners: true` with `clearCredential()` is only for a method

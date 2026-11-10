@@ -31,7 +31,7 @@
  * cookieless page load; the boot warns when such a registration leaves it on
  * (`warnAboutOwnerIdentityConfiguration` in `./registry.ts`). A host that keeps
  * anonymous visitors needs minting for them and skips
- * {@link anonymousOwnerForNavigation} in `middleware.ts` only for the requests
+ * {@link anonymousOwnerForNavigation} in `proxy.ts` only for the requests
  * its methods authenticate.
  */
 import { establishAnonymousCookie } from './anonymous-cookie';
