@@ -121,6 +121,183 @@ export class MockApi {
   async setupGenerationMocks(options: MockRunOptions = {}) {
     return this.mockGenerationRun(options);
   }
+
+  /**
+   * Student home reads the live RSAF Commands release from
+   * `GET /api/curriculum/rsaf-commands` before opening a classroom.
+   */
+  async mockCurriculumRelease(
+    release: { available: true; stageId: string } | { available: false; stageId?: null } = {
+      available: false,
+      stageId: null,
+    },
+  ) {
+    await this.page.route('**/api/curriculum/rsaf-commands', (route) => {
+      if (route.request().method() !== 'GET') return route.fallback();
+      return route.fulfill({
+        json: release.available
+          ? { available: true, stageId: release.stageId }
+          : { available: false, stageId: null },
+      });
+    });
+  }
+
+  /**
+   * Override `GET /api/auth/session` so admin/student UI can be exercised
+   * without a real Google cookie.
+   */
+  async mockAuthSession(
+    session:
+      | {
+          authenticated: true;
+          isAdmin?: boolean;
+          email?: string;
+          name?: string;
+          givenName?: string;
+          picture?: string;
+          sub?: string;
+        }
+      | { authenticated: false; configured?: boolean } = {
+      authenticated: false,
+      configured: false,
+    },
+  ) {
+    await this.page.route('**/api/auth/session', (route) => {
+      if (route.request().method() !== 'GET') return route.fallback();
+      if (session.authenticated) {
+        return route.fulfill({
+          json: {
+            authenticated: true,
+            configured: true,
+            sub: session.sub ?? 'e2e-admin',
+            email: session.email ?? 'admin@example.com',
+            name: session.name ?? 'E2E Admin',
+            givenName: session.givenName ?? 'E2E',
+            picture: session.picture ?? '',
+            isAdmin: session.isAdmin === true,
+          },
+        });
+      }
+      return route.fulfill({
+        json: { authenticated: false, configured: session.configured === true },
+      });
+    });
+  }
+
+  /**
+   * Admin curriculum overview + prompts + generate/approve mutations.
+   * Mutating calls update the in-memory overview returned on the next GET.
+   */
+  async mockAdminCurriculum(
+    options: {
+      release?: {
+        stageId: string;
+        candidateId: string;
+        approvedBy?: string;
+        approvedAt?: string;
+      } | null;
+      candidates?: Array<{
+        id: string;
+        stageId: string | null;
+        runId?: string;
+        label?: string | null;
+        status: 'generating' | 'ready' | 'failed' | 'superseded';
+        runState?: string | null;
+        scenesCompleted?: number | null;
+        scenesTotal?: number | null;
+        outlineTitle?: string | null;
+        createdAt?: string;
+      }>;
+      prompts?: Array<{
+        id: string;
+        ownerId: string;
+        sceneId: string | null;
+        promptText: string;
+        createdAt: string;
+      }>;
+    } = {},
+  ) {
+    let release = options.release ?? null;
+    let candidates = [...(options.candidates ?? [])];
+    const prompts = [...(options.prompts ?? [])];
+    const generateCalls: unknown[] = [];
+    const approveCalls: unknown[] = [];
+
+    const overview = () => ({
+      release: release
+        ? {
+            stageId: release.stageId,
+            candidateId: release.candidateId,
+            approvedBy: release.approvedBy ?? 'admin@example.com',
+            approvedAt: release.approvedAt ?? new Date(0).toISOString(),
+          }
+        : null,
+      candidates: candidates.map((c) => ({
+        id: c.id,
+        stageId: c.stageId,
+        runId: c.runId ?? `run-${c.id}`,
+        label: c.label ?? null,
+        status: c.status,
+        runState: c.runState ?? null,
+        scenesCompleted: c.scenesCompleted ?? null,
+        scenesTotal: c.scenesTotal ?? null,
+        outlineTitle: c.outlineTitle ?? null,
+        createdAt: c.createdAt ?? new Date(0).toISOString(),
+      })),
+    });
+
+    await this.page.route('**/api/admin/curriculum/rsaf-commands**', async (route) => {
+      const request = route.request();
+      const path = new URL(request.url()).pathname;
+      const method = request.method();
+
+      if (path === '/api/admin/curriculum/rsaf-commands' && method === 'GET') {
+        return route.fulfill({ json: overview() });
+      }
+      if (path === '/api/admin/curriculum/rsaf-commands/prompts' && method === 'GET') {
+        return route.fulfill({ json: { prompts } });
+      }
+      if (path === '/api/admin/curriculum/rsaf-commands/candidates' && method === 'POST') {
+        const body = request.postDataJSON() as Record<string, unknown>;
+        generateCalls.push(body);
+        const created = {
+          id: `cand-${generateCalls.length}`,
+          stageId: null,
+          runId: `run-cand-${generateCalls.length}`,
+          label: `Candidate ${generateCalls.length}`,
+          status: 'generating' as const,
+          runState: 'preparing',
+          scenesCompleted: 0,
+          scenesTotal: 2,
+          outlineTitle: null,
+          createdAt: new Date().toISOString(),
+        };
+        candidates = [created, ...candidates];
+        return route.fulfill({ status: 202, json: { candidates: [created] } });
+      }
+      if (path === '/api/admin/curriculum/rsaf-commands/approve' && method === 'POST') {
+        const body = request.postDataJSON() as { candidateId?: string };
+        approveCalls.push(body);
+        const candidate = candidates.find((c) => c.id === body.candidateId);
+        if (!candidate?.stageId) {
+          return route.fulfill({
+            status: 400,
+            json: { message: 'Candidate is not ready' },
+          });
+        }
+        release = {
+          stageId: candidate.stageId,
+          candidateId: candidate.id,
+          approvedBy: 'admin@example.com',
+          approvedAt: new Date().toISOString(),
+        };
+        return route.fulfill({ json: { release } });
+      }
+      return route.fulfill({ status: 404, body: 'Not found' });
+    });
+
+    return { generateCalls, approveCalls, overview };
+  }
 }
 
 type RunEventFrame = { seq: number; type: string; data: Record<string, unknown> };

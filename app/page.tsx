@@ -637,6 +637,7 @@ function HomePage() {
               className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-white/80 dark:hover:bg-slate-700 hover:text-primary transition-all"
               aria-label={t('admin.openCurriculum')}
               title={t('admin.openCurriculum')}
+              data-testid="admin-open-curriculum"
             >
               <Shield className="w-4 h-4" />
             </button>
@@ -763,6 +764,7 @@ function HomePage() {
             <div className="ground-composer-footer px-3 py-3 flex items-center justify-end gap-2">
               <button
                 type="button"
+                data-testid="start-mission"
                 onClick={handleGenerate}
                 disabled={!canGenerate || preparingGenerate}
                 className={cn(
@@ -837,6 +839,7 @@ function HomePage() {
         <AnimatePresence>
           {error && (
             <motion.div
+              data-testid="home-curriculum-error"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}

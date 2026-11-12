@@ -42,6 +42,13 @@ export default defineConfig({
       PORT: '3002',
       NEXT_PUBLIC_MAIC_EDITOR_ENABLED: 'true',
       NEXT_PUBLIC_COURSEWARE_REFERENCE_ENABLED: 'true',
+      // Match CI: leave Google OAuth unset so document nav is not redirected
+      // to /login. Local .env.local often configures OAuth; clearing these
+      // keeps the anonymous-owner persistence seeding path working.
+      GOOGLE_OAUTH_CLIENT_ID: '',
+      GOOGLE_OAUTH_CLIENT_SECRET: '',
+      AUTH_SESSION_SECRET: '',
+      AUTH_PUBLIC_ORIGIN: '',
     },
   },
 });

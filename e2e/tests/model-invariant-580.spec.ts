@@ -2,39 +2,34 @@ import { test, expect } from '../fixtures/base';
 import { HomePage } from '../pages/home.page';
 
 /**
- * #580 — "usable provider ⇒ a concrete model is always selected".
+ * Start Mission is gated by the briefing typewriter finishing — not by
+ * whether a language model is configured. Students open an already-generated
+ * shared classroom; model setup only matters for admin candidate generation.
  *
- * The course model is the workspace's `llm` slot, read from the server
- * (`/api/model-config`); the browser keeps no provider state.
- *
- * State A: the workspace has no language model → Start Mission stays
- *          disabled after the briefing. NO modelNotConfigured toast, NO
- *          forced settings dialog. Model setup is via the header settings gear.
- * State B: the llm slot names a model → Start Mission enables after the
- *          briefing finishes.
- *
- * The Playwright Chromium locale is en-US, so UI strings are English
- * ("Start Mission").
+ * State A: no language model → Start Mission still enables after the briefing.
+ * State B: llm slot set → same briefing gate.
  */
 
 const SCREENSHOT_DIR = 'e2e/screenshots';
 
 test.describe.configure({ mode: 'serial' });
 
-test.describe('#580 model-selection invariant', () => {
-  test('State A: no language model → disabled generate, settings gear present, no toast', async ({
+test.describe('#580 Start Mission briefing gate', () => {
+  test('State A: no language model → Start Mission enables after briefing', async ({
     page,
     mockApi,
   }) => {
     await mockApi.mockModelSettings({ providers: {} });
+    await mockApi.mockCurriculumRelease({ available: false });
 
     const home = new HomePage(page);
     await Promise.all([page.waitForResponse('**/api/model-config'), home.goto()]);
     await expect(home.briefing).toBeVisible();
     await expect(page.locator('button:has(svg.lucide-settings)').first()).toBeVisible();
+    await expect(home.enterButton).toBeDisabled();
 
     await home.waitForBriefing();
-    await expect(home.enterButton).toBeDisabled();
+    await expect(home.enterButton).toBeEnabled();
     await expect(page.locator('[data-sonner-toast]')).toHaveCount(0);
     await expect(page.getByRole('dialog')).toHaveCount(0);
 
@@ -46,7 +41,7 @@ test.describe('#580 model-selection invariant', () => {
     });
   });
 
-  test('State B: the llm slot names a model → generation enabled after briefing', async ({
+  test('State B: the llm slot names a model → Start Mission enables after briefing', async ({
     page,
     mockApi,
   }) => {
@@ -54,6 +49,7 @@ test.describe('#580 model-selection invariant', () => {
       providers: { openai: ['gpt-4o', 'gpt-4o-mini'] },
       llm: 'openai:gpt-4o',
     });
+    await mockApi.mockCurriculumRelease({ available: false });
 
     const home = new HomePage(page);
     await Promise.all([page.waitForResponse('**/api/model-config'), home.goto()]);

@@ -177,7 +177,10 @@ export default function AdminCurriculumPage() {
   };
 
   return (
-    <div className="ground-home min-h-[100dvh] w-full px-4 py-8 md:px-8 max-w-4xl mx-auto">
+    <div
+      data-testid="admin-curriculum-page"
+      className="ground-home min-h-[100dvh] w-full px-4 py-8 md:px-8 max-w-4xl mx-auto"
+    >
       <div className="flex items-center justify-between gap-4 mb-8">
         <div>
           <Link
@@ -206,6 +209,7 @@ export default function AdminCurriculumPage() {
           </button>
           <button
             type="button"
+            data-testid="admin-generate-candidates"
             onClick={() => void generateCandidates()}
             disabled={generating}
             className={cn(
@@ -225,7 +229,10 @@ export default function AdminCurriculumPage() {
         </div>
       ) : null}
 
-      <section className="mb-8 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 p-4">
+      <section
+        data-testid="admin-live-release"
+        className="mb-8 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 p-4"
+      >
         <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-2">
           {t('admin.approvedLive')}
         </h2>
@@ -260,6 +267,7 @@ export default function AdminCurriculumPage() {
           return (
             <div
               key={candidate.id}
+              data-testid={`admin-candidate-${candidate.id}`}
               className={cn(
                 'rounded-xl border p-4 bg-white/70 dark:bg-slate-900/50',
                 isLive
@@ -298,6 +306,7 @@ export default function AdminCurriculumPage() {
                   {candidate.status === 'ready' && !isLive ? (
                     <button
                       type="button"
+                      data-testid="admin-approve"
                       onClick={() => void approve(candidate.id)}
                       disabled={approvingId === candidate.id}
                       className="h-8 px-2.5 rounded-lg text-xs font-medium bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-50 inline-flex items-center gap-1"

@@ -1,8 +1,7 @@
 import { test, expect } from '../fixtures/base';
-import { HomePage } from '../pages/home.page';
-import { GenerationPreviewPage } from '../pages/generation-preview.page';
 import { ClassroomPage } from '../pages/classroom.page';
 import { createSettingsStorage } from '../fixtures/test-data/settings';
+import { openSeededSlideClassroom } from '../fixtures/seed-slide-classroom';
 
 const SETTINGS_STORAGE = createSettingsStorage({ sidebarCollapsed: false });
 
@@ -12,28 +11,14 @@ const SETTINGS_STORAGE = createSettingsStorage({ sidebarCollapsed: false });
  * Regression test to ensure the event-propagation guard works correctly.
  */
 test.describe('Slide editor double-click text insertion (#1310)', () => {
-  test.beforeEach(async ({ page, mockApi }) => {
+  test.beforeEach(async ({ page }) => {
     await page.addInitScript((settings) => {
       localStorage.setItem('maic:account:settings-storage', settings);
     }, SETTINGS_STORAGE);
-    await mockApi.setupGenerationMocks();
   });
 
   test('double-click on blank canvas area creates a new text element', async ({ page }) => {
-    // Generate a classroom through the mocked pipeline
-    const home = new HomePage(page);
-    await home.goto();
-    // Dismiss the "What's New" changelog modal
-    await page
-      .getByRole('button', { name: /got it|知道了/i })
-      .click({ timeout: 5_000 })
-      .catch(() => {});
-    await home.fillRequirement('Test Canvas Double Click');
-    await home.submit();
-    await page.waitForURL(/\/generation-preview/);
-
-    const preview = new GenerationPreviewPage(page);
-    await preview.waitForRedirectToClassroom();
+    await openSeededSlideClassroom(page, 'e2e-dblclick');
 
     const classroom = new ClassroomPage(page);
     await classroom.waitForLoaded();
