@@ -17,6 +17,7 @@ import {
   Trash2,
   Search,
   Settings,
+  Shield,
   Sun,
   Moon,
   Monitor,
@@ -42,27 +43,9 @@ import { SettingsDialog } from '@/components/settings';
 import { AgentBar } from '@/components/agent/agent-bar';
 import { BriefingTypewriter } from '@/components/home/briefing-typewriter';
 import { useTheme } from '@/lib/hooks/use-theme';
-import {
-  courseGenerationUsable,
-  requireModelCapabilities,
-} from '@/lib/model-settings/capabilities';
-import {
-  RunApiError,
-  discardGenerationRun,
-  listActiveGenerationRuns,
-  runApiErrorText,
-} from '@/lib/generation-run-client/api';
-import { RunStartRefusedError, startClassicRun } from '@/lib/generation-run-client/start';
+import { discardGenerationRun } from '@/lib/generation-run-client/api';
 import { useOwnerRuns } from '@/lib/generation-run-client/use-owner-runs';
-import {
-  SORTIE_INSTRUCTIONS,
-  SORTIE_REQUIREMENT,
-} from '@/lib/ground-school/sortie-briefing';
-import {
-  SORTIE_AUTOSTART_SESSION_KEY,
-  hasSortiePresence,
-} from '@/lib/ground-school/sortie-presence';
-import { useSettingsStore } from '@/lib/store/settings';
+import { SORTIE_INSTRUCTIONS } from '@/lib/ground-school/sortie-briefing';
 import {
   courseRunHref,
   courseRunStatus,
@@ -73,7 +56,6 @@ import {
 } from '@/lib/generation-run-client/course-card';
 import type { RunSnapshot } from '@/lib/generation-run-client/types';
 import { CourseRunStatusLabel } from '@/components/generation/course-run-status-label';
-import { useModelCapabilities } from '@/lib/model-settings/use-model-settings';
 import { useUserProfileStore, AVATAR_OPTIONS } from '@/lib/store/user-profile';
 import { useAuthSession } from '@/lib/hooks/use-auth-session';
 import {
@@ -190,10 +172,6 @@ function HomePage() {
     import('@/lib/types/settings').SettingsSection | undefined
   >(undefined);
 
-  // Generation needs the course slots it resolves (outline, content, actions)
-  // to name a model, whether or not the llm root does (the server's view;
-  // while it cannot be read the server has the last word).
-  const hasUsableProvider = courseGenerationUsable(useModelCapabilities());
   const [recentOpen, setRecentOpen] = useState(true);
   const persistRecentOpen = (next: boolean) => {
     setRecentOpen(next);
@@ -271,13 +249,12 @@ function HomePage() {
 
   // Courses being generated on the server: a card from the moment the run
   // starts, live through the owner's run stream.
-  const { runs, forget: forgetRun, refresh: refreshRuns } = useOwnerRuns({
+  const { runs, forget: forgetRun } = useOwnerRuns({
     onCourseChanged: () => void loadClassrooms(),
   });
 
-  const { status: authStatus, session: authSession, claimAnonymousWork } = useAuthSession();
-  const reviewOutlineEnabled = useSettingsStore((s) => s.reviewOutlineEnabled);
-  const sortieAutostartRef = useRef(false);
+  const { session: authSession } = useAuthSession();
+  const isAdmin = authSession?.authenticated === true && authSession.isAdmin === true;
 
   const loadFolders = async () => {
     try {
@@ -525,109 +502,24 @@ function HomePage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  // After login: start the fixed RSAF Commands sortie in the background when
-  // the owner has neither a ready classroom nor an in-progress run. Stay on
-  // home (pending run card); manual Start Mission still opens the preview.
-  useEffect(() => {
-    if (sortieAutostartRef.current) return;
-    if (!hydrated || !hasUsableProvider) return;
-    if (authStatus !== 'ready' || authSession?.authenticated !== true) return;
-    // Unattended outline confirmation requires countdown/auto; wait mode stalls.
-    if (reviewOutlineEnabled) return;
-
-    let cancelled = false;
-
-    const autoStart = async () => {
-      try {
-        if (sessionStorage.getItem(SORTIE_AUTOSTART_SESSION_KEY)) return;
-
-        // Idempotent with GreetingBar's claim on ?auth=success.
-        await claimAnonymousWork();
-        if (cancelled) return;
-
-        const { runs: activeRuns } = await listActiveGenerationRuns();
-        if (cancelled) return;
-
-        if (hasSortiePresence(activeRuns, classrooms)) {
-          sessionStorage.setItem(SORTIE_AUTOSTART_SESSION_KEY, '1');
-          return;
-        }
-
-        // Reserve the slot before awaiting start (Strict Mode remount).
-        sessionStorage.setItem(SORTIE_AUTOSTART_SESSION_KEY, '1');
-        sortieAutostartRef.current = true;
-
-        const capabilities = await requireModelCapabilities();
-        if (!capabilities || cancelled) {
-          sessionStorage.removeItem(SORTIE_AUTOSTART_SESSION_KEY);
-          sortieAutostartRef.current = false;
-          return;
-        }
-
-        await startClassicRun({
-          requirement: SORTIE_REQUIREMENT,
-          materialIds: [],
-          interactive: form.vocationalTestMode,
-          taskEngine: form.vocationalTestMode,
-          capabilities,
-        });
-        if (!cancelled) refreshRuns();
-      } catch (err) {
-        log.error('Sortie auto-start failed:', err);
-        try {
-          sessionStorage.removeItem(SORTIE_AUTOSTART_SESSION_KEY);
-        } catch {
-          /* ignore */
-        }
-        sortieAutostartRef.current = false;
-      }
-    };
-
-    void autoStart();
-    return () => {
-      cancelled = true;
-    };
-  }, [
-    hydrated,
-    hasUsableProvider,
-    authStatus,
-    authSession,
-    reviewOutlineEnabled,
-    classrooms,
-    claimAnonymousWork,
-    form.vocationalTestMode,
-    refreshRuns,
-  ]);
-
   const handleGenerate = async () => {
-    // No model/provider guard here: generation is gated by `canGenerate`
-    // (requires a usable provider), and under the #580 invariant a usable
-    // provider always has a concrete model. State A (no usable provider)
-    // keeps Start Mission disabled; configure a model from the header settings.
+    // Opens the admin-approved shared classroom — no per-student generation.
     if (preparingGenerate || !briefingComplete) return;
 
     setError(null);
     setPreparingGenerate(true);
     try {
-      const capabilities = await requireModelCapabilities();
-      if (!capabilities) throw new Error(t('generation.modelSettingsUnavailable'));
-      const run = await startClassicRun({
-        requirement: SORTIE_REQUIREMENT,
-        materialIds: [],
-        interactive: form.vocationalTestMode ? true : false,
-        taskEngine: form.vocationalTestMode,
-        capabilities,
-      });
-      router.push(`/generation-preview?run=${encodeURIComponent(run.id)}`);
-    } catch (err) {
-      log.error('Error starting generation:', err);
-      if (err instanceof RunStartRefusedError) {
-        setError(t(err.reason, err.values));
-      } else if (err instanceof RunApiError) {
-        setError(runApiErrorText(err, t));
-      } else {
-        setError(err instanceof Error ? err.message : t('upload.generateFailed'));
+      const res = await fetch('/api/curriculum/rsaf-commands', { credentials: 'same-origin' });
+      if (!res.ok) throw new Error(t('curriculum.loadFailed'));
+      const body = (await res.json()) as { available?: boolean; stageId?: string | null };
+      if (!body.available || !body.stageId) {
+        setError(t('curriculum.notReleased'));
+        return;
       }
+      router.push(`/classroom/${encodeURIComponent(body.stageId)}`);
+    } catch (err) {
+      log.error('Error opening approved classroom:', err);
+      setError(err instanceof Error ? err.message : t('curriculum.loadFailed'));
     } finally {
       setPreparingGenerate(false);
     }
@@ -645,7 +537,8 @@ function HomePage() {
     return date.toLocaleDateString();
   };
 
-  const canGenerate = briefingComplete && hasUsableProvider;
+  // Students only need the briefing to finish — the classroom is already generated.
+  const canGenerate = briefingComplete;
 
   return (
     <div className="ground-home min-h-[100dvh] w-full flex flex-col items-center px-4 pb-4 pt-20 md:px-8 md:pb-8 md:pt-20 overflow-x-hidden">
@@ -734,6 +627,22 @@ function HomePage() {
             </div>
           )}
         </div>
+
+        {isAdmin ? (
+          <>
+            <div className="w-px h-4 bg-slate-300/70 dark:bg-slate-600/70" />
+            <button
+              type="button"
+              onClick={() => router.push('/admin/curriculum')}
+              className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-white/80 dark:hover:bg-slate-700 hover:text-primary transition-all"
+              aria-label={t('admin.openCurriculum')}
+              title={t('admin.openCurriculum')}
+              data-testid="admin-open-curriculum"
+            >
+              <Shield className="w-4 h-4" />
+            </button>
+          </>
+        ) : null}
 
         <div className="w-px h-4 bg-slate-300/70 dark:bg-slate-600/70" />
 
@@ -855,6 +764,7 @@ function HomePage() {
             <div className="ground-composer-footer px-3 py-3 flex items-center justify-end gap-2">
               <button
                 type="button"
+                data-testid="start-mission"
                 onClick={handleGenerate}
                 disabled={!canGenerate || preparingGenerate}
                 className={cn(
@@ -865,7 +775,7 @@ function HomePage() {
                 )}
               >
                 <span className="text-xs font-medium">
-                  {preparingGenerate ? t('stage.generating') : t('toolbar.enterClassroom')}
+                  {preparingGenerate ? t('curriculum.opening') : t('toolbar.enterClassroom')}
                 </span>
                 {preparingGenerate ? (
                   <Loader2 className="size-3.5 animate-spin" />
@@ -929,6 +839,7 @@ function HomePage() {
         <AnimatePresence>
           {error && (
             <motion.div
+              data-testid="home-curriculum-error"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}

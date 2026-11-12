@@ -288,9 +288,7 @@ export function HeaderControls({
           <span
             className={cn(
               'text-[11px] font-bold uppercase tracking-[0.14em] tabular-nums select-none transition-colors duration-200',
-              proChecked
-                ? 'text-primary dark:text-primary'
-                : 'text-gray-500 dark:text-gray-400',
+              proChecked ? 'text-primary dark:text-primary' : 'text-gray-500 dark:text-gray-400',
             )}
           >
             {t('edit.proMode')}

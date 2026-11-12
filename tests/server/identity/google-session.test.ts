@@ -23,6 +23,7 @@ const GOOGLE_AUTH_ENV = [
   'GOOGLE_OAUTH_CLIENT_SECRET',
   'AUTH_SESSION_SECRET',
   'AUTH_PUBLIC_ORIGIN',
+  'ADMIN_EMAILS',
 ] as const;
 
 beforeEach(() => {
@@ -100,6 +101,22 @@ describe('googleSessionAuthMethod', () => {
     expect(result.principal.ownerId).toBe(`${GOOGLE_OWNER_PREFIX}${PROFILE.sub}`);
     expect(result.principal.kind).toBe('user');
     expect(result.principal.assurance).toBe('verified');
+    expect(result.principal.roles.has('course:publish')).toBe(true);
+    expect(result.principal.roles.has('admin')).toBe(false);
+  });
+
+  it('grants admin when the session email is on ADMIN_EMAILS', async () => {
+    stubGoogleEnv();
+    vi.stubEnv('ADMIN_EMAILS', 'Ada@Example.com, other@example.com');
+    const token = createGoogleSessionToken(PROFILE, SECRET);
+    const result = await googleSessionAuthMethod.authenticate({
+      headers: new Headers({
+        cookie: `${GOOGLE_SESSION_COOKIE}=${encodeURIComponent(token)}`,
+      }),
+    });
+    expect(result.status).toBe('authenticated');
+    if (result.status !== 'authenticated') return;
+    expect(result.principal.roles.has('admin')).toBe(true);
     expect(result.principal.roles.has('course:publish')).toBe(true);
   });
 

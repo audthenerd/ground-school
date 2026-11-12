@@ -134,12 +134,7 @@ export async function generatePBLV2Project(
   const contentLanguage =
     project.languageDirective || 'Match the language of the outline content above.';
   const systemPrompt = withGenerationSystemPrompt(
-    await buildPlannerSystemPrompt(
-      input,
-      project.proficiency,
-      contentLanguage,
-      scenarioRoleplay,
-    ),
+    await buildPlannerSystemPrompt(input, project.proficiency, contentLanguage, scenarioRoleplay),
   );
 
   // Tool implementations. Each one validates its inputs, mutates

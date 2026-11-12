@@ -1,9 +1,10 @@
 import { test, expect } from '../fixtures/base';
 import { HomePage } from '../pages/home.page';
 import { createSettingsStorage } from '../fixtures/test-data/settings';
+import { createMockScene } from '../fixtures/test-data/generated-scene';
+import { seedServerDocument, uniqueStageId } from '../fixtures/server-seed';
 import type { Page } from '@playwright/test';
 
-// Inject settings with modelId so the "enter classroom" button works
 const SETTINGS_STORAGE = createSettingsStorage();
 
 interface BodySpacing {
@@ -37,7 +38,9 @@ async function expectBodyScrollState(page: Page, initialSpacing: BodySpacing, lo
     });
 }
 
-test.describe('Home → Generation', () => {
+test.describe('Home → Classroom', () => {
+  test.describe.configure({ timeout: 90_000 });
+
   test.beforeEach(async ({ page }) => {
     await page.addInitScript((settings) => {
       localStorage.setItem('maic:account:settings-storage', settings);
@@ -45,7 +48,7 @@ test.describe('Home → Generation', () => {
     }, SETTINGS_STORAGE);
   });
 
-  test('home page session probe does not block the composer', async ({ page }) => {
+  test('home page session probe does not block the briefing', async ({ page }) => {
     const session = page.waitForResponse(
       (response) => new URL(response.url()).pathname === '/api/auth/session',
     );
@@ -59,29 +62,45 @@ test.describe('Home → Generation', () => {
     await expect(home.enterButton).toBeDisabled();
   });
 
-  test('home page loads with core UI elements and submits the fixed briefing', async ({
-    page,
-    mockApi,
-  }) => {
-    // Submitting starts a generation run (mocked: no provider is called).
-    const run = await mockApi.setupGenerationMocks();
+  test('Start Mission opens the admin-approved classroom', async ({ page, mockApi }) => {
+    const stageId = uniqueStageId('e2e-curriculum');
+    const now = Date.now();
+    // Establish the anonymous owner cookie before seeding; keep navigation light
+    // so a cold Next compile does not burn the whole test budget.
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await seedServerDocument(page, {
+      stage: { id: stageId, name: 'Approved sortie', createdAt: now, updatedAt: now },
+      scenes: [createMockScene(stageId)],
+      outline: { outlines: [], createdAt: now, updatedAt: now },
+    });
+    await mockApi.mockCurriculumRelease({ available: true, stageId });
+
     const home = new HomePage(page);
     await home.goto();
 
-    // Core elements visible
-    await expect(home.logo).toBeVisible();
+    await expect(home.logo).toBeVisible({ timeout: 30_000 });
     await expect(home.briefing).toBeVisible();
     await expect(home.enterButton).toBeDisabled();
 
-    // Briefing typewriter finishes → button activates
     await home.waitForBriefing();
     await expect(home.enterButton).toBeEnabled();
 
-    // Submit → navigate to generation-preview
-    await home.submit();
-    await page.waitForURL(/\/generation-preview/);
-    expect(page.url()).toContain(`/generation-preview?run=${run.id}`);
-    expect(run.started).toBe(true);
+    await home.openClassroom();
+    expect(page.url()).toContain(`/classroom/${stageId}`);
+  });
+
+  test('Start Mission shows an error when no classroom is released', async ({ page, mockApi }) => {
+    await mockApi.mockCurriculumRelease({ available: false });
+
+    const home = new HomePage(page);
+    await home.goto();
+    await home.waitForBriefing();
+    await home.enterButton.click({ timeout: 15_000 });
+
+    await expect(home.curriculumError).toBeVisible({ timeout: 15_000 });
+    await expect(home.curriculumError).toContainText(/not released|尚未发布/i);
+    expect(page.url()).not.toContain('/classroom/');
+    expect(page.url()).not.toContain('/generation-preview');
   });
 
   test('keeps body spacing stable when the settings dialog opens', async ({ page }) => {

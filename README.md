@@ -366,7 +366,7 @@ Protect a deployment with a site-level password in `.env.local`:
 ACCESS_CODE=your-secret-code
 ```
 
-Use a long random value, at least 16 characters from a random generator: it is the only secret guarding the deployment. Visitors then see a password prompt, and every API route is gated too. When it is unset (the default in `.env.example`), `middleware.ts` checks no credential and every route, the API included, is reachable: an unconfigured deployment is not gated, and there is no second enforcement point. The code is remembered for 7 days in a signed HTTP-only cookie; attempts are rate limited only behind a trusted proxy with `TRUST_PROXY_HEADERS=true`. See [Configuration → ACCESS_CODE](packages/docs/content/docs/configuration.mdx#access_code--site-wide-password).
+Use a long random value, at least 16 characters from a random generator: it is the only secret guarding the deployment. Visitors then see a password prompt, and every API route is gated too. When it is unset (the default in `.env.example`), `proxy.ts` checks no credential and every route, the API included, is reachable: an unconfigured deployment is not gated, and there is no second enforcement point. The code is remembered for 7 days in a signed HTTP-only cookie; attempts are rate limited only behind a trusted proxy with `TRUST_PROXY_HEADERS=true`. See [Configuration → ACCESS_CODE](packages/docs/content/docs/configuration.mdx#access_code--site-wide-password).
 
 ### Optional: Agent workbench and runtime
 

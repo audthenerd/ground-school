@@ -91,12 +91,7 @@ export function WorkspaceHome({
           `pro-mode-exit` would be one testid too many. */}
       <div className="flex h-12 shrink-0 items-center justify-between px-4 md:hidden">
         <span className="flex items-center gap-1.5">
-          <img
-            src={brand.markSrc}
-            alt=""
-            aria-hidden="true"
-            className="h-5 w-5 object-contain"
-          />
+          <img src={brand.markSrc} alt="" aria-hidden="true" className="h-5 w-5 object-contain" />
           <span className="text-sm font-black tracking-[-0.04em] text-[#252525] dark:text-slate-100">
             {brand.productName}
           </span>

@@ -1,8 +1,7 @@
 import { test, expect } from '../fixtures/base';
-import { HomePage } from '../pages/home.page';
-import { GenerationPreviewPage } from '../pages/generation-preview.page';
 import { ClassroomPage } from '../pages/classroom.page';
 import { createSettingsStorage } from '../fixtures/test-data/settings';
+import { openSeededSlideClassroom } from '../fixtures/seed-slide-classroom';
 
 const SETTINGS_STORAGE = createSettingsStorage({ sidebarCollapsed: false });
 
@@ -14,28 +13,14 @@ const SETTINGS_STORAGE = createSettingsStorage({ sidebarCollapsed: false });
  * assertions locale-independent.
  */
 test.describe('Slide content surface (#647)', () => {
-  test.beforeEach(async ({ page, mockApi }) => {
+  test.beforeEach(async ({ page }) => {
     await page.addInitScript((settings) => {
       localStorage.setItem('maic:account:settings-storage', settings);
     }, SETTINGS_STORAGE);
-    await mockApi.setupGenerationMocks();
   });
 
   test('background, z-order, and image bar surface in Pro mode', async ({ page }, testInfo) => {
-    // Generate a classroom through the mocked pipeline, then enter Pro mode.
-    const home = new HomePage(page);
-    await home.goto();
-    // Dismiss the "What's New" changelog modal that overlays the home page on
-    // first load (it intercepts the submit button otherwise).
-    await page
-      .getByRole('button', { name: /got it|知道了/i })
-      .click({ timeout: 5_000 })
-      .catch(() => {});
-    await home.fillRequirement('讲解光合作用');
-    await home.submit();
-    await page.waitForURL(/\/generation-preview/);
-    const preview = new GenerationPreviewPage(page);
-    await preview.waitForRedirectToClassroom();
+    await openSeededSlideClassroom(page, 'e2e-slide-647');
 
     const classroom = new ClassroomPage(page);
     await classroom.waitForLoaded();

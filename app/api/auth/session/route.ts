@@ -1,3 +1,4 @@
+import { isAdminEmail } from '@/lib/server/identity/admin-emails';
 import { isGoogleAuthConfigured } from '@/lib/server/identity/host/google-auth-config';
 import { readGoogleSession } from '@/lib/server/identity/host/google-session';
 
@@ -12,6 +13,8 @@ export type AuthSessionResponse =
       name: string;
       givenName: string;
       picture: string;
+      /** True when this email is on `ADMIN_EMAILS` (curriculum admin surfaces). */
+      isAdmin: boolean;
     }
   | {
       authenticated: false;
@@ -33,6 +36,7 @@ export async function GET(request: Request): Promise<Response> {
         name: session.name,
         givenName: session.givenName,
         picture: session.picture,
+        isAdmin: isAdminEmail(session.email),
       }
     : { authenticated: false, configured };
 

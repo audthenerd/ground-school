@@ -14,11 +14,14 @@ export interface BriefingTypewriterProps {
  * Full text is exposed to assistive tech immediately; the animation is visual only.
  */
 export function BriefingTypewriter({ text, className, onComplete }: BriefingTypewriterProps) {
-  const [visible, setVisible] = useState('');
-  const [done, setDone] = useState(false);
+  const [typed, setTyped] = useState('');
+  const [typedDone, setTypedDone] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -30,14 +33,14 @@ export function BriefingTypewriter({ text, className, onComplete }: BriefingType
 
   useEffect(() => {
     if (reduceMotion) {
-      setVisible(text);
-      setDone(true);
       onCompleteRef.current?.();
       return;
     }
 
-    setVisible('');
-    setDone(false);
+    /* eslint-disable react-hooks/set-state-in-effect -- Animation driver: character-paced briefing display */
+    setTyped('');
+    setTypedDone(false);
+    /* eslint-enable react-hooks/set-state-in-effect */
     let cancelled = false;
     let index = 0;
     let timer: number | undefined;
@@ -45,12 +48,12 @@ export function BriefingTypewriter({ text, className, onComplete }: BriefingType
     const tick = () => {
       if (cancelled) return;
       if (index >= text.length) {
-        setDone(true);
+        setTypedDone(true);
         onCompleteRef.current?.();
         return;
       }
       index += 1;
-      setVisible(text.slice(0, index));
+      setTyped(text.slice(0, index));
       const justTyped = text[index - 1] ?? '';
       timer = window.setTimeout(tick, typeDelay(justTyped));
     };
@@ -61,6 +64,9 @@ export function BriefingTypewriter({ text, className, onComplete }: BriefingType
       if (timer !== undefined) window.clearTimeout(timer);
     };
   }, [text, reduceMotion]);
+
+  const visible = reduceMotion ? text : typed;
+  const done = reduceMotion || typedDone;
 
   return (
     <div

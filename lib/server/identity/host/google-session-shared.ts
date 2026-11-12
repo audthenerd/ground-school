@@ -32,8 +32,7 @@ export function isGoogleSessionSignatureFormatValid(signature: string): boolean 
 function base64UrlToBytes(encoded: string): Uint8Array | undefined {
   try {
     const normalized = encoded.replace(/-/g, '+').replace(/_/g, '/');
-    const pad =
-      normalized.length % 4 === 0 ? '' : '='.repeat(4 - (normalized.length % 4));
+    const pad = normalized.length % 4 === 0 ? '' : '='.repeat(4 - (normalized.length % 4));
     const binary = atob(normalized + pad);
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
@@ -49,9 +48,7 @@ function base64UrlToBytes(encoded: string): Uint8Array | undefined {
  * Parse and validate the JSON payload half of a Google session token.
  * Does not check expiry — callers compare `exp` to now.
  */
-export function parseGoogleSessionPayload(
-  encoded: string,
-): GoogleSessionPayload | undefined {
+export function parseGoogleSessionPayload(encoded: string): GoogleSessionPayload | undefined {
   const bytes = base64UrlToBytes(encoded);
   if (!bytes) return undefined;
   try {

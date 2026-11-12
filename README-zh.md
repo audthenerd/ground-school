@@ -346,7 +346,7 @@ Ground School 把课程保存在服务端。课程文档、文件夹、对话历
 ACCESS_CODE=your-secret-code
 ```
 
-请使用足够长的随机值（至少 16 个字符）：它是保护部署的唯一密钥。设置后，访客需要输入密码才能使用，所有 API 路由也会受到保护。未设置时（`.env.example` 的默认），`middleware.ts` 不校验任何凭证，所有路由（包括 API）均可访问：未配置的部署没有门禁，也没有第二道校验。验证结果以签名令牌保存在 HTTP-only cookie 中，有效期 7 天；只有在可信反向代理之后并设置 `TRUST_PROXY_HEADERS=true` 时才会限流。详见[配置说明 → ACCESS_CODE](packages/docs/content/docs/configuration.zh-cn.mdx#access_code--站点级访问密码)。
+请使用足够长的随机值（至少 16 个字符）：它是保护部署的唯一密钥。设置后，访客需要输入密码才能使用，所有 API 路由也会受到保护。未设置时（`.env.example` 的默认），`proxy.ts` 不校验任何凭证，所有路由（包括 API）均可访问：未配置的部署没有门禁，也没有第二道校验。验证结果以签名令牌保存在 HTTP-only cookie 中，有效期 7 天；只有在可信反向代理之后并设置 `TRUST_PROXY_HEADERS=true` 时才会限流。详见[配置说明 → ACCESS_CODE](packages/docs/content/docs/configuration.zh-cn.mdx#access_code--站点级访问密码)。
 
 <a id="lemonade-local-ai"></a>
 

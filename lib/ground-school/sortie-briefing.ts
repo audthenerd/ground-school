@@ -18,7 +18,7 @@ export const SORTIE_INSTRUCTIONS = [
 ].join('\n');
 
 /**
- * Generation requirement sent with every Start Mission click (and login auto-start).
+ * Generation requirement used when an admin generates curriculum candidates.
  * Kept verbatim — do not paraphrase when editing.
  */
 export const SORTIE_REQUIREMENT = `ROLE

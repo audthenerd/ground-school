@@ -11,10 +11,11 @@ import {
 } from '@/lib/server/identity/navigation';
 
 /**
- * Edge middleware can only see env vars referenced as static `process.env.NAME`
- * property accesses — dynamic `process.env[name]` is empty after bundling.
+ * Prefer static `process.env.NAME` reads. Proxy runs on the Node.js runtime in
+ * Next.js 16+, but keeping static accesses matches the previous Edge bundling
+ * constraint and avoids accidental dynamic lookups.
  */
-function isGoogleAuthConfiguredInMiddleware(): boolean {
+function isGoogleAuthConfiguredInProxy(): boolean {
   return (
     !!process.env.GOOGLE_OAUTH_CLIENT_ID?.trim() &&
     !!process.env.GOOGLE_OAUTH_CLIENT_SECRET?.trim() &&
@@ -70,13 +71,12 @@ function navigationIdentity(
   });
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Return an actual server-side 404 when either half of the workbench is off.
-  // Edge middleware cannot reliably inspect server-only deployment variables,
-  // so it enforces the public gate and leaves the complete runtime/database
-  // check to Node. A Node-hosted middleware uses the same gate as startup.
+  // Proxy runs on Node.js (Next.js 16+), so the full runtime/database gate is
+  // available here — same check as startup.
   const canInspectServerRuntime = process.env.NEXT_RUNTIME !== 'edge';
   const workbenchEnabled =
     isProWorkbenchEnabled() && (!canInspectServerRuntime || isAgentRuntimeConfigured());
@@ -94,8 +94,7 @@ export async function middleware(request: NextRequest) {
 
     if (!accessPublic) {
       const cookie = request.cookies.get('openmaic_access');
-      const accessOk =
-        !!cookie?.value && (await verifyAccessTokenEdge(cookie.value, accessCode));
+      const accessOk = !!cookie?.value && (await verifyAccessTokenEdge(cookie.value, accessCode));
       if (!accessOk) {
         // API requests without valid cookie → 401
         if (pathname.startsWith('/api/')) {
@@ -111,7 +110,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Require a valid Google session when OAuth env is fully configured.
-  if (isGoogleAuthConfiguredInMiddleware()) {
+  if (isGoogleAuthConfiguredInProxy()) {
     const sessionSecret = process.env.AUTH_SESSION_SECRET?.trim() ?? '';
     const token = request.cookies.get(GOOGLE_SESSION_COOKIE)?.value;
     const session = await verifyGoogleSessionTokenEdge(token, sessionSecret);
@@ -159,6 +158,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // Skip Next internals and public brand/logo assets. Other static files that
-  // still hit middleware are allowed through by the document-navigation check.
+  // still hit proxy are allowed through by the document-navigation check.
   matcher: ['/((?!_next/static|_next/image|favicon.ico|logos/|brand/).*)'],
 };

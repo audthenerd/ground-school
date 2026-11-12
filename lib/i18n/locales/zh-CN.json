@@ -22,6 +22,31 @@
     "loginSubtitle": "使用 Google 账号打开 Ground School。",
     "notConfigured": "此部署未配置 Google 登录。"
   },
+  "curriculum": {
+    "notReleased": "课堂尚未发布。管理员需先批准一版课程。",
+    "opening": "正在打开课堂…",
+    "loadFailed": "无法打开课堂，请重试。"
+  },
+  "admin": {
+    "openCurriculum": "管理课程",
+    "curriculumTitle": "Ground School 课程",
+    "curriculumSubtitle": "生成候选课堂，审阅后批准一版，供全体学员使用。",
+    "generateCandidates": "生成候选",
+    "generating": "正在开始生成…",
+    "approve": "批准",
+    "approving": "正在批准…",
+    "approvedLive": "当前发布版",
+    "noRelease": "尚未发布课堂。",
+    "preview": "预览课堂",
+    "statusReady": "就绪",
+    "statusGenerating": "生成中",
+    "statusFailed": "失败",
+    "statusSuperseded": "已替代",
+    "promptsTitle": "学员提问",
+    "promptsEmpty": "尚无提问记录。",
+    "backHome": "返回首页",
+    "forbidden": "需要管理员权限。"
+  },
   "toolbar": {
     "pdfParser": "解析器",
     "pdfUpload": "上传 PDF",

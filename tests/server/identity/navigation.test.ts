@@ -14,7 +14,7 @@ import {
   createGoogleSessionToken,
   GOOGLE_SESSION_COOKIE,
 } from '@/lib/server/identity/host/google-session';
-import { middleware } from '@/middleware';
+import { proxy } from '@/proxy';
 
 const GOOGLE_SESSION_SECRET = 'd'.repeat(32);
 const GOOGLE_PROFILE = {
@@ -33,7 +33,7 @@ function stubGoogleAuthEnv(): void {
 }
 
 /**
- * The page request establishes the anonymous owner (middleware.ts,
+ * The page request establishes the anonymous owner (proxy.ts,
  * lib/server/identity/navigation.ts): one cookie, minted on the document
  * response with the route handlers' own format and attributes, before the
  * page can send an API request that would mint one of its own.
@@ -79,7 +79,7 @@ afterEach(() => {
 
 describe('the page request establishes the anonymous owner', () => {
   it('mints one cookie on a first page load, with the attributes a route handler uses', async () => {
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
 
     const setCookie = response.headers.get('set-cookie');
     const id = mintedId(setCookie);
@@ -92,20 +92,20 @@ describe('the page request establishes the anonymous owner', () => {
 
   it('uses the Secure attribute exactly when the route handlers do', async () => {
     vi.stubEnv('NODE_ENV', 'production');
-    const secure = (await middleware(pageRequest())).headers.get('set-cookie')!;
+    const secure = (await proxy(pageRequest())).headers.get('set-cookie')!;
     expect(secure).toMatch(/; Secure$/);
     const server = await serverMintedCookie();
     expect(secure).toBe(server.replace(mintedId(server), mintedId(secure)));
 
     vi.stubEnv('COOKIE_SECURE', '0');
-    const plain = (await middleware(pageRequest())).headers.get('set-cookie')!;
+    const plain = (await proxy(pageRequest())).headers.get('set-cookie')!;
     expect(plain).not.toMatch(/Secure/);
     const plainServer = await serverMintedCookie();
     expect(plain).toBe(plainServer.replace(mintedId(plainServer), mintedId(plain)));
   });
 
   it('never replaces a valid anonymous cookie', async () => {
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/', { cookie: `theme=dark; anonymous_id=${EXISTING}` }),
     );
     expect(response.headers.get('set-cookie')).toBeNull();
@@ -113,7 +113,7 @@ describe('the page request establishes the anonymous owner', () => {
   });
 
   it('replaces a malformed cookie, as a route handler would, and forwards only the new one', async () => {
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/classroom/x', { cookie: 'theme=dark; anonymous_id=not-a-uuid; lang=en' }),
     );
     const id = mintedId(response.headers.get('set-cookie'));
@@ -126,30 +126,30 @@ describe('the page request establishes the anonymous owner', () => {
   });
 
   it('mints a different owner for each browser', async () => {
-    const first = mintedId((await middleware(pageRequest())).headers.get('set-cookie'));
-    const second = mintedId((await middleware(pageRequest())).headers.get('set-cookie'));
+    const first = mintedId((await proxy(pageRequest())).headers.get('set-cookie'));
+    const second = mintedId((await proxy(pageRequest())).headers.get('set-cookie'));
     expect(first).not.toBe(second);
   });
 
   it('mints on a page the access-code modal guards, and nothing on a refused API request', async () => {
     vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
-    const page = await middleware(pageRequest());
+    const page = await proxy(pageRequest());
     expect(mintedId(page.headers.get('set-cookie'))).toMatch(UUID_V4);
 
-    const api = await middleware(new NextRequest('http://localhost/api/stages'));
+    const api = await proxy(new NextRequest('http://localhost/api/stages'));
     expect(api.status).toBe(401);
     expect(api.headers.get('set-cookie')).toBeNull();
   });
 
   it('does not mint a claim candidate when a Google session cookie is already present', async () => {
-    const response = await middleware(pageRequest('/', { cookie: 'gs_google_session=present' }));
+    const response = await proxy(pageRequest('/', { cookie: 'gs_google_session=present' }));
     expect(response.headers.get('set-cookie')).toBeNull();
     expect(response.headers.get('x-middleware-request-cookie')).toBeNull();
   });
 
   it('lets Google auth routes through the access-code gate', async () => {
     vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
-    const response = await middleware(new NextRequest('http://localhost/api/auth/google/callback'));
+    const response = await proxy(new NextRequest('http://localhost/api/auth/google/callback'));
     expect(response.status).not.toBe(401);
     expect(response.headers.get('x-middleware-next')).toBe('1');
     expect(response.headers.get('set-cookie')).toBeNull();
@@ -163,31 +163,31 @@ describe('the page request establishes the anonymous owner', () => {
     ['a script fetch', '/', { 'sec-fetch-dest': 'empty', accept: '*/*' }],
     ['an image', '/logo.png', { 'sec-fetch-dest': 'image', accept: 'image/*' }],
   ])('does not mint for %s', async (_label, path, headers) => {
-    const response = await middleware(pageRequest(path, headers as Record<string, string>));
+    const response = await proxy(pageRequest(path, headers as Record<string, string>));
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('does not mint for a POST to a page', async () => {
-    const response = await middleware(pageRequest('/', {}, 'POST'));
+    const response = await proxy(pageRequest('/', {}, 'POST'));
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('does not mint when single-user mode resolves every request to one owner', async () => {
     vi.stubEnv('OWNER_SINGLE_USER', 'true');
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('does not mint when a shared team owner resolves every request', async () => {
     vi.stubEnv('ACCESS_CODE', 'demo-code-that-is-long-enough');
     vi.stubEnv('PERSISTENCE_SHARED_OWNER_ID', 'team');
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('does not mint on a configuration the boot refuses', async () => {
     vi.stubEnv('OWNER_SINGLE_USER', 'maybe');
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
@@ -195,7 +195,7 @@ describe('the page request establishes the anonymous owner', () => {
     'does not mint when OWNER_ANONYMOUS_PREMINT=%s turns it off',
     async (value) => {
       vi.stubEnv('OWNER_ANONYMOUS_PREMINT', value);
-      const response = await middleware(pageRequest());
+      const response = await proxy(pageRequest());
       expect(response.headers.get('set-cookie')).toBeNull();
       expect(response.headers.get('x-middleware-request-cookie')).toBeNull();
     },
@@ -203,19 +203,19 @@ describe('the page request establishes the anonymous owner', () => {
 
   it.each(['true', '1', ''])('mints with OWNER_ANONYMOUS_PREMINT=%j', async (value) => {
     vi.stubEnv('OWNER_ANONYMOUS_PREMINT', value);
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(mintedId(response.headers.get('set-cookie'))).toMatch(UUID_V4);
   });
 
   it('does not mint on a malformed OWNER_ANONYMOUS_PREMINT, which the boot refuses', async () => {
     vi.stubEnv('OWNER_ANONYMOUS_PREMINT', 'off');
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('mints when single-user mode is explicitly off', async () => {
     vi.stubEnv('OWNER_SINGLE_USER', 'false');
-    const response = await middleware(pageRequest());
+    const response = await proxy(pageRequest());
     expect(mintedId(response.headers.get('set-cookie'))).toMatch(UUID_V4);
   });
 });
@@ -223,24 +223,22 @@ describe('the page request establishes the anonymous owner', () => {
 describe('Google login gate', () => {
   it('redirects unsigned document navigations to /login when Google auth is on', async () => {
     stubGoogleAuthEnv();
-    const response = await middleware(pageRequest('/classroom/abc'));
+    const response = await proxy(pageRequest('/classroom/abc'));
     expect(response.status).toBe(307);
-    expect(response.headers.get('location')).toBe(
-      'http://localhost/login?next=%2Fclassroom%2Fabc',
-    );
+    expect(response.headers.get('location')).toBe('http://localhost/login?next=%2Fclassroom%2Fabc');
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 
   it('answers 401 for unsigned API requests when Google auth is on', async () => {
     stubGoogleAuthEnv();
-    const response = await middleware(new NextRequest('http://localhost/api/stages'));
+    const response = await proxy(new NextRequest('http://localhost/api/stages'));
     expect(response.status).toBe(401);
     await expect(response.json()).resolves.toMatchObject({ errorCode: 'UNAUTHORIZED' });
   });
 
   it('lets /login through without minting an anonymous cookie', async () => {
     stubGoogleAuthEnv();
-    const response = await middleware(pageRequest('/login'));
+    const response = await proxy(pageRequest('/login'));
     expect(response.status).toBe(200);
     expect(response.headers.get('x-middleware-next')).toBe('1');
     expect(response.headers.get('set-cookie')).toBeNull();
@@ -249,7 +247,7 @@ describe('Google login gate', () => {
   it('sends signed-in visitors away from /login', async () => {
     stubGoogleAuthEnv();
     const token = createGoogleSessionToken(GOOGLE_PROFILE, GOOGLE_SESSION_SECRET);
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/login?next=%2Fclassroom%2Fx', {
         cookie: `${GOOGLE_SESSION_COOKIE}=${encodeURIComponent(token)}`,
       }),
@@ -261,7 +259,7 @@ describe('Google login gate', () => {
   it('lets signed-in users through to the app', async () => {
     stubGoogleAuthEnv();
     const token = createGoogleSessionToken(GOOGLE_PROFILE, GOOGLE_SESSION_SECRET);
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/', {
         cookie: `${GOOGLE_SESSION_COOKIE}=${encodeURIComponent(token)}`,
       }),
@@ -273,15 +271,15 @@ describe('Google login gate', () => {
 
   it('keeps auth and health routes public while Google auth is on', async () => {
     stubGoogleAuthEnv();
-    const auth = await middleware(new NextRequest('http://localhost/api/auth/session'));
+    const auth = await proxy(new NextRequest('http://localhost/api/auth/session'));
     expect(auth.status).not.toBe(401);
-    const health = await middleware(new NextRequest('http://localhost/api/health'));
+    const health = await proxy(new NextRequest('http://localhost/api/health'));
     expect(health.status).not.toBe(401);
   });
 
   it('does not redirect brand/static asset fetches to /login', async () => {
     stubGoogleAuthEnv();
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/brand/ground-school-mark-minimal.svg', {
         'sec-fetch-dest': 'image',
         accept: 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
@@ -294,7 +292,7 @@ describe('Google login gate', () => {
 
   it('does not treat RSC fetches as gated document navigations', async () => {
     stubGoogleAuthEnv();
-    const response = await middleware(
+    const response = await proxy(
       pageRequest('/classroom/x', {
         rsc: '1',
         'sec-fetch-dest': 'empty',

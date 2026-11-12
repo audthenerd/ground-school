@@ -5,14 +5,16 @@ export class HomePage {
   readonly logo: Locator;
   readonly briefing: Locator;
   readonly enterButton: Locator;
+  readonly curriculumError: Locator;
+  readonly adminOpenCurriculum: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.logo = page.locator('img[alt="Ground School"]');
     this.briefing = page.getByTestId('sortie-briefing');
-    this.enterButton = page
-      .getByRole('button', { name: /enter/i })
-      .or(page.locator('button:has-text("进入课堂")'));
+    this.enterButton = page.getByTestId('start-mission');
+    this.curriculumError = page.getByTestId('home-curriculum-error');
+    this.adminOpenCurriculum = page.getByTestId('admin-open-curriculum');
   }
 
   async goto() {
@@ -33,7 +35,14 @@ export class HomePage {
     await this.waitForBriefing();
   }
 
+  /** Open the admin-approved shared classroom (Start Mission). */
   async submit() {
     await this.enterButton.click();
+  }
+
+  /** Start Mission and wait for the approved classroom route. */
+  async openClassroom() {
+    await this.submit();
+    await this.page.waitForURL(/\/classroom\//, { timeout: 60_000 });
   }
 }

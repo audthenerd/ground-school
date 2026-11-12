@@ -46,8 +46,25 @@ import {
   ElementReferenceValidationError,
   resolveElementReference,
 } from '@/lib/chat/pi/element-reference';
+import { appendClassroomPromptSafe } from '@/lib/persistence/classroom-prompts';
+import { isServerPersistenceConfigured } from '@/lib/config/feature-flags';
 
 const log = createLogger('Pi Chat API');
+
+/** Last user turn text for the durable prompt log (best-effort). */
+function latestUserPromptText(messages: StatelessChatRequest['messages']): string | null {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    const message = messages[i];
+    if (message?.role !== 'user') continue;
+    const text = (message.parts ?? [])
+      .map((part) => (part.type === 'text' ? part.text : ''))
+      .filter(Boolean)
+      .join('\n')
+      .trim();
+    if (text) return text;
+  }
+  return null;
+}
 
 export async function POST(req: NextRequest) {
   // Like every owner-resolving route, a request whose credential an owner
@@ -275,6 +292,21 @@ async function chat(req: NextRequest, principal: OwnerPrincipal): Promise<Respon
     log.info(
       `Pi request agents=${body.config.agentIds.join(', ')} messages=${body.messages.length} maxAgentTurns=${maxAgentTurns}`,
     );
+
+    // Durable student prompt log for shared classrooms (admin audit). Never
+    // blocks or fails the chat stream.
+    if (isServerPersistenceConfigured()) {
+      const stageId = body.storeState.stage?.id;
+      const promptText = latestUserPromptText(body.messages);
+      if (typeof stageId === 'string' && stageId.trim() && promptText) {
+        appendClassroomPromptSafe({
+          stageId: stageId.trim(),
+          ownerId: principal.ownerId,
+          sceneId: body.storeState.currentSceneId,
+          promptText,
+        });
+      }
+    }
 
     (async () => {
       let heartbeatTimer: ReturnType<typeof setInterval> | null = null;

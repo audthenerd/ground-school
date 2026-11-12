@@ -34,3 +34,5 @@ export { configureOwnerAuthentication } from './registry';
 export { sharedTeamAuthMethod } from './shared-team';
 export { singleUserAuthMethod } from './single-user';
 export { principalFromStoredOwner } from './stored-owner';
+export { adminEmailAllowlist, isAdminEmail } from './admin-emails';
+export { adminForbiddenResponse, isAdminPrincipal } from './require-admin';

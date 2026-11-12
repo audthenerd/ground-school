@@ -11,6 +11,7 @@ export type AuthSession =
       name: string;
       givenName: string;
       picture: string;
+      isAdmin: boolean;
     }
   | {
       authenticated: false;

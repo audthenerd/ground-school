@@ -15,7 +15,7 @@ const config = {
   basePath: DOCS_BASE_PATH,
   // This package is a standalone Next.js app with its own lockfile and alias
   // map. Without an explicit boundary, Turbopack walks up to the repository
-  // root and compiles the product middleware as part of the docs application.
+  // root and compiles the product proxy as part of the docs application.
   turbopack: {
     root: docsRoot,
   },

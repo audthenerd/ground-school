@@ -24,8 +24,7 @@ export function hasReadySortieClassroom(
   classrooms: ReadonlyArray<{ name?: string; description?: string }>,
 ): boolean {
   return classrooms.some(
-    (c) =>
-      RSAF_COMMANDS_LABEL.test(c.name ?? '') || RSAF_COMMANDS_LABEL.test(c.description ?? ''),
+    (c) => RSAF_COMMANDS_LABEL.test(c.name ?? '') || RSAF_COMMANDS_LABEL.test(c.description ?? ''),
   );
 }
 

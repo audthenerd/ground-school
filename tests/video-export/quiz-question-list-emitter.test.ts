@@ -129,7 +129,7 @@ describe('Quiz question-list Hyperframes emission', () => {
     expect(html).toContain('url("assets/fonts/noto-sans-sc-chinese-simplified-400-normal.woff2")');
     expect(html).toContain('url("assets/fonts/noto-sans-kr-korean-400-normal.woff2")');
     expect(html).toContain(
-      'font-family:"OpenMAIC Noto Sans Cyrillic","OpenMAIC Noto Sans Arabic",Inter,"OpenMAIC Noto Sans SC","OpenMAIC Noto Sans KR",sans-serif',
+      'font-family:"Ground School Noto Sans Cyrillic","Ground School Noto Sans Arabic",Inter,"Ground School Noto Sans SC","Ground School Noto Sans KR",sans-serif',
     );
   });
 

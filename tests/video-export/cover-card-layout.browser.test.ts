@@ -1382,12 +1382,12 @@ describe('Quiz/PBL cover cards in a real browser', () => {
     expect(measured.value).toEqual(QUIZ_SCROLL_LAYOUT_720P);
     expect(surface.css).not.toMatch(/url\(["']?https?:\/\//);
     expect(
-      await page.evaluate(() => document.fonts.check('16px "OpenMAIC Noto Sans SC"', '中文')),
+      await page.evaluate(() => document.fonts.check('16px "Ground School Noto Sans SC"', '中文')),
     ).toBe(true);
     const cjkCoverage = await page.evaluate(async () => {
       await Promise.all([
-        document.fonts.load('40px "OpenMAIC Noto Sans SC"', '漢字あア'),
-        document.fonts.load('40px "OpenMAIC Noto Sans KR"', '한글'),
+        document.fonts.load('40px "Ground School Noto Sans SC"', '漢字あア'),
+        document.fonts.load('40px "Ground School Noto Sans KR"', '한글'),
       ]);
       const signature = (text: string, font: string): number => {
         const canvas = document.createElement('canvas');
