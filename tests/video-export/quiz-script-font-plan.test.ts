@@ -40,7 +40,7 @@ describe('Quiz script-font plan', () => {
     const plan = planQuizScriptFonts(['<article>Решите уравнение Ёж</article>']);
 
     expect(plan.scripts).toEqual(['cyrillic']);
-    expect(plan.measurementCss).toContain('font-family:"OpenMAIC Noto Sans Cyrillic"');
+    expect(plan.measurementCss).toContain('font-family:"Ground School Noto Sans Cyrillic"');
     expect(plan.measurementCss).toContain('/vendor/video-export/fonts/');
     expect(plan.exportCss).toContain('assets/fonts/');
     expect(plan.assets.map(({ path }) => path)).toEqual([
@@ -58,7 +58,7 @@ describe('Quiz script-font plan', () => {
     const plan = planQuizScriptFonts(['<article dir="rtl">حل المسألة</article>']);
 
     expect(plan.scripts).toEqual(['arabic']);
-    expect(plan.measurementCss).toContain('font-family:"OpenMAIC Noto Sans Arabic"');
+    expect(plan.measurementCss).toContain('font-family:"Ground School Noto Sans Arabic"');
     expect(plan.measurementCss).toContain('/vendor/video-export/fonts/');
     expect(plan.exportCss).toContain('assets/fonts/');
     expect(plan.assets.map(({ path }) => path)).toEqual([
