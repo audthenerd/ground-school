@@ -545,8 +545,7 @@ function QuestionCard({
           <span
             className={cn(
               'w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0',
-              !isReview &&
-                'bg-primary/15 dark:bg-primary/50 text-primary dark:text-primary/70',
+              !isReview && 'bg-primary/15 dark:bg-primary/50 text-primary dark:text-primary/70',
               isReview &&
                 result.status === 'correct' &&
                 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400',

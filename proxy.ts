@@ -94,8 +94,7 @@ export async function proxy(request: NextRequest) {
 
     if (!accessPublic) {
       const cookie = request.cookies.get('openmaic_access');
-      const accessOk =
-        !!cookie?.value && (await verifyAccessTokenEdge(cookie.value, accessCode));
+      const accessOk = !!cookie?.value && (await verifyAccessTokenEdge(cookie.value, accessCode));
       if (!accessOk) {
         // API requests without valid cookie → 401
         if (pathname.startsWith('/api/')) {

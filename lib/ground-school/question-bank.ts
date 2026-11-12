@@ -108,7 +108,9 @@ export function formatQuestionBankObjectives(
   lines.push('## Outline / slide mapping rules');
   lines.push('- Name which question IDs each slide unlocks (e.g. unlocks: Q001, Q008).');
   lines.push('- Cover every item in this sortie at least once across Remember/Understand slides.');
-  lines.push('- Apply/Analyse scenes reuse taught distinctions; do not introduce new bank facts there.');
+  lines.push(
+    '- Apply/Analyse scenes reuse taught distinctions; do not introduce new bank facts there.',
+  );
   lines.push(
     '- Practice quiz scenes may only test facts taught earlier in THIS lesson (same IDs or close paraphrases). Label them as practice.',
   );

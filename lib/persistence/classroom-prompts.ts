@@ -103,14 +103,7 @@ export async function appendClassroomPrompt(input: {
        (id, stage_id, owner_id, scene_id, chat_session_id, prompt_text)
      VALUES ($1, $2, $3, $4, $5, $6)
      RETURNING id, stage_id, owner_id, scene_id, chat_session_id, prompt_text, created_at`,
-    [
-      id,
-      input.stageId,
-      input.ownerId,
-      input.sceneId ?? null,
-      input.chatSessionId ?? null,
-      text,
-    ],
+    [id, input.stageId, input.ownerId, input.sceneId ?? null, input.chatSessionId ?? null, text],
   );
   return mapPrompt(result.rows[0]!);
 }

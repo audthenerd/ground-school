@@ -1927,8 +1927,7 @@ export function Roundtable({
                         !isBubbleLoading &&
                         (() => {
                           const btnState = playbackView?.buttonState ?? 'none';
-                          const barsColor =
-                            bubbleRole === 'agent' ? 'bg-blue-500' : 'bg-primary';
+                          const barsColor = bubbleRole === 'agent' ? 'bg-blue-500' : 'bg-primary';
 
                           if (btnState === 'none') return null;
 

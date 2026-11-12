@@ -466,8 +466,7 @@ export function ElementPickLayer() {
 
         {/* instruction banner */}
         <div className="pointer-events-none absolute left-1/2 top-3 -translate-x-1/2 rounded-full border border-primary/50 bg-popover/95 px-3.5 py-1.5 text-[12px] font-medium text-foreground shadow-lg shadow-black/10 backdrop-blur">
-          <span className="text-primary dark:text-primary/70">{banner.lead}</span> ·{' '}
-          {banner.hint}
+          <span className="text-primary dark:text-primary/70">{banner.lead}</span> · {banner.hint}
         </div>
 
         {/* draggable + collapsible element panel, inside the canvas */}

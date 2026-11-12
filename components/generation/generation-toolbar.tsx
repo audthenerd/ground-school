@@ -639,10 +639,7 @@ export function CourseMaterialChip({
       ))}
       {material.status === 'uploading' && (
         <div className="absolute inset-x-0 bottom-0 h-0.5 bg-primary/10">
-          <div
-            className="h-full bg-primary transition-[width]"
-            style={{ width: `${percent}%` }}
-          />
+          <div className="h-full bg-primary transition-[width]" style={{ width: `${percent}%` }} />
         </div>
       )}
       {material.status === 'extracting' && (

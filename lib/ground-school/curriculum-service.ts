@@ -122,9 +122,7 @@ export async function getCurriculumOverview(slot: CurriculumSlot): Promise<Curri
     listCurriculumCandidates(slot),
   ]);
   // Sync each candidate under its creator's owner id (run ownership).
-  const views = await Promise.all(
-    candidates.map((c) => syncCandidateFromRun(c, c.createdBy)),
-  );
+  const views = await Promise.all(candidates.map((c) => syncCandidateFromRun(c, c.createdBy)));
   return {
     slot: CURRICULUM_SLOT_RSAF_COMMANDS,
     release: release ? releaseView(release) : null,

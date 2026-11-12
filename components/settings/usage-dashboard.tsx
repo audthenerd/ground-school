@@ -152,8 +152,14 @@ export function UsageDashboard() {
               x2: 0,
               y2: 1,
               colorStops: [
-                { offset: 0, color: isDark ? 'rgba(92, 164, 213,0.35)' : 'rgba(50, 136, 198,0.25)' },
-                { offset: 1, color: isDark ? 'rgba(92, 164, 213,0.02)' : 'rgba(50, 136, 198,0.02)' },
+                {
+                  offset: 0,
+                  color: isDark ? 'rgba(92, 164, 213,0.35)' : 'rgba(50, 136, 198,0.25)',
+                },
+                {
+                  offset: 1,
+                  color: isDark ? 'rgba(92, 164, 213,0.02)' : 'rgba(50, 136, 198,0.02)',
+                },
               ],
             },
           },

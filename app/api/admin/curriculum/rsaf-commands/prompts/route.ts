@@ -6,10 +6,7 @@ import { NextResponse } from 'next/server';
 
 import { isServerPersistenceConfigured } from '@/lib/config/feature-flags';
 import { listClassroomPrompts } from '@/lib/persistence/classroom-prompts';
-import {
-  CURRICULUM_SLOT_RSAF_COMMANDS,
-  getCurriculumRelease,
-} from '@/lib/persistence/curriculum';
+import { CURRICULUM_SLOT_RSAF_COMMANDS, getCurriculumRelease } from '@/lib/persistence/curriculum';
 import { adminForbiddenResponse, isAdminPrincipal } from '@/lib/server/identity/require-admin';
 import { withRequestOwner } from '@/lib/server/identity/with-owner';
 

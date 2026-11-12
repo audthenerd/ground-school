@@ -7,7 +7,7 @@ import {
   generatePBLV2ProjectSingleCall as generatePackage,
   type PlannerSingleCallFn,
 } from '@openmaic/generation';
-import type { PBLPlannerV2Input, PBLProjectV2 } from '@/lib/types/stage';
+import type { PBLPlannerV2Input, PBLProjectV2 } from '@/lib/pbl/v2/types';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 
 export type { PlannerSingleCallFn };

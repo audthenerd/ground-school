@@ -498,9 +498,7 @@ export function ModelPicker({
                   </span>
                 )}
               </span>
-              {!value && (
-                <Check className="size-3.5 shrink-0 text-primary dark:text-primary/70" />
-              )}
+              {!value && <Check className="size-3.5 shrink-0 text-primary dark:text-primary/70" />}
             </button>
           )}
 

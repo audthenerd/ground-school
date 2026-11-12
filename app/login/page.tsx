@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Loader2, Plane } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -44,23 +44,23 @@ export default function LoginPage() {
   const { t } = useI18n();
   const brand = useBrand();
   const { status, session, signIn } = useAuthSession();
-  const [errorHandled, setErrorHandled] = useState(false);
+  const errorHandledRef = useRef(false);
   const [signingIn, setSigningIn] = useState(false);
 
   useEffect(() => {
-    if (errorHandled) return;
+    if (errorHandledRef.current) return;
     const params = new URLSearchParams(window.location.search);
     const auth = params.get('auth');
     if (auth !== 'error') return;
     const reason = params.get('reason') || 'unknown';
     toast.error(t('auth.signInFailed', { reason }));
-    setErrorHandled(true);
+    errorHandledRef.current = true;
     params.delete('auth');
     params.delete('reason');
     const next = params.toString();
     const clean = next ? `/login?${next}` : '/login';
     window.history.replaceState({}, '', clean);
-  }, [errorHandled, t]);
+  }, [t]);
 
   const configured = session?.configured === true;
   const showNotConfigured = status === 'ready' && !configured;

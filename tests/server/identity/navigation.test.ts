@@ -225,9 +225,7 @@ describe('Google login gate', () => {
     stubGoogleAuthEnv();
     const response = await proxy(pageRequest('/classroom/abc'));
     expect(response.status).toBe(307);
-    expect(response.headers.get('location')).toBe(
-      'http://localhost/login?next=%2Fclassroom%2Fabc',
-    );
+    expect(response.headers.get('location')).toBe('http://localhost/login?next=%2Fclassroom%2Fabc');
     expect(response.headers.get('set-cookie')).toBeNull();
   });
 

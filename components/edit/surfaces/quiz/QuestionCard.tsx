@@ -105,8 +105,7 @@ export function QuestionCard({ question: q, index, expanded, onToggle }: Props) 
       <div
         className={cn(
           'flex items-center gap-2 py-2 pr-2.5 pl-3 transition-colors',
-          expanded &&
-            'bg-gradient-to-r from-primary/10 to-transparent dark:from-primary/[0.06]',
+          expanded && 'bg-gradient-to-r from-primary/10 to-transparent dark:from-primary/[0.06]',
         )}
       >
         <button
