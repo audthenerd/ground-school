@@ -21,6 +21,7 @@ import { createLogger } from '@/lib/logger';
 const log = createLogger('QuizView');
 import type { QuizQuestion } from '@/lib/types/stage';
 import { SpeechButton } from '@/components/audio/speech-button';
+import { reportQuizScore } from '@/lib/classroom/learner-analytics';
 import { gradeChoiceQuestions, isShortAnswer, type QuestionResult } from '@/lib/quiz/grading';
 import { renderQuizMathText } from '@/lib/quiz/math-text';
 import { writeDraftRecovery } from '@/lib/quiz/persistence';
@@ -836,6 +837,16 @@ export function QuizView({ questions, sceneId, stageId }: QuizViewProps) {
         return;
       }
       if (cancelled) return;
+      const earned = ordered.reduce((sum, r) => sum + r.earned, 0);
+      const total = questions.reduce((sum, q) => sum + (q.points ?? 1), 0);
+      reportQuizScore({
+        stageId,
+        sceneId,
+        attemptId,
+        earned,
+        total,
+        results: ordered,
+      });
       setResults(ordered);
       setPhase('reviewing');
     })();

@@ -32,7 +32,8 @@ interface DeepLinkStore {
  * course is `classroomId` and has that scene. Returns the applied scene id, or
  * null when nothing changed. The cursor is set without marking it as a pending
  * change: opening a link is not an edit, and the next navigation persists the
- * cursor as usual.
+ * cursor as usual. Learner analytics still observe the switch via the store's
+ * `currentSceneId` subscription.
  */
 export function applySceneDeepLink(
   search: string,

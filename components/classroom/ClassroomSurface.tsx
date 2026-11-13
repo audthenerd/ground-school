@@ -45,6 +45,7 @@ import {
   resolveClassroomSurfaceView,
 } from '@/lib/classroom/progressive-load-policy';
 import { useClassroomSession } from '@/lib/classroom/use-classroom-session';
+import { useLearnerAnalytics } from '@/lib/classroom/use-learner-analytics';
 import { applySceneDeepLink } from '@/lib/classroom/scene-deep-link';
 import { useRunCourse } from '@/lib/generation-run-client/use-run-course';
 import { pendingSceneFailureKey } from '@/lib/generation-run-client/failure-message';
@@ -275,6 +276,9 @@ export function ClassroomSurface({
   // mount this, so a course opened through the workbench pane converges its
   // narration exactly as the standalone page does.
   useNarrationAdoption(classroomId, { ready: !loading && !error, mayGenerate });
+
+  // Admin learner analytics: scene visits + dwell while the classroom is open.
+  useLearnerAnalytics(!loading && !error && !notFound && loadedClassroomId === classroomId);
 
   // A course a server-side generation run produces: the classroom follows the
   // run (its scenes, media and pauses) and sends it Retry.

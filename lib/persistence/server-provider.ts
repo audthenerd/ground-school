@@ -17,6 +17,8 @@ import { configuredLazyAssetByteStore } from '@/lib/persistence/asset-byte-store
 import { resolveAssetPendingTtlMs } from '@/lib/persistence/asset-pending-ttl';
 import { resolveAssetQuotaBytes } from '@/lib/persistence/asset-quota';
 import { ensureClassroomPromptsSchema } from '@/lib/persistence/classroom-prompts';
+import { ensureClassroomQuizScoresSchema } from '@/lib/persistence/classroom-quiz-scores';
+import { ensureClassroomSceneVisitsSchema } from '@/lib/persistence/classroom-scene-visits';
 import { ensureCurriculumSchema } from '@/lib/persistence/curriculum';
 import { ensureLegacyClassroomImportSchema } from '@/lib/persistence/legacy-classroom-imports';
 import { ensureOwnerMaterialSchema } from '@/lib/persistence/owner-materials';
@@ -89,6 +91,8 @@ async function createServerPersistenceProvider(
       await ensureOwnerAgentSchema(locked);
       await ensureCurriculumSchema(locked);
       await ensureClassroomPromptsSchema(locked);
+      await ensureClassroomSceneVisitsSchema(locked);
+      await ensureClassroomQuizScoresSchema(locked);
     });
     const withTransaction = nodePostgresTransaction(queryable);
     const byteStore = configuredLazyAssetByteStore(queryable);

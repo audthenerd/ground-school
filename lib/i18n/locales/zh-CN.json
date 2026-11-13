@@ -49,7 +49,22 @@
     "promptsTitle": "学员提问",
     "promptsEmpty": "尚无提问记录。",
     "backHome": "返回首页",
-    "forbidden": "需要管理员权限。"
+    "forbidden": "需要管理员权限。",
+    "promptsSeeLearners": "打开学员活动查看完整会话轨迹",
+    "backCurriculum": "返回课程管理",
+    "learnersLink": "学员活动",
+    "learnersTitle": "学员活动",
+    "learnersSubtitle": "查看线上课堂的幻灯片访问、测验分数与对话提问。",
+    "learnersLoading": "正在加载学员…",
+    "learnersEmpty": "尚无学员活动记录。",
+    "learnersVisits": "访问",
+    "learnersQuiz": "测验",
+    "learnersPrompts": "提问",
+    "learnersLastActive": "最近活动",
+    "learnersTimelineLoading": "正在加载时间线…",
+    "learnersTimelineEmpty": "该学员暂无事件。",
+    "learnersDwellOpen": "进行中",
+    "learnersQuizScore": "得分"
   },
   "toolbar": {
     "pdfParser": "解析器",

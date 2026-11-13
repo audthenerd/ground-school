@@ -246,6 +246,13 @@ export default function AdminCurriculumPage() {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {t('admin.curriculumSubtitle')}
           </p>
+          <Link
+            href="/admin/learners"
+            className="inline-flex items-center gap-1.5 mt-2 text-sm text-primary hover:underline"
+            data-testid="admin-learners-link"
+          >
+            {t('admin.learnersLink')}
+          </Link>
         </div>
         <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center">
           {(overview?.models?.length ?? 0) > 0 ? (
@@ -429,9 +436,17 @@ export default function AdminCurriculumPage() {
       </section>
 
       <section className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 p-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-3">
-          {t('admin.promptsTitle')}
-        </h2>
+        <div className="flex items-center justify-between gap-3 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
+            {t('admin.promptsTitle')}
+          </h2>
+          <Link
+            href="/admin/learners"
+            className="text-xs text-primary hover:underline"
+          >
+            {t('admin.promptsSeeLearners')}
+          </Link>
+        </div>
         {prompts.length === 0 ? (
           <p className="text-sm text-slate-500">{t('admin.promptsEmpty')}</p>
         ) : (
