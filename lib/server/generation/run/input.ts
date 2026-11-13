@@ -201,6 +201,19 @@ export function parseRunInput(raw: unknown): Parsed<GenerationRunInput> {
     };
   }
 
+  let llmModel: string | undefined;
+  if (body.llmModel !== undefined) {
+    if (typeof body.llmModel !== 'string' || !body.llmModel.trim()) {
+      return { ok: false, message: 'llmModel must be a non-empty "provider:model" string' };
+    }
+    const trimmed = body.llmModel.trim();
+    const colon = trimmed.indexOf(':');
+    if (colon <= 0 || colon === trimmed.length - 1) {
+      return { ok: false, message: 'llmModel must be "provider:model"' };
+    }
+    llmModel = trimmed;
+  }
+
   return {
     ok: true,
     value: {
@@ -212,6 +225,7 @@ export function parseRunInput(raw: unknown): Parsed<GenerationRunInput> {
       ...(learnerProfile ? { learnerProfile } : {}),
       outlineReview,
       ...(voice ? { voice } : {}),
+      ...(llmModel ? { llmModel } : {}),
       ...(releaseMaterials.value && materialIds.length > 0 ? { releaseMaterials: true } : {}),
     },
   };

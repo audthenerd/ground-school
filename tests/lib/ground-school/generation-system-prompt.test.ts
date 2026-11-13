@@ -67,6 +67,14 @@ describe('question bank', () => {
     expect(md).toContain('Teach:');
     expect(md).toContain('Target answer:');
     expect(md).toContain('Source:');
-    expect(md).toContain('unlocks');
+    expect(md).toContain('twenty bank items');
+  });
+
+  it('locks the classroom shape in the domain brief', () => {
+    const brief = loadGenerationSystemPrompt();
+    expect(brief).toContain('exactly **11** scenes');
+    expect(brief).toContain('quizConfig.questionCount: 20');
+    expect(brief).toContain('actual quiz');
+    expect(brief.toLowerCase()).not.toMatch(/generated quizzes are practice/);
   });
 });

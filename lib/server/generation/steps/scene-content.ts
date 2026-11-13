@@ -23,8 +23,14 @@ import type {
 import { resolveVocationalActive } from '@/lib/config/feature-flags';
 import { MAX_VISION_IMAGES } from '@/lib/constants/generation';
 import { sortDocumentImagesForVision } from '@/lib/document/bundle';
+import { SORTIE_QUIZ_QUESTION_COUNT } from '@/lib/ground-school/classroom-format';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
-import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
+import {
+  appendDraftQuestions,
+  DEFAULT_SORTIE_TOPICS,
+} from '@/lib/ground-school/question-bank';
+import { sampleQuizQuestionsFromBank } from '@/lib/ground-school/question-bank-quiz';
+import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
 import { generatePBLV2Project } from '@/lib/pbl/v2/agents/planner';
 
 import {
@@ -300,6 +306,41 @@ export async function generateSceneContent(
     `Generating content: "${effectiveOutline.title}" (${effectiveOutline.type}) [model=${modelString}]`,
   );
 
+  // RSAF Commands sortie: seed the terminal quiz from the question bank
+  // (exact wording) instead of LLM-invented stems.
+  if (
+    effectiveOutline.type === 'quiz' &&
+    requirements?.requirement &&
+    isSortieRequirement(requirements.requirement)
+  ) {
+    const seed = `${effectiveOutline.id}:${effectiveOutline.order}:${requirements.requirement.length}`;
+    const questions = sampleQuizQuestionsFromBank({
+      topics: DEFAULT_SORTIE_TOPICS,
+      count: effectiveOutline.quizConfig?.questionCount ?? SORTIE_QUIZ_QUESTION_COUNT,
+      seed,
+    });
+    if (questions.length === 0) {
+      throw new StepRefusal<SceneContentRefusal>(
+        'generation-failed',
+        `Question bank has no items for quiz: ${effectiveOutline.title}`,
+      );
+    }
+    log.info(
+      `Seeded quiz from question bank: ${questions.length} items for "${effectiveOutline.title}"`,
+    );
+    return {
+      content: { questions },
+      effectiveOutline: {
+        ...effectiveOutline,
+        quizConfig: {
+          questionCount: questions.length,
+          difficulty: effectiveOutline.quizConfig?.difficulty ?? 'medium',
+          questionTypes: effectiveOutline.quizConfig?.questionTypes ?? ['single', 'multiple'],
+        },
+      },
+    };
+  }
+
   const content = await generateContent(effectiveOutline, aiCall, {
     assignedImages,
     imageMapping: visionImageMapping,
@@ -332,6 +373,40 @@ export async function generateSceneContent(
       'generation-failed',
       `Failed to generate content: ${effectiveOutline.title}`,
     );
+  }
+
+  // Capture LLM-invented quiz stems (non-sortie or fallback path) as Draft
+  // bank rows for Sheets re-import.
+  if (
+    effectiveOutline.type === 'quiz' &&
+    content &&
+    'questions' in content &&
+    Array.isArray(content.questions)
+  ) {
+    try {
+      const added = appendDraftQuestions(
+        content.questions.map((q) => ({
+          question: q.question,
+          fieldType:
+            q.type === 'multiple' ? 'Checkbox' : q.type === 'short_answer' ? 'Long Answer' : 'Radio',
+          options: q.options?.map((o) => o.label) ?? [],
+          correctAnswer:
+            q.options && q.answer
+              ? q.answer
+                  .map((value) => q.options?.find((o) => o.value === value)?.label ?? value)
+                  .join('; ')
+              : '',
+          explanation: q.analysis ?? '',
+          topic: DEFAULT_SORTIE_TOPICS[0],
+          source: 'generation',
+        })),
+      );
+      if (added.length > 0) {
+        log.info(`Recorded ${added.length} Draft question(s) from generated quiz`);
+      }
+    } catch (error) {
+      log.warn('Failed to append Draft quiz questions to the bank', error);
+    }
   }
 
   log.info(`Content generated successfully: "${effectiveOutline.title}"`);

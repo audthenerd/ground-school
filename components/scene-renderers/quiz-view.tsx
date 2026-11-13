@@ -204,6 +204,15 @@ function QuizCover({
         </div>
       </motion.div>
 
+      <motion.p
+        initial={{ y: 10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.25 }}
+        className="max-w-sm text-center text-xs text-gray-500 dark:text-gray-400 z-10 px-4"
+      >
+        {t('quiz.scoreRecordedNotice')}
+      </motion.p>
+
       <motion.button
         initial={{ y: 10, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

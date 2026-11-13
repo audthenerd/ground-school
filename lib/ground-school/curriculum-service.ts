@@ -5,7 +5,9 @@
 import {
   approveCurriculumCandidate,
   CurriculumApproveError,
+  CurriculumDeleteError,
   CURRICULUM_SLOT_RSAF_COMMANDS,
+  deleteCurriculumCandidate as deleteCurriculumCandidateRow,
   getCurriculumCandidate,
   getCurriculumRelease,
   insertCurriculumCandidate,
@@ -15,15 +17,29 @@ import {
   type CurriculumReleaseRow,
   type CurriculumSlot,
 } from '@/lib/persistence/curriculum';
+import {
+  currentCurriculumLlmModel,
+  listCurriculumChatModels,
+  resolveCurriculumLlmModel,
+  type CurriculumModelOption,
+} from '@/lib/ground-school/curriculum-models';
 import { SORTIE_REQUIREMENT } from '@/lib/ground-school/sortie-briefing';
+import { createLogger } from '@/lib/logger';
+import { getOwnerScopedDocumentStore } from '@/lib/server/agent-runtime/owner-scoped-documents';
 import { parseRunInput } from '@/lib/server/generation/run/input';
 import { startGenerationRun, startRefusal } from '@/lib/server/generation/run/start';
-import { readGenerationRun } from '@/lib/server/generation/run/store';
+import {
+  discardGenerationRun,
+  readGenerationRun,
+  RunCommandConflictError,
+} from '@/lib/server/generation/run/store';
 import type { OwnerPrincipal } from '@/lib/server/identity/types';
 import { requiredModelRefusal } from '@/lib/server/generate-classroom-job';
 
-export { CURRICULUM_SLOT_RSAF_COMMANDS, CurriculumApproveError };
+export { CURRICULUM_SLOT_RSAF_COMMANDS, CurriculumApproveError, CurriculumDeleteError };
 export type { CurriculumSlot };
+
+const log = createLogger('CurriculumService');
 
 export interface CurriculumCandidateView {
   id: string;
@@ -49,6 +65,10 @@ export interface CurriculumOverview {
     approvedAt: string;
   } | null;
   candidates: CurriculumCandidateView[];
+  /** Authorized chat models admins may pick for generation. */
+  models: CurriculumModelOption[];
+  /** Current deployment default / last-applied llm slot. */
+  currentModel: string | null;
 }
 
 function releaseView(row: CurriculumReleaseRow) {
@@ -127,6 +147,8 @@ export async function getCurriculumOverview(slot: CurriculumSlot): Promise<Curri
     slot: CURRICULUM_SLOT_RSAF_COMMANDS,
     release: release ? releaseView(release) : null,
     candidates: views,
+    models: listCurriculumChatModels(),
+    currentModel: currentCurriculumLlmModel(),
   };
 }
 
@@ -134,7 +156,9 @@ export async function createCurriculumCandidates(input: {
   principal: OwnerPrincipal;
   request: Request;
   count?: number;
-}): Promise<{ candidates: CurriculumCandidateView[] }> {
+  /** Optional `provider:model` from the deployment allowlist. */
+  model?: string;
+}): Promise<{ candidates: CurriculumCandidateView[]; model: string | null }> {
   const count = Math.min(Math.max(input.count ?? 3, 1), 5);
   const { ownerId } = input.principal;
 
@@ -147,10 +171,16 @@ export async function createCurriculumCandidates(input: {
     });
   }
 
+  let appliedModel: string | null = currentCurriculumLlmModel();
+  if (input.model?.trim()) {
+    appliedModel = resolveCurriculumLlmModel(input.model.trim());
+  }
+
   const parsed = parseRunInput({
     requirement: SORTIE_REQUIREMENT,
     materialIds: [],
     outlineReview: 'auto',
+    ...(appliedModel ? { llmModel: appliedModel } : {}),
   });
   if (!parsed.ok) {
     throw Object.assign(new Error(parsed.message), {
@@ -160,6 +190,7 @@ export async function createCurriculumCandidates(input: {
     });
   }
 
+  const modelLabel = appliedModel ? ` · ${appliedModel}` : '';
   const created: CurriculumCandidateView[] = [];
   for (let i = 0; i < count; i += 1) {
     try {
@@ -172,7 +203,7 @@ export async function createCurriculumCandidates(input: {
         slot: CURRICULUM_SLOT_RSAF_COMMANDS,
         runId: run.id,
         createdBy: ownerId,
-        label: `Candidate ${i + 1}`,
+        label: `Candidate ${i + 1}${modelLabel}`,
       });
       created.push(await syncCandidateFromRun(row, ownerId));
     } catch (error) {
@@ -188,7 +219,7 @@ export async function createCurriculumCandidates(input: {
     }
   }
 
-  return { candidates: created };
+  return { candidates: created, model: appliedModel };
 }
 
 export async function approveCurriculumRelease(input: {
@@ -213,4 +244,42 @@ export async function getPublicCurriculumStageId(
 ): Promise<string | null> {
   const release = await getCurriculumRelease(slot);
   return release?.stageId ?? null;
+}
+
+/**
+ * Delete a curriculum candidate classroom: clear live release if needed,
+ * delete the stage document (or discard an in-progress run), then drop the row.
+ */
+export async function deleteCurriculumCandidate(input: {
+  candidateId: string;
+}): Promise<{ clearedRelease: boolean; stageId: string | null }> {
+  const existing = await getCurriculumCandidate(input.candidateId);
+  if (!existing || existing.slot !== CURRICULUM_SLOT_RSAF_COMMANDS) {
+    throw new CurriculumDeleteError('not_found', 'Candidate not found');
+  }
+
+  const { deleted, clearedRelease, stageId } = await deleteCurriculumCandidateRow({
+    slot: CURRICULUM_SLOT_RSAF_COMMANDS,
+    candidateId: input.candidateId,
+  });
+
+  if (stageId) {
+    try {
+      const store = await getOwnerScopedDocumentStore(deleted.createdBy);
+      await store.deleteDocument(stageId);
+    } catch (error) {
+      // Stage may already be gone; curriculum row is already removed.
+      log.warn(`Failed to delete classroom stage ${stageId} for candidate ${deleted.id}`, error);
+    }
+  } else {
+    try {
+      await discardGenerationRun(deleted.runId, deleted.createdBy);
+    } catch (error) {
+      if (!(error instanceof RunCommandConflictError)) {
+        log.warn(`Failed to discard run ${deleted.runId} for candidate ${deleted.id}`, error);
+      }
+    }
+  }
+
+  return { clearedRelease, stageId };
 }

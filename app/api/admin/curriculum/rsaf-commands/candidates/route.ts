@@ -23,8 +23,9 @@ export async function POST(req: NextRequest) {
     }
 
     let count: number | undefined;
+    let model: string | undefined;
     try {
-      const body = (await req.json()) as { count?: unknown };
+      const body = (await req.json()) as { count?: unknown; model?: unknown };
       if (body.count !== undefined) {
         if (typeof body.count !== 'number' || !Number.isFinite(body.count)) {
           return NextResponse.json(
@@ -33,6 +34,15 @@ export async function POST(req: NextRequest) {
           );
         }
         count = body.count;
+      }
+      if (body.model !== undefined) {
+        if (typeof body.model !== 'string' || !body.model.trim()) {
+          return NextResponse.json(
+            { error: 'invalid_model' },
+            { status: 400, headers: responseHeaders },
+          );
+        }
+        model = body.model.trim();
       }
     } catch {
       // Empty body → default count.
@@ -43,6 +53,7 @@ export async function POST(req: NextRequest) {
         principal,
         request: req,
         count,
+        model,
       });
       return NextResponse.json(result, { status: 202, headers: responseHeaders });
     } catch (error) {

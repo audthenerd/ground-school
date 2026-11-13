@@ -280,3 +280,48 @@ export class CurriculumApproveError extends Error {
     this.name = 'CurriculumApproveError';
   }
 }
+
+/**
+ * Remove a candidate row. Clears the live release when it points at this
+ * candidate (FK requires that order). Does not delete the stage document —
+ * callers that own the stage should delete it separately.
+ */
+export async function deleteCurriculumCandidate(input: {
+  slot: CurriculumSlot;
+  candidateId: string;
+}): Promise<{
+  deleted: CurriculumCandidateRow;
+  clearedRelease: boolean;
+  stageId: string | null;
+}> {
+  const db = await curriculumDb();
+  const candidate = await getCurriculumCandidate(input.candidateId);
+  if (!candidate || candidate.slot !== input.slot) {
+    throw new CurriculumDeleteError('not_found', 'Candidate not found');
+  }
+
+  const release = await getCurriculumRelease(input.slot);
+  let clearedRelease = false;
+  if (release?.candidateId === candidate.id) {
+    await db.query(`DELETE FROM curriculum_releases WHERE slot = $1`, [input.slot]);
+    clearedRelease = true;
+  }
+
+  await db.query(`DELETE FROM curriculum_candidates WHERE id = $1`, [candidate.id]);
+
+  return {
+    deleted: candidate,
+    clearedRelease,
+    stageId: candidate.stageId,
+  };
+}
+
+export class CurriculumDeleteError extends Error {
+  constructor(
+    readonly code: 'not_found',
+    message: string,
+  ) {
+    super(message);
+    this.name = 'CurriculumDeleteError';
+  }
+}

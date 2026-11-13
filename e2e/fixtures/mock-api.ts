@@ -222,6 +222,7 @@ export class MockApi {
     const prompts = [...(options.prompts ?? [])];
     const generateCalls: unknown[] = [];
     const approveCalls: unknown[] = [];
+    const deleteCalls: unknown[] = [];
 
     const overview = () => ({
       release: release
@@ -244,6 +245,15 @@ export class MockApi {
         outlineTitle: c.outlineTitle ?? null,
         createdAt: c.createdAt ?? new Date(0).toISOString(),
       })),
+      models: [
+        {
+          id: 'google:gemini-3.5-flash-lite',
+          providerId: 'google',
+          modelId: 'gemini-3.5-flash-lite',
+          label: 'google / gemini-3.5-flash-lite',
+        },
+      ],
+      currentModel: 'google:gemini-3.5-flash-lite',
     });
 
     await this.page.route('**/api/admin/curriculum/rsaf-commands**', async (route) => {
@@ -293,10 +303,23 @@ export class MockApi {
         };
         return route.fulfill({ json: { release } });
       }
+      const deleteMatch = path.match(
+        /^\/api\/admin\/curriculum\/rsaf-commands\/candidates\/([^/]+)$/,
+      );
+      if (deleteMatch && method === 'DELETE') {
+        const candidateId = decodeURIComponent(deleteMatch[1]!);
+        deleteCalls.push({ candidateId });
+        const clearedRelease = release?.candidateId === candidateId;
+        if (clearedRelease) release = null;
+        candidates = candidates.filter((c) => c.id !== candidateId);
+        return route.fulfill({
+          json: { ok: true, clearedRelease, stageId: null },
+        });
+      }
       return route.fulfill({ status: 404, body: 'Not found' });
     });
 
-    return { generateCalls, approveCalls, overview };
+    return { generateCalls, approveCalls, deleteCalls, overview };
   }
 }
 

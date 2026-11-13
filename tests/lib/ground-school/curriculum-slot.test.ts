@@ -11,4 +11,10 @@ describe('curriculum slot', () => {
   it('still keys generation on the fixed sortie requirement text', () => {
     expect(SORTIE_REQUIREMENT).toContain('RSAF Commands');
   });
+
+  it('requires the fixed 9+1+20 classroom shape in the sortie requirement', () => {
+    expect(SORTIE_REQUIREMENT).toContain('Exactly nine type "slide"');
+    expect(SORTIE_REQUIREMENT).toContain('Exactly one type "interactive"');
+    expect(SORTIE_REQUIREMENT).toContain('questionCount: 20');
+  });
 });

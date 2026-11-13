@@ -76,5 +76,10 @@ test.describe('Admin curriculum', () => {
     await page.getByTestId('admin-generate-candidates').click();
     await expect.poll(() => admin.generateCalls.length).toBe(1);
     await expect(page.getByTestId(/admin-candidate-cand-/)).toHaveCount(2);
+
+    page.once('dialog', (dialog) => dialog.accept());
+    await page.getByTestId('admin-candidate-cand-ready').getByTestId('admin-delete-candidate').click();
+    await expect.poll(() => admin.deleteCalls.length).toBe(1);
+    await expect(page.getByTestId('admin-candidate-cand-ready')).toHaveCount(0);
   });
 });
