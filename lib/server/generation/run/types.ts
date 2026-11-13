@@ -73,8 +73,9 @@ export type GenerationRunAgents =
   | { mode: 'preset'; agentIds: string[] };
 
 /**
- * What a run generates from. No keys and no models: every model and provider
- * resolves through the owner's capability slots.
+ * What a run generates from. Models normally resolve through the owner's
+ * capability slots; optional {@link llmModel} overrides chat stages for that
+ * run with an authorized deployment model (curriculum picker).
  */
 export interface GenerationRunInput {
   requirement: string;
@@ -84,6 +85,11 @@ export interface GenerationRunInput {
   taskEngine: boolean;
   agents: GenerationRunAgents;
   learnerProfile?: { nickname?: string; bio?: string };
+  /**
+   * Optional `provider:model` from the deployment allowlist. When set, chat
+   * stages for this run use it instead of the locked/default `llm` slot.
+   */
+  llmModel?: string;
   /**
    * How the outline is confirmed:
    * - `wait` holds the run for a `confirm-outline` command;

@@ -54,16 +54,15 @@ export async function POST(req: NextRequest) {
 
     const isZh = language === 'zh-CN';
 
-    // Domain brief (§9): generated quizzes are practice; explain, do not just
-    // mark. The JSON score field remains for the existing client contract —
-    // treat it as practice feedback weight, not a score of record.
+    // Domain brief (§9): RSAF Commands quiz is an actual assessment; explain,
+    // do not just mark.
     const systemPrompt = withGenerationSystemPrompt(
       isZh
-        ? `你是一位专业的教育评估专家，正在为练习题（非记分考试）提供反馈。
+        ? `你是一位专业的教育评估专家，正在为正式测验题目评分并给出反馈。
 说明为什么正确选项正确，以及所选干扰项为何有吸引力；错误是信息，不是失败。
 必须以如下 JSON 格式回复（不要包含其他内容）：
 {"score": <0到${points}的整数>, "comment": "<一两句说明对错原因的评语>"}`
-        : `You are a professional educational assessor giving feedback on a practice quiz item (not a score of record).
+        : `You are a professional educational assessor grading a quiz assessment item.
 Explain why the correct answer is correct, and why a chosen distractor was attractive. An error is information, not a failure — no praise inflation, no admonishment.
 You must reply in the following JSON format only (no other content):
 {"score": <integer from 0 to ${points}>, "comment": "<one or two sentences naming what was wrong or right and why>"}`,
@@ -71,10 +70,10 @@ You must reply in the following JSON format only (no other content):
 
     const userPrompt = isZh
       ? `题目：${question}
-满分：${points}分（练习反馈用，非正式成绩）
+满分：${points}分
 ${commentPrompt ? `评分要点：${commentPrompt}\n` : ''}学生答案：${userAnswer}`
       : `Question: ${question}
-Full marks: ${points} points (practice feedback only — not a score of record)
+Full marks: ${points} points
 ${commentPrompt ? `Grading guidance: ${commentPrompt}\n` : ''}Student answer: ${userAnswer}`;
 
     const result = await callLLM(

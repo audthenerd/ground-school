@@ -12,9 +12,9 @@
 export const SORTIE_INSTRUCTIONS = [
   'You are about to start a mini classroom on RSAF Commands.',
   '',
-  'Follow the lesson with your instructors. It prepares you for a practice quiz.',
+  'Follow the lesson with your instructors. It prepares you for a quiz.',
   '',
-  'When the classroom ends, you will attempt that practice quiz.',
+  'When the classroom ends, you will attempt that quiz.',
 ].join('\n');
 
 /**
@@ -52,21 +52,27 @@ LEVEL — structure every lesson on Bloom's taxonomy, lowest to highest
 Stop at Analyse. Do not generate Evaluate or Create scenes.
 Weight roughly 20% Remember, 30% Understand, 30% Apply, 20% Analyse.
 
-SCENES
-Open with one short slide on why command boundaries matter to someone building
-software for this customer — one concrete decision they would make better.
-Then dense Remember/Understand slides that cover every bank item in this sortie
-(name which IDs each slide unlocks). Scenario/discussion for Apply and Analyse.
-A simulation only where a relationship is genuinely structural and a diagram
-would not do.
+SCENES — fixed shape (exactly 11 scenes; do not add or omit)
+1–9. Exactly nine type "slide" lecture scenes.
+     Scene 1: why command boundaries matter to someone building software for
+     this customer — one concrete decision they would make better (short).
+     Scenes 2–8: dense Remember/Understand covering every bank item in this
+     sortie (name which IDs each slide unlocks).
+     Scene 9: three things to retain, phrased as the learner would use them
+     on the quiz.
+10. Exactly one type "interactive" page for Apply/Analyse (diagram or
+    simulation). The Trainee matches a need to the right command/group or
+    distinguishes look-alikes (e.g. ADOC vs APGC).
+11. Exactly one type "quiz" scene last, with quizConfig.questionCount: 20.
 Never put AI grounding rules, Bloom weights, or agent-role policy on slides.
-Close with three things to retain, phrased as the learner would use them on the quiz.
+Do not insert mid-lesson quizzes. Do not add PBL scenes.
 
 QUIZ SCENES
-Generate one practice quiz after the teaching slides, testing only facts taught
-earlier (same bank IDs or close paraphrases). Label it practice. It is not
-assessment. Scored assessment comes from the separately reviewed question bank
-and is never generated here.
+The terminal scene is an actual quiz (assessment), not a practice quiz. Title
+it "RSAF Commands Quiz" (never "practice"). Its twenty questions are taken
+from the RSAF Commands question bank (exact wording); do not invent quiz
+stems. quizConfig must be
+{ "questionCount": 20, "difficulty": "medium", "questionTypes": ["single", "multiple"] }.
 
 VOCABULARY
 Use the bank/source terms exactly. Expand every acronym on first use. Do not

@@ -37,7 +37,13 @@ providers:
   openai:
     preset: openai
     apiKey: ${OPENAI_API_KEY}
-    models: [gpt-5.5]
+    # Allowlist: Settings + admin curriculum picker can switch among these.
+    models: [gpt-5.5, gpt-5.4-mini]
+
+  # google:
+  #   preset: google
+  #   apiKey: ${GOOGLE_API_KEY}
+  #   models: [gemini-3.5-flash-lite, gemini-2.5-flash, gemini-2.5-pro]
 
   # --- Optional providers ----------------------------------------------------
 
@@ -45,6 +51,7 @@ providers:
   # anthropic:
   #   preset: anthropic
   #   apiKey: ${ANTHROPIC_API_KEY}
+  #   models: [claude-sonnet-4-6, claude-haiku-4-5]
 
   # Web search.
   # tavily:
@@ -133,8 +140,11 @@ slots:
 
 # Slots fixed for everyone, with every slot below them ("lock: all" fixes
 # every slot). Each must be written under slots above (null counts).
+# Leave LLM unlocked so admins can switch models in Settings / curriculum.
 # lock: [video]
+# lock: all
 
 # false: users cannot add providers, keys or token plans; they only choose
 # among the providers declared above, for the slots lock leaves open.
 # allowUserKeys: true
+allowUserKeys: false

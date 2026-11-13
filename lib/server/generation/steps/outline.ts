@@ -18,8 +18,10 @@ import {
   logFallbackFired,
 } from '@/lib/server/llm-fallback';
 import { buildPrompt, PROMPT_IDS } from '@/lib/prompts';
+import { normalizeSortieOutlines } from '@/lib/ground-school/classroom-format';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
+import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
 import {
   formatImageDescription,
   formatImagePlaceholder,
@@ -801,9 +803,19 @@ async function streamOutlines(
     });
   }
 
+  const uniquified = uniquifyMediaElementIds(parsedOutlines);
+  const outlines = isSortieRequirement(requirement)
+    ? normalizeSortieOutlines(uniquified)
+    : uniquified;
+  if (isSortieRequirement(requirement)) {
+    log.info(
+      `Sortie outline normalized to ${outlines.length} scenes (9 slide + 1 interactive + 1 quiz/20)`,
+    );
+  }
+
   return {
     // Replace sequential gen_img_N/gen_vid_N with globally unique IDs
-    outlines: uniquifyMediaElementIds(parsedOutlines),
+    outlines,
     languageDirective: languageDirective || DEFAULT_LANGUAGE_DIRECTIVE,
     courseTitle: courseTitle || undefined,
     taskEngineMode,

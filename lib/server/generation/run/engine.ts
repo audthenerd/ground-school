@@ -52,6 +52,8 @@ import { splitLongSpeechActions } from '@/lib/audio/tts-utils';
 import { validateAppScene } from '@/lib/document-store/validators';
 import { sceneCarriesMediaReference } from '@/lib/media/generated-media-references';
 import { buildVideoManifestFromOutlines } from '@/lib/media/video-manifest';
+import { normalizeSortieOutlines } from '@/lib/ground-school/classroom-format';
+import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
 import { createLogger } from '@/lib/logger';
 import { BUILT_IN_AGENTS } from '@/lib/orchestration/registry/built-in';
 import type { AgentConfig } from '@/lib/orchestration/registry/types';
@@ -516,14 +518,21 @@ async function executeClaimedRun(
               ...materialImages(),
               agents: agents().agents.agents,
               languageDirective,
-              // The first scene is generated with the session's requirements;
-              // the classroom generates the rest with the task-engine flag only.
-              requirements:
-                sceneIndex === 0
-                  ? runRequirements(input, research?.webSearch === true)
-                  : taskEngineMode
-                    ? ({ taskEngineMode: true } as UserRequirements)
-                    : undefined,
+              // Pass full requirements for scene 0, quiz scenes (bank seeding),
+              // and whenever the requirement is the fixed RSAF sortie. Other
+              // scenes keep the lean task-engine flag when that mode is on.
+              requirements: (() => {
+                const full = runRequirements(input, research?.webSearch === true);
+                const outlineType = outlines[sceneIndex]?.type;
+                if (
+                  sceneIndex === 0 ||
+                  outlineType === 'quiz' ||
+                  isSortieRequirement(input.requirement)
+                ) {
+                  return full;
+                }
+                return taskEngineMode ? ({ taskEngineMode: true } as UserRequirements) : undefined;
+              })(),
             },
             { log, signal: callSignal },
           ),
@@ -832,7 +841,10 @@ async function executeClaimedRun(
     // as generated is always confirmable unchanged.
     const normalized = normalizeSceneOutlines(result.outlines);
     if (!normalized.ok) throw new Error(`The generated outline is unusable: ${normalized.message}`);
-    result = { ...result, outlines: normalized.value };
+    const outlines = isSortieRequirement(input.requirement)
+      ? normalizeSortieOutlines(normalized.value)
+      : normalized.value;
+    result = { ...result, outlines };
     const confirmed: GenerationRunOutline = {
       outlines: result.outlines,
       languageDirective: result.languageDirective,

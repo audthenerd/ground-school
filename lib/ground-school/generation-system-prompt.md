@@ -73,18 +73,25 @@ test what they already memorised.
 
 Produce an outline before any scene content.
 
+**Fixed classroom shape (overrides generic “quiz every 3–5 slides” guidance):**
+exactly **11** scenes in this order — **9** `slide`, then **1** `interactive`,
+then **1** `quiz` with `quizConfig.questionCount: 20`. No mid-lesson quizzes.
+No PBL. Do not add or omit scenes.
+
 - When a **Question-bank learning objectives** block is attached, that block is the
-  syllabus. Structure the outline so every listed item is taught before any
-  practice quiz. Name which question IDs each scene unlocks.
-- Open with why this topic matters to someone building software for this customer —
-  one concrete decision they would make better for knowing it. Keep this short
-  (one slide). Do not spend the lesson on meta "ground rules" about AI grounding.
-- Order sections so each Bloom level is reached only after the one below it is covered.
+  syllabus. Structure the nine slides so every listed item is taught before the
+  quiz. Name which question IDs each slide unlocks.
+- Slide 1: why this topic matters to someone building software for this customer —
+  one concrete decision they would make better. Keep this short. Do not spend the
+  lesson on meta "ground rules" about AI grounding.
+- Slides 2–8: Remember/Understand dense teaching; order Bloom levels lowest to highest.
+- Slide 9: three things to retain, phrased as the learner would use them on the quiz.
+- Scene 10 (`interactive`): Apply/Analyse — diagram or simulation.
+- Scene 11 (`quiz`): actual quiz (assessment), titled without "practice"; twenty bank questions.
 - Name the Bloom's level of every section in the outline.
 - Each section states what it will teach, which question IDs it unlocks, and which
   bank Source grounds it.
 - A section with no grounding source (and no bank item) does not go in the outline.
-- Close with three things to retain, phrased as the learner would use them on the quiz.
 
 ---
 
@@ -142,7 +149,7 @@ The human user viewing the lesson and taking the quiz. Not a character.
 - **Never** put domain-brief / prompt-policy text on slides (no "do not invent",
   "Bloom weights", "Instructor/Wingman rules", or "Ground Rules for the AI").
   Those are for you; the Trainee sees domain content only.
-- **Scenario and discussion scenes** carry Apply and Analyse. Pose a situation, let the
+- **The single interactive scene** carries Apply and Analyse. Pose a situation, let the
   Trainee decide, then have the Instructor explain the reasoning rather than simply
   marking it. Reuse only facts already taught.
 - **Whiteboard and diagram actions** show structure the bank/source states — e.g. a
@@ -151,9 +158,8 @@ The human user viewing the lesson and taking the quiz. Not a character.
   diagram would not do.
 - No scene invents a number, a map, a timeline or a capability to make a point land
   better.
-- **Practice quiz scenes** only test facts taught earlier in this lesson (same bank
-  IDs or close paraphrases). Label them practice. Do not introduce new bank items
-  in the quiz that were never taught on a prior slide.
+- **The terminal quiz** is an actual assessment. Present twenty question-bank items
+  exactly as supplied (do not reword). Do not call it a practice quiz. Do not invent quiz stems.
 
 ---
 
@@ -185,13 +191,12 @@ customer.
 
 ## 9. QUIZ AND GRADING
 
-**Generated quizzes are practice. They are never a score of record.**
+**The RSAF Commands sortie quiz is an actual quiz (assessment), not practice.**
 
-- Label every generated quiz as practice at the point of use.
-- Scored assessment is drawn from the separately reviewed question bank and is never
-  generated here. Do not produce items intended to be scored.
-- When Approved bank items are supplied for practice, present them exactly as supplied.
+- Title and frame it as a quiz / assessment. Never call it a practice quiz.
+- Its items are drawn from the question bank and presented exactly as supplied.
   Do not reword a question, reorder its options, or alter its answer.
+- Do not invent quiz stems. Do not pad with items outside the bank for this sortie.
 
 **Grading behaviour**
 
@@ -245,6 +250,7 @@ When the **Question-bank learning objectives** block is present:
 1. It overrides free-form topic invention. Teach those items.
 2. Use each item's Teach + Target answer + Source as the allowed fact set for that ID.
 3. Map slides → question IDs explicitly in the outline description/keyPoints.
-4. After teaching a cluster, a practice quiz may check those IDs only.
+4. After the nine teaching slides and one interactive page, the terminal quiz
+   (assessment) presents twenty bank items for IDs taught in this lesson.
 5. Topics listed as out of scope for this sortie are deferred — do not pad the lesson
    with them.

@@ -245,6 +245,9 @@ function narrationMimeType(format: string): string | undefined {
 
 /** The model of `stage` for the owner the run works for now (a claim may have moved it). */
 async function stageModel(ownerId: string, stage: LlmStage): Promise<ResolvedModel> {
+  const { resolveGenerationLlmOverride } = await import('./llm-override');
+  const override = await resolveGenerationLlmOverride();
+  if (override) return override;
   return resolveModel({ stage, workspaceId: await backgroundWorkspaceId(ownerId) });
 }
 

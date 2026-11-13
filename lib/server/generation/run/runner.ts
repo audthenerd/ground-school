@@ -89,13 +89,17 @@ export async function runClaimedGenerationRun(
   }, heartbeatIntervalMs);
   heartbeat.unref?.();
   try {
-    return await executeGenerationRun(claim, {
-      services,
-      signal: abort.signal,
-      onLeaseReleased: () => {
-        released = true;
-      },
-    });
+    const { withGenerationLlmOverride } = await import('./llm-override');
+    const execute = () =>
+      executeGenerationRun(claim, {
+        services,
+        signal: abort.signal,
+        onLeaseReleased: () => {
+          released = true;
+        },
+      });
+    const llmModel = claim.run.input.llmModel?.trim();
+    return await (llmModel ? withGenerationLlmOverride(llmModel, execute) : execute());
   } catch (error) {
     if (!(error instanceof ModelAuthorizationError)) throw error;
     return await refuseGenerationRunExecution(claim.lease, {

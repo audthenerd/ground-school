@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Check, Loader2, RefreshCw, Shield } from 'lucide-react';
+import { ArrowLeft, Check, Loader2, RefreshCw, Shield, Trash2 } from 'lucide-react';
 
 import { useAuthSession } from '@/lib/hooks/use-auth-session';
 import { useI18n } from '@/lib/hooks/use-i18n';
@@ -22,6 +22,13 @@ interface CandidateView {
   createdAt: string;
 }
 
+interface ModelOption {
+  id: string;
+  providerId: string;
+  modelId: string;
+  label: string;
+}
+
 interface Overview {
   release: {
     stageId: string;
@@ -30,6 +37,8 @@ interface Overview {
     approvedAt: string;
   } | null;
   candidates: CandidateView[];
+  models?: ModelOption[];
+  currentModel?: string | null;
 }
 
 interface PromptRow {
@@ -51,7 +60,9 @@ export default function AdminCurriculumPage() {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [approvingId, setApprovingId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedModel, setSelectedModel] = useState<string>('');
 
   const load = useCallback(async () => {
     setError(null);
@@ -69,6 +80,13 @@ export default function AdminCurriculumPage() {
       if (!overviewRes.ok) throw new Error('Failed to load curriculum');
       const overviewBody = (await overviewRes.json()) as Overview;
       setOverview(overviewBody);
+      setSelectedModel((prev) => {
+        if (prev) return prev;
+        const current = overviewBody.currentModel ?? '';
+        const models = overviewBody.models ?? [];
+        if (current && models.some((m) => m.id === current)) return current;
+        return models[0]?.id ?? '';
+      });
       if (promptsRes.ok) {
         const promptsBody = (await promptsRes.json()) as { prompts?: PromptRow[] };
         setPrompts(promptsBody.prompts ?? []);
@@ -106,7 +124,10 @@ export default function AdminCurriculumPage() {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ count: 3 }),
+        body: JSON.stringify({
+          count: 3,
+          ...(selectedModel ? { model: selectedModel } : {}),
+        }),
       });
       if (res.status === 403) {
         router.replace('/');
@@ -148,6 +169,34 @@ export default function AdminCurriculumPage() {
       setError(err instanceof Error ? err.message : 'Failed to approve');
     } finally {
       setApprovingId(null);
+    }
+  };
+
+  const removeCandidate = async (candidateId: string, isLive: boolean) => {
+    const message = isLive
+      ? t('admin.deleteLiveConfirm')
+      : t('admin.deleteConfirm');
+    if (!window.confirm(message)) return;
+    setDeletingId(candidateId);
+    setError(null);
+    try {
+      const res = await fetch(
+        `/api/admin/curriculum/rsaf-commands/candidates/${encodeURIComponent(candidateId)}`,
+        { method: 'DELETE', credentials: 'same-origin' },
+      );
+      if (res.status === 403) {
+        router.replace('/');
+        return;
+      }
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { message?: string };
+        throw new Error(body.message ?? 'Failed to delete');
+      }
+      await load();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -198,7 +247,25 @@ export default function AdminCurriculumPage() {
             {t('admin.curriculumSubtitle')}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center">
+          {(overview?.models?.length ?? 0) > 0 ? (
+            <label className="flex flex-col gap-1 text-xs text-slate-500">
+              <span>LLM</span>
+              <select
+                data-testid="admin-curriculum-model"
+                value={selectedModel}
+                onChange={(event) => setSelectedModel(event.target.value)}
+                disabled={generating}
+                className="h-9 min-w-[14rem] rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 text-sm text-slate-800 dark:text-slate-100"
+              >
+                {(overview?.models ?? []).map((model) => (
+                  <option key={model.id} value={model.id}>
+                    {model.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
           <button
             type="button"
             onClick={() => void load()}
@@ -244,12 +311,28 @@ export default function AdminCurriculumPage() {
                 Approved {new Date(overview.release.approvedAt).toLocaleString()}
               </div>
             </div>
-            <Link
-              href={`/classroom/${encodeURIComponent(overview.release.stageId)}`}
-              className="text-sm text-primary hover:underline"
-            >
-              {t('admin.preview')}
-            </Link>
+            <div className="flex items-center gap-2 shrink-0">
+              <Link
+                href={`/classroom/${encodeURIComponent(overview.release.stageId)}`}
+                className="text-sm text-primary hover:underline"
+              >
+                {t('admin.preview')}
+              </Link>
+              <button
+                type="button"
+                data-testid="admin-delete-live"
+                onClick={() => void removeCandidate(overview.release!.candidateId, true)}
+                disabled={deletingId === overview.release.candidateId}
+                className="h-8 px-2.5 rounded-lg text-xs font-medium border border-red-200 text-red-700 hover:bg-red-50 dark:border-red-900 dark:text-red-300 dark:hover:bg-red-950/40 disabled:opacity-50 inline-flex items-center gap-1"
+              >
+                {deletingId === overview.release.candidateId ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : (
+                  <Trash2 className="size-3.5" />
+                )}
+                {deletingId === overview.release.candidateId ? t('admin.deleting') : t('admin.delete')}
+              </button>
+            </div>
           </div>
         ) : (
           <p className="text-sm text-slate-500">{t('admin.noRelease')}</p>
@@ -308,7 +391,7 @@ export default function AdminCurriculumPage() {
                       type="button"
                       data-testid="admin-approve"
                       onClick={() => void approve(candidate.id)}
-                      disabled={approvingId === candidate.id}
+                      disabled={approvingId === candidate.id || deletingId === candidate.id}
                       className="h-8 px-2.5 rounded-lg text-xs font-medium bg-emerald-600 text-white hover:bg-emerald-500 disabled:opacity-50 inline-flex items-center gap-1"
                     >
                       {approvingId === candidate.id ? (
@@ -319,6 +402,20 @@ export default function AdminCurriculumPage() {
                       {approvingId === candidate.id ? t('admin.approving') : t('admin.approve')}
                     </button>
                   ) : null}
+                  <button
+                    type="button"
+                    data-testid="admin-delete-candidate"
+                    onClick={() => void removeCandidate(candidate.id, isLive)}
+                    disabled={deletingId === candidate.id || approvingId === candidate.id}
+                    className="h-8 px-2.5 rounded-lg text-xs font-medium border border-red-200 text-red-700 hover:bg-red-50 dark:border-red-900 dark:text-red-300 dark:hover:bg-red-950/40 disabled:opacity-50 inline-flex items-center gap-1"
+                  >
+                    {deletingId === candidate.id ? (
+                      <Loader2 className="size-3.5 animate-spin" />
+                    ) : (
+                      <Trash2 className="size-3.5" />
+                    )}
+                    {deletingId === candidate.id ? t('admin.deleting') : t('admin.delete')}
+                  </button>
                 </div>
               </div>
             </div>
