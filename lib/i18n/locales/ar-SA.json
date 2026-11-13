@@ -49,7 +49,22 @@
     "promptsTitle": "Student prompts",
     "promptsEmpty": "No prompts logged yet.",
     "backHome": "Back to home",
-    "forbidden": "Admin access required."
+    "forbidden": "Admin access required.",
+    "promptsSeeLearners": "Open learner activity for full session trails",
+    "backCurriculum": "Back to curriculum",
+    "learnersLink": "Learner activity",
+    "learnersTitle": "Learner activity",
+    "learnersSubtitle": "Slide visits, quiz scores, and chat prompts on the live classroom.",
+    "learnersLoading": "Loading learners…",
+    "learnersEmpty": "No learner activity recorded yet.",
+    "learnersVisits": "Visits",
+    "learnersQuiz": "Quiz",
+    "learnersPrompts": "Prompts",
+    "learnersLastActive": "Last active",
+    "learnersTimelineLoading": "Loading timeline…",
+    "learnersTimelineEmpty": "No events for this learner.",
+    "learnersDwellOpen": "still open",
+    "learnersQuizScore": "Score"
   },
   "toolbar": {
     "pdfParser": "محلل PDF",

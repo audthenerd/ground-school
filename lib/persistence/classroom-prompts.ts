@@ -158,3 +158,40 @@ export async function listClassroomPrompts(input: {
 
   return { prompts: result.rows.map(mapPrompt), total };
 }
+
+/** Aggregate prompt counts per owner for a stage. */
+export async function summarizeClassroomPrompts(input: {
+  stageId: string;
+}): Promise<
+  Array<{
+    ownerId: string;
+    promptCount: number;
+    lastPromptAt: Date;
+  }>
+> {
+  const db = await promptsDb();
+  const result = await db.query<
+    {
+      owner_id: string;
+      prompt_count: string;
+      last_prompt_at: Date | string;
+    } & Record<string, unknown>
+  >(
+    `SELECT owner_id,
+            COUNT(*)::text AS prompt_count,
+            MAX(created_at) AS last_prompt_at
+       FROM classroom_prompts
+      WHERE stage_id = $1
+      GROUP BY owner_id`,
+    [input.stageId],
+  );
+
+  return result.rows.map((row) => ({
+    ownerId: row.owner_id,
+    promptCount: Number(row.prompt_count),
+    lastPromptAt:
+      row.last_prompt_at instanceof Date
+        ? row.last_prompt_at
+        : new Date(row.last_prompt_at),
+  }));
+}

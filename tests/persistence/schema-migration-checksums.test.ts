@@ -221,6 +221,34 @@ const SHIPPED: readonly (readonly [
     true,
     '73994d78d22a31a3b7c62f9ecb147a20bd70ffa17ab036f7bd6a75df682d9827',
   ],
+  [
+    'curriculum',
+    1,
+    'baseline',
+    false,
+    '7d3036a83a66a3bb86f9ec4f8302ad2b2d0f11a4c0cc25242da9a7ee578322ab',
+  ],
+  [
+    'classroom-prompts',
+    1,
+    'baseline',
+    false,
+    '558cc6c36be13218e6204b8dd53586b234bfb94335bcb62de0e03a709c0593b2',
+  ],
+  [
+    'classroom-scene-visits',
+    1,
+    'baseline',
+    false,
+    '2e857ef1165bcfa1019d4225abe6baa382b9216e5c663e642596f9b86ee671f2',
+  ],
+  [
+    'classroom-quiz-scores',
+    1,
+    'baseline',
+    false,
+    '6ea597a3ebfe5b50ad4a4eb789a50f2b38b1d2ce4f49bc51284c06bcd11536e4',
+  ],
 ];
 
 /**
