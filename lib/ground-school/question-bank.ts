@@ -14,6 +14,21 @@
 import fs from 'fs';
 import path from 'path';
 
+/**
+ * Bloom's taxonomy cognitive levels (revised, Vanderbilt Center for Teaching).
+ * Questions are classified by the cognitive process they test.
+ */
+export const BLOOMS_LEVELS = [
+  'remember',
+  'understand',
+  'apply',
+  'analyze',
+  'evaluate',
+  'create',
+] as const;
+
+export type BloomsLevel = (typeof BLOOMS_LEVELS)[number];
+
 export interface QuestionBankItem {
   id: string;
   question: string;
@@ -26,6 +41,8 @@ export interface QuestionBankItem {
   difficulty: string;
   status: string;
   source: string;
+  /** Bloom's taxonomy level (null = unclassified). */
+  bloomsLevel: BloomsLevel | null;
 }
 
 /** Default Start Mission sortie: RSAF Commands foundation. */
@@ -189,11 +206,21 @@ const CSV_HEADERS = [
   'Difficulty',
   'Status',
   'Source',
+  "Bloom's Level",
 ] as const;
 
 function headerIndex(headers: string[], name: string): number {
   const lower = name.toLowerCase();
   return headers.findIndex((h) => h.trim().toLowerCase() === lower);
+}
+
+function parseBloomsLevel(value: string): BloomsLevel | null {
+  const normalized = value.trim().toLowerCase();
+  if (!normalized) return null;
+  if (BLOOMS_LEVELS.includes(normalized as BloomsLevel)) {
+    return normalized as BloomsLevel;
+  }
+  return null;
 }
 
 /** Parse a Sheets CSV export into bank items. Throws on validation failures. */
@@ -217,9 +244,12 @@ export function parseQuestionBankCsv(csv: string): QuestionBankItem[] {
     difficulty: headerIndex(headers, 'Difficulty'),
     status: headerIndex(headers, 'Status'),
     source: headerIndex(headers, 'Source'),
+    bloomsLevel: headerIndex(headers, "Bloom's Level"),
   };
-  for (const [key, value] of Object.entries(idx)) {
-    if (value < 0) throw new Error(`CSV missing required column: ${key}`);
+  const requiredColumns = ['id', 'question', 'fieldType', 'options', 'correctAnswer', 
+    'explanation', 'topic', 'subtopic', 'difficulty', 'status', 'source'] as const;
+  for (const key of requiredColumns) {
+    if (idx[key] < 0) throw new Error(`CSV missing required column: ${key}`);
   }
 
   const items: QuestionBankItem[] = [];
@@ -262,6 +292,9 @@ export function parseQuestionBankCsv(csv: string): QuestionBankItem[] {
       }
     }
 
+    const bloomsLevelRaw = idx.bloomsLevel >= 0 ? (cells[idx.bloomsLevel] ?? '').trim() : '';
+    const bloomsLevel = parseBloomsLevel(bloomsLevelRaw);
+
     items.push({
       id,
       question,
@@ -274,6 +307,7 @@ export function parseQuestionBankCsv(csv: string): QuestionBankItem[] {
       difficulty,
       status,
       source,
+      bloomsLevel,
     });
   }
   return items;
@@ -295,6 +329,7 @@ export function questionBankToCsv(items: readonly QuestionBankItem[]): string {
         item.difficulty,
         item.status,
         item.source,
+        item.bloomsLevel ?? '',
       ]
         .map(escapeCsv)
         .join(','),
@@ -322,6 +357,7 @@ export interface DraftQuestionInput {
   subtopic?: string;
   difficulty?: string;
   source?: string;
+  bloomsLevel?: BloomsLevel | null;
 }
 
 /**
@@ -352,6 +388,7 @@ export function appendDraftQuestions(inputs: readonly DraftQuestionInput[]): Que
       difficulty: input.difficulty?.trim() || '1.0',
       status: 'Draft',
       source: input.source?.trim() || 'generation',
+      bloomsLevel: input.bloomsLevel ?? null,
     };
     added.push(item);
   }

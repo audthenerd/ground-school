@@ -25,12 +25,14 @@ describe('bankItemToQuizQuestion', () => {
       difficulty: '1.0',
       status: 'Draft',
       source: 'rsaf.gov.sg',
+      bloomsLevel: 'remember',
     };
     const q = bankItemToQuizQuestion(item);
     expect(q.type).toBe('single');
     expect(q.options?.map((o) => o.value)).toEqual(['A', 'B', 'C', 'D']);
     expect(q.answer).toEqual(['A']);
     expect(q.analysis).toBe('ACC flies combat');
+    expect(q.bloomsLevel).toBe('remember');
   });
 
   it('maps Yes/No numeric answers', () => {
@@ -46,6 +48,7 @@ describe('bankItemToQuizQuestion', () => {
       difficulty: '1.0',
       status: 'Draft',
       source: 'rsaf.gov.sg',
+      bloomsLevel: null,
     };
     const q = bankItemToQuizQuestion(item);
     expect(q.answer).toEqual(['A']);
@@ -63,9 +66,18 @@ describe('sampleQuizQuestionsFromBank', () => {
     expect(filterQuestionBank(['RSAF Commands']).length).toBeGreaterThanOrEqual(20);
   });
 
-  it('prefers choice questions when sampling', () => {
+  it('prefers choice questions when sampling (within Bloom level constraints)', () => {
     const items = sampleBankItemsForQuiz({ seed: 'prefer-choice', count: 20 });
-    expect(items.every((item) => item.fieldType.toLowerCase() !== 'long answer')).toBe(true);
+    // With Bloom's distribution, some levels may only have long answer questions
+    // The sampling prefers choice questions within each level, but includes
+    // long answer if needed to meet level targets
+    const longAnswerCount = items.filter(
+      (item) => item.fieldType.toLowerCase() === 'long answer',
+    ).length;
+    // Should have mostly choice questions
+    expect(longAnswerCount).toBeLessThanOrEqual(3);
+    // And should still have 20 total
+    expect(items).toHaveLength(20);
   });
 });
 

@@ -15,20 +15,25 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q002",
     "question": "The Air Defence and Operations Command operates a 24/7 operations centre that oversees all RSAF operations.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "The Air Operations Control Group within ADOC functions as the RSAF Ops Centre, maintaining round-the-clock operational control.",
     "topic": "RSAF Commands",
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q003",
@@ -46,7 +51,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q004",
@@ -59,7 +65,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q005",
@@ -72,7 +79,8 @@
     "subtopic": "Air Force Training Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q006",
@@ -90,20 +98,25 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q007",
     "question": "The Air Surveillance and Control Group falls under the Participation Command.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "0",
     "explanation": "ASCG sits under the Air Defence and Operations Command, not Participation Command.",
     "topic": "RSAF Commands",
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q008",
@@ -121,7 +134,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q009",
@@ -139,7 +153,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q010",
@@ -152,7 +167,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q011",
@@ -170,7 +186,8 @@
     "subtopic": "Fighters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q012",
@@ -188,20 +205,27 @@
     "subtopic": "Fighters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q013",
     "question": "What is the stated service ceiling of the F-15SG?",
     "fieldType": "Radio",
-    "options": ["41,000 ft", "50,000 ft", "65,000 ft", "83,000 ft"],
+    "options": [
+      "41,000 ft",
+      "50,000 ft",
+      "65,000 ft",
+      "83,000 ft"
+    ],
     "correctAnswer": "65,000 ft",
     "explanation": "The F-16 is listed at 50,000 ft and the G550-AEW at 41,000 ft.",
     "topic": "Platforms",
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q014",
@@ -219,46 +243,63 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q015",
     "question": "The H225M Medium Lift Helicopter replaces which ageing RSAF fleet?",
     "fieldType": "Radio",
-    "options": ["AS332M Super Puma", "CH-47D Chinook", "AH-64D Apache", "S-70B Seahawk"],
+    "options": [
+      "AS332M Super Puma",
+      "CH-47D Chinook",
+      "AH-64D Apache",
+      "S-70B Seahawk"
+    ],
     "correctAnswer": "AS332M Super Puma",
     "explanation": "The Super Pumas had been in service since 1985; the H225M offers roughly 20% longer range.",
     "topic": "Platforms",
     "subtopic": "Helicopters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q016",
     "question": "The CH-47F Chinook replaces the CH-47D fleet that had been in service since 1994.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "The CH-47F adds a fully integrated digital cockpit management system, SATCOM and a self-protection suite.",
     "topic": "Platforms",
     "subtopic": "Helicopters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q017",
     "question": "Which RSAF helicopter is the first tandem-seat helicopter in the service?",
     "fieldType": "Radio",
-    "options": ["CH-47F Chinook", "AH-64D Apache Longbow", "H225M", "S-70B Seahawk"],
+    "options": [
+      "CH-47F Chinook",
+      "AH-64D Apache Longbow",
+      "H225M",
+      "S-70B Seahawk"
+    ],
     "correctAnswer": "AH-64D Apache Longbow",
     "explanation": "In the AH-64D the pilot sits in the rear seat and the co-pilot/gunner in the front.",
     "topic": "Platforms",
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q018",
@@ -271,7 +312,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q019",
@@ -289,7 +331,8 @@
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q020",
@@ -307,46 +350,65 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q021",
     "question": "Which two aircraft does the RSAF operate in the trainer role?",
     "fieldType": "Checkbox",
-    "options": ["M-346", "PC-21", "Fokker-50", "C-130 Hercules"],
+    "options": [
+      "M-346",
+      "PC-21",
+      "Fokker-50",
+      "C-130 Hercules"
+    ],
     "correctAnswer": "M-346; PC-21",
     "explanation": "The Fokker-50 and C-130 are classified as transports.",
     "topic": "Platforms",
     "subtopic": "Trainers",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q022",
     "question": "What is the service ceiling of the M-346 trainer?",
     "fieldType": "Radio",
-    "options": ["7,620 m", "13,716 m", "12.6 km", "20 km"],
+    "options": [
+      "7,620 m",
+      "13,716 m",
+      "12.6 km",
+      "20 km"
+    ],
     "correctAnswer": "13,716 m",
     "explanation": "The PC-21 is listed at 7,620 m and the A330 MRTT at 12.6 km.",
     "topic": "Platforms",
     "subtopic": "Trainers",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q023",
     "question": "The G550-Airborne Early Warning aircraft replaced which platform?",
     "fieldType": "Radio",
-    "options": ["E-2C", "KC-135R", "Fokker-50", "C-130H"],
+    "options": [
+      "E-2C",
+      "KC-135R",
+      "Fokker-50",
+      "C-130H"
+    ],
     "correctAnswer": "E-2C",
     "explanation": "The KC-135R was replaced by the A330 MRTT, a separate replacement programme.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q024",
@@ -364,7 +426,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q025",
@@ -382,33 +445,44 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q026",
     "question": "The A330 Multi-Role Tanker Transport replaces the KC-135R.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "The A330 MRTT offers better endurance, greater cargo and passenger capacity, and can offload more fuel than the KC-135R.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q027",
     "question": "How much fuel can the A330 MRTT carry for its own use or offload to receivers?",
     "fieldType": "Radio",
-    "options": ["37,000 kg", "82,000 kg", "111,000 kg", "245,000 kg"],
+    "options": [
+      "37,000 kg",
+      "82,000 kg",
+      "111,000 kg",
+      "245,000 kg"
+    ],
     "correctAnswer": "111,000 kg",
     "explanation": "111,000 kg is 245,000 lbs; 37,000 kg (82,000 lbs) is the maximum cargo load, so both figures appear in the specification and are easily swapped.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q028",
@@ -421,33 +495,46 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q029",
     "question": "What is the maximum personnel capacity of the A330 MRTT?",
     "fieldType": "Radio",
-    "options": ["92", "175", "266", "400"],
+    "options": [
+      "92",
+      "175",
+      "266",
+      "400"
+    ],
     "correctAnswer": "266.0",
     "explanation": "Alternatively it can carry up to 37,000 kg of cargo. The 92 figure is the C-130's ground troop capacity.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q030",
     "question": "What is the stated endurance of the C-130 Hercules?",
     "fieldType": "Radio",
-    "options": ["8 hours", "9 hours", "15 hours", "24 hours"],
+    "options": [
+      "8 hours",
+      "9 hours",
+      "15 hours",
+      "24 hours"
+    ],
     "correctAnswer": "15 hours",
     "explanation": "8 hours is the Fokker-50's maximum endurance and 9 hours the G550-AEW's.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q031",
@@ -460,46 +547,63 @@
     "subtopic": "Maritime Air Surveillance",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q032",
     "question": "Which RSAF platforms have been deployed on Humanitarian Assistance and Disaster Relief and Search and Locate missions?",
     "fieldType": "Checkbox",
-    "options": ["C-130 Hercules", "Fokker-50", "AH-64D Apache Longbow", "RBS-70"],
+    "options": [
+      "C-130 Hercules",
+      "Fokker-50",
+      "AH-64D Apache Longbow",
+      "RBS-70"
+    ],
     "correctAnswer": "C-130 Hercules; Fokker-50",
     "explanation": "The Apache is an attack helicopter and the RBS-70 a ground-based air defence system; neither is a HADR or SAL asset.",
     "topic": "Missions and Roles",
     "subtopic": "HADR and SAL",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q033",
     "question": "Which RSAF UAV has the longest stated endurance?",
     "fieldType": "Radio",
-    "options": ["Hermes 450", "Hermes 900", "Heron 1", "Orbiter 4"],
+    "options": [
+      "Hermes 450",
+      "Hermes 900",
+      "Heron 1",
+      "Orbiter 4"
+    ],
     "correctAnswer": "Hermes 900",
     "explanation": "The Hermes 900 is listed at up to 36 hours, against 24 hours for the Heron 1 and Orbiter 4, and more than 14 hours for the Hermes 450.",
     "topic": "Platforms",
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q034",
     "question": "The Heron 1 UAV features a fully automatic take-off and landing capability.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "ATOL is one of the Heron 1's distinguishing features, alongside its long endurance.",
     "topic": "Platforms",
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q035",
@@ -517,7 +621,8 @@
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q036",
@@ -530,33 +635,46 @@
     "subtopic": "AISR",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q037",
     "question": "Which system was the first 3rd generation weapon system integrated into the enhanced Island Air Defence system?",
     "fieldType": "Radio",
-    "options": ["SPYDER", "Aster 30", "RBS-70", "SHIKRA"],
+    "options": [
+      "SPYDER",
+      "Aster 30",
+      "RBS-70",
+      "SHIKRA"
+    ],
     "correctAnswer": "SPYDER",
     "explanation": "SPYDER is operated by a 6-man crew and carries two missile types for rapid deployment and redeployment.",
     "topic": "Air Defence",
     "subtopic": "Ground Based Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q038",
     "question": "What is the maximum intercept range of the Aster 30 against fighter aircraft?",
     "fieldType": "Radio",
-    "options": ["8 km", "15 km", "70 km", "100 km"],
+    "options": [
+      "8 km",
+      "15 km",
+      "70 km",
+      "100 km"
+    ],
     "correctAnswer": "70 km",
     "explanation": "15 km is SPYDER's effective range and 8 km the RBS-70's; 100 km is SHIKRA's radar range.",
     "topic": "Air Defence",
     "subtopic": "Ground Based Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q039",
@@ -574,7 +692,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q040",
@@ -592,7 +711,8 @@
     "subtopic": "Radar",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q041",
@@ -610,7 +730,8 @@
     "subtopic": "ADOC and APGC",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q042",
@@ -628,7 +749,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q043",
@@ -646,7 +768,8 @@
     "subtopic": "ADOC and APGC",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q044",
@@ -664,7 +787,8 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q045",
@@ -682,20 +806,27 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q046",
     "question": "Which gun is fitted to the AH-64D Apache Longbow?",
     "fieldType": "Radio",
-    "options": ["30 mm M230 chain gun", "M61 20 mm cannon", "25 mm GAU-12", "No gun is fitted"],
+    "options": [
+      "30 mm M230 chain gun",
+      "M61 20 mm cannon",
+      "25 mm GAU-12",
+      "No gun is fitted"
+    ],
     "correctAnswer": "30 mm M230 chain gun",
     "explanation": "The M61 20 mm cannon arms the F-15SG and F-16. The Apache also carries HYDRA 70 rockets and AGM-114 Hellfire missiles.",
     "topic": "Platforms",
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q047",
@@ -713,20 +844,27 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q048",
     "question": "Roughly how much more range does the H225M offer compared with the AS332M Super Puma it replaces?",
     "fieldType": "Radio",
-    "options": ["About 20% longer", "About 5% longer", "About 50% longer", "About the same range"],
+    "options": [
+      "About 20% longer",
+      "About 5% longer",
+      "About 50% longer",
+      "About the same range"
+    ],
     "correctAnswer": "About 20% longer",
     "explanation": "The extra range, combined with high load capacity and fast cruise speed, is what lets the H225M meet SAF lift and reach requirements more efficiently.",
     "topic": "Platforms",
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q049",
@@ -744,7 +882,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q050",
@@ -762,46 +901,63 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q051",
     "question": "How many fully equipped paratroopers can the C-130 Hercules carry?",
     "fieldType": "Radio",
-    "options": ["39", "64", "72", "92"],
+    "options": [
+      "39",
+      "64",
+      "72",
+      "92"
+    ],
     "correctAnswer": "64.0",
     "explanation": "92 is the ground troop figure (72 if fully equipped) and 39 is the Fokker-50 UTA's paratrooper capacity.",
     "topic": "Platforms",
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q052",
     "question": "The Fokker-50 MPA can be armed with anti-ship missiles.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "Anti-ship missiles are the Fokker-50's listed armament, consistent with its maritime surveillance and seaward defence role alongside the RSN.",
     "topic": "Platforms",
     "subtopic": "Maritime Air Surveillance",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q053",
     "question": "Which RSAF UAV has the greatest stated maximum range?",
     "fieldType": "Radio",
-    "options": ["Hermes 900", "Orbiter 4", "Heron 1", "Hermes 450"],
+    "options": [
+      "Hermes 900",
+      "Orbiter 4",
+      "Heron 1",
+      "Hermes 450"
+    ],
     "correctAnswer": "Hermes 900",
     "explanation": "The Hermes 900 exceeds 300 km, against 150 km for the Orbiter 4, 200 km for the Heron 1 and 100 km for the Hermes 450.",
     "topic": "Platforms",
     "subtopic": "UAV",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q054",
@@ -814,33 +970,46 @@
     "subtopic": "Island Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q055",
     "question": "What is the maximum intercept altitude of the Aster 30?",
     "fieldType": "Radio",
-    "options": ["9 km", "5 km", "60,000 ft (20 km)", "83,000 ft (25 km)"],
+    "options": [
+      "9 km",
+      "5 km",
+      "60,000 ft (20 km)",
+      "83,000 ft (25 km)"
+    ],
     "correctAnswer": "60,000 ft (20 km)",
     "explanation": "9 km is SPYDER's intercept altitude and 5 km the RBS-70's. 83,000 ft is the SHIKRA radar's altitude coverage, not a weapon envelope.",
     "topic": "Air Defence",
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q056",
     "question": "Which types of air threat is the Aster 30 described as capable of engaging? Select all that apply.",
     "fieldType": "Checkbox",
-    "options": ["Fighter aircraft", "Helicopters", "UAVs", "Precision-guided munitions"],
+    "options": [
+      "Fighter aircraft",
+      "Helicopters",
+      "UAVs",
+      "Precision-guided munitions"
+    ],
     "correctAnswer": "Fighter aircraft; Helicopters; UAVs; Precision-guided munitions",
     "explanation": "The Aster 30's value in the IAD is precisely this breadth of threat coverage, combined with the ability to engage multiple threats simultaneously.",
     "topic": "Air Defence",
     "subtopic": "Ground Based Air Defence",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q057",
@@ -858,7 +1027,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q058",
@@ -876,7 +1046,8 @@
     "subtopic": "Radar",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q059",
@@ -894,7 +1065,8 @@
     "subtopic": "Radar",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q060",
@@ -912,7 +1084,8 @@
     "subtopic": "Radar",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q061",
@@ -930,7 +1103,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q062",
@@ -948,7 +1122,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q063",
@@ -966,7 +1141,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q064",
@@ -984,7 +1160,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q065",
@@ -1002,7 +1179,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q066",
@@ -1020,20 +1198,27 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q067",
     "question": "How many groups make up the Air Combat Command?",
     "fieldType": "Radio",
-    "options": ["Four", "Two", "Three", "Five"],
+    "options": [
+      "Four",
+      "Two",
+      "Three",
+      "Five"
+    ],
     "correctAnswer": "Four",
     "explanation": "FG, TG, ISDG and ODG.",
     "topic": "RSAF Commands",
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q068",
@@ -1051,20 +1236,25 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q069",
     "question": "ACC aims to sustain air superiority over the SAF's area of operations.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "This is stated directly in ACC's mission.",
     "topic": "RSAF Commands",
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q070",
@@ -1082,7 +1272,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q071",
@@ -1100,7 +1291,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q072",
@@ -1118,7 +1310,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q073",
@@ -1136,7 +1329,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q074",
@@ -1154,7 +1348,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q075",
@@ -1172,20 +1367,25 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q076",
     "question": "ADOC plans, controls, executes and commands all peacetime RSAF operations.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "This sits alongside its airspace protection role in ADOC's mission.",
     "topic": "RSAF Commands",
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q077",
@@ -1203,7 +1403,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q078",
@@ -1221,7 +1422,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q079",
@@ -1239,7 +1441,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q080",
@@ -1257,7 +1460,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q081",
@@ -1275,7 +1479,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q082",
@@ -1293,7 +1498,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q083",
@@ -1311,7 +1517,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q084",
@@ -1329,7 +1536,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q085",
@@ -1347,7 +1555,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q086",
@@ -1365,7 +1574,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q087",
@@ -1383,7 +1593,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q088",
@@ -1401,7 +1612,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q089",
@@ -1419,20 +1631,25 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q090",
     "question": "The Force Protection Squadron guards against both conventional and asymmetric threats.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "Its purpose is to sustain air operations by securing the airbase and its launch and recovery platforms.",
     "topic": "RSAF Commands",
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q091",
@@ -1450,7 +1667,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q092",
@@ -1468,7 +1686,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q093",
@@ -1486,7 +1705,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q094",
@@ -1504,7 +1724,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q095",
@@ -1522,33 +1743,44 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q096",
     "question": "How many groups make up the Participation Command?",
     "fieldType": "Radio",
-    "options": ["Three", "Two", "Four", "Five"],
+    "options": [
+      "Three",
+      "Two",
+      "Four",
+      "Five"
+    ],
     "correctAnswer": "Three",
     "explanation": "DAG, HG and TASG.",
     "topic": "RSAF Commands",
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q097",
     "question": "The Tactical Air Support Group delivers responsive air support to the Army and Navy.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "This is how PC shapes the surface campaign.",
     "topic": "RSAF Commands",
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q098",
@@ -1566,7 +1798,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q099",
@@ -1584,7 +1817,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q100",
@@ -1602,7 +1836,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q101",
@@ -1620,7 +1855,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q102",
@@ -1638,7 +1874,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q103",
@@ -1656,7 +1893,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q104",
@@ -1674,7 +1912,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q105",
@@ -1692,7 +1931,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q106",
@@ -1710,7 +1950,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q107",
@@ -1728,7 +1969,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q108",
@@ -1746,7 +1988,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q109",
@@ -1764,20 +2007,25 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q110",
     "question": "The UAV Command is the first operational SAF Command within the RSAF.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "Its tri-Service and Joint Staff manning is what gives it that status.",
     "topic": "RSAF Commands",
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q111",
@@ -1795,7 +2043,8 @@
     "subtopic": "Vision",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q112",
@@ -1813,7 +2062,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force"
+    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q113",
@@ -1831,7 +2081,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q114",
@@ -1849,46 +2100,63 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q115",
     "question": "The RSAF states that its people are the heart of the organisation.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "The vision's second paragraph closes: \"Above all, our people are the heart of our organisation.\" It also states the RSAF is founded on the core values and competencies of its World Class People.",
     "topic": "RSAF Identity",
     "subtopic": "Vision",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q116",
     "question": "Which of the following is NOT one of the RSAF's nine core values?",
     "fieldType": "Radio",
-    "options": ["Innovation", "Fighting spirit", "Care for soldiers", "Team excellence"],
+    "options": [
+      "Innovation",
+      "Fighting spirit",
+      "Care for soldiers",
+      "Team excellence"
+    ],
     "correctAnswer": "Innovation",
     "explanation": "The nine are: Loyalty to country, Leadership, Discipline, Professionalism, Fighting spirit, Ethics, Care for soldiers, Safety, and Team excellence.",
     "topic": "RSAF Identity",
     "subtopic": "Core Values",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q117",
     "question": "Which of the following are RSAF core values? Select all that apply.",
     "fieldType": "Checkbox",
-    "options": ["Discipline", "Ethics", "Agility", "Resilience"],
+    "options": [
+      "Discipline",
+      "Ethics",
+      "Agility",
+      "Resilience"
+    ],
     "correctAnswer": "Discipline; Ethics",
     "explanation": "Agility and Resilience are plausible but are not among the nine stated core values.",
     "topic": "RSAF Identity",
     "subtopic": "Core Values",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q118",
@@ -1906,20 +2174,27 @@
     "subtopic": "Founding",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q119",
     "question": "When was the Singapore Air Defence Command (SADC) stood up?",
     "fieldType": "Radio",
-    "options": ["1 September 1968", "9 August 1965", "1 March 1971", "1 January 1975"],
+    "options": [
+      "1 September 1968",
+      "9 August 1965",
+      "1 March 1971",
+      "1 January 1975"
+    ],
     "correctAnswer": "25082.0",
     "explanation": "March 1971 was the deadline for the British withdrawal, not the SADC's founding date.",
     "topic": "RSAF Identity",
     "subtopic": "Founding",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q120",
@@ -1938,59 +2213,82 @@
     "subtopic": "Value in Peace",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q121",
     "question": "Safety is one of the RSAF's nine stated core values.",
     "fieldType": "Yes/No",
-    "options": ["True", "False"],
+    "options": [
+      "True",
+      "False"
+    ],
     "correctAnswer": "1",
     "explanation": "Safety sits alongside Loyalty to country, Leadership, Discipline, Professionalism, Fighting spirit, Ethics, Care for soldiers and Team excellence.",
     "topic": "Safety",
     "subtopic": "Core Values",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q122",
     "question": "The SAF's safety management systems are aligned to which international standard?",
     "fieldType": "Radio",
-    "options": ["ISO 45001", "ISO 9001", "ISO 27001", "ISO 14001"],
+    "options": [
+      "ISO 45001",
+      "ISO 9001",
+      "ISO 27001",
+      "ISO 14001"
+    ],
     "correctAnswer": "ISO 45001",
     "explanation": "ISO 45001 is the international standard for occupational health and safety management. ISO 9001 covers quality, 27001 information security and 14001 environmental management.",
     "topic": "Safety",
     "subtopic": "Safety Management System",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q123",
     "question": "ISO 45001 replaced which earlier occupational health and safety standard?",
     "fieldType": "Radio",
-    "options": ["OHSAS 18001", "ISO 9001", "MIL-STD-882", "AS9100"],
+    "options": [
+      "OHSAS 18001",
+      "ISO 9001",
+      "MIL-STD-882",
+      "AS9100"
+    ],
     "correctAnswer": "OHSAS 18001",
     "explanation": "OHSAS 18001 was the predecessor standard for occupational health and safety management systems.",
     "topic": "Safety",
     "subtopic": "Safety Management System",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q124",
     "question": "When was the Inspector-General's Office (IGO) formed?",
     "fieldType": "Radio",
-    "options": ["27 February 2019", "1 September 1968", "2 March 2020", "1 January 2015"],
+    "options": [
+      "27 February 2019",
+      "1 September 1968",
+      "2 March 2020",
+      "1 January 2015"
+    ],
     "correctAnswer": "43523.0",
     "explanation": "1 September 1968 is the founding date of the Singapore Air Defence Command, included here as a distractor.",
     "topic": "Safety",
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q125",
@@ -2008,7 +2306,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q126",
@@ -2026,7 +2325,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q127",
@@ -2045,7 +2345,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q128",
@@ -2063,7 +2364,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q129",
@@ -2081,7 +2383,8 @@
     "subtopic": "Safety Tools",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q130",
@@ -2099,7 +2402,8 @@
     "subtopic": "Training Safety",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q131",
@@ -2118,7 +2422,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q132",
@@ -2136,7 +2441,8 @@
     "subtopic": "Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q133",
@@ -2154,7 +2460,8 @@
     "subtopic": "Founding",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "create"
   },
   {
     "id": "Q134",
@@ -2167,7 +2474,8 @@
     "subtopic": "Vision",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q135",
@@ -2185,7 +2493,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force; rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force; rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q136",
@@ -2198,7 +2507,8 @@
     "subtopic": "Force Design",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q137",
@@ -2216,7 +2526,8 @@
     "subtopic": "Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q138",
@@ -2234,7 +2545,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q139",
@@ -2247,7 +2559,8 @@
     "subtopic": "Value in Peace",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q140",
@@ -2265,7 +2578,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q151",
@@ -2283,20 +2597,27 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q152",
     "question": "Which RSAF squadron operates the A330 Multi-Role Tanker Transport?",
     "fieldType": "Radio",
-    "options": ["112 Squadron", "111 Squadron", "122 Squadron", "130 Squadron"],
+    "options": [
+      "112 Squadron",
+      "111 Squadron",
+      "122 Squadron",
+      "130 Squadron"
+    ],
     "correctAnswer": "112 Squadron",
     "explanation": "111 Squadron operates the airborne early warning fleet.",
     "topic": "Digitalisation and Technology",
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q153",
@@ -2314,20 +2635,27 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q154",
     "question": "DSTA led the technical work to qualify the A330 MRTT to refuel which RSAF aircraft in flight?",
     "fieldType": "Radio",
-    "options": ["F-16", "H225M", "Heron 1", "PC-21"],
+    "options": [
+      "F-16",
+      "H225M",
+      "Heron 1",
+      "PC-21"
+    ],
     "correctAnswer": "F-16",
     "explanation": "The team analysed existing flight-test results between MRTTs and F-16s, then ran a technical study comparing those results with the RSAF's own MRTT and F-16 pairing.",
     "topic": "Digitalisation and Technology",
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q155",
@@ -2345,7 +2673,8 @@
     "subtopic": "Systems Engineering",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q156",
@@ -2363,7 +2692,8 @@
     "subtopic": "Systems Engineering",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q157",
@@ -2381,7 +2711,8 @@
     "subtopic": "Avionics",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q158",
@@ -2399,7 +2730,8 @@
     "subtopic": "Avionics",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q159",
@@ -2417,7 +2749,8 @@
     "subtopic": "Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q160",
@@ -2430,72 +2763,103 @@
     "subtopic": "Systems Engineering",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight; rsaf.gov.sg/rsaf-forces/aircraft; rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight; rsaf.gov.sg/rsaf-forces/aircraft; rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q161",
     "question": "A submarine contact needs to be prosecuted, and a Formidable-class frigate is already on station. Which RSAF asset is designed for that task?",
     "fieldType": "Radio",
-    "options": ["S-70B Seahawk", "Fokker-50 MPA", "Heron 1 UAV", "CH-47F Chinook"],
+    "options": [
+      "S-70B Seahawk",
+      "Fokker-50 MPA",
+      "Heron 1 UAV",
+      "CH-47F Chinook"
+    ],
     "correctAnswer": "S-70B Seahawk",
     "explanation": "The S-70B operates as an integral unit of the Formidable-class frigates for anti-surface and anti-submarine warfare. The Fokker-50 MPA provides wide-area maritime surveillance but is not an ASW platform.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q162",
     "question": "Ground targets must be found, classified and engaged at night in poor weather. Which RSAF platform is designed for that?",
     "fieldType": "Radio",
-    "options": ["AH-64D Apache Longbow", "CH-47F Chinook", "H225M", "S-70B Seahawk"],
+    "options": [
+      "AH-64D Apache Longbow",
+      "CH-47F Chinook",
+      "H225M",
+      "S-70B Seahawk"
+    ],
     "correctAnswer": "AH-64D Apache Longbow",
     "explanation": "The Apache is designed to fight and survive in day, night and adverse weather, and its Fire Control Radar detects, classifies and prioritises targets on the ground and in the air.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q163",
     "question": "Which RSAF aircraft detects, tracks and identifies aerial targets at long range so threats can be identified early?",
     "fieldType": "Radio",
-    "options": ["G550-Airborne Early Warning", "F-15SG", "A330 MRTT", "Hermes 900 UAV"],
+    "options": [
+      "G550-Airborne Early Warning",
+      "F-15SG",
+      "A330 MRTT",
+      "Hermes 900 UAV"
+    ],
     "correctAnswer": "G550-Airborne Early Warning",
     "explanation": "Its AESA radar sees further than the E-2C it replaced, allowing the RSAF to identify potential aerial threats early and respond decisively.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q164",
     "question": "Fighters need to remain on station well beyond their normal endurance. Which RSAF asset makes that possible?",
     "fieldType": "Radio",
-    "options": ["A330 Multi-Role Tanker Transport", "C-130 Hercules", "G550-AEW", "Fokker-50 UTA"],
+    "options": [
+      "A330 Multi-Role Tanker Transport",
+      "C-130 Hercules",
+      "G550-AEW",
+      "Fokker-50 UTA"
+    ],
     "correctAnswer": "A330 Multi-Role Tanker Transport",
     "explanation": "Air-to-air refuelling extends the endurance of fighter aircraft so they can safeguard Singapore's skies for longer.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q165",
     "question": "Aerial firefighting is required, using a 5,000-litre heli-bucket. Which RSAF helicopter was deployed for exactly this in Indonesia in 2015?",
     "fieldType": "Radio",
-    "options": ["Chinook", "AH-64D Apache Longbow", "S-70B Seahawk", "H225M"],
+    "options": [
+      "Chinook",
+      "AH-64D Apache Longbow",
+      "S-70B Seahawk",
+      "H225M"
+    ],
     "correctAnswer": "Chinook",
     "explanation": "A Chinook with a 5,000-litre heli-bucket deployed alongside 34 RSAF personnel and six SCDF personnel, with two C-130s ferrying people and equipment over about two weeks.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q166",
@@ -2513,33 +2877,46 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q167",
     "question": "Surveillance is needed over a dense urban area with no runway available and a requirement to set up quickly. Which RSAF UAV fits?",
     "fieldType": "Radio",
-    "options": ["Orbiter 4", "Hermes 900", "Heron 1", "Hermes 450"],
+    "options": [
+      "Orbiter 4",
+      "Hermes 900",
+      "Heron 1",
+      "Hermes 450"
+    ],
     "correctAnswer": "Orbiter 4",
     "explanation": "The Orbiter 4 is a Close-Range UAV with a lower logistical footprint, runway independence and a short set-up time, suited to urbanised and confined environments.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q168",
     "question": "Fully equipped paratroopers must be dropped and heavy cargo airdropped into an austere location. Which aircraft is designed for that?",
     "fieldType": "Radio",
-    "options": ["C-130 Hercules", "A330 MRTT", "Fokker-50 MPA", "CH-47F Chinook"],
+    "options": [
+      "C-130 Hercules",
+      "A330 MRTT",
+      "Fokker-50 MPA",
+      "CH-47F Chinook"
+    ],
     "correctAnswer": "C-130 Hercules",
     "explanation": "The C-130 carries 64 fully equipped paratroopers and up to 42,000 lbs of cargo for airdrops, alongside troop lift and stretcher configurations.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q169",
@@ -2557,20 +2934,27 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q170",
     "question": "A large number of casualties must be flown out over a long distance with medical equipment aboard. Which RSAF platform can be configured for that scale of aeromedical evacuation?",
     "fieldType": "Radio",
-    "options": ["A330 Multi-Role Tanker Transport", "H225M", "CH-47F Chinook", "Fokker-50 UTA"],
+    "options": [
+      "A330 Multi-Role Tanker Transport",
+      "H225M",
+      "CH-47F Chinook",
+      "Fokker-50 UTA"
+    ],
     "correctAnswer": "A330 Multi-Role Tanker Transport",
     "explanation": "The A330 MRTT carries up to 266 personnel or 37,000 kg of cargo and can be fitted with medical equipment for aeromedical evacuation. The helicopters carry far smaller stretcher loads over far shorter distances.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q171",
@@ -2588,20 +2972,27 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q172",
     "question": "Troops must be moved quickly with an underslung load, and the same aircraft may be needed for casualty evacuation. Which helicopter is built for that mix?",
     "fieldType": "Radio",
-    "options": ["H225M", "AH-64D Apache Longbow", "S-70B Seahawk", "Hermes 900 UAV"],
+    "options": [
+      "H225M",
+      "AH-64D Apache Longbow",
+      "S-70B Seahawk",
+      "Hermes 900 UAV"
+    ],
     "correctAnswer": "H225M",
     "explanation": "The H225M carries more than 20 personnel, or 11 stretchers with medical support, or up to 4,750 kg of underslung cargo.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q173",
@@ -2620,20 +3011,27 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q174",
     "question": "Which RSAF platform carries AGM-114 Hellfire missiles and HYDRA 70 rockets?",
     "fieldType": "Radio",
-    "options": ["AH-64D Apache Longbow", "S-70B Seahawk", "F-16C/D/D+", "CH-47F Chinook"],
+    "options": [
+      "AH-64D Apache Longbow",
+      "S-70B Seahawk",
+      "F-16C/D/D+",
+      "CH-47F Chinook"
+    ],
     "correctAnswer": "AH-64D Apache Longbow",
     "explanation": "Its armament also includes a 30 mm M230 chain gun. The fighters carry Maverick air-to-ground missiles rather than Hellfire.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q175",
@@ -2651,33 +3049,46 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q176",
     "question": "A mixed formation includes both drogue-refuelled and boom-refuelled aircraft. Which RSAF platform can refuel both?",
     "fieldType": "Radio",
-    "options": ["A330 Multi-Role Tanker Transport", "C-130 Hercules", "G550-AEW", "Fokker-50 UTA"],
+    "options": [
+      "A330 Multi-Role Tanker Transport",
+      "C-130 Hercules",
+      "G550-AEW",
+      "Fokker-50 UTA"
+    ],
     "correctAnswer": "A330 Multi-Role Tanker Transport",
     "explanation": "Being able to refuel both types also improves interoperability with other air forces operating alongside the RSAF.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q177",
     "question": "Which platform would build the air picture and support control of an interception, rather than carrying out the interception itself?",
     "fieldType": "Radio",
-    "options": ["G550-Airborne Early Warning", "F-15SG", "AH-64D Apache Longbow", "A330 MRTT"],
+    "options": [
+      "G550-Airborne Early Warning",
+      "F-15SG",
+      "AH-64D Apache Longbow",
+      "A330 MRTT"
+    ],
     "correctAnswer": "G550-Airborne Early Warning",
     "explanation": "The G550-AEW carries two pilots and six Air Warfare Officers, whose job is building and managing that picture.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q178",
@@ -2690,162 +3101,236 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q179",
     "question": "How many aircraft did the RSAF commit to the search for Malaysia Airlines Flight MH370 in March 2014?",
     "fieldType": "Radio",
-    "options": ["10", "4", "6", "15"],
+    "options": [
+      "10",
+      "4",
+      "6",
+      "15"
+    ],
     "correctAnswer": "10.0",
     "explanation": "The search covered the South China Sea and the Malacca Straits.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q180",
     "question": "Which RSAF platforms took part in the response to the USS John McCain collision in August 2017? Select all that apply.",
     "fieldType": "Checkbox",
-    "options": ["Super Pumas", "Chinooks", "C-130", "Fokker 50", "F-15SG"],
+    "options": [
+      "Super Pumas",
+      "Chinooks",
+      "C-130",
+      "Fokker 50",
+      "F-15SG"
+    ],
     "correctAnswer": "Super Pumas; Chinooks; C-130; Fokker 50",
     "explanation": "A Super Puma evacuated injured crew to Singapore General Hospital, with the other types supporting the search and rescue effort. Fighters have no role in a maritime SAR response.",
     "topic": "Platforms",
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q181",
     "question": "Identify the helicopter shown.",
     "fieldType": "Radio",
-    "options": ["CH-47F Chinook", "H225M", "S-70B Seahawk", "AH-64D Apache Longbow"],
+    "options": [
+      "CH-47F Chinook",
+      "H225M",
+      "S-70B Seahawk",
+      "AH-64D Apache Longbow"
+    ],
     "correctAnswer": "CH-47F Chinook",
     "explanation": "Two main rotors mounted fore and aft, and no tail rotor. No other RSAF helicopter has this configuration, which makes it the easiest airframe in the inventory to identify.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q182",
     "question": "Identify the fighter shown.",
     "fieldType": "Radio",
-    "options": ["F-15SG", "F-16C/D/D+ Fighting Falcon", "M-346", "F/A-18"],
+    "options": [
+      "F-15SG",
+      "F-16C/D/D+ Fighting Falcon",
+      "M-346",
+      "F/A-18"
+    ],
     "correctAnswer": "F-15SG",
     "explanation": "Two engines and twin vertical stabilisers. The F-16 has a single engine and a single tail, and the M-346 is a trainer of markedly smaller proportions.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q183",
     "question": "Identify the transport aircraft shown.",
     "fieldType": "Radio",
-    "options": ["C-130 Hercules", "A330 MRTT", "Fokker-50", "G550-AEW"],
+    "options": [
+      "C-130 Hercules",
+      "A330 MRTT",
+      "Fokker-50",
+      "G550-AEW"
+    ],
     "correctAnswer": "C-130 Hercules",
     "explanation": "Four turboprop engines on a high wing, with a rear loading ramp. The Fokker-50 is a twin, and the other two are jets.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q184",
     "question": "Identify the maritime patrol aircraft shown.",
     "fieldType": "Radio",
-    "options": ["Fokker-50 MPA", "C-130 Hercules", "A330 MRTT", "Heron 1 UAV"],
+    "options": [
+      "Fokker-50 MPA",
+      "C-130 Hercules",
+      "A330 MRTT",
+      "Heron 1 UAV"
+    ],
     "correctAnswer": "Fokker-50 MPA",
     "explanation": "A twin-engine propeller aircraft, markedly smaller than the four-engine C-130. The RSAF operates it in both MPA and UTA configurations, which are not distinguishable by silhouette alone.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q185",
     "question": "Identify the aircraft shown.",
     "fieldType": "Radio",
-    "options": ["A330 Multi-Role Tanker Transport", "C-130 Hercules", "G550-AEW", "Fokker-50"],
+    "options": [
+      "A330 Multi-Role Tanker Transport",
+      "C-130 Hercules",
+      "G550-AEW",
+      "Fokker-50"
+    ],
     "correctAnswer": "A330 Multi-Role Tanker Transport",
     "explanation": "A widebody twin-jet derived from the civil A330, far larger than anything else in the inventory at 58.8 m long with a 60.3 m wingspan. The refuelling boom under the rear fuselage is the confirming feature.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q186",
     "question": "Identify the aircraft shown.",
     "fieldType": "Radio",
-    "options": ["G550-Airborne Early Warning", "A330 MRTT", "Fokker-50", "PC-21"],
+    "options": [
+      "G550-Airborne Early Warning",
+      "A330 MRTT",
+      "Fokker-50",
+      "PC-21"
+    ],
     "correctAnswer": "G550-Airborne Early Warning",
     "explanation": "A Gulfstream business-jet airframe carrying large fuselage radar fairings for its AESA array. At 29.8 m long it is roughly half the length of the A330 MRTT.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q187",
     "question": "Identify the helicopter shown.",
     "fieldType": "Radio",
-    "options": ["AH-64D Apache Longbow", "S-70B Seahawk", "H225M", "CH-47F Chinook"],
+    "options": [
+      "AH-64D Apache Longbow",
+      "S-70B Seahawk",
+      "H225M",
+      "CH-47F Chinook"
+    ],
     "correctAnswer": "AH-64D Apache Longbow",
     "explanation": "A narrow tandem cockpit with stub wings carrying weapons, and the mast-mounted Fire Control Radar above the rotor head. The Longbow radar raises overall height from 4.05 m to 4.95 m.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q188",
     "question": "Identify the unmanned aerial vehicle shown.",
     "fieldType": "Radio",
-    "options": ["Heron 1", "Hermes 900", "Hermes 450", "Orbiter 4"],
+    "options": [
+      "Heron 1",
+      "Hermes 900",
+      "Hermes 450",
+      "Orbiter 4"
+    ],
     "correctAnswer": "Heron 1",
     "explanation": "Wingspan is the most reliable discriminator across the RSAF's UAV fleet: Heron 1 at 16.6 m, Hermes 900 at 15 m, Hermes 450 at 10.5 m and Orbiter 4 at 5.4 m. Scale reference in the image matters more than outline here.",
     "topic": "Recognition",
     "subtopic": "Aircraft Recognition",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q189",
     "question": "Identify the ground-based air defence system shown.",
     "fieldType": "Radio",
-    "options": ["Aster 30", "SPYDER", "RBS-70", "MPSTAR"],
+    "options": [
+      "Aster 30",
+      "SPYDER",
+      "RBS-70",
+      "MPSTAR"
+    ],
     "correctAnswer": "Aster 30",
     "explanation": "A missile launcher vehicle carrying vertical launch containers. SPYDER carries its missiles on a raised, angled launcher, and the RBS-70 is mounted on a V200A armoured fighting vehicle or deployed dismounted.",
     "topic": "Recognition",
     "subtopic": "Weapon System Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q190",
     "question": "Identify the sensor shown.",
     "fieldType": "Radio",
-    "options": ["Aerostat", "SHIKRA", "MPSTAR", "MMR"],
+    "options": [
+      "Aerostat",
+      "SHIKRA",
+      "MPSTAR",
+      "MMR"
+    ],
     "correctAnswer": "Aerostat",
     "explanation": "A tethered balloon system, 55 m long, operating at 2,000 ft. It is unmistakable against the other three, which are all vehicle or tripod mounted ground radars.",
     "topic": "Recognition",
     "subtopic": "Weapon System Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   }
 ]

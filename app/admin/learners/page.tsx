@@ -226,7 +226,40 @@ export default function AdminLearnersPage() {
                             ) : null}
                             {event.kind === 'quiz_score' ? (
                               <div>
-                                {t('admin.learnersQuizScore')}: {event.earned}/{event.total}
+                                <div>
+                                  {t('admin.learnersQuizScore')}: {event.earned}/{event.total}
+                                </div>
+                                {event.bloomsBreakdown ? (
+                                  <div className="mt-2 text-xs">
+                                    <div className="font-medium text-slate-600 dark:text-slate-300 mb-1">
+                                      {t('admin.bloomsBreakdown')}:
+                                    </div>
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1">
+                                      {(['remember', 'understand', 'apply', 'analyze', 'evaluate', 'create'] as const).map(
+                                        (level) => {
+                                          const data = event.bloomsBreakdown?.[level];
+                                          if (!data) return null;
+                                          return (
+                                            <div key={level} className="flex justify-between">
+                                              <span className="capitalize text-slate-500">{level}:</span>
+                                              <span className={data.earned === data.total ? 'text-green-600' : 'text-slate-700 dark:text-slate-300'}>
+                                                {data.earned}/{data.total}
+                                              </span>
+                                            </div>
+                                          );
+                                        },
+                                      )}
+                                      {event.bloomsBreakdown?.unclassified ? (
+                                        <div className="flex justify-between">
+                                          <span className="text-slate-400">{t('admin.bloomsUnclassified')}:</span>
+                                          <span className="text-slate-700 dark:text-slate-300">
+                                            {event.bloomsBreakdown.unclassified.earned}/{event.bloomsBreakdown.unclassified.total}
+                                          </span>
+                                        </div>
+                                      ) : null}
+                                    </div>
+                                  </div>
+                                ) : null}
                               </div>
                             ) : null}
                             {event.kind === 'prompt' ? (

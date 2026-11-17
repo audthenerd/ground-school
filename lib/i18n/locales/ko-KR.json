@@ -64,7 +64,13 @@
     "learnersTimelineLoading": "Loading timeline…",
     "learnersTimelineEmpty": "No events for this learner.",
     "learnersDwellOpen": "still open",
-    "learnersQuizScore": "Score"
+    "learnersQuizScore": "Score",
+    "bloomsBreakdown": "Bloom's level breakdown",
+    "bloomsUnclassified": "Unclassified",
+    "questionBankLink": "Question bank",
+    "questionBankTitle": "Question Bank",
+    "questionBankSubtitle": "Manage Bloom's taxonomy levels for quiz questions",
+    "questionBankSearch": "Search by ID, question, or topic..."
   },
   "toolbar": {
     "pdfParser": "파서",

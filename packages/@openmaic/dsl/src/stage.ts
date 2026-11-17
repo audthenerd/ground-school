@@ -208,6 +208,11 @@ export interface QuizQuestion {
   commentPrompt?: string; // Grading guidance for text questions
   hasAnswer?: boolean; // Whether auto-grading is possible
   points?: number; // Points per question (default 1)
+  /**
+   * Bloom's taxonomy cognitive level (revised, Vanderbilt Center for Teaching).
+   * Optional; unclassified questions omit this field.
+   */
+  bloomsLevel?: 'remember' | 'understand' | 'apply' | 'analyze' | 'evaluate' | 'create';
 }
 
 /**
