@@ -25,6 +25,8 @@ export type LearnerTimelineEvent =
       attemptId: string;
       earned: number;
       total: number;
+      /** Per-Bloom's-level breakdown of scores. */
+      bloomsBreakdown?: BloomsScoreBreakdown;
     }
   | {
       kind: 'prompt';
@@ -33,6 +35,17 @@ export type LearnerTimelineEvent =
       sceneId: string | null;
       promptText: string;
     };
+
+/** Score breakdown by Bloom's taxonomy level. */
+export interface BloomsScoreBreakdown {
+  remember?: { earned: number; total: number };
+  understand?: { earned: number; total: number };
+  apply?: { earned: number; total: number };
+  analyze?: { earned: number; total: number };
+  evaluate?: { earned: number; total: number };
+  create?: { earned: number; total: number };
+  unclassified?: { earned: number; total: number };
+}
 
 export interface LearnerSummary {
   ownerId: string;
@@ -74,7 +87,27 @@ export function mergeLearnerTimeline(input: {
       attemptId: score.attemptId,
       earned: score.earned,
       total: score.total,
+      bloomsBreakdown: computeBloomsBreakdown(score.results),
     });
+  }
+
+  function computeBloomsBreakdown(
+    results: Array<{ earned: number; bloomsLevel?: string }>,
+  ): BloomsScoreBreakdown | undefined {
+    if (!results || results.length === 0) return undefined;
+
+    const breakdown: BloomsScoreBreakdown = {};
+    for (const result of results) {
+      const level = result.bloomsLevel ?? 'unclassified';
+      const key = level as keyof BloomsScoreBreakdown;
+      if (!breakdown[key]) {
+        breakdown[key] = { earned: 0, total: 0 };
+      }
+      breakdown[key]!.earned += result.earned;
+      breakdown[key]!.total += 1;
+    }
+
+    return Object.keys(breakdown).length > 0 ? breakdown : undefined;
   }
 
   for (const prompt of input.prompts) {

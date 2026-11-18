@@ -15,7 +15,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q002",
@@ -28,7 +29,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q003",
@@ -46,7 +48,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q004",
@@ -59,7 +62,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q005",
@@ -72,7 +76,8 @@
     "subtopic": "Air Force Training Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q006",
@@ -90,7 +95,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q007",
@@ -103,7 +109,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q008",
@@ -121,7 +128,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q009",
@@ -139,7 +147,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q010",
@@ -152,7 +161,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q011",
@@ -170,7 +180,8 @@
     "subtopic": "Fighters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q012",
@@ -188,7 +199,8 @@
     "subtopic": "Fighters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q013",
@@ -201,7 +213,8 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q014",
@@ -219,7 +232,8 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q015",
@@ -232,7 +246,8 @@
     "subtopic": "Helicopters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q016",
@@ -245,7 +260,8 @@
     "subtopic": "Helicopters",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q017",
@@ -258,7 +274,8 @@
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q018",
@@ -271,7 +288,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q019",
@@ -289,7 +307,8 @@
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q020",
@@ -307,7 +326,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q021",
@@ -320,7 +340,8 @@
     "subtopic": "Trainers",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q022",
@@ -333,7 +354,8 @@
     "subtopic": "Trainers",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q023",
@@ -346,7 +368,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q024",
@@ -364,7 +387,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q025",
@@ -382,7 +406,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q026",
@@ -395,7 +420,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q027",
@@ -408,7 +434,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q028",
@@ -421,7 +448,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q029",
@@ -434,7 +462,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q030",
@@ -447,7 +476,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q031",
@@ -460,7 +490,8 @@
     "subtopic": "Maritime Air Surveillance",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q032",
@@ -473,7 +504,8 @@
     "subtopic": "HADR and SAL",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q033",
@@ -486,7 +518,8 @@
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q034",
@@ -499,7 +532,8 @@
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q035",
@@ -517,7 +551,8 @@
     "subtopic": "UAV",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q036",
@@ -530,7 +565,8 @@
     "subtopic": "AISR",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q037",
@@ -543,7 +579,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q038",
@@ -556,7 +593,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q039",
@@ -574,7 +612,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q040",
@@ -592,7 +631,8 @@
     "subtopic": "Radar",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q041",
@@ -610,7 +650,8 @@
     "subtopic": "ADOC and APGC",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q042",
@@ -628,7 +669,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q043",
@@ -646,7 +688,8 @@
     "subtopic": "ADOC and APGC",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands"
+    "source": "rsaf.gov.sg/rsaf-forces/commands",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q044",
@@ -664,7 +707,8 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q045",
@@ -682,7 +726,8 @@
     "subtopic": "Fighters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q046",
@@ -695,7 +740,8 @@
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q047",
@@ -713,7 +759,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q048",
@@ -726,7 +773,8 @@
     "subtopic": "Helicopters",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q049",
@@ -744,7 +792,8 @@
     "subtopic": "Helicopters",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q050",
@@ -762,7 +811,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q051",
@@ -775,7 +825,8 @@
     "subtopic": "Transports and AEW",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q052",
@@ -788,7 +839,8 @@
     "subtopic": "Maritime Air Surveillance",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q053",
@@ -801,7 +853,8 @@
     "subtopic": "UAV",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q054",
@@ -814,7 +867,8 @@
     "subtopic": "Island Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q055",
@@ -827,7 +881,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q056",
@@ -840,7 +895,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q057",
@@ -858,7 +914,8 @@
     "subtopic": "Ground Based Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q058",
@@ -876,7 +933,8 @@
     "subtopic": "Radar",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q059",
@@ -894,7 +952,8 @@
     "subtopic": "Radar",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q060",
@@ -912,7 +971,8 @@
     "subtopic": "Radar",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q061",
@@ -930,7 +990,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q062",
@@ -948,7 +1009,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q063",
@@ -966,7 +1028,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q064",
@@ -984,7 +1047,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q065",
@@ -1002,7 +1066,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q066",
@@ -1020,7 +1085,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q067",
@@ -1033,7 +1099,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q068",
@@ -1051,7 +1118,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q069",
@@ -1064,7 +1132,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q070",
@@ -1082,7 +1151,8 @@
     "subtopic": "Air Combat Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-combat-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q071",
@@ -1100,7 +1170,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q072",
@@ -1118,7 +1189,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q073",
@@ -1136,7 +1208,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q074",
@@ -1154,7 +1227,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q075",
@@ -1172,7 +1246,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q076",
@@ -1185,7 +1260,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q077",
@@ -1203,7 +1279,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q078",
@@ -1221,7 +1298,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q079",
@@ -1239,7 +1317,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q080",
@@ -1257,7 +1336,8 @@
     "subtopic": "Air Defence and Operations Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q081",
@@ -1275,7 +1355,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q082",
@@ -1293,7 +1374,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q083",
@@ -1311,7 +1393,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q084",
@@ -1329,7 +1412,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q085",
@@ -1347,7 +1431,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q086",
@@ -1365,7 +1450,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q087",
@@ -1383,7 +1469,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q088",
@@ -1401,7 +1488,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q089",
@@ -1419,7 +1507,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q090",
@@ -1432,7 +1521,8 @@
     "subtopic": "Air Power Generation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-power-generation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q091",
@@ -1450,7 +1540,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q092",
@@ -1468,7 +1559,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q093",
@@ -1486,7 +1578,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q094",
@@ -1504,7 +1597,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q095",
@@ -1522,7 +1616,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q096",
@@ -1535,7 +1630,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q097",
@@ -1548,7 +1644,8 @@
     "subtopic": "Participation Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q098",
@@ -1566,7 +1663,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q099",
@@ -1584,7 +1682,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q100",
@@ -1602,7 +1701,8 @@
     "subtopic": "Participation Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q101",
@@ -1620,7 +1720,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q102",
@@ -1638,7 +1739,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q103",
@@ -1656,7 +1758,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q104",
@@ -1674,7 +1777,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q105",
@@ -1692,7 +1796,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q106",
@@ -1710,7 +1815,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q107",
@@ -1728,7 +1834,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q108",
@@ -1746,7 +1853,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q109",
@@ -1764,7 +1872,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q110",
@@ -1777,7 +1886,8 @@
     "subtopic": "Unmanned Aerial Vehicle Command",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/unmanned-aerial-vehicle-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q111",
@@ -1795,7 +1905,8 @@
     "subtopic": "Vision",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q112",
@@ -1813,7 +1924,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force"
+    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q113",
@@ -1831,7 +1943,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q114",
@@ -1849,7 +1962,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q115",
@@ -1862,7 +1976,8 @@
     "subtopic": "Vision",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q116",
@@ -1875,7 +1990,8 @@
     "subtopic": "Core Values",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q117",
@@ -1888,7 +2004,8 @@
     "subtopic": "Core Values",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q118",
@@ -1906,7 +2023,8 @@
     "subtopic": "Founding",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q119",
@@ -1919,7 +2037,8 @@
     "subtopic": "Founding",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q120",
@@ -1938,7 +2057,8 @@
     "subtopic": "Value in Peace",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q121",
@@ -1951,7 +2071,8 @@
     "subtopic": "Core Values",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q122",
@@ -1964,7 +2085,8 @@
     "subtopic": "Safety Management System",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q123",
@@ -1977,7 +2099,8 @@
     "subtopic": "Safety Management System",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q124",
@@ -1990,7 +2113,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q125",
@@ -2008,7 +2132,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q126",
@@ -2026,7 +2151,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q127",
@@ -2045,7 +2171,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q128",
@@ -2063,7 +2190,8 @@
     "subtopic": "Safety Oversight",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q129",
@@ -2081,7 +2209,8 @@
     "subtopic": "Safety Tools",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q130",
@@ -2099,7 +2228,8 @@
     "subtopic": "Training Safety",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4"
+    "source": "mindef.gov.sg/news-and-events/latest-releases/02mar20_fs4",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q131",
@@ -2118,7 +2248,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q132",
@@ -2136,7 +2267,8 @@
     "subtopic": "Air Defence",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q133",
@@ -2154,7 +2286,8 @@
     "subtopic": "Founding",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history"
+    "source": "rsaf.gov.sg/about-us/history",
+    "bloomsLevel": "create"
   },
   {
     "id": "Q134",
@@ -2167,7 +2300,8 @@
     "subtopic": "Vision",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/air-defence-and-operations-command; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q135",
@@ -2185,7 +2319,8 @@
     "subtopic": "Vision",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force; rsaf.gov.sg/about-us/vision-and-mission"
+    "source": "rsaf.gov.sg/about-us/history/history-of-the-rsaf/2000-jan-world-class-people-first-class-air-force; rsaf.gov.sg/about-us/vision-and-mission",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q136",
@@ -2198,7 +2333,8 @@
     "subtopic": "Force Design",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q137",
@@ -2216,7 +2352,8 @@
     "subtopic": "Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q138",
@@ -2234,7 +2371,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "evaluate"
   },
   {
     "id": "Q139",
@@ -2247,7 +2385,8 @@
     "subtopic": "Value in Peace",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q140",
@@ -2265,7 +2404,8 @@
     "subtopic": "Joint Integration",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/participation-command"
+    "source": "rsaf.gov.sg/about-us/vision-and-mission; rsaf.gov.sg/rsaf-forces/commands/participation-command",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q151",
@@ -2283,7 +2423,8 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q152",
@@ -2296,7 +2437,8 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q153",
@@ -2314,7 +2456,8 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification"
+    "source": "airbus.com/en/newsroom/press-releases/2026-02-airbus-singapore-achieve-world-first-on-a330-mrtt-auto-refuelling-full-certification",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q154",
@@ -2327,7 +2470,8 @@
     "subtopic": "Air-to-Air Refuelling",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q155",
@@ -2345,7 +2489,8 @@
     "subtopic": "Systems Engineering",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q156",
@@ -2363,7 +2508,8 @@
     "subtopic": "Systems Engineering",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q157",
@@ -2381,7 +2527,8 @@
     "subtopic": "Avionics",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "apply"
   },
   {
     "id": "Q158",
@@ -2399,7 +2546,8 @@
     "subtopic": "Avionics",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q159",
@@ -2417,7 +2565,8 @@
     "subtopic": "Air Defence",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q160",
@@ -2430,7 +2579,8 @@
     "subtopic": "Systems Engineering",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight; rsaf.gov.sg/rsaf-forces/aircraft; rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "dsta.gov.sg/what-we-do/detail?title=fuelling-the-flight; rsaf.gov.sg/rsaf-forces/aircraft; rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q161",
@@ -2443,7 +2593,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q162",
@@ -2456,7 +2607,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q163",
@@ -2469,7 +2621,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q164",
@@ -2482,7 +2635,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q165",
@@ -2495,7 +2649,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q166",
@@ -2513,7 +2668,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q167",
@@ -2526,7 +2682,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q168",
@@ -2539,7 +2696,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q169",
@@ -2557,7 +2715,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q170",
@@ -2570,7 +2729,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q171",
@@ -2588,7 +2748,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q172",
@@ -2601,7 +2762,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q173",
@@ -2620,7 +2782,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q174",
@@ -2633,7 +2796,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q175",
@@ -2651,7 +2815,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q176",
@@ -2664,7 +2829,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q177",
@@ -2677,7 +2843,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q178",
@@ -2690,7 +2857,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace; rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q179",
@@ -2703,7 +2871,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q180",
@@ -2716,7 +2885,8 @@
     "subtopic": "Roles and Tasking",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/about-us/our-value-in-peace"
+    "source": "rsaf.gov.sg/about-us/our-value-in-peace",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q181",
@@ -2729,7 +2899,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q182",
@@ -2742,7 +2913,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q183",
@@ -2755,7 +2927,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q184",
@@ -2768,7 +2941,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "remember"
   },
   {
     "id": "Q185",
@@ -2781,7 +2955,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q186",
@@ -2794,7 +2969,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q187",
@@ -2807,7 +2983,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q188",
@@ -2820,7 +2997,8 @@
     "subtopic": "Aircraft Recognition",
     "difficulty": "3.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/aircraft"
+    "source": "rsaf.gov.sg/rsaf-forces/aircraft",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q189",
@@ -2833,7 +3011,8 @@
     "subtopic": "Weapon System Recognition",
     "difficulty": "2.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "understand"
   },
   {
     "id": "Q190",
@@ -2846,6 +3025,7 @@
     "subtopic": "Weapon System Recognition",
     "difficulty": "1.0",
     "status": "Draft",
-    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems"
+    "source": "rsaf.gov.sg/rsaf-forces/weapon-systems",
+    "bloomsLevel": "remember"
   }
 ]

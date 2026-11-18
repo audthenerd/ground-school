@@ -6,6 +6,8 @@ export interface QuestionResult {
   status: 'correct' | 'incorrect';
   earned: number;
   aiComment?: string;
+  /** Bloom's taxonomy level of this question, if classified. */
+  bloomsLevel?: 'remember' | 'understand' | 'apply' | 'analyze' | 'evaluate' | 'create';
 }
 
 export function arraysEqual(a: string[], b: string[]): boolean {
@@ -84,6 +86,7 @@ export function gradeChoiceQuestions(
         correct,
         status: correct ? ('correct' as const) : ('incorrect' as const),
         earned: correct ? pts : 0,
+        bloomsLevel: q.bloomsLevel,
       };
     });
 }

@@ -173,9 +173,7 @@ export default function AdminCurriculumPage() {
   };
 
   const removeCandidate = async (candidateId: string, isLive: boolean) => {
-    const message = isLive
-      ? t('admin.deleteLiveConfirm')
-      : t('admin.deleteConfirm');
+    const message = isLive ? t('admin.deleteLiveConfirm') : t('admin.deleteConfirm');
     if (!window.confirm(message)) return;
     setDeletingId(candidateId);
     setError(null);
@@ -246,13 +244,22 @@ export default function AdminCurriculumPage() {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {t('admin.curriculumSubtitle')}
           </p>
-          <Link
-            href="/admin/learners"
-            className="inline-flex items-center gap-1.5 mt-2 text-sm text-primary hover:underline"
-            data-testid="admin-learners-link"
-          >
-            {t('admin.learnersLink')}
-          </Link>
+          <div className="flex gap-4 mt-2">
+            <Link
+              href="/admin/learners"
+              className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+              data-testid="admin-learners-link"
+            >
+              {t('admin.learnersLink')}
+            </Link>
+            <Link
+              href="/admin/question-bank"
+              className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+              data-testid="admin-question-bank-link"
+            >
+              {t('admin.questionBankLink')}
+            </Link>
+          </div>
         </div>
         <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center">
           {(overview?.models?.length ?? 0) > 0 ? (
@@ -337,7 +344,9 @@ export default function AdminCurriculumPage() {
                 ) : (
                   <Trash2 className="size-3.5" />
                 )}
-                {deletingId === overview.release.candidateId ? t('admin.deleting') : t('admin.delete')}
+                {deletingId === overview.release.candidateId
+                  ? t('admin.deleting')
+                  : t('admin.delete')}
               </button>
             </div>
           </div>
@@ -440,10 +449,7 @@ export default function AdminCurriculumPage() {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
             {t('admin.promptsTitle')}
           </h2>
-          <Link
-            href="/admin/learners"
-            className="text-xs text-primary hover:underline"
-          >
+          <Link href="/admin/learners" className="text-xs text-primary hover:underline">
             {t('admin.promptsSeeLearners')}
           </Link>
         </div>

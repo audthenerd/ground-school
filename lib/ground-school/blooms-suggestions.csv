@@ -1,0 +1,181 @@
+ID,Question,Current Level,Suggested Level,Confidence,Topic,Subtopic
+Q001,"Which RSAF command is responsible for maintaining air superiority and executing air combat operations?",,remember,95%,RSAF Commands,Air Combat Command
+Q002,"The Air Defence and Operations Command operates a 24/7 operations centre that oversees all RSAF operations.",,remember,100%,RSAF Commands,Air Defence and Operations Command
+Q003,"What is the primary role of the Air Power Generation Command (APGC)?",,remember,77%,RSAF Commands,Air Power Generation Command
+Q004,"Name the four domestic RSAF air bases that fall under the jurisdiction of APGC.",,remember,91%,RSAF Commands,Air Power Generation Command
+Q005,"Which command was inaugurated most recently, and what is its primary responsibility?",,remember,85%,RSAF Commands,Air Force Training Command
+Q006,"The Participation Command integrates rotary-wing assets primarily to support which of the following?",,evaluate,54%,RSAF Commands,Participation Command
+Q007,"The Air Surveillance and Control Group falls under the Participation Command.",,remember,100%,RSAF Commands,Air Defence and Operations Command
+Q008,"The Air Combat Command has four key internal divisions. Which of the following is NOT one of them?",,remember,95%,RSAF Commands,Air Combat Command
+Q009,"Which command oversees unmanned aerial vehicle systems and includes a dedicated UAV Training School?",,remember,100%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q010,"Explain the functional difference between the Air Defence Group and the Air Operations Control Group, both of which operate under ADOC.",,apply,35%,RSAF Commands,Air Defence and Operations Command
+Q011,"What is the crew composition of the F-15SG?",,remember,95%,Platforms,Fighters
+Q012,"Which engines power the F-15SG?",,remember,95%,Platforms,Fighters
+Q013,"What is the stated service ceiling of the F-15SG?",,remember,95%,Platforms,Fighters
+Q014,"Which engine powers the RSAF's F-16C/D/D+ Fighting Falcon?",,remember,95%,Platforms,Fighters
+Q015,"The H225M Medium Lift Helicopter replaces which ageing RSAF fleet?",,remember,95%,Platforms,Helicopters
+Q016,"The CH-47F Chinook replaces the CH-47D fleet that had been in service since 1994.",,remember,100%,Platforms,Helicopters
+Q017,"Which RSAF helicopter is the first tandem-seat helicopter in the service?",,remember,95%,Platforms,Helicopters
+Q018,"Describe the function of the Fire Control Radar on the AH-64D Apache Longbow.",,remember,48%,Platforms,Helicopters
+Q019,"The S-70B Seahawk is integrated with which platform, and for what primary missions?",,remember,95%,Platforms,Helicopters
+Q020,"What is the crew composition of the S-70B Seahawk?",,remember,95%,Platforms,Helicopters
+Q021,"Which two aircraft does the RSAF operate in the trainer role?",,remember,49%,Platforms,Trainers
+Q022,"What is the service ceiling of the M-346 trainer?",,remember,95%,Platforms,Trainers
+Q023,"The G550-Airborne Early Warning aircraft replaced which platform?",,remember,95%,Platforms,Transports and AEW
+Q024,"What type of radar is fitted to the G550-AEW?",,understand,55%,Platforms,Transports and AEW
+Q025,"What is the crew composition of the G550-AEW?",,remember,95%,Platforms,Transports and AEW
+Q026,"The A330 Multi-Role Tanker Transport replaces the KC-135R.",,remember,100%,Platforms,Transports and AEW
+Q027,"How much fuel can the A330 MRTT carry for its own use or offload to receivers?",,apply,95%,Platforms,Transports and AEW
+Q028,"What capability does the UARRSI give the A330 MRTT, and why does it matter operationally?",,understand,91%,Platforms,Transports and AEW
+Q029,"What is the maximum personnel capacity of the A330 MRTT?",,remember,95%,Platforms,Transports and AEW
+Q030,"What is the stated endurance of the C-130 Hercules?",,remember,95%,Platforms,Transports and AEW
+Q031,"What is the primary maritime role of the Fokker-50 MPA, and which service does it work with?",,remember,96%,Missions and Roles,Maritime Air Surveillance
+Q032,"Which RSAF platforms have been deployed on Humanitarian Assistance and Disaster Relief and Search and Locate missions?",,remember,98%,Missions and Roles,HADR and SAL
+Q033,"Which RSAF UAV has the longest stated endurance?",,remember,95%,Platforms,UAV
+Q034,"The Heron 1 UAV features a fully automatic take-off and landing capability.",,remember,100%,Platforms,UAV
+Q035,"What class of UAV is the Orbiter 4, and what operational advantage does it offer?",,understand,100%,Platforms,UAV
+Q036,"Explain how the Orbiter 4 complements the RSAF's larger UAVs in building situational awareness.",,understand,91%,Missions and Roles,AISR
+Q037,"Which system was the first 3rd generation weapon system integrated into the enhanced Island Air Defence system?",,remember,95%,Air Defence,Ground Based Air Defence
+Q038,"What is the maximum intercept range of the Aster 30 against fighter aircraft?",,remember,95%,Air Defence,Ground Based Air Defence
+Q039,"On what guidance principle does the RBS-70 short-range air defence missile system work?",,understand,100%,Air Defence,Ground Based Air Defence
+Q040,"The MPSTAR radar provides the air picture to which system?",,remember,95%,Air Defence,Radar
+Q041,"At a high-level organisational overview, what is the main distinction between the Air Defence and Operations Command (ADOC) and the Air Power Generation Command (APGC)?",,remember,77%,RSAF Commands,ADOC and APGC
+Q042,"Which responsibilities are most closely associated with the Air Defence and Operations Command (ADOC)? Select all that apply.",,remember,66%,RSAF Commands,Air Defence and Operations Command
+Q043,"Which statement best describes the role of the Air Power Generation Command (APGC) in relation to ADOC?",,remember,95%,RSAF Commands,ADOC and APGC
+Q044,"Which is correct about the maximum speeds of the RSAF's two fighter types?",,remember,95%,Platforms,Fighters
+Q045,"What does the Joint Helmet Mounted Cueing System (JHMCS) provide to the F-15SG crew?",,understand,100%,Platforms,Fighters
+Q046,"Which gun is fitted to the AH-64D Apache Longbow?",,remember,95%,Platforms,Helicopters
+Q047,"Which payload configurations can the H225M carry? Select all that apply.",,remember,66%,Platforms,Helicopters
+Q048,"Roughly how much more range does the H225M offer compared with the AS332M Super Puma it replaces?",,understand,100%,Platforms,Helicopters
+Q049,"Which capabilities does the CH-47F add over the CH-47D it replaces? Select all that apply.",,remember,66%,Platforms,Helicopters
+Q050,"What is the crew composition of the C-130 Hercules?",,remember,95%,Platforms,Transports and AEW
+Q051,"How many fully equipped paratroopers can the C-130 Hercules carry?",,remember,95%,Platforms,Transports and AEW
+Q052,"The Fokker-50 MPA can be armed with anti-ship missiles.",,remember,100%,Platforms,Maritime Air Surveillance
+Q053,"Which RSAF UAV has the greatest stated maximum range?",,remember,95%,Platforms,UAV
+Q054,"Explain what makes the Island Air Defence (IAD) system more than a collection of individual sensors and launchers.",,understand,91%,Air Defence,Island Air Defence
+Q055,"What is the maximum intercept altitude of the Aster 30?",,remember,95%,Air Defence,Ground Based Air Defence
+Q056,"Which types of air threat is the Aster 30 described as capable of engaging? Select all that apply.",,remember,66%,Air Defence,Ground Based Air Defence
+Q057,"What are the effective range and intercept altitude of the SPYDER system?",,understand,100%,Air Defence,Ground Based Air Defence
+Q058,"What does the SHIKRA radar contribute to the RSAF's air picture, and how quickly can it be deployed?",,understand,81%,Air Defence,Radar
+Q059,"Why did the SAF introduce the aerostat, given the surveillance systems already in place?",,understand,100%,Air Defence,Radar
+Q060,"The Multi Mission Radar (MMR) performs two distinct detection functions. What are they, and at what ranges?",,understand,100%,Air Defence,Radar
+Q061,"What does the Air Combat Command (ACC) plan, control and execute?",,understand,34%,RSAF Commands,Air Combat Command
+Q062,"What is the Air Combat Command's primary aim?",,remember,95%,RSAF Commands,Air Combat Command
+Q063,"Which ACC group develops the professional skills of the fighter force?",,remember,95%,RSAF Commands,Air Combat Command
+Q064,"Which ACC group trains transport aircrew to a high level of proficiency?",,remember,95%,RSAF Commands,Air Combat Command
+Q065,"What is the role of the Integrated System Development Group (ISDG)?",,remember,95%,RSAF Commands,Air Combat Command
+Q066,"What does ACC's Operations Development Group (ODG) develop?",,understand,46%,RSAF Commands,Air Combat Command
+Q067,"How many groups make up the Air Combat Command?",,remember,95%,RSAF Commands,Air Combat Command
+Q068,"Which two forces does ACC raise, train and sustain?",,remember,95%,RSAF Commands,Air Combat Command
+Q069,"ACC aims to sustain air superiority over the SAF's area of operations.",,remember,100%,RSAF Commands,Air Combat Command
+Q070,"Which of the following is NOT an Air Combat Command group?",,remember,95%,RSAF Commands,Air Combat Command
+Q071,"What does the Air Defence and Operations Command (ADOC) protect?",,understand,100%,RSAF Commands,Air Defence and Operations Command
+Q072,"Which ADOC unit serves as the RSAF Operations Centre?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q073,"Which ADOC group provides Ground Based Air Defence?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q074,"Which ADOC group conducts round-the-clock air surveillance and air control?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q075,"Which two force types does ADOC raise, train and sustain?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q076,"ADOC plans, controls, executes and commands all peacetime RSAF operations.",,remember,100%,RSAF Commands,Air Defence and Operations Command
+Q077,"What is the role of 9 Air Engineering and Logistics Group (9 AELG)?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q078,"Which squadrons does 9 AELG command?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q079,"ADOC maintains high readiness to enable which transition?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q080,"Which of the following is NOT an ADOC unit?",,remember,95%,RSAF Commands,Air Defence and Operations Command
+Q081,"What does the Air Power Generation Command (APGC) manage to keep aircraft launching and recovering continuously?",,understand,100%,RSAF Commands,Air Power Generation Command
+Q082,"Which APGC squadron rapidly repairs unserviceable aircraft?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q083,"Which APGC squadron handles complex defects and repairs components off the aircraft?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q084,"Which APGC squadron provides air traffic control, weather monitoring and flight information?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q085,"Which APGC squadron carries out airfield damage recovery?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q086,"Which APGC squadron provides ground defence and airbase security?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q087,"Which APGC squadron provides meals, accommodation, electrical power and water?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q088,"What is the role of APGC's Operations Development Group (ODG)?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q089,"AOMS and ASMS both sit under which APGC group?",,remember,95%,RSAF Commands,Air Power Generation Command
+Q090,"The Force Protection Squadron guards against both conventional and asymmetric threats.",,remember,100%,RSAF Commands,Air Power Generation Command
+Q091,"The Participation Command (PC) delivers air power to decisively influence which battles?",,remember,95%,RSAF Commands,Participation Command
+Q092,"Which PC group provides low-level ground-based air defence for the Army's area of operations?",,remember,95%,RSAF Commands,Participation Command
+Q093,"Which PC group operates the RSAF's helicopter fleet?",,remember,95%,RSAF Commands,Participation Command
+Q094,"Which PC group coordinates integration between the Air Force, Navy and Army?",,remember,77%,RSAF Commands,Participation Command
+Q095,"What types of system does the Divisional Air Defence Group (DAG) operate?",,apply,95%,RSAF Commands,Participation Command
+Q096,"How many groups make up the Participation Command?",,remember,95%,RSAF Commands,Participation Command
+Q097,"The Tactical Air Support Group delivers responsive air support to the Army and Navy.",,evaluate,93%,RSAF Commands,Participation Command
+Q098,"Which three unit types does PC raise, train and sustain?",,remember,95%,RSAF Commands,Participation Command
+Q099,"Which of the following is NOT a Participation Command group?",,remember,95%,RSAF Commands,Participation Command
+Q100,"On what basis does the Helicopter Group maintain competency and technical expertise?",,understand,100%,RSAF Commands,Participation Command
+Q101,"The UAV Command was the second command inaugurated under what?",,understand,100%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q102,"What is distinctive about how the UAV Command is staffed?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q103,"Which UAV Command group develops operational plans and doctrine for AISR operations?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q104,"Which UAV Command unit drives the development of UAS warfare and works with industry and technology agencies?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q105,"Which UAV Command group governs all UAV operations in the SAF?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q106,"Which UAV Command group turns data collected by unmanned platforms into actionable intelligence?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q107,"Which UAV Command group handles operational maintenance and engineering for its UAVs and systems?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q108,"What does AISR stand for?",,understand,100%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q109,"The Air Intelligence Group maintains the competency of which specialists?",,remember,95%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q110,"The UAV Command is the first operational SAF Command within the RSAF.",,remember,100%,RSAF Commands,Unmanned Aerial Vehicle Command
+Q111,"The RSAF's vision opens by describing it as a First Class Air Force, always ready to do what?",,evaluate,83%,RSAF Identity,Vision
+Q112,"Which phrase has the RSAF promoted as its vision since 2000?",,remember,95%,RSAF Identity,Vision
+Q113,"According to the vision, the RSAF will be superior in the air and decisively influence what?",,understand,100%,RSAF Identity,Vision
+Q114,"The vision states that the RSAF will respond decisively to the full spectrum of missions from peace to war as part of what?",,understand,100%,RSAF Identity,Vision
+Q115,"The RSAF states that its people are the heart of the organisation.",,remember,100%,RSAF Identity,Vision
+Q116,"Which of the following is NOT one of the RSAF's nine core values?",,remember,95%,RSAF Identity,Core Values
+Q117,"Which of the following are RSAF core values? Select all that apply.",,remember,66%,RSAF Identity,Core Values
+Q118,"What prompted Singapore to raise an air force from scratch in 1968?",,understand,100%,RSAF Identity,Founding
+Q119,"When was the Singapore Air Defence Command (SADC) stood up?",,understand,100%,RSAF Identity,Founding
+Q120,"Which of the following are among the RSAF's stated areas of value in peacetime? Select all that apply.",,remember,61%,RSAF Identity,Value in Peace
+Q121,"Safety is one of the RSAF's nine stated core values.",,remember,100%,Safety,Core Values
+Q122,"The SAF's safety management systems are aligned to which international standard?",,remember,95%,Safety,Safety Management System
+Q123,"ISO 45001 replaced which earlier occupational health and safety standard?",,remember,95%,Safety,Safety Management System
+Q124,"When was the Inspector-General's Office (IGO) formed?",,understand,100%,Safety,Safety Oversight
+Q125,"What is the Inspector-General's Office (IGO) responsible for?",,remember,77%,Safety,Safety Oversight
+Q126,"Which body is made up of external safety experts and other professionals who visit Services, formations and units to evaluate practices and recommend improvements?",,evaluate,61%,Safety,Safety Oversight
+Q127,"Which of the following are layers of the SAF's safety review and audit system? Select all that apply.",,remember,66%,Safety,Safety Oversight
+Q128,"The external auditors who check SAF units' compliance with ISO 45001 are accredited by which body?",,remember,95%,Safety,Safety Oversight
+Q129,"What is SafeGuardian?",,remember,95%,Safety,Safety Tools
+Q130,"How does safety feature in training evaluations such as the SAF Best Unit Competition and ATEC assessments?",,understand,81%,Safety,Training Safety
+Q131,"Which RSAF elements exist to support the Army or the Navy directly? Select all that apply.",,remember,47%,RSAF in Context,Joint Integration
+Q132,"Both the Air Defence Group (ADG) and the Divisional Air Defence Group (DAG) provide ground-based air defence. What distinguishes them?",,understand,100%,RSAF in Context,Air Defence
+Q133,"What made raising an air force in 1968 particularly difficult for Singapore?",,create,83%,RSAF in Context,Founding
+Q134,"The RSAF's vision commits it both to being superior in the air and to decisively influencing the ground and maritime battles. Explain how ADOC and the Participation Command divide that work between them.",,understand,91%,RSAF in Context,Vision
+Q135,"What was the RSAF signalling when it adopted ""World Class People, First Class Air Force"" as its vision in 2000?",,understand,100%,RSAF in Context,Vision
+Q136,"The aircraft the RSAF commits to humanitarian and search-and-rescue missions are the same types it operates for its military roles. What does this suggest about how the force is designed, and what trade-offs does it imply?",,understand,91%,RSAF in Context,Force Design
+Q137,"What does the RSAF state that its enhanced, networked Island Air Defence system allows it to do?",,understand,51%,RSAF in Context,Air Defence
+Q138,"What does the Tactical Air Support Group (TASG) provide that neither the Helicopter Group nor the Divisional Air Defence Group does?",,evaluate,54%,RSAF in Context,Joint Integration
+Q139,"The RSAF names four areas of value in peacetime: 24/7 air defence, Search and Rescue, HADR and Peace Support. Explain how these peacetime activities relate to its readiness for operations.",,understand,48%,RSAF in Context,Value in Peace
+Q140,"The RSAF describes itself as responding to the full spectrum of missions ""as part of an integrated SAF"". Which command most directly embodies that integration?",,remember,77%,RSAF in Context,Joint Integration
+Q151,"What does A3R stand for, and what did the RSAF achieve with it in 2026?",,understand,100%,Digitalisation and Technology,Air-to-Air Refuelling
+Q152,"Which RSAF squadron operates the A330 Multi-Role Tanker Transport?",,remember,95%,Digitalisation and Technology,Air-to-Air Refuelling
+Q153,"Which body granted full certification of the A3R capability on the A330 MRTT?",,remember,95%,Digitalisation and Technology,Air-to-Air Refuelling
+Q154,"DSTA led the technical work to qualify the A330 MRTT to refuel which RSAF aircraft in flight?",,remember,95%,Digitalisation and Technology,Air-to-Air Refuelling
+Q155,"DSTA proposed reducing the A330 MRTT crew from four to three. How was that proposal assessed?",,understand,100%,Digitalisation and Technology,Systems Engineering
+Q156,"What became of the three-crew concept after the RSAF adopted it for the A330 MRTT?",,understand,100%,Digitalisation and Technology,Systems Engineering
+Q157,"How are the A330 MRTT's avionics described?",,apply,83%,Digitalisation and Technology,Avionics
+Q158,"What does the 3D video system fitted to the A330 MRTT's Aerial Refuelling Boom System provide?",,understand,81%,Digitalisation and Technology,Avionics
+Q159,"How is the Island Air Defence (IAD) system described in terms of its origin?",,remember,45%,Digitalisation and Technology,Air Defence
+Q160,"The RSAF repeatedly develops capability jointly with DSTA rather than buying finished products. Using the A330 MRTT work as an example, explain what this approach allows that an off-the-shelf purchase would not.",,understand,91%,Digitalisation and Technology,Systems Engineering
+Q161,"A submarine contact needs to be prosecuted, and a Formidable-class frigate is already on station. Which RSAF asset is designed for that task?",,remember,95%,Platforms,Roles and Tasking
+Q162,"Ground targets must be found, classified and engaged at night in poor weather. Which RSAF platform is designed for that?",,remember,95%,Platforms,Roles and Tasking
+Q163,"Which RSAF aircraft detects, tracks and identifies aerial targets at long range so threats can be identified early?",,remember,81%,Platforms,Roles and Tasking
+Q164,"Fighters need to remain on station well beyond their normal endurance. Which RSAF asset makes that possible?",,remember,95%,Platforms,Roles and Tasking
+Q165,"Aerial firefighting is required, using a 5,000-litre heli-bucket. Which RSAF helicopter was deployed for exactly this in Indonesia in 2015?",,remember,95%,Platforms,Roles and Tasking
+Q166,"Both the Fokker-50 MPA and the S-70B Seahawk work over the sea. What distinguishes their roles?",,understand,100%,Platforms,Roles and Tasking
+Q167,"Surveillance is needed over a dense urban area with no runway available and a requirement to set up quickly. Which RSAF UAV fits?",,remember,95%,Platforms,Roles and Tasking
+Q168,"Fully equipped paratroopers must be dropped and heavy cargo airdropped into an austere location. Which aircraft is designed for that?",,remember,95%,Platforms,Roles and Tasking
+Q169,"What distinguishes the training roles of the PC-21 and the M-346?",,understand,100%,Platforms,Roles and Tasking
+Q170,"A large number of casualties must be flown out over a long distance with medical equipment aboard. Which RSAF platform can be configured for that scale of aeromedical evacuation?",,remember,95%,Platforms,Roles and Tasking
+Q171,"What distinguishes the F-15SG from the F-16 in RSAF service?",,understand,100%,Platforms,Roles and Tasking
+Q172,"Troops must be moved quickly with an underslung load, and the same aircraft may be needed for casualty evacuation. Which helicopter is built for that mix?",,remember,77%,Platforms,Roles and Tasking
+Q173,"Which RSAF platforms are designed to operate with, or in direct support of, the Republic of Singapore Navy? Select all that apply.",,remember,40%,Platforms,Roles and Tasking
+Q174,"Which RSAF platform carries AGM-114 Hellfire missiles and HYDRA 70 rockets?",,remember,95%,Platforms,Roles and Tasking
+Q175,"Which cannon is fitted to both the F-15SG and the F-16?",,remember,95%,Platforms,Roles and Tasking
+Q176,"A mixed formation includes both drogue-refuelled and boom-refuelled aircraft. Which RSAF platform can refuel both?",,remember,95%,Platforms,Roles and Tasking
+Q177,"Which platform would build the air picture and support control of an interception, rather than carrying out the interception itself?",,remember,33%,Platforms,Roles and Tasking
+Q178,"A wide-area maritime search is required, with the possibility of survivors in the water. Which combination of RSAF assets would you expect to be tasked, and what does each contribute?",,remember,48%,Platforms,Roles and Tasking
+Q179,"How many aircraft did the RSAF commit to the search for Malaysia Airlines Flight MH370 in March 2014?",,remember,95%,Platforms,Roles and Tasking
+Q180,"Which RSAF platforms took part in the response to the USS John McCain collision in August 2017? Select all that apply.",,remember,66%,Platforms,Roles and Tasking
+Q181,"Identify the helicopter shown.",,remember,54%,Recognition,Aircraft Recognition
+Q182,"Identify the fighter shown.",,understand,51%,Recognition,Aircraft Recognition
+Q183,"Identify the transport aircraft shown.",,understand,51%,Recognition,Aircraft Recognition
+Q184,"Identify the maritime patrol aircraft shown.",,remember,54%,Recognition,Aircraft Recognition
+Q185,"Identify the aircraft shown.",,understand,51%,Recognition,Aircraft Recognition
+Q186,"Identify the aircraft shown.",,understand,51%,Recognition,Aircraft Recognition
+Q187,"Identify the helicopter shown.",,understand,51%,Recognition,Aircraft Recognition
+Q188,"Identify the unmanned aerial vehicle shown.",,understand,46%,Recognition,Aircraft Recognition
+Q189,"Identify the ground-based air defence system shown.",,understand,51%,Recognition,Weapon System Recognition
+Q190,"Identify the sensor shown.",,remember,54%,Recognition,Weapon System Recognition

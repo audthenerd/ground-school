@@ -64,7 +64,13 @@
     "learnersTimelineLoading": "正在加载时间线…",
     "learnersTimelineEmpty": "该学员暂无事件。",
     "learnersDwellOpen": "进行中",
-    "learnersQuizScore": "得分"
+    "learnersQuizScore": "得分",
+    "bloomsBreakdown": "Bloom's level breakdown",
+    "bloomsUnclassified": "Unclassified",
+    "questionBankLink": "Question bank",
+    "questionBankTitle": "Question Bank",
+    "questionBankSubtitle": "Manage Bloom's taxonomy levels for quiz questions",
+    "questionBankSearch": "Search by ID, question, or topic..."
   },
   "toolbar": {
     "pdfParser": "解析器",

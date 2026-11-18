@@ -51,7 +51,7 @@ jobs:
   check:
     name: Lint, Typecheck & Unit Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v5
         with:
@@ -153,6 +153,9 @@ jobs:
       # These four do not share state. Sequential they were ~2 minutes; the
       # slowest (ESLint) is the new bound.
       - name: Prettier, ESLint, TypeScript, i18n
+        env:
+          # Increase Node.js heap size for tsc on large codebases
+          NODE_OPTIONS: '--max-old-space-size=4096'
         run: |
           scripts/ci-run-parallel.sh \
             'prettier' 'pnpm check' \

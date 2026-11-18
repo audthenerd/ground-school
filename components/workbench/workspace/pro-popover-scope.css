@@ -160,7 +160,7 @@
   color: var(--ws-ink);
 }
 
-.ws-root .pro-theme-popover > button.bg-primary/10 {
+.ws-root .pro-theme-popover > button.bg-primary\/10 {
   background: var(--ws-accent-wash);
   color: var(--ws-accent);
 }

@@ -1,27 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useCallback } from 'react';
 import tinycolor from 'tinycolor2';
 import type { ChartData, ChartOptions, ChartType } from '@openmaic/dsl';
 import { getChartOption } from './chartOption';
-
-import * as echarts from 'echarts/core';
-import { BarChart, LineChart, PieChart, ScatterChart, RadarChart } from 'echarts/charts';
-import { LegendComponent } from 'echarts/components';
-import { SVGRenderer } from 'echarts/renderers';
-import * as chartFeatures from 'echarts/features';
-
-echarts.use([
-  BarChart,
-  LineChart,
-  PieChart,
-  ScatterChart,
-  RadarChart,
-  LegendComponent,
-  SVGRenderer,
-]);
-// ECharts 6 makes the ECharts 5 containLabel layout an opt-in feature.
-if (chartFeatures.LegacyGridContainLabel) echarts.use(chartFeatures.LegacyGridContainLabel);
+import { loadChartRuntime } from './chartRuntime';
 
 interface ChartProps {
   width: number;
@@ -45,7 +28,9 @@ export function Chart({
   options,
 }: ChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
-  const chartInstance = useRef<echarts.ECharts | null>(null);
+  const chartInstance = useRef<import('echarts/core').ECharts | null>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const updateOptionRef = useRef<() => void>(() => undefined);
 
   // Generate theme colors
   const themeColors = useMemo(() => {
@@ -66,47 +51,58 @@ export function Chart({
     return colors;
   }, [rawThemeColors]);
 
-  // Update chart option
-  const updateOption = useMemo(() => {
-    return () => {
-      if (!chartInstance.current) return;
+  const updateOption = useCallback(() => {
+    if (!chartInstance.current) return;
 
-      const option = getChartOption({
-        type,
-        data,
-        themeColors,
-        textColor,
-        lineColor,
-        lineSmooth: options?.lineSmooth || false,
-        stack: options?.stack || false,
-      });
+    const option = getChartOption({
+      type,
+      data,
+      themeColors,
+      textColor,
+      lineColor,
+      lineSmooth: options?.lineSmooth || false,
+      stack: options?.stack || false,
+    });
 
-      if (option) {
-        chartInstance.current.setOption(option, true);
-      }
-    };
+    if (option) {
+      chartInstance.current.setOption(option, true);
+    }
   }, [type, data, themeColors, textColor, lineColor, options]);
 
-  // Initialize chart
   useEffect(() => {
-    if (!chartRef.current) return;
+    updateOptionRef.current = updateOption;
+  }, [updateOption]);
 
-    chartInstance.current = echarts.init(chartRef.current, null, {
-      renderer: 'svg',
-    });
-    updateOption();
+  // Initialize chart after the optional ECharts runtime loads on the client.
+  useEffect(() => {
+    let mounted = true;
 
-    const resizeObserver = new ResizeObserver(() => {
-      chartInstance.current?.resize();
-    });
-    resizeObserver.observe(chartRef.current);
+    void loadChartRuntime()
+      .then((echarts) => {
+        if (!mounted || !chartRef.current) return;
+
+        chartInstance.current = echarts.init(chartRef.current, null, {
+          renderer: 'svg',
+        });
+        updateOptionRef.current();
+
+        const resizeObserver = new ResizeObserver(() => {
+          chartInstance.current?.resize();
+        });
+        resizeObserver.observe(chartRef.current);
+        resizeObserverRef.current = resizeObserver;
+      })
+      .catch(() => {
+        // Leave the empty chart host in place; option updates no-op until ready.
+      });
 
     return () => {
-      resizeObserver.disconnect();
+      mounted = false;
+      resizeObserverRef.current?.disconnect();
+      resizeObserverRef.current = null;
       chartInstance.current?.dispose();
       chartInstance.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Init-only effect: chart setup and resize observer
   }, []);
 
   // Update chart when props change

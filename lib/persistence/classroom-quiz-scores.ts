@@ -179,9 +179,7 @@ export async function listClassroomQuizScores(input: {
   return { scores: result.rows.map(mapScore), total };
 }
 
-export async function summarizeClassroomQuizScores(input: {
-  stageId: string;
-}): Promise<
+export async function summarizeClassroomQuizScores(input: { stageId: string }): Promise<
   Array<{
     ownerId: string;
     quizCount: number;
