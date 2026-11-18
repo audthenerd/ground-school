@@ -11,10 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import {
-  parseQuestionBankCsv,
-  saveQuestionBank,
-} from '../lib/ground-school/question-bank';
+import { parseQuestionBankCsv, saveQuestionBank } from '../lib/ground-school/question-bank';
 
 function main(): void {
   const args = process.argv.slice(2).filter((a) => a !== '--');

@@ -160,9 +160,7 @@ export async function listClassroomPrompts(input: {
 }
 
 /** Aggregate prompt counts per owner for a stage. */
-export async function summarizeClassroomPrompts(input: {
-  stageId: string;
-}): Promise<
+export async function summarizeClassroomPrompts(input: { stageId: string }): Promise<
   Array<{
     ownerId: string;
     promptCount: number;
@@ -190,8 +188,6 @@ export async function summarizeClassroomPrompts(input: {
     ownerId: row.owner_id,
     promptCount: Number(row.prompt_count),
     lastPromptAt:
-      row.last_prompt_at instanceof Date
-        ? row.last_prompt_at
-        : new Date(row.last_prompt_at),
+      row.last_prompt_at instanceof Date ? row.last_prompt_at : new Date(row.last_prompt_at),
   }));
 }

@@ -71,8 +71,10 @@ function asQuiz(outline: SceneOutline, order: number): SceneOutline {
     order,
     title: quizTitle(outline.title),
     description:
-      outline.description?.trim().replace(/\bpractice\b/gi, 'assessment').trim() ||
-      'Quiz: twenty questions from the RSAF Commands question bank.',
+      outline.description
+        ?.trim()
+        .replace(/\bpractice\b/gi, 'assessment')
+        .trim() || 'Quiz: twenty questions from the RSAF Commands question bank.',
     keyPoints:
       outline.keyPoints?.length > 0
         ? outline.keyPoints.map((point) => point.replace(/\bpractice\b/gi, 'quiz'))
