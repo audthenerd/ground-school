@@ -24,9 +24,7 @@ test.describe('Admin curriculum', () => {
     // Hit the admin route first: the client gate redirects before the heavy home
     // library queries run, so this stays reliable on a cold Next compile.
     await page.goto('/admin/curriculum', { waitUntil: 'domcontentloaded' });
-    await expect
-      .poll(() => new URL(page.url()).pathname, { timeout: 60_000 })
-      .toBe('/');
+    await expect.poll(() => new URL(page.url()).pathname, { timeout: 60_000 }).toBe('/');
     await expect(page.getByTestId('admin-curriculum-page')).toHaveCount(0);
 
     const home = new HomePage(page);
@@ -78,7 +76,10 @@ test.describe('Admin curriculum', () => {
     await expect(page.getByTestId(/admin-candidate-cand-/)).toHaveCount(2);
 
     page.once('dialog', (dialog) => dialog.accept());
-    await page.getByTestId('admin-candidate-cand-ready').getByTestId('admin-delete-candidate').click();
+    await page
+      .getByTestId('admin-candidate-cand-ready')
+      .getByTestId('admin-delete-candidate')
+      .click();
     await expect.poll(() => admin.deleteCalls.length).toBe(1);
     await expect(page.getByTestId('admin-candidate-cand-ready')).toHaveCount(0);
   });

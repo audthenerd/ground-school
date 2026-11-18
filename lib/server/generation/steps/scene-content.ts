@@ -25,10 +25,7 @@ import { MAX_VISION_IMAGES } from '@/lib/constants/generation';
 import { sortDocumentImagesForVision } from '@/lib/document/bundle';
 import { SORTIE_QUIZ_QUESTION_COUNT } from '@/lib/ground-school/classroom-format';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
-import {
-  appendDraftQuestions,
-  DEFAULT_SORTIE_TOPICS,
-} from '@/lib/ground-school/question-bank';
+import { appendDraftQuestions, DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
 import { sampleQuizQuestionsFromBank } from '@/lib/ground-school/question-bank-quiz';
 import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
 import { generatePBLV2Project } from '@/lib/pbl/v2/agents/planner';
@@ -388,7 +385,11 @@ export async function generateSceneContent(
         content.questions.map((q) => ({
           question: q.question,
           fieldType:
-            q.type === 'multiple' ? 'Checkbox' : q.type === 'short_answer' ? 'Long Answer' : 'Radio',
+            q.type === 'multiple'
+              ? 'Checkbox'
+              : q.type === 'short_answer'
+                ? 'Long Answer'
+                : 'Radio',
           options: q.options?.map((o) => o.label) ?? [],
           correctAnswer:
             q.options && q.answer

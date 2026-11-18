@@ -41,9 +41,7 @@ function normalizeStem(text: string): string {
   return text.trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
-function fieldTypeToQuizType(
-  fieldType: string,
-): QuizQuestion['type'] {
+function fieldTypeToQuizType(fieldType: string): QuizQuestion['type'] {
   const t = fieldType.trim().toLowerCase();
   if (t === 'checkbox') return 'multiple';
   if (t === 'long answer' || t === 'long_answer' || t === 'text') return 'short_answer';
@@ -233,7 +231,7 @@ export function sampleBankItemsForQuiz(options: {
     const levelItems = groups.get(level) ?? [];
     const target = targets.get(level) ?? 0;
     const take = Math.min(target, levelItems.length);
-    
+
     selected.push(...levelItems.slice(0, take));
     remaining.set(level, levelItems.slice(take));
     overflow += Math.max(0, target - levelItems.length);
@@ -247,8 +245,12 @@ export function sampleBankItemsForQuiz(options: {
       fillPool.push(...items);
     }
     // Sort fill pool to prefer choice questions, then shuffle within each type
-    const fillChoice = fillPool.filter((item) => fieldTypeToQuizType(item.fieldType) !== 'short_answer');
-    const fillText = fillPool.filter((item) => fieldTypeToQuizType(item.fieldType) === 'short_answer');
+    const fillChoice = fillPool.filter(
+      (item) => fieldTypeToQuizType(item.fieldType) !== 'short_answer',
+    );
+    const fillText = fillPool.filter(
+      (item) => fieldTypeToQuizType(item.fieldType) === 'short_answer',
+    );
     shuffleInPlace(fillChoice, rand);
     shuffleInPlace(fillText, rand);
     const orderedFill = [...fillChoice, ...fillText];

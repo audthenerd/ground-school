@@ -191,9 +191,7 @@ export async function listClassroomSceneVisits(input: {
 }
 
 /** Aggregate dwell + visit counts per owner for a stage. */
-export async function summarizeClassroomSceneVisits(input: {
-  stageId: string;
-}): Promise<
+export async function summarizeClassroomSceneVisits(input: { stageId: string }): Promise<
   Array<{
     ownerId: string;
     visitCount: number;
@@ -225,8 +223,6 @@ export async function summarizeClassroomSceneVisits(input: {
     visitCount: Number(row.visit_count),
     totalDwellMs: Number(row.total_dwell_ms),
     lastEnteredAt:
-      row.last_entered_at instanceof Date
-        ? row.last_entered_at
-        : new Date(row.last_entered_at),
+      row.last_entered_at instanceof Date ? row.last_entered_at : new Date(row.last_entered_at),
   }));
 }
