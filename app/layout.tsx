@@ -14,6 +14,7 @@ import { ModelSettingsInit } from '@/components/model-settings-init';
 import { StorageHealthNotice } from '@/components/storage-health-notice';
 import { AccessCodeGuard } from '@/components/access-code-guard';
 import { ProSwapWatcher } from '@/components/workbench/ProSwapWatcher';
+import { ThemeInitScript } from '@/components/theme-init-script';
 import { loadLocaleResource } from '@/lib/i18n/load-resource';
 import { LOCALE_COOKIE, resolveRequestLocale } from '@/lib/i18n/resolve-locale';
 
@@ -31,15 +32,6 @@ import { LOCALE_COOKIE, resolveRequestLocale } from '@/lib/i18n/resolve-locale';
 // `--font-sans` moves to globals.css since the family no longer comes from
 // next/font's generated class.
 import '@fontsource-variable/inter';
-
-/**
- * Applies the dark theme before the first paint. `ThemeProvider` resolves the
- * theme (the `theme` key in localStorage, else the system preference) only
- * once the page's scripts run, so a server-rendered page would otherwise be
- * painted light and flip to dark afterwards. Keep in step with
- * `lib/hooks/use-theme.tsx`.
- */
-const THEME_INIT_SCRIPT = `try{var t=localStorage.getItem('theme');if(t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`;
 
 export const metadata: Metadata = {
   title: 'Ground School',
@@ -63,13 +55,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-      </head>
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <ThemeInitScript />
         <ThemeProvider>
           <I18nProvider initialLocale={locale} initialResources={resources}>
             <ModelSettingsInit />

@@ -15,9 +15,9 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('system');
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>('light');
-  // The document already carries the stored theme (the layout's pre-paint
-  // script); it is not touched until the stored theme has been read here, or
-  // the defaults above would flash a dark page light.
+  // The document already carries the stored theme (`ThemeInitScript`); it is
+  // not touched until the stored theme has been read here, or the defaults
+  // above would flash a dark page light.
   const [loaded, setLoaded] = useState(false);
 
   const resolvedTheme = theme === 'system' ? systemTheme : theme;
