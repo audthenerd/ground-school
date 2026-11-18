@@ -6,12 +6,11 @@ import { createElementIdMap } from '@/lib/utils/element';
 import { CURRENT_SLIDE_CONTENT_SCHEMA_VERSION } from '@/lib/edit/slide-schema';
 
 const DEFAULT_THEME: SlideTheme = {
-  backgroundColor: '#ffffff',
-  themeColors: ['#5b9bd5', '#ed7d31', '#a5a5a5', '#ffc000', '#4472c4'],
-  fontColor: '#333333',
-  fontName: 'Microsoft YaHei',
-  outline: { color: '#d14424', width: 2, style: 'solid' },
-  shadow: { h: 0, v: 0, blur: 10, color: '#000000' },
+  backgroundColor: '#CCD3BA',
+  themeColors: ['#B7F03E', '#F3EEDD', '#8B967C', '#5E6656', '#C3CCAE'],
+  fontColor: '#B7F03E',
+  fontName: 'IBM Plex Sans',
+  outline: { color: '#3C3C36', width: 1, style: 'solid' },
 };
 
 /**
@@ -32,7 +31,7 @@ export function createBlankSlideScene(stageId: string, title: string, order: num
     viewportRatio: 0.5625,
     theme: DEFAULT_THEME,
     elements: [],
-    background: { type: 'solid', color: '#ffffff' },
+    background: { type: 'solid', color: '#CCD3BA' },
   };
 
   const content: SlideContent = {

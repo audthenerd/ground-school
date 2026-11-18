@@ -38,8 +38,8 @@ export function createDefaultTextElement(id: string): PPTTextElement {
     height: 72,
     rotate: 0,
     content: '<p>New text</p>',
-    defaultFontName: 'Inter',
-    defaultColor: '#111827',
+    defaultFontName: 'IBM Plex Sans',
+    defaultColor: '#B7F03E',
     lineHeight: 1.4,
   };
 }
@@ -64,8 +64,8 @@ export function createTextElementAtCanvasPoint(
     height,
     rotate: 0,
     content: '<p style="text-align: center"><br></p>',
-    defaultFontName: 'Inter',
-    defaultColor: '#333',
+    defaultFontName: 'IBM Plex Sans',
+    defaultColor: '#B7F03E',
     lineHeight: 1.4,
   };
 }
@@ -88,10 +88,10 @@ export function createDefaultShapeElement(id: string, spec?: ShapeSpec): PPTShap
     path: spec?.path ?? 'M 0 0 L 260 0 L 260 140 L 0 140 Z',
     pathFormula: spec?.pathFormula,
     fixedRatio: false,
-    fill: '#dbeafe',
+    fill: '#111111',
     outline: {
-      width: 2,
-      color: '#2563eb',
+      width: 1,
+      color: '#3C3C36',
       style: 'solid',
     },
   };
@@ -103,13 +103,13 @@ export function createDefaultSlide(id: string): Slide {
     viewportSize: 1000,
     viewportRatio: 0.5625, // 16:9
     theme: {
-      backgroundColor: '#ffffff',
-      themeColors: ['#5b8def', '#3288c6', '#10b981', '#f59e0b'],
-      fontColor: '#111827',
-      fontName: 'Inter',
+      backgroundColor: '#CCD3BA',
+      themeColors: ['#B7F03E', '#F3EEDD', '#8B967C', '#5E6656', '#C3CCAE'],
+      fontColor: '#B7F03E',
+      fontName: 'IBM Plex Sans',
     },
     elements: [],
-    background: { type: 'solid', color: '#ffffff' },
+    background: { type: 'solid', color: '#CCD3BA' },
   };
 }
 
@@ -138,7 +138,7 @@ export function createDefaultLatexElement(id: string, result: LatexEditorResult)
     rotate: 0,
     latex: result.latex,
     html: result.html,
-    color: '#333333',
+    color: '#B7F03E',
     align: 'center',
     fixedRatio: true,
   };
@@ -183,9 +183,9 @@ export function createDefaultChartElement(id: string, chartType: ChartType): PPT
       legends: ['Series 1'],
       series: [[24, 36, 28, 42]],
     },
-    themeColors: ['#5b8def', '#3288c6', '#10b981', '#f59e0b'],
-    textColor: '#333333',
-    lineColor: '#d4d4d8',
+    themeColors: ['#B7F03E', '#F3EEDD', '#8B967C', '#5E6656'],
+    textColor: '#B7F03E',
+    lineColor: '#3C3C36',
   };
 }
 

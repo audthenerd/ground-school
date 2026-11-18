@@ -27,6 +27,9 @@ export const FONTS: readonly FontEntry[] = [
   { label: '霞鹜文楷', value: 'LXGW WenKai' },
   { label: '站酷快乐体', value: 'ZCOOL KuaiLe' },
   // Latin
+  { label: 'Anton', value: 'Anton' },
+  { label: 'IBM Plex Sans', value: 'IBM Plex Sans' },
+  { label: 'IBM Plex Mono', value: 'IBM Plex Mono' },
   { label: 'Inter', value: 'Inter' },
   { label: 'Roboto', value: 'Roboto' },
   { label: 'Open Sans', value: 'Open Sans' },

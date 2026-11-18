@@ -179,8 +179,8 @@ export function SlideCanvas(props: SlideCanvasProps) {
           position: 'absolute',
           ...(chrome
             ? {
-                boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.01), 0 0 12px 0 rgba(0, 0, 0, 0.1)',
-                borderRadius: '0.5rem',
+                boxShadow: 'inset 0 0 0 1px rgba(243, 238, 221, 0.16)',
+                borderRadius: '3px',
               }
             : {}),
           overflow: 'hidden',
@@ -203,7 +203,7 @@ export function SlideCanvas(props: SlideCanvasProps) {
             width: '100%',
             height: '100%',
             backgroundPosition: 'center',
-            ...(chrome ? { borderRadius: '0.5rem' } : {}),
+            ...(chrome ? { borderRadius: '3px' } : {}),
             ...backgroundStyle,
           }}
         />

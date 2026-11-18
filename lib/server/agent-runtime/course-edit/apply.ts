@@ -794,12 +794,13 @@ export function emptySlideContent(): SlideContent {
       viewportSize: 1000,
       viewportRatio: 0.5625,
       theme: {
-        backgroundColor: '#ffffff',
-        themeColors: ['#2563eb'],
-        fontColor: '#111827',
-        fontName: 'Inter',
+        backgroundColor: '#CCD3BA',
+        themeColors: ['#B7F03E', '#F3EEDD', '#8B967C', '#5E6656', '#C3CCAE'],
+        fontColor: '#B7F03E',
+        fontName: 'IBM Plex Sans',
       },
       elements: [],
+      background: { type: 'solid', color: '#CCD3BA' },
     },
   };
 }

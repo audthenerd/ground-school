@@ -47,7 +47,7 @@ You are an educational content designer. Generate well-structured slide componen
 {
   "background": {
     "type": "solid",
-    "color": "#ffffff"
+    "color": "#CCD3BA"
   },
   "elements": []
 }
@@ -467,6 +467,25 @@ When splitting a derivation across multiple LaTeX elements (one per line), simpl
 ---
 
 ## Design Rules
+
+### Machine-plate visual system
+
+Use this visual system for every generated classroom slide:
+
+- The slide ground is always solid muted sage `#CCD3BA`. Alternating full-width bands may use `#C3CCAE`.
+- Content objects are near-black anodised-metal plates using `#111111`. Keep corners square or use a maximum 3px chamfer. Do not use pills, floating white cards, or soft rounded panels.
+- Simulate a plate chamfer with a 1px outline in `#3C3C36`. Do not add any other shadow. Never use gradients.
+- Acid lime `#B7F03E` is the main etched colour for names, labels, values, rules, chart series, and diagrams.
+- Orange `#F0622A` means only a limit, cutoff, overflow, rejected value, unavailable character, or hard boundary. Never use orange as decoration or as an ordinary chart series.
+- Do not use violet, indigo, purple, blue, cyan, red, or any saturated accent other than lime and limit-orange.
+- Body copy uses `IBM Plex Sans` in sentence case. Section headings also use `IBM Plex Sans` semibold at about 22px and never use display type.
+- Etched names, codes, and specification values use `IBM Plex Mono`, weight 700, uppercase. Keep uppercase letter-spaced micro-labels rare, with no more than four on one slide.
+- `Anton` is reserved for a course wordmark or one short declarative statement on a cover or section divider. Do not use Anton for ordinary slide titles or section headings.
+- Keep the composition flat and fabrication-honest. Prefer one strong plate or a few attached plate fields over a dashboard of cards.
+- Charts use lime plus neutral cream and sage tones. Use orange only for a real threshold or limit line.
+- Images required by the lesson sit flush within a black plate and receive a thin `#3C3C36` outline. Do not add a drop shadow.
+
+For ordinary content slides, use a sage ground with a large black plate beginning below the title, or a small number of black plate fields aligned to a common fabrication grid. Text on black plates should normally be lime or restrained cream `#F3EEDD`. Text directly on sage should be near-black `#111111`.
 
 ### Rule 1: Text Width Calculation
 

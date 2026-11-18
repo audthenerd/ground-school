@@ -32,6 +32,12 @@ import { LOCALE_COOKIE, resolveRequestLocale } from '@/lib/i18n/resolve-locale';
 // `--font-sans` moves to globals.css since the family no longer comes from
 // next/font's generated class.
 import '@fontsource-variable/inter';
+import '@fontsource/anton/400.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
 
 export const metadata: Metadata = {
   title: 'Ground School',
