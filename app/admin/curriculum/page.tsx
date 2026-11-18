@@ -173,9 +173,7 @@ export default function AdminCurriculumPage() {
   };
 
   const removeCandidate = async (candidateId: string, isLive: boolean) => {
-    const message = isLive
-      ? t('admin.deleteLiveConfirm')
-      : t('admin.deleteConfirm');
+    const message = isLive ? t('admin.deleteLiveConfirm') : t('admin.deleteConfirm');
     if (!window.confirm(message)) return;
     setDeletingId(candidateId);
     setError(null);
@@ -346,7 +344,9 @@ export default function AdminCurriculumPage() {
                 ) : (
                   <Trash2 className="size-3.5" />
                 )}
-                {deletingId === overview.release.candidateId ? t('admin.deleting') : t('admin.delete')}
+                {deletingId === overview.release.candidateId
+                  ? t('admin.deleting')
+                  : t('admin.delete')}
               </button>
             </div>
           </div>
@@ -449,10 +449,7 @@ export default function AdminCurriculumPage() {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">
             {t('admin.promptsTitle')}
           </h2>
-          <Link
-            href="/admin/learners"
-            className="text-xs text-primary hover:underline"
-          >
+          <Link href="/admin/learners" className="text-xs text-primary hover:underline">
             {t('admin.promptsSeeLearners')}
           </Link>
         </div>

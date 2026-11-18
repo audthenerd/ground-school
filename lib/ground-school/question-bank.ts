@@ -246,8 +246,19 @@ export function parseQuestionBankCsv(csv: string): QuestionBankItem[] {
     source: headerIndex(headers, 'Source'),
     bloomsLevel: headerIndex(headers, "Bloom's Level"),
   };
-  const requiredColumns = ['id', 'question', 'fieldType', 'options', 'correctAnswer', 
-    'explanation', 'topic', 'subtopic', 'difficulty', 'status', 'source'] as const;
+  const requiredColumns = [
+    'id',
+    'question',
+    'fieldType',
+    'options',
+    'correctAnswer',
+    'explanation',
+    'topic',
+    'subtopic',
+    'difficulty',
+    'status',
+    'source',
+  ] as const;
   for (const key of requiredColumns) {
     if (idx[key] < 0) throw new Error(`CSV missing required column: ${key}`);
   }
@@ -275,11 +286,17 @@ export function parseQuestionBankCsv(csv: string): QuestionBankItem[] {
     if (!source) throw new Error(`Row ${row + 1} (${id}): blank Source`);
 
     const options = optionsRaw
-      ? optionsRaw.split('|').map((o) => o.trim()).filter(Boolean)
+      ? optionsRaw
+          .split('|')
+          .map((o) => o.trim())
+          .filter(Boolean)
       : [];
     const choiceType = /^(radio|dropdown|checkbox|yes\/no)$/i.test(fieldType);
     if (choiceType && options.length > 0) {
-      const answers = correctAnswer.split(';').map((a) => a.trim()).filter(Boolean);
+      const answers = correctAnswer
+        .split(';')
+        .map((a) => a.trim())
+        .filter(Boolean);
       for (const answer of answers) {
         const ok =
           options.some((o) => o.toLowerCase() === answer.toLowerCase()) ||
@@ -367,7 +384,9 @@ export interface DraftQuestionInput {
 export function appendDraftQuestions(inputs: readonly DraftQuestionInput[]): QuestionBankItem[] {
   if (inputs.length === 0) return [];
   const bank = [...loadQuestionBank()];
-  const stems = new Set(bank.map((item) => item.question.trim().toLowerCase().replace(/\s+/g, ' ')));
+  const stems = new Set(
+    bank.map((item) => item.question.trim().toLowerCase().replace(/\s+/g, ' ')),
+  );
   const added: QuestionBankItem[] = [];
 
   for (const input of inputs) {
