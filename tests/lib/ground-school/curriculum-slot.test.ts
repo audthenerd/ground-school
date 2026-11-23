@@ -12,9 +12,11 @@ describe('curriculum slot', () => {
     expect(SORTIE_REQUIREMENT).toContain('RSAF Commands');
   });
 
-  it('requires the fixed 9+1+20 classroom shape in the sortie requirement', () => {
+  it('requires the fixed L1 9+1+20 classroom shape in the default sortie requirement', () => {
+    expect(SORTIE_REQUIREMENT).toContain('ASSESSMENT_LEVEL: L1');
     expect(SORTIE_REQUIREMENT).toContain('Exactly nine type "slide"');
     expect(SORTIE_REQUIREMENT).toContain('Exactly one type "interactive"');
     expect(SORTIE_REQUIREMENT).toContain('questionCount: 20');
   });
 });
+

@@ -942,6 +942,7 @@ export const PlaybackChromeRoot = forwardRef<PlaybackChromeRootHandle, PlaybackC
                   const currentScene = allScenes[idx];
                   if (
                     currentScene.type === 'quiz' ||
+                    currentScene.type === 'probe_pack' ||
                     currentScene.type === 'interactive' ||
                     currentScene.type === 'pbl'
                   ) {
@@ -957,6 +958,7 @@ export const PlaybackChromeRoot = forwardRef<PlaybackChromeRootHandle, PlaybackC
                   const currentScene = allScenes[idx];
                   if (
                     currentScene.type === 'quiz' ||
+                    currentScene.type === 'probe_pack' ||
                     currentScene.type === 'interactive' ||
                     currentScene.type === 'pbl'
                   ) {

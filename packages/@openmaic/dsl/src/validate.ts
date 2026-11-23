@@ -283,6 +283,19 @@ function checkScene(doc: unknown, path: string, errors: ValidationIssue[]): void
       checkInteractiveContent(content, `${path}/content`, errors);
     } else if (t === 'pbl') {
       checkPBLContent(content, `${path}/content`, errors);
+    } else if (t === 'probe_pack') {
+      if (!Array.isArray(content.probes)) {
+        errors.push({
+          path: `${path}/content/probes`,
+          message: 'probe_pack content requires a `probes` array',
+        });
+      }
+      if (content.assessmentLevel !== 'L2' && content.assessmentLevel !== 'L3') {
+        errors.push({
+          path: `${path}/content/assessmentLevel`,
+          message: 'probe_pack content requires assessmentLevel L2 or L3',
+        });
+      }
     }
   }
 

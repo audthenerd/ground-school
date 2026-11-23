@@ -285,6 +285,20 @@ export default function AdminLearnersPage() {
                                 {event.promptText}
                               </div>
                             ) : null}
+                            {event.kind === 'probe_evidence' ? (
+                              <div>
+                                <div className="font-medium">
+                                  {event.assessmentLevel} · {event.dimension}{' '}
+                                  {event.passed ? 'Pass' : 'Fail'}
+                                </div>
+                                <div className="text-xs text-amber-700 dark:text-amber-300 mt-0.5">
+                                  {event.subtitle}
+                                </div>
+                                <div className="mt-1 whitespace-pre-wrap break-words text-slate-700 dark:text-slate-300">
+                                  {event.evidenceNote}
+                                </div>
+                              </div>
+                            ) : null}
                           </li>
                         ))}
                       </ol>

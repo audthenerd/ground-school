@@ -1,12 +1,16 @@
 /**
- * Shared RSAF Commands curriculum: candidate classrooms and the one approved
- * release every student opens via Start Mission.
+ * Shared RSAF Commands curriculum: candidate classrooms and approved
+ * releases — one live release per (slot, assessment_level).
  */
 import { randomUUID } from 'node:crypto';
 
 import type { Queryable } from '@openmaic/storage/document/pg';
 import { applySchemaMigrations, type SchemaMigrationSet } from '@openmaic/storage/pg-migrations';
 
+import {
+  type AssessmentLevel,
+  parseAssessmentLevel,
+} from '@/lib/ground-school/assessment-level';
 import { getServerPersistenceProvider } from '@/lib/persistence/server-provider';
 import { setStagePublished } from '@/lib/persistence/stage-meta';
 
@@ -30,6 +34,7 @@ export interface CurriculumCandidateRow {
   createdAt: Date;
   label: string | null;
   status: CurriculumCandidateStatus;
+  assessmentLevel: AssessmentLevel;
 }
 
 export interface CurriculumReleaseRow {
@@ -38,6 +43,7 @@ export interface CurriculumReleaseRow {
   candidateId: string;
   approvedBy: string;
   approvedAt: Date;
+  assessmentLevel: AssessmentLevel;
 }
 
 export const CURRICULUM_SCHEMA = `
@@ -68,9 +74,66 @@ CREATE TABLE IF NOT EXISTS curriculum_releases (
 );
 `;
 
+/** Add per-level releases: one approved classroom per (slot, assessment_level). */
+export const CURRICULUM_ASSESSMENT_LEVEL_MIGRATION = `
+ALTER TABLE curriculum_candidates
+  ADD COLUMN IF NOT EXISTS assessment_level TEXT NOT NULL DEFAULT 'L1';
+
+ALTER TABLE curriculum_releases
+  ADD COLUMN IF NOT EXISTS assessment_level TEXT NOT NULL DEFAULT 'L1';
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conname = 'curriculum_candidates_assessment_level_check'
+  ) THEN
+    ALTER TABLE curriculum_candidates
+      ADD CONSTRAINT curriculum_candidates_assessment_level_check
+      CHECK (assessment_level IN ('L1', 'L2', 'L3'));
+  END IF;
+END $$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conname = 'curriculum_releases_assessment_level_check'
+  ) THEN
+    ALTER TABLE curriculum_releases
+      ADD CONSTRAINT curriculum_releases_assessment_level_check
+      CHECK (assessment_level IN ('L1', 'L2', 'L3'));
+  END IF;
+END $$;
+
+CREATE INDEX IF NOT EXISTS curriculum_candidates_slot_level_created_idx
+  ON curriculum_candidates (slot, assessment_level, created_at DESC);
+
+ALTER TABLE curriculum_releases DROP CONSTRAINT IF EXISTS curriculum_releases_pkey;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conname = 'curriculum_releases_pkey'
+  ) THEN
+    ALTER TABLE curriculum_releases
+      ADD CONSTRAINT curriculum_releases_pkey PRIMARY KEY (slot, assessment_level);
+  END IF;
+END $$;
+`;
+
 export const CURRICULUM_MIGRATIONS: SchemaMigrationSet = {
   store: 'curriculum',
-  migrations: [{ version: 1, name: 'baseline', up: CURRICULUM_SCHEMA, transaction: false }],
+  migrations: [
+    { version: 1, name: 'baseline', up: CURRICULUM_SCHEMA, transaction: false },
+    {
+      version: 2,
+      name: 'assessment_level',
+      up: CURRICULUM_ASSESSMENT_LEVEL_MIGRATION,
+      transaction: false,
+    },
+  ],
 };
 
 export async function ensureCurriculumSchema(queryable: Queryable): Promise<void> {
@@ -92,6 +155,7 @@ interface RawCandidate extends Record<string, unknown> {
   created_at: Date | string;
   label: string | null;
   status: string;
+  assessment_level?: string | null;
 }
 
 interface RawRelease extends Record<string, unknown> {
@@ -100,6 +164,7 @@ interface RawRelease extends Record<string, unknown> {
   candidate_id: string;
   approved_by: string;
   approved_at: Date | string;
+  assessment_level?: string | null;
 }
 
 function toDate(value: Date | string): Date {
@@ -116,6 +181,7 @@ function mapCandidate(row: RawCandidate): CurriculumCandidateRow {
     createdAt: toDate(row.created_at),
     label: row.label,
     status: row.status as CurriculumCandidateStatus,
+    assessmentLevel: parseAssessmentLevel(row.assessment_level, 'L1'),
   };
 }
 
@@ -126,32 +192,49 @@ function mapRelease(row: RawRelease): CurriculumReleaseRow {
     candidateId: row.candidate_id,
     approvedBy: row.approved_by,
     approvedAt: toDate(row.approved_at),
+    assessmentLevel: parseAssessmentLevel(row.assessment_level, 'L1'),
   };
 }
+
+const CANDIDATE_SELECT = `id, slot, stage_id, run_id, created_by, created_at, label, status, assessment_level`;
+const RELEASE_SELECT = `slot, stage_id, candidate_id, approved_by, approved_at, assessment_level`;
 
 export async function insertCurriculumCandidate(input: {
   slot: CurriculumSlot;
   runId: string;
   createdBy: string;
   label?: string;
+  assessmentLevel?: AssessmentLevel;
 }): Promise<CurriculumCandidateRow> {
   const db = await curriculumDb();
   const id = randomUUID();
+  const level = input.assessmentLevel ?? 'L1';
   const result = await db.query<RawCandidate>(
-    `INSERT INTO curriculum_candidates (id, slot, run_id, created_by, label, status)
-     VALUES ($1, $2, $3, $4, $5, 'generating')
-     RETURNING id, slot, stage_id, run_id, created_by, created_at, label, status`,
-    [id, input.slot, input.runId, input.createdBy, input.label ?? null],
+    `INSERT INTO curriculum_candidates (id, slot, run_id, created_by, label, status, assessment_level)
+     VALUES ($1, $2, $3, $4, $5, 'generating', $6)
+     RETURNING ${CANDIDATE_SELECT}`,
+    [id, input.slot, input.runId, input.createdBy, input.label ?? null, level],
   );
   return mapCandidate(result.rows[0]!);
 }
 
 export async function listCurriculumCandidates(
   slot: CurriculumSlot,
+  assessmentLevel?: AssessmentLevel,
 ): Promise<CurriculumCandidateRow[]> {
   const db = await curriculumDb();
+  if (assessmentLevel) {
+    const result = await db.query<RawCandidate>(
+      `SELECT ${CANDIDATE_SELECT}
+         FROM curriculum_candidates
+        WHERE slot = $1 AND assessment_level = $2
+        ORDER BY created_at DESC`,
+      [slot, assessmentLevel],
+    );
+    return result.rows.map(mapCandidate);
+  }
   const result = await db.query<RawCandidate>(
-    `SELECT id, slot, stage_id, run_id, created_by, created_at, label, status
+    `SELECT ${CANDIDATE_SELECT}
        FROM curriculum_candidates
       WHERE slot = $1
       ORDER BY created_at DESC`,
@@ -165,7 +248,7 @@ export async function getCurriculumCandidate(
 ): Promise<CurriculumCandidateRow | null> {
   const db = await curriculumDb();
   const result = await db.query<RawCandidate>(
-    `SELECT id, slot, stage_id, run_id, created_by, created_at, label, status
+    `SELECT ${CANDIDATE_SELECT}
        FROM curriculum_candidates
       WHERE id = $1`,
     [candidateId],
@@ -186,7 +269,7 @@ export async function updateCurriculumCandidate(
     const r = await db.query<RawCandidate>(
       `UPDATE curriculum_candidates SET stage_id = $2, status = $3
         WHERE id = $1
-        RETURNING id, slot, stage_id, run_id, created_by, created_at, label, status`,
+        RETURNING ${CANDIDATE_SELECT}`,
       [candidateId, patch.stageId, patch.status],
     );
     return r.rows[0] ? mapCandidate(r.rows[0]) : null;
@@ -195,7 +278,7 @@ export async function updateCurriculumCandidate(
     const r = await db.query<RawCandidate>(
       `UPDATE curriculum_candidates SET stage_id = $2
         WHERE id = $1
-        RETURNING id, slot, stage_id, run_id, created_by, created_at, label, status`,
+        RETURNING ${CANDIDATE_SELECT}`,
       [candidateId, patch.stageId],
     );
     return r.rows[0] ? mapCandidate(r.rows[0]) : null;
@@ -203,29 +286,46 @@ export async function updateCurriculumCandidate(
   const r = await db.query<RawCandidate>(
     `UPDATE curriculum_candidates SET status = $2
       WHERE id = $1
-      RETURNING id, slot, stage_id, run_id, created_by, created_at, label, status`,
+      RETURNING ${CANDIDATE_SELECT}`,
     [candidateId, patch.status],
   );
   return r.rows[0] ? mapCandidate(r.rows[0]) : null;
 }
 
+/** Live release for a slot+level (defaults to L1 for Start Mission compat). */
 export async function getCurriculumRelease(
   slot: CurriculumSlot,
+  assessmentLevel: AssessmentLevel = 'L1',
 ): Promise<CurriculumReleaseRow | null> {
   const db = await curriculumDb();
   const result = await db.query<RawRelease>(
-    `SELECT slot, stage_id, candidate_id, approved_by, approved_at
+    `SELECT ${RELEASE_SELECT}
        FROM curriculum_releases
-      WHERE slot = $1`,
-    [slot],
+      WHERE slot = $1 AND assessment_level = $2`,
+    [slot, assessmentLevel],
   );
   const row = result.rows[0];
   return row ? mapRelease(row) : null;
 }
 
+/** All approved releases for a slot (up to one per level). */
+export async function listCurriculumReleases(
+  slot: CurriculumSlot,
+): Promise<CurriculumReleaseRow[]> {
+  const db = await curriculumDb();
+  const result = await db.query<RawRelease>(
+    `SELECT ${RELEASE_SELECT}
+       FROM curriculum_releases
+      WHERE slot = $1
+      ORDER BY assessment_level ASC`,
+    [slot],
+  );
+  return result.rows.map(mapRelease);
+}
+
 /**
- * Approve a ready candidate as the live release for `slot`. Publishes the
- * stage and marks other non-failed candidates for the slot as superseded.
+ * Approve a ready candidate as the live release for its slot+level.
+ * Publishes the stage and supersedes other non-failed candidates at that level.
  */
 export async function approveCurriculumCandidate(input: {
   slot: CurriculumSlot;
@@ -251,21 +351,22 @@ export async function approveCurriculumCandidate(input: {
     `UPDATE curriculum_candidates
         SET status = 'superseded'
       WHERE slot = $1
-        AND id <> $2
+        AND assessment_level = $2
+        AND id <> $3
         AND status IN ('generating', 'ready')`,
-    [input.slot, candidate.id],
+    [input.slot, candidate.assessmentLevel, candidate.id],
   );
 
   const result = await db.query<RawRelease>(
-    `INSERT INTO curriculum_releases (slot, stage_id, candidate_id, approved_by, approved_at)
-     VALUES ($1, $2, $3, $4, now())
-     ON CONFLICT (slot) DO UPDATE
+    `INSERT INTO curriculum_releases (slot, stage_id, candidate_id, approved_by, approved_at, assessment_level)
+     VALUES ($1, $2, $3, $4, now(), $5)
+     ON CONFLICT (slot, assessment_level) DO UPDATE
        SET stage_id = EXCLUDED.stage_id,
            candidate_id = EXCLUDED.candidate_id,
            approved_by = EXCLUDED.approved_by,
            approved_at = EXCLUDED.approved_at
-     RETURNING slot, stage_id, candidate_id, approved_by, approved_at`,
-    [input.slot, candidate.stageId, candidate.id, input.approvedBy],
+     RETURNING ${RELEASE_SELECT}`,
+    [input.slot, candidate.stageId, candidate.id, input.approvedBy, candidate.assessmentLevel],
   );
 
   return mapRelease(result.rows[0]!);
@@ -300,10 +401,13 @@ export async function deleteCurriculumCandidate(input: {
     throw new CurriculumDeleteError('not_found', 'Candidate not found');
   }
 
-  const release = await getCurriculumRelease(input.slot);
+  const release = await getCurriculumRelease(input.slot, candidate.assessmentLevel);
   let clearedRelease = false;
   if (release?.candidateId === candidate.id) {
-    await db.query(`DELETE FROM curriculum_releases WHERE slot = $1`, [input.slot]);
+    await db.query(
+      `DELETE FROM curriculum_releases WHERE slot = $1 AND assessment_level = $2`,
+      [input.slot, candidate.assessmentLevel],
+    );
     clearedRelease = true;
   }
 

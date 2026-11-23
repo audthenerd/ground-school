@@ -19,7 +19,7 @@ import type { Slide } from './slides.js';
 import type { Action } from './action.js';
 
 /** All scene kinds owned by the contract. */
-export type SceneType = 'slide' | 'quiz' | 'interactive' | 'pbl';
+export type SceneType = 'slide' | 'quiz' | 'interactive' | 'pbl' | 'probe_pack';
 
 /** Frozen set of every valid {@link SceneType}, for cheap membership checks. */
 export const SCENE_TYPES = [
@@ -27,6 +27,7 @@ export const SCENE_TYPES = [
   'quiz',
   'interactive',
   'pbl',
+  'probe_pack',
 ] as const satisfies readonly SceneType[];
 
 // Compile-time exhaustiveness: every SceneType must appear in SCENE_TYPES.
@@ -223,12 +224,40 @@ export interface QuizContent {
   questions: QuizQuestion[];
 }
 
+/** OQ dimension scored by an assessor probe. */
+export type OqDimension = 'E' | 'M' | 'I';
+
+/**
+ * One assessor probe inside a {@link ProbePackContent} (L2/L3 F2F instrument).
+ */
+export interface ProbeItem {
+  id: string;
+  dimension: OqDimension;
+  bloomsLevel?: 'remember' | 'understand' | 'apply' | 'analyze' | 'evaluate' | 'create';
+  title: string;
+  stem: string;
+  /** Rubric / pass signal — typically admin-only in the UI. */
+  goodLooksLike: string;
+  notesForAssessor?: string;
+}
+
+/**
+ * Assessor probe pack — interview script for F2F Capable / Lead-Capable gates.
+ * Does not certify standing by itself.
+ */
+export interface ProbePackContent {
+  type: 'probe_pack';
+  assessmentLevel: 'L2' | 'L3';
+  banner: string;
+  probes: ProbeItem[];
+}
+
 /**
  * The universal scene-content subset used by {@link Scene}'s compatibility
- * default. Interactive and PBL content are also contract-owned and are composed
- * into concrete scene unions through the generic content parameter.
+ * default. Interactive, PBL, and probe-pack content are also contract-owned and
+ * are composed into concrete scene unions through the generic content parameter.
  */
-export type SceneContent = SlideContent | QuizContent;
+export type SceneContent = SlideContent | QuizContent | ProbePackContent;
 
 /**
  * The content-kind-independent fields of a {@link Scene}. Everything except the

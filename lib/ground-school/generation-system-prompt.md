@@ -54,6 +54,8 @@ Attribute it as such.
 
 ## 4. LEVEL — Bloom's taxonomy, lowest to highest
 
+Default (when the requirement does not name an assessment level) is L1 Immersed:
+
 | Level | What the learner does | Weight |
 | --- | --- | --- |
 | Remember | Recalls names, structures, definitions | 20% |
@@ -61,8 +63,12 @@ Attribute it as such.
 | Apply | Matches the right command, unit or capability to a stated need | 30% |
 | Analyse | Distinguishes two things that look alike and states the cost of confusing them | 20% |
 
-**Stop at Analyse.** Do not generate Evaluate or Create scenes. They require operational
-judgement this audience does not yet have and this source material cannot ground.
+**Default: stop at Analyse.** Do not generate Evaluate or Create scenes unless the
+sortie requirement explicitly sets `ASSESSMENT_LEVEL: L3`.
+
+When the requirement embeds `ASSESSMENT_LEVEL: L1|L2|L3`, that section of the
+requirement **overrides** this table (L1 = Remember/Understand; L2 = Apply/Analyse;
+L3 = Evaluate/Create with practice quiz + probe_pack).
 
 Learners arrive over-weighted to Remember. The lesson's job is to move them up, not to
 test what they already memorised.

@@ -53,7 +53,10 @@ import { validateAppScene } from '@/lib/document-store/validators';
 import { sceneCarriesMediaReference } from '@/lib/media/generated-media-references';
 import { buildVideoManifestFromOutlines } from '@/lib/media/video-manifest';
 import { normalizeSortieOutlines } from '@/lib/ground-school/classroom-format';
-import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
+import {
+  assessmentLevelFromRequirement,
+  isSortieRequirement,
+} from '@/lib/ground-school/sortie-presence';
 import { createLogger } from '@/lib/logger';
 import { BUILT_IN_AGENTS } from '@/lib/orchestration/registry/built-in';
 import type { AgentConfig } from '@/lib/orchestration/registry/types';
@@ -842,7 +845,10 @@ async function executeClaimedRun(
     const normalized = normalizeSceneOutlines(result.outlines);
     if (!normalized.ok) throw new Error(`The generated outline is unusable: ${normalized.message}`);
     const outlines = isSortieRequirement(input.requirement)
-      ? normalizeSortieOutlines(normalized.value)
+      ? normalizeSortieOutlines(
+          normalized.value,
+          assessmentLevelFromRequirement(input.requirement),
+        )
       : normalized.value;
     result = { ...result, outlines };
     const confirmed: GenerationRunOutline = {

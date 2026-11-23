@@ -158,6 +158,14 @@ function pblConfig(value: unknown): SceneOutline['pblConfig'] {
   }) as SceneOutline['pblConfig'];
 }
 
+function probePackConfig(value: unknown): SceneOutline['probePackConfig'] {
+  const config = record(value);
+  if (!config) return undefined;
+  const assessmentLevel = oneOf(config.assessmentLevel, ['L2', 'L3'] as const);
+  if (!assessmentLevel) return undefined;
+  return { assessmentLevel };
+}
+
 class OutlineRefused extends Error {}
 
 function sceneOutline(value: unknown, index: number): SceneOutline {
@@ -192,6 +200,7 @@ function sceneOutline(value: unknown, index: number): SceneOutline {
     quizConfig: quizConfig(raw.quizConfig),
     interactiveConfig: interactiveConfig(raw.interactiveConfig),
     pblConfig: pblConfig(raw.pblConfig),
+    probePackConfig: probePackConfig(raw.probePackConfig),
     widgetType: oneOf(raw.widgetType, WIDGET_TYPES),
     widgetOutline: widgetOutline
       ? (withoutNulls(widgetOutline) as SceneOutline['widgetOutline'])

@@ -142,7 +142,7 @@ export interface WidgetOutline {
  */
 export interface SceneOutline {
   id: string;
-  type: 'slide' | 'quiz' | 'interactive' | 'pbl';
+  type: 'slide' | 'quiz' | 'interactive' | 'pbl' | 'probe_pack';
   title: string;
   description: string; // 1-2 sentences describing the purpose
   keyPoints: string[]; // 3-5 core key points
@@ -159,6 +159,10 @@ export interface SceneOutline {
     questionCount: number;
     difficulty: 'easy' | 'medium' | 'hard';
     questionTypes: ('single' | 'multiple' | 'text')[];
+  };
+  /** L2/L3 assessor probe pack — interview instrument, not a certifying quiz. */
+  probePackConfig?: {
+    assessmentLevel: 'L2' | 'L3';
   };
   /**
    * @deprecated Use widgetType + widgetOutline instead
@@ -206,6 +210,8 @@ export interface GeneratedSlideContent {
 export interface GeneratedQuizContent {
   questions: QuizQuestion[];
 }
+
+export type { ProbePackContent as GeneratedProbePackContent } from '@/lib/types/stage';
 
 // ==================== PBL Generation Types ====================
 

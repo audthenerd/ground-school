@@ -21,7 +21,10 @@ import { buildPrompt, PROMPT_IDS } from '@/lib/prompts';
 import { normalizeSortieOutlines } from '@/lib/ground-school/classroom-format';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 import { DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
-import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
+import {
+  assessmentLevelFromRequirement,
+  isSortieRequirement,
+} from '@/lib/ground-school/sortie-presence';
 import {
   formatImageDescription,
   formatImagePlaceholder,
@@ -804,12 +807,13 @@ async function streamOutlines(
   }
 
   const uniquified = uniquifyMediaElementIds(parsedOutlines);
-  const outlines = isSortieRequirement(requirement)
-    ? normalizeSortieOutlines(uniquified)
-    : uniquified;
-  if (isSortieRequirement(requirement)) {
+  const sortieLevel = isSortieRequirement(requirement)
+    ? assessmentLevelFromRequirement(requirement)
+    : null;
+  const outlines = sortieLevel ? normalizeSortieOutlines(uniquified, sortieLevel) : uniquified;
+  if (sortieLevel) {
     log.info(
-      `Sortie outline normalized to ${outlines.length} scenes (9 slide + 1 interactive + 1 quiz/20)`,
+      `Sortie ${sortieLevel} outline normalized to ${outlines.length} scenes`,
     );
   }
 

@@ -20,6 +20,7 @@ import type {
   GeneratedQuizContent,
   GeneratedInteractiveContent,
   GeneratedPBLContent,
+  GeneratedProbePackContent,
 } from '@/lib/types/generation';
 import type { SpeechAction } from '@/lib/types/action';
 import type { PBLContent } from '@/lib/types/stage';
@@ -38,6 +39,7 @@ export interface SceneActionsInput {
     | GeneratedQuizContent
     | GeneratedInteractiveContent
     | GeneratedPBLContent
+    | GeneratedProbePackContent
     | PBLContent;
   stageId: string;
   agents?: AgentInfo[];
@@ -135,6 +137,19 @@ export async function generateSceneActions(
     allTitles,
     previousSpeeches: input.previousSpeeches ?? [],
   };
+
+  // Assessor probe packs are interview instruments — no agent narration.
+  if (outline.type === 'probe_pack' && 'probes' in content && content.type === 'probe_pack') {
+    log.info(`Assembling probe pack without actions: "${outline.title}"`);
+    const scene = buildCompleteScene(outline, content, [], stageId);
+    if (!scene) {
+      throw new StepRefusal<SceneActionsRefusal>(
+        'assembly-failed',
+        `Failed to build probe pack scene: ${outline.title}`,
+      );
+    }
+    return { scene, previousSpeeches: [] };
+  }
 
   // ── Generate actions ──
   log.info(`Generating actions: "${outline.title}" (${outline.type}) [model=${modelString}]`);

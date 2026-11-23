@@ -22,6 +22,7 @@ import {
   summarizeClassroomSceneVisits,
 } from '@/lib/persistence/classroom-scene-visits';
 import { CURRICULUM_SLOT_RSAF_COMMANDS, getCurriculumRelease } from '@/lib/persistence/curriculum';
+import { listClassroomProbeResultsForLearner } from '@/lib/persistence/classroom-probe-results';
 import { adminForbiddenResponse, isAdminPrincipal } from '@/lib/server/identity/require-admin';
 import { withRequestOwner } from '@/lib/server/identity/with-owner';
 
@@ -51,7 +52,7 @@ export async function GET(req: NextRequest) {
     const safeOffset = Number.isFinite(offset) ? offset : 0;
 
     if (ownerId) {
-      const [visits, scores, prompts] = await Promise.all([
+      const [visits, scores, prompts, probeResults] = await Promise.all([
         listClassroomSceneVisits({
           stageId: release.stageId,
           ownerId,
@@ -70,12 +71,14 @@ export async function GET(req: NextRequest) {
           limit: safeLimit,
           offset: safeOffset,
         }),
+        listClassroomProbeResultsForLearner(ownerId),
       ]);
 
       const timeline = mergeLearnerTimeline({
         visits: visits.visits,
         scores: scores.scores,
         prompts: prompts.prompts,
+        probeResults,
       });
 
       return NextResponse.json(
@@ -87,6 +90,7 @@ export async function GET(req: NextRequest) {
             visits: visits.total,
             scores: scores.total,
             prompts: prompts.total,
+            probeResults: probeResults.length,
           },
         },
         { status: 200, headers: responseHeaders },

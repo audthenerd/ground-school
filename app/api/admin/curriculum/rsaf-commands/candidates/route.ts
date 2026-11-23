@@ -5,6 +5,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 import { isServerPersistenceConfigured } from '@/lib/config/feature-flags';
+import { isAssessmentLevel } from '@/lib/ground-school/assessment-level';
 import { createCurriculumCandidates } from '@/lib/ground-school/curriculum-service';
 import { adminForbiddenResponse, isAdminPrincipal } from '@/lib/server/identity/require-admin';
 import { withRequestOwner } from '@/lib/server/identity/with-owner';
@@ -24,8 +25,9 @@ export async function POST(req: NextRequest) {
 
     let count: number | undefined;
     let model: string | undefined;
+    let level: string | undefined;
     try {
-      const body = (await req.json()) as { count?: unknown; model?: unknown };
+      const body = (await req.json()) as { count?: unknown; model?: unknown; level?: unknown };
       if (body.count !== undefined) {
         if (typeof body.count !== 'number' || !Number.isFinite(body.count)) {
           return NextResponse.json(
@@ -44,6 +46,15 @@ export async function POST(req: NextRequest) {
         }
         model = body.model.trim();
       }
+      if (body.level !== undefined) {
+        if (!isAssessmentLevel(body.level)) {
+          return NextResponse.json(
+            { error: 'invalid_level' },
+            { status: 400, headers: responseHeaders },
+          );
+        }
+        level = body.level;
+      }
     } catch {
       // Empty body → default count.
     }
@@ -54,6 +65,7 @@ export async function POST(req: NextRequest) {
         request: req,
         count,
         model,
+        assessmentLevel: level && isAssessmentLevel(level) ? level : 'L1',
       });
       return NextResponse.json(result, { status: 202, headers: responseHeaders });
     } catch (error) {

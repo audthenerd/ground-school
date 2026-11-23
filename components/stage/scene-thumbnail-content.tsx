@@ -56,6 +56,13 @@ export function SceneThumbnailContent({
     );
   }
 
+  if (scene.type === 'probe_pack') {
+    return (
+      <div className="flex h-full w-full items-center justify-center bg-amber-50 text-[10px] font-medium text-amber-800">
+        Probe pack
+      </div>
+    );
+  }
   if (scene.type === 'quiz') {
     return (
       <div className="flex h-full w-full flex-col bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/20 p-2">

@@ -23,11 +23,19 @@ import type {
 import { resolveVocationalActive } from '@/lib/config/feature-flags';
 import { MAX_VISION_IMAGES } from '@/lib/constants/generation';
 import { sortDocumentImagesForVision } from '@/lib/document/bundle';
+import {
+  buildProbePackContent,
+  hasProbePack,
+  quizDistributionForLevel,
+} from '@/lib/ground-school/assessment-level';
 import { SORTIE_QUIZ_QUESTION_COUNT } from '@/lib/ground-school/classroom-format';
 import { withGenerationSystemPrompt } from '@/lib/ground-school/generation-system-prompt';
 import { appendDraftQuestions, DEFAULT_SORTIE_TOPICS } from '@/lib/ground-school/question-bank';
 import { sampleQuizQuestionsFromBank } from '@/lib/ground-school/question-bank-quiz';
-import { isSortieRequirement } from '@/lib/ground-school/sortie-presence';
+import {
+  assessmentLevelFromRequirement,
+  isSortieRequirement,
+} from '@/lib/ground-school/sortie-presence';
 import { generatePBLV2Project } from '@/lib/pbl/v2/agents/planner';
 
 import {
@@ -304,26 +312,35 @@ export async function generateSceneContent(
   );
 
   // RSAF Commands sortie: seed the terminal quiz from the question bank
-  // (exact wording) instead of LLM-invented stems.
+  // (exact wording) instead of LLM-invented stems. Distribution follows
+  // assessment level (L1 R/U, L2 apply/analyze, L3 evaluate/create).
   if (
     effectiveOutline.type === 'quiz' &&
     requirements?.requirement &&
     isSortieRequirement(requirements.requirement)
   ) {
-    const seed = `${effectiveOutline.id}:${effectiveOutline.order}:${requirements.requirement.length}`;
+    const level = assessmentLevelFromRequirement(requirements.requirement);
+    const seed = `${effectiveOutline.id}:${effectiveOutline.order}:${level}:${requirements.requirement.length}`;
     const questions = sampleQuizQuestionsFromBank({
       topics: DEFAULT_SORTIE_TOPICS,
       count: effectiveOutline.quizConfig?.questionCount ?? SORTIE_QUIZ_QUESTION_COUNT,
       seed,
+      bloomsDistribution: quizDistributionForLevel(level),
+      allowOverflow: false,
     });
     if (questions.length === 0) {
       throw new StepRefusal<SceneContentRefusal>(
         'generation-failed',
-        `Question bank has no items for quiz: ${effectiveOutline.title}`,
+        `Question bank has no ${level} Bloom items for quiz: ${effectiveOutline.title}`,
+      );
+    }
+    if (questions.length < (effectiveOutline.quizConfig?.questionCount ?? SORTIE_QUIZ_QUESTION_COUNT)) {
+      log.warn(
+        `Sortie ${level} quiz undersized: ${questions.length}/${effectiveOutline.quizConfig?.questionCount ?? SORTIE_QUIZ_QUESTION_COUNT} bank items available for required Blooms`,
       );
     }
     log.info(
-      `Seeded quiz from question bank: ${questions.length} items for "${effectiveOutline.title}"`,
+      `Seeded ${level} quiz from question bank: ${questions.length} items for "${effectiveOutline.title}"`,
     );
     return {
       content: { questions },
@@ -334,6 +351,36 @@ export async function generateSceneContent(
           difficulty: effectiveOutline.quizConfig?.difficulty ?? 'medium',
           questionTypes: effectiveOutline.quizConfig?.questionTypes ?? ['single', 'multiple'],
         },
+      },
+    };
+  }
+
+  // L2/L3 assessor probe pack — template-filled, not LLM-invented.
+  if (
+    effectiveOutline.type === 'probe_pack' &&
+    requirements?.requirement &&
+    isSortieRequirement(requirements.requirement)
+  ) {
+    const level = assessmentLevelFromRequirement(requirements.requirement);
+    if (!hasProbePack(level)) {
+      throw new StepRefusal<SceneContentRefusal>(
+        'generation-failed',
+        `Probe pack is only valid for L2/L3 (got ${level})`,
+      );
+    }
+    const packLevel =
+      effectiveOutline.probePackConfig?.assessmentLevel &&
+      hasProbePack(effectiveOutline.probePackConfig.assessmentLevel)
+        ? effectiveOutline.probePackConfig.assessmentLevel
+        : level;
+    const content = buildProbePackContent(packLevel);
+    log.info(`Built ${packLevel} assessor probe pack for "${effectiveOutline.title}"`);
+    return {
+      content,
+      effectiveOutline: {
+        ...effectiveOutline,
+        type: 'probe_pack',
+        probePackConfig: { assessmentLevel: packLevel },
       },
     };
   }
