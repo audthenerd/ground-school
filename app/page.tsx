@@ -45,7 +45,7 @@ import { BriefingTypewriter } from '@/components/home/briefing-typewriter';
 import { useTheme } from '@/lib/hooks/use-theme';
 import { discardGenerationRun } from '@/lib/generation-run-client/api';
 import { useOwnerRuns } from '@/lib/generation-run-client/use-owner-runs';
-import { SORTIE_INSTRUCTIONS } from '@/lib/ground-school/sortie-briefing';
+import { SORTIE_INSTRUCTIONS } from '@/lib/ground-school/sortie-instructions';
 import {
   courseRunHref,
   courseRunStatus,

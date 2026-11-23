@@ -4,6 +4,7 @@ import type {
   PBLContent,
   PBLProject,
   PPTElement,
+  ProbePackContent,
   QuizContent,
   QuizQuestion,
   Scene,
@@ -45,13 +46,22 @@ export interface GeneratedPBLContent {
   projectV2: PBLProject;
 }
 
+/** Assessor probe pack payload (template-filled; not LLM-invented bank stems). */
+export type GeneratedProbePackContent = ProbePackContent;
+
 export type GeneratedSceneContent =
   | GeneratedSlideContent
   | GeneratedQuizContent
   | GeneratedInteractiveContent
-  | GeneratedPBLContent;
+  | GeneratedPBLContent
+  | GeneratedProbePackContent;
 
-export type CompleteSceneContent = SlideContent | QuizContent | InteractiveContent | PBLContent;
+export type CompleteSceneContent =
+  | SlideContent
+  | QuizContent
+  | InteractiveContent
+  | PBLContent
+  | ProbePackContent;
 
 /** Scene assembled by the package, including the originating outline identity. */
 export type CompleteScene = Scene<Action, CompleteSceneContent> & { outlineId: string };

@@ -5,6 +5,7 @@ import type {
   CompleteScene,
   GeneratedInteractiveContent,
   GeneratedPBLContent,
+  GeneratedProbePackContent,
   GeneratedQuizContent,
   GeneratedSlideContent,
 } from './scene-types.js';
@@ -25,7 +26,8 @@ export function buildCompleteScene(
     | GeneratedSlideContent
     | GeneratedQuizContent
     | GeneratedInteractiveContent
-    | GeneratedPBLContent,
+    | GeneratedPBLContent
+    | GeneratedProbePackContent,
   actions: Action[],
   stageId: string,
   options: BuildCompleteSceneOptions = {},
@@ -106,6 +108,25 @@ export function buildCompleteScene(
       title: outline.title,
       order: outline.order,
       content: { type: 'pbl', projectV2: content.projectV2 },
+      actions,
+      ...timestamps,
+    };
+  }
+
+  if (outline.type === 'probe_pack' && 'probes' in content && content.type === 'probe_pack') {
+    return {
+      id: sceneId,
+      outlineId: outline.id,
+      stageId,
+      type: 'probe_pack',
+      title: outline.title,
+      order: outline.order,
+      content: {
+        type: 'probe_pack',
+        assessmentLevel: content.assessmentLevel,
+        banner: content.banner,
+        probes: content.probes,
+      },
       actions,
       ...timestamps,
     };

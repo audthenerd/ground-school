@@ -9,10 +9,11 @@ import {
 } from '@/lib/ground-school/sortie-presence';
 
 describe('sortie presence', () => {
-  it('matches only the fixed SORTIE_REQUIREMENT text', () => {
+  it('matches RSAF Commands sortie requirements (marker or exact L1 text)', () => {
     expect(isSortieRequirement(SORTIE_REQUIREMENT)).toBe(true);
     expect(isSortieRequirement('RSAF Commands')).toBe(false);
   });
+
 
   it('detects an in-progress sortie run by requirement', () => {
     expect(hasInProgressSortieRun([{ input: { requirement: SORTIE_REQUIREMENT } }])).toBe(true);

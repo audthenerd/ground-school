@@ -1,6 +1,6 @@
 /**
  * Admin curriculum operations: start candidate generation runs, refresh
- * candidate status from generation runs, approve a shared release.
+ * candidate status from generation runs, approve a shared release per level.
  */
 import {
   approveCurriculumCandidate,
@@ -12,18 +12,26 @@ import {
   getCurriculumRelease,
   insertCurriculumCandidate,
   listCurriculumCandidates,
+  listCurriculumReleases,
   updateCurriculumCandidate,
   type CurriculumCandidateRow,
   type CurriculumReleaseRow,
   type CurriculumSlot,
 } from '@/lib/persistence/curriculum';
 import {
+  type AssessmentLevel,
+  ASSESSMENT_LEVELS,
+  assessmentLevelHelperText,
+  parseAssessmentLevel,
+} from '@/lib/ground-school/assessment-level';
+import { bankReadinessForLevels } from '@/lib/ground-school/bank-readiness';
+import {
   currentCurriculumLlmModel,
   listCurriculumChatModels,
   resolveCurriculumLlmModel,
   type CurriculumModelOption,
 } from '@/lib/ground-school/curriculum-models';
-import { SORTIE_REQUIREMENT } from '@/lib/ground-school/sortie-briefing';
+import { buildSortieRequirement } from '@/lib/ground-school/sortie-briefing';
 import { createLogger } from '@/lib/logger';
 import { getOwnerScopedDocumentStore } from '@/lib/server/agent-runtime/owner-scoped-documents';
 import { parseRunInput } from '@/lib/server/generation/run/input';
@@ -50,33 +58,42 @@ export interface CurriculumCandidateView {
   createdAt: string;
   label: string | null;
   status: CurriculumCandidateRow['status'];
+  assessmentLevel: AssessmentLevel;
   runState: string | null;
   scenesCompleted: number | null;
   scenesTotal: number | null;
   outlineTitle: string | null;
 }
 
+export interface CurriculumReleaseView {
+  stageId: string;
+  candidateId: string;
+  approvedBy: string;
+  approvedAt: string;
+  assessmentLevel: AssessmentLevel;
+}
+
 export interface CurriculumOverview {
   slot: typeof CURRICULUM_SLOT_RSAF_COMMANDS;
-  release: {
-    stageId: string;
-    candidateId: string;
-    approvedBy: string;
-    approvedAt: string;
-  } | null;
+  /** @deprecated Prefer `releases` — kept as the L1 release for older clients. */
+  release: CurriculumReleaseView | null;
+  releases: CurriculumReleaseView[];
   candidates: CurriculumCandidateView[];
   /** Authorized chat models admins may pick for generation. */
   models: CurriculumModelOption[];
   /** Current deployment default / last-applied llm slot. */
   currentModel: string | null;
+  bankReadiness: ReturnType<typeof bankReadinessForLevels>;
+  levelHelpers: Record<AssessmentLevel, string>;
 }
 
-function releaseView(row: CurriculumReleaseRow) {
+function releaseView(row: CurriculumReleaseRow): CurriculumReleaseView {
   return {
     stageId: row.stageId,
     candidateId: row.candidateId,
     approvedBy: row.approvedBy,
     approvedAt: row.approvedAt.toISOString(),
+    assessmentLevel: row.assessmentLevel,
   };
 }
 
@@ -94,6 +111,7 @@ async function syncCandidateFromRun(
       createdAt: candidate.createdAt.toISOString(),
       label: candidate.label,
       status: candidate.status,
+      assessmentLevel: candidate.assessmentLevel,
       runState: null,
       scenesCompleted: null,
       scenesTotal: null,
@@ -129,6 +147,7 @@ async function syncCandidateFromRun(
     createdAt: candidate.createdAt.toISOString(),
     label: candidate.label,
     status,
+    assessmentLevel: candidate.assessmentLevel,
     runState: run?.state ?? null,
     scenesCompleted: run?.progress.scenesCompleted ?? null,
     scenesTotal: run?.progress.scenesTotal ?? null,
@@ -136,19 +155,28 @@ async function syncCandidateFromRun(
   };
 }
 
-export async function getCurriculumOverview(slot: CurriculumSlot): Promise<CurriculumOverview> {
-  const [release, candidates] = await Promise.all([
-    getCurriculumRelease(slot),
-    listCurriculumCandidates(slot),
+export async function getCurriculumOverview(
+  slot: CurriculumSlot,
+  filterLevel?: AssessmentLevel,
+): Promise<CurriculumOverview> {
+  const [releases, candidates] = await Promise.all([
+    listCurriculumReleases(slot),
+    listCurriculumCandidates(slot, filterLevel),
   ]);
-  // Sync each candidate under its creator's owner id (run ownership).
   const views = await Promise.all(candidates.map((c) => syncCandidateFromRun(c, c.createdBy)));
+  const releaseViews = releases.map(releaseView);
+  const l1 = releaseViews.find((r) => r.assessmentLevel === 'L1') ?? null;
   return {
     slot: CURRICULUM_SLOT_RSAF_COMMANDS,
-    release: release ? releaseView(release) : null,
+    release: l1,
+    releases: releaseViews,
     candidates: views,
     models: listCurriculumChatModels(),
     currentModel: currentCurriculumLlmModel(),
+    bankReadiness: bankReadinessForLevels(),
+    levelHelpers: Object.fromEntries(
+      ASSESSMENT_LEVELS.map((level) => [level, assessmentLevelHelperText(level)]),
+    ) as Record<AssessmentLevel, string>,
   };
 }
 
@@ -158,8 +186,10 @@ export async function createCurriculumCandidates(input: {
   count?: number;
   /** Optional `provider:model` from the deployment allowlist. */
   model?: string;
-}): Promise<{ candidates: CurriculumCandidateView[]; model: string | null }> {
+  assessmentLevel?: AssessmentLevel;
+}): Promise<{ candidates: CurriculumCandidateView[]; model: string | null; level: AssessmentLevel }> {
   const count = Math.min(Math.max(input.count ?? 3, 1), 5);
+  const level = parseAssessmentLevel(input.assessmentLevel, 'L1');
   const { ownerId } = input.principal;
 
   const refused = await requiredModelRefusal(ownerId);
@@ -177,7 +207,7 @@ export async function createCurriculumCandidates(input: {
   }
 
   const parsed = parseRunInput({
-    requirement: SORTIE_REQUIREMENT,
+    requirement: buildSortieRequirement(level),
     materialIds: [],
     outlineReview: 'auto',
     ...(appliedModel ? { llmModel: appliedModel } : {}),
@@ -203,7 +233,8 @@ export async function createCurriculumCandidates(input: {
         slot: CURRICULUM_SLOT_RSAF_COMMANDS,
         runId: run.id,
         createdBy: ownerId,
-        label: `Candidate ${i + 1}${modelLabel}`,
+        label: `${level} Candidate ${i + 1}${modelLabel}`,
+        assessmentLevel: level,
       });
       created.push(await syncCandidateFromRun(row, ownerId));
     } catch (error) {
@@ -219,16 +250,15 @@ export async function createCurriculumCandidates(input: {
     }
   }
 
-  return { candidates: created, model: appliedModel };
+  return { candidates: created, model: appliedModel, level };
 }
 
 export async function approveCurriculumRelease(input: {
   candidateId: string;
   approvedBy: string;
-}): Promise<CurriculumOverview['release']> {
+}): Promise<CurriculumReleaseView> {
   const candidate = await getCurriculumCandidate(input.candidateId);
   if (candidate) {
-    // Refresh from the run before approving so a just-finished classroom is ready.
     await syncCandidateFromRun(candidate, candidate.createdBy);
   }
   const release = await approveCurriculumCandidate({
@@ -241,9 +271,17 @@ export async function approveCurriculumRelease(input: {
 
 export async function getPublicCurriculumStageId(
   slot: CurriculumSlot = CURRICULUM_SLOT_RSAF_COMMANDS,
+  assessmentLevel: AssessmentLevel = 'L1',
 ): Promise<string | null> {
-  const release = await getCurriculumRelease(slot);
+  const release = await getCurriculumRelease(slot, assessmentLevel);
   return release?.stageId ?? null;
+}
+
+export async function getPublicCurriculumReleases(
+  slot: CurriculumSlot = CURRICULUM_SLOT_RSAF_COMMANDS,
+): Promise<CurriculumReleaseView[]> {
+  const releases = await listCurriculumReleases(slot);
+  return releases.map(releaseView);
 }
 
 /**
@@ -268,7 +306,6 @@ export async function deleteCurriculumCandidate(input: {
       const store = await getOwnerScopedDocumentStore(deleted.createdBy);
       await store.deleteDocument(stageId);
     } catch (error) {
-      // Stage may already be gone; curriculum row is already removed.
       log.warn(`Failed to delete classroom stage ${stageId} for candidate ${deleted.id}`, error);
     }
   } else {

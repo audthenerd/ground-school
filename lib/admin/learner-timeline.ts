@@ -3,6 +3,7 @@
  * for the admin learners view.
  */
 import type { ClassroomPromptRow } from '@/lib/persistence/classroom-prompts';
+import type { ClassroomProbeResultRow } from '@/lib/persistence/classroom-probe-results';
 import type { ClassroomQuizScoreRow } from '@/lib/persistence/classroom-quiz-scores';
 import type { ClassroomSceneVisitRow } from '@/lib/persistence/classroom-scene-visits';
 
@@ -34,6 +35,18 @@ export type LearnerTimelineEvent =
       at: string;
       sceneId: string | null;
       promptText: string;
+    }
+  | {
+      kind: 'probe_evidence';
+      id: string;
+      at: string;
+      sceneId: string;
+      assessmentLevel: 'L2' | 'L3';
+      dimension: string;
+      passed: boolean;
+      evidenceNote: string;
+      /** Explicit: interview evidence does not change standing. */
+      subtitle: 'Interview evidence — not a standing change';
     };
 
 /** Score breakdown by Bloom's taxonomy level. */
@@ -62,6 +75,7 @@ export function mergeLearnerTimeline(input: {
   visits: ClassroomSceneVisitRow[];
   scores: ClassroomQuizScoreRow[];
   prompts: ClassroomPromptRow[];
+  probeResults?: ClassroomProbeResultRow[];
 }): LearnerTimelineEvent[] {
   const events: LearnerTimelineEvent[] = [];
 
@@ -117,6 +131,20 @@ export function mergeLearnerTimeline(input: {
       at: prompt.createdAt.toISOString(),
       sceneId: prompt.sceneId,
       promptText: prompt.promptText,
+    });
+  }
+
+  for (const probe of input.probeResults ?? []) {
+    events.push({
+      kind: 'probe_evidence',
+      id: probe.id,
+      at: probe.updatedAt.toISOString(),
+      sceneId: probe.sceneId,
+      assessmentLevel: probe.assessmentLevel,
+      dimension: probe.dimension,
+      passed: probe.passed,
+      evidenceNote: probe.evidenceNote,
+      subtitle: 'Interview evidence — not a standing change',
     });
   }
 

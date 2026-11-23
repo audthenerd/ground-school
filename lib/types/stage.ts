@@ -33,6 +33,9 @@ export type {
   QuizOption,
   QuizQuestion,
   QuizContent,
+  OqDimension,
+  ProbeItem,
+  ProbePackContent,
 } from '@openmaic/dsl';
 
 // The two discriminant guards are runtime functions, so they must be value
@@ -77,14 +80,14 @@ export type PBLContent = DslPBLContent & {
 /**
  * The app's full scene-content union: the contract's universal kinds plus the
  * app-widened feature kinds. This is what `@/lib/types/stage` callers have
- * always known as `SceneContent` (all four cases).
+ * always known as `SceneContent` (slide | quiz | interactive | pbl | probe_pack).
  */
 export type AppSceneContent = DslSceneContent | InteractiveContent | PBLContent;
 
 /**
- * The app's `SceneContent` — the full four-way union. Overrides the contract's
- * narrower `SceneContentBase` (slide | quiz) so call sites that switch on all
- * four `content.type` cases keep compiling.
+ * The app's `SceneContent` — the full content union. Overrides the contract's
+ * narrower `SceneContentBase` so call sites that switch on all
+ * `content.type` cases keep compiling.
  */
 export type SceneContent = AppSceneContent;
 

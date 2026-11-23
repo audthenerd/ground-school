@@ -1,0 +1,3 @@
+ID,Question,Field Type,Options,Correct Answer,Explanation,Topic,Subtopic,Difficulty,Status,Source
+Q191,The Air Defence and Operations Command operates a 24/7 operations centre that oversees all RSAF operations. Is this statement true or false?,Radio,True|False,True,"The Air Operations Control Group within ADOC functions as the RSAF Ops Centre, maintaining round-the-clock operational control over all RSAF operations.",RSAF Commands,,1.0,Draft,generation
+Q192,The Air Surveillance and Control Group falls under the Participation Command. Is this statement true or false?,Radio,True|False,False,"The Air Surveillance and Control Group sits under the Air Defence and Operations Command, not the Participation Command.",RSAF Commands,,1.0,Draft,generation

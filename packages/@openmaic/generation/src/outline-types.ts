@@ -69,7 +69,7 @@ export interface MediaGenerationRequest {
 /** A generation-ready description of one course scene. */
 export interface SceneOutline {
   id: string;
-  type: 'slide' | 'quiz' | 'interactive' | 'pbl';
+  type: 'slide' | 'quiz' | 'interactive' | 'pbl' | 'probe_pack';
   title: string;
   description: string;
   keyPoints: string[];
@@ -83,6 +83,10 @@ export interface SceneOutline {
     questionCount: number;
     difficulty: 'easy' | 'medium' | 'hard';
     questionTypes: ('single' | 'multiple' | 'text')[];
+  };
+  /** L2/L3 assessor probe pack config. */
+  probePackConfig?: {
+    assessmentLevel: 'L2' | 'L3';
   };
   /**
    * @deprecated Use widgetType + widgetOutline instead

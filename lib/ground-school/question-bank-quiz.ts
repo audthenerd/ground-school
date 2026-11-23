@@ -144,28 +144,48 @@ function shuffleInPlace<T>(items: T[], rand: () => number): void {
 
 /**
  * Calculate target counts per Bloom's level from distribution percentages.
+ * When a custom distribution is provided, only levels with positive weight
+ * receive targets (and remainder); zero-weight levels stay at 0.
  */
 function calculateBloomsTargets(
   total: number,
-  distribution: BloomsDistribution,
+  distribution: BloomsDistribution | undefined,
+  allowUnclassified: boolean,
 ): Map<BloomsLevel | null, number> {
   const targets = new Map<BloomsLevel | null, number>();
   let allocated = 0;
-  const dist = { ...DEFAULT_BLOOMS_DISTRIBUTION, ...distribution };
+  const dist =
+    distribution === undefined
+      ? { ...DEFAULT_BLOOMS_DISTRIBUTION }
+      : { ...Object.fromEntries(BLOOMS_LEVELS.map((l) => [l, 0])), ...distribution };
+
+  const weighted = BLOOMS_LEVELS.filter((level) => (dist[level] ?? 0) > 0);
 
   for (const level of BLOOMS_LEVELS) {
-    const target = Math.round((dist[level] / 100) * total);
+    const weight = dist[level] ?? 0;
+    const target = weight > 0 ? Math.round((weight / 100) * total) : 0;
     targets.set(level, target);
     allocated += target;
   }
 
-  // Distribute remainder to 'understand' (most common level)
+  // Distribute remainder to the first weighted level (or understand for default mix)
   if (allocated < total) {
-    targets.set('understand', (targets.get('understand') ?? 0) + (total - allocated));
+    const remainderBucket = weighted[0] ?? 'understand';
+    targets.set(remainderBucket, (targets.get(remainderBucket) ?? 0) + (total - allocated));
+  } else if (allocated > total) {
+    // Rounding can overshoot — trim from the largest bucket
+    let overshoot = allocated - total;
+    for (const level of [...BLOOMS_LEVELS].reverse()) {
+      if (overshoot <= 0) break;
+      const current = targets.get(level) ?? 0;
+      if (current <= 0) continue;
+      const cut = Math.min(current, overshoot);
+      targets.set(level, current - cut);
+      overshoot -= cut;
+    }
   }
 
-  // Unclassified questions can fill gaps
-  targets.set(null, 0);
+  targets.set(null, allowUnclassified ? 0 : 0);
 
   return targets;
 }
@@ -202,8 +222,16 @@ export function sampleBankItemsForQuiz(options: {
   count?: number;
   seed: string;
   bloomsDistribution?: BloomsDistribution;
+  /**
+   * When true (default for legacy mixed quizzes), unmet Bloom quotas may be
+   * filled from any remaining items. When false (level-scoped L1–L3 quizzes),
+   * only items matching positive-weight Bloom levels are used — never refill
+   * with lower/other levels.
+   */
+  allowOverflow?: boolean;
 }): QuestionBankItem[] {
   const count = options.count ?? SORTIE_QUIZ_QUESTION_COUNT;
+  const allowOverflow = options.allowOverflow ?? options.bloomsDistribution === undefined;
   const pool = [...filterQuestionBank(options.topics ?? DEFAULT_SORTIE_TOPICS)];
   const rand = mulberry32(hashSeed(options.seed));
 
@@ -219,7 +247,7 @@ export function sampleBankItemsForQuiz(options: {
 
   // Group by Bloom's level
   const groups = groupByBloomsLevel(sortedPool);
-  const targets = calculateBloomsTargets(count, options.bloomsDistribution ?? {});
+  const targets = calculateBloomsTargets(count, options.bloomsDistribution, allowOverflow);
 
   // Sample from each level up to its target
   const selected: QuestionBankItem[] = [];
@@ -237,14 +265,32 @@ export function sampleBankItemsForQuiz(options: {
     overflow += Math.max(0, target - levelItems.length);
   }
 
-  // Second pass: fill overflow with remaining questions from any level
-  // Prefer choice questions when filling
-  if (overflow > 0 && selected.length < count) {
+  // Second pass: fill overflow — either any remaining (legacy) or only
+  // positive-weight Bloom levels (level-scoped).
+  if (overflow > 0 && selected.length < count && allowOverflow) {
     const fillPool: QuestionBankItem[] = [];
     for (const [, items] of remaining) {
       fillPool.push(...items);
     }
-    // Sort fill pool to prefer choice questions, then shuffle within each type
+    const fillChoice = fillPool.filter(
+      (item) => fieldTypeToQuizType(item.fieldType) !== 'short_answer',
+    );
+    const fillText = fillPool.filter(
+      (item) => fieldTypeToQuizType(item.fieldType) === 'short_answer',
+    );
+    shuffleInPlace(fillChoice, rand);
+    shuffleInPlace(fillText, rand);
+    const orderedFill = [...fillChoice, ...fillText];
+    const needed = Math.min(overflow, count - selected.length, orderedFill.length);
+    selected.push(...orderedFill.slice(0, needed));
+  } else if (overflow > 0 && selected.length < count && !allowOverflow) {
+    const allowed = new Set(
+      BLOOMS_LEVELS.filter((level) => (targets.get(level) ?? 0) > 0),
+    );
+    const fillPool: QuestionBankItem[] = [];
+    for (const [level, items] of remaining) {
+      if (level !== null && allowed.has(level)) fillPool.push(...items);
+    }
     const fillChoice = fillPool.filter(
       (item) => fieldTypeToQuizType(item.fieldType) !== 'short_answer',
     );
@@ -268,6 +314,8 @@ export function sampleQuizQuestionsFromBank(options: {
   topics?: readonly string[];
   count?: number;
   seed: string;
+  bloomsDistribution?: BloomsDistribution;
+  allowOverflow?: boolean;
 }): QuizQuestion[] {
   return sampleBankItemsForQuiz(options).map(bankItemToQuizQuestion);
 }
