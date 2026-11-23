@@ -35,8 +35,10 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY packages/ ./packages/
 COPY scripts/ ./scripts/
 
-RUN --mount=type=cache,id=s/69007862-9d80-46bb-8dda-dfd790f022bb-/root/.local/share/pnpm/store,target=/root/.local/share/pnpm/store \
-    npm_registry="$NPM_REGISTRY"; \
+# Railway rejects bare BuildKit cache mount ids (must be prefixed with the
+# service id). Skip the mount so the same Dockerfile validates on Railway and
+# still builds locally / in Compose — install is just uncached on the builder.
+RUN npm_registry="$NPM_REGISTRY"; \
     while [ "${npm_registry%/}" != "$npm_registry" ]; do \
       npm_registry="${npm_registry%/}"; \
     done; \
