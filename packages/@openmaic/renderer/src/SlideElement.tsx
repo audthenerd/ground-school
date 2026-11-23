@@ -25,8 +25,8 @@ import { BaseAudioElement } from './elements/audio/BaseAudioElement';
 import { BaseCodeElement } from './elements/code/BaseCodeElement';
 
 const DEFAULT_THEME = {
-  fontColor: '#333333',
-  fontName: 'Microsoft YaHei',
+  fontColor: '#B7F03E',
+  fontName: 'IBM Plex Sans',
 } as const;
 
 export interface SlideElementProps {

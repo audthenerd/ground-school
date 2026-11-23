@@ -308,7 +308,7 @@ async function renderFrame(
     const output = await slideToPng(resolved, {
       width,
       pixelRatio: 1,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#CCD3BA',
       format: 'blob',
     });
     return output instanceof Blob ? output : await fetch(output).then((r) => r.blob());

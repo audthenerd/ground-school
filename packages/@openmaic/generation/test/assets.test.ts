@@ -81,6 +81,23 @@ describe('packaged prompt assets', () => {
     expect(actualFiles).toEqual(expectedFiles);
   });
 
+  test('keeps classroom slide generation on the machine-plate palette', () => {
+    const system = readFileSync(
+      join(PACKAGE_ROOT, 'templates', 'slide-content', 'system.md'),
+      'utf8',
+    );
+    const user = readFileSync(join(PACKAGE_ROOT, 'templates', 'slide-content', 'user.md'), 'utf8');
+
+    expect(system).toContain('Machine-plate visual system');
+    expect(system).toContain('`#CCD3BA`');
+    expect(system).toContain('`#111111`');
+    expect(system).toContain('`#B7F03E`');
+    expect(system).toContain('`#F0622A` means only a limit');
+    expect(system).toContain('Never use gradients');
+    expect(user).toContain('"color":"#CCD3BA"');
+    expect(user).toContain('"fill":"#111111"');
+  });
+
   test('instructs Pyodide widgets to load micropip before importing it', () => {
     const source = readFileSync(
       join(PACKAGE_ROOT, 'templates', 'code-content', 'system.md'),

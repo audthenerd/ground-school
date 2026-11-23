@@ -93,6 +93,14 @@ describe('SlideCanvas', () => {
     expect(container.querySelector('style')?.textContent).toContain("content: '\\00a0';");
   });
 
+  it('uses a machined chamfer instead of a soft card shadow', () => {
+    const { container } = render(<SlideCanvas slide={slide} scale={1} />);
+    const canvasFrame = container.firstElementChild?.querySelector<HTMLElement>(':scope > div');
+
+    expect(canvasFrame?.style.borderRadius).toBe('3px');
+    expect(canvasFrame?.style.boxShadow).toBe('inset 0 0 0 1px rgba(243, 238, 221, 0.16)');
+  });
+
   it('does not render elements listed in hiddenElementIds', () => {
     const html = renderToStaticMarkup(
       createElement(SlideCanvas, {

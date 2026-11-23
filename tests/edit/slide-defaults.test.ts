@@ -86,6 +86,12 @@ describe('createBlankSlideScene', () => {
     expect(s.content.schemaVersion).toBe(CURRENT_SLIDE_CONTENT_SCHEMA_VERSION);
     expect(s.content.canvas.elements).toEqual([]);
     expect(s.content.canvas.background?.type).toBe('solid');
+    expect(s.content.canvas.background).toEqual({ type: 'solid', color: '#CCD3BA' });
+    expect(s.content.canvas.theme).toMatchObject({
+      backgroundColor: '#CCD3BA',
+      fontColor: '#B7F03E',
+      fontName: 'IBM Plex Sans',
+    });
   });
 
   it('starts with no actions (engine dwells; no seeded blank speech)', () => {

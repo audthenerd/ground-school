@@ -362,10 +362,10 @@ export function pptxSlideNumbers(
 // ── Placeholder rendering ──
 
 const FALLBACK_THEME = {
-  backgroundColor: '#ffffff',
-  fontColor: '#333333',
-  fontName: 'Microsoft YaHei',
-  accent: '#5b6cf9',
+  backgroundColor: '#CCD3BA',
+  fontColor: '#B7F03E',
+  fontName: 'IBM Plex Sans',
+  accent: '#B7F03E',
 };
 
 export interface PlaceholderStyle {

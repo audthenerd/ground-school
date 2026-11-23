@@ -88,7 +88,7 @@ export function createDefaultTableElement(
         text: '',
       })),
     ),
-    outline: { width: 2, color: '#eeece1', style: 'solid' },
+    outline: { width: 1, color: '#3C3C36', style: 'solid' },
   };
 }
 
@@ -107,9 +107,9 @@ export function createDefaultChartElement(id: string, chartType: ChartType): PPT
       legends: ['Series 1'],
       series: [[24, 36, 28, 42]],
     },
-    themeColors: ['#5b8def', '#8b5cf6', '#10b981', '#f59e0b'],
-    textColor: '#333333',
-    lineColor: '#d4d4d8',
+    themeColors: ['#B7F03E', '#F3EEDD', '#8B967C', '#5E6656'],
+    textColor: '#B7F03E',
+    lineColor: '#3C3C36',
   };
 }
 
