@@ -88,7 +88,11 @@ COPY . .
 # memory, so it does not by itself prevent a host- or VM-level OOM.
 RUN NODE_OPTIONS=--max-old-space-size=1024 pnpm run build:packages
 
-RUN pnpm build
+# next build is much hungrier than build:packages (Turbopack + large app graph).
+# Cap the V8 heap at 8 GiB so the limit is explicit rather than derived from the
+# cgroup. The builder host/container still needs at least that much RAM — this
+# flag bounds the JS heap only; Next workers and native allocations sit on top.
+RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 
 # ---- Stage 4: Runner ----
 FROM node:22-alpine AS runner
