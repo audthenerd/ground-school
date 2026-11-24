@@ -13,7 +13,7 @@ import {
   buildVisionUserContent,
   partitionImagesForVision,
 } from '@openmaic/generation';
-import type { AgentInfo } from '@openmaic/generation';
+import type { AgentInfo, GeneratedSceneContent } from '@openmaic/generation';
 import type {
   SceneOutline,
   PdfImage,
@@ -78,7 +78,8 @@ export interface SceneContentInput {
 
 export type SceneContentRefusal = 'generation-failed';
 
-export type GeneratedSceneContent = NonNullable<Awaited<ReturnType<typeof generateContent>>>;
+/** Package union plus assessor probe packs filled locally (not via LLM). */
+export type { GeneratedSceneContent };
 
 export interface SceneContentResult {
   content: GeneratedSceneContent;

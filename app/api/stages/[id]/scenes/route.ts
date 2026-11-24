@@ -27,10 +27,9 @@ import { getOwnerScopedDocumentStore } from '@/lib/server/agent-runtime/owner-sc
 import { ownerJson, ownerNotFound } from '@/lib/server/agent-runtime/route-response';
 import { withRequestOwner } from '@/lib/server/identity/with-owner';
 
-export const runtime = 'nodejs';
+import { MAX_BATCH_SCENE_IDS } from './constants';
 
-/** Upper bound on `ids` — see the file header. */
-export const MAX_BATCH_SCENE_IDS = 200;
+export const runtime = 'nodejs';
 
 /**
  * Scene ids travel the same wire as stage ids, so they face the same driver
