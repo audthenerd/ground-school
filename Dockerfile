@@ -89,10 +89,10 @@ COPY . .
 RUN NODE_OPTIONS=--max-old-space-size=1024 pnpm run build:packages
 
 # next build is much hungrier than build:packages (Turbopack + large app graph).
-# Cap the V8 heap at 8 GiB so the limit is explicit rather than derived from the
-# cgroup. The builder host/container still needs at least that much RAM — this
-# flag bounds the JS heap only; Next workers and native allocations sit on top.
-RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
+# Cap the V8 heap at 4 GiB so it fits an 8 GiB builder (e.g. t3.large ~7.6 GiB)
+# after Docker, the OS, and Next workers. 8192 OOMs those hosts because the heap
+# ceiling alone can exceed available RAM. This flag bounds the JS heap only.
+RUN NODE_OPTIONS=--max-old-space-size=4096 pnpm build
 
 # ---- Stage 4: Runner ----
 FROM node:22-alpine AS runner
