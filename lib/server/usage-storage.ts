@@ -128,8 +128,15 @@ export async function recordUsage(
     };
 
     const dir = usageDir(opts.baseDir);
-    await fs.mkdir(dir, { recursive: true });
-    await fs.appendFile(monthlyFile(dir, now), JSON.stringify(record) + '\n', 'utf-8');
+    // turbopackIgnore: baseDir is test-injected; default is data/usage, but the
+    // path is not a static literal at the call site so Turbopack would otherwise
+    // trace the whole project into the standalone output and fail the build.
+    await fs.mkdir(/* turbopackIgnore: true */ dir, { recursive: true });
+    await fs.appendFile(
+      /* turbopackIgnore: true */ monthlyFile(dir, now),
+      JSON.stringify(record) + '\n',
+      'utf-8',
+    );
   } catch (err) {
     log.warn('Failed to record usage (ignored):', err);
   }
@@ -179,7 +186,10 @@ export async function readUsageRecords(opts: ReadOptions = {}): Promise<UsageRec
   const dir = usageDir(opts.baseDir);
   let files: string[];
   try {
-    files = (await fs.readdir(dir)).filter((f) => f.endsWith('.jsonl'));
+    // See recordUsage: dynamic dir would make Turbopack trace the whole project.
+    files = (await fs.readdir(/* turbopackIgnore: true */ dir)).filter((f) =>
+      f.endsWith('.jsonl'),
+    );
   } catch {
     return [];
   }
@@ -191,7 +201,7 @@ export async function readUsageRecords(opts: ReadOptions = {}): Promise<UsageRec
   for (const file of files.sort()) {
     let content: string;
     try {
-      content = await fs.readFile(path.join(dir, file), 'utf-8');
+      content = await fs.readFile(/* turbopackIgnore: true */ path.join(dir, file), 'utf-8');
     } catch {
       continue;
     }
