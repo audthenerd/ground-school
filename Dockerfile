@@ -88,11 +88,12 @@ COPY . .
 # memory, so it does not by itself prevent a host- or VM-level OOM.
 RUN NODE_OPTIONS=--max-old-space-size=1024 pnpm run build:packages
 
-# next build is much hungrier than build:packages (Turbopack + large app graph).
-# Cap the V8 heap at 4 GiB so it fits an 8 GiB builder (e.g. t3.large ~7.6 GiB)
-# after Docker, the OS, and Next workers. 8192 OOMs those hosts because the heap
-# ceiling alone can exceed available RAM. This flag bounds the JS heap only.
-RUN NODE_OPTIONS=--max-old-space-size=4096 pnpm build
+# Turbopack production builds routinely OOM an 8 GiB EC2 builder (t3.large
+# ~7.6 GiB) even with a capped V8 heap. Use webpack + one compile worker and a
+# 3 GiB heap so Docker/OS/native allocations still fit. Local `pnpm build`
+# stays on Turbopack.
+ENV OPENMAIC_BUILD_CPUS=1
+RUN NODE_OPTIONS=--max-old-space-size=3072 pnpm run build:docker
 
 # ---- Stage 4: Runner ----
 FROM node:22-alpine AS runner

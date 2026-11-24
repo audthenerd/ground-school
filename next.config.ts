@@ -54,6 +54,12 @@ const nextConfig: NextConfig = {
   ],
   experimental: {
     proxyClientMaxBodySize: '200mb',
+    // Lowers peak RSS for `next build --webpack` (Docker / small builders).
+    webpackMemoryOptimizations: true,
+    // Optional: set OPENMAIC_BUILD_CPUS=1 in Docker to serialize compile workers.
+    ...(process.env.OPENMAIC_BUILD_CPUS
+      ? { cpus: Number(process.env.OPENMAIC_BUILD_CPUS) }
+      : {}),
   },
   async headers() {
     const extraAncestors = process.env.ALLOWED_FRAME_ANCESTORS?.trim();
