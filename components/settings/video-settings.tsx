@@ -1,6 +1,6 @@
 'use client';
 
-import { VIDEO_PROVIDERS } from '@/lib/media/video-providers';
+import { VIDEO_PROVIDERS } from '@/lib/media/video-provider-catalog';
 import type { VideoProviderId } from '@/lib/media/types';
 import { MediaServicePanel } from './media-service-panel';
 import type { ServicePanelProps } from './server-settings';

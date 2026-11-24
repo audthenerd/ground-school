@@ -20,7 +20,7 @@ import { WEB_FETCH_PROVIDERS } from '@/lib/web-fetch/registry';
 import { PROVIDERS } from '@/lib/ai/providers';
 import { ASR_PROVIDERS, TTS_PROVIDERS } from '@/lib/audio/constants';
 import { IMAGE_PROVIDERS } from '@/lib/media/image-providers';
-import { VIDEO_PROVIDERS } from '@/lib/media/video-providers';
+import { VIDEO_PROVIDERS } from '@/lib/media/video-provider-catalog';
 import { PDF_PROVIDERS } from '@/lib/pdf/constants';
 import { WEB_SEARCH_PROVIDERS } from '@/lib/web-search/constants';
 import {

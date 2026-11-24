@@ -13,13 +13,28 @@
  * the asset registry; the lifecycle only coordinates which worker may turn a
  * source asset into a text-bearing derivative.
  */
-import { randomBytes } from 'node:crypto';
-
 const CROCKFORD_BASE32 = '0123456789abcdefghjkmnpqrstvwxyz';
 
-/** Allocate a private material id from 128 random bits. */
+/** Bytes of randomness in an allocated material id. */
+const MATERIAL_ID_ENTROPY_BYTES = 16;
+
+/**
+ * Allocate a private material id from 128 random bits.
+ *
+ * Uses Web Crypto (`crypto.getRandomValues`) so this module stays safe on the
+ * package's browser entry — `node:crypto` breaks Next/webpack client bundles
+ * (`UnhandledSchemeError` for the `node:` URI scheme).
+ */
 export function createMaterialId(): string {
-  const bytes = randomBytes(16);
+  const getRandomValues = globalThis.crypto?.getRandomValues;
+  if (!getRandomValues) {
+    throw new Error(
+      'Web Crypto crypto.getRandomValues is unavailable; material id allocation requires a secure context (HTTPS or localhost).',
+    );
+  }
+  const bytes = new Uint8Array(MATERIAL_ID_ENTROPY_BYTES);
+  getRandomValues.call(globalThis.crypto, bytes);
+
   let bits = 0;
   let value = 0;
   let encoded = '';

@@ -36,7 +36,7 @@ const REGISTRY_SOURCES: readonly RegistrySource[] = [
   { file: 'lib/ai/providers.ts', declarations: ['PROVIDERS'] },
   { file: 'lib/audio/constants.ts', declarations: ['TTS_PROVIDERS', 'ASR_PROVIDERS'] },
   { file: 'lib/media/image-providers.ts', declarations: ['IMAGE_PROVIDERS'] },
-  { file: 'lib/media/video-providers.ts', declarations: ['VIDEO_PROVIDERS'] },
+  { file: 'lib/media/video-provider-catalog.ts', declarations: ['VIDEO_PROVIDERS'] },
   { file: 'lib/web-search/constants.ts', declarations: ['WEB_SEARCH_PROVIDERS'] },
   { file: 'lib/web-fetch/registry.ts', declarations: ['WEB_FETCH_PROVIDERS'] },
   { file: 'lib/pdf/constants.ts', declarations: ['PDF_PROVIDERS'] },

@@ -210,7 +210,7 @@ export interface ImageGenerationResult {
  * Video Provider IDs
  *
  * Add new video providers here as union members.
- * Keep in sync with VIDEO_PROVIDERS registry in constants.ts
+ * Keep in sync with VIDEO_PROVIDERS registry in video-provider-catalog.ts
  */
 export type VideoProviderId =
   | 'seedance'
