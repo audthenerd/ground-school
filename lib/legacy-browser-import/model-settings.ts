@@ -28,7 +28,7 @@ import type { SlotCapability } from '@/lib/config/model-slots';
 import { presetIdFor, tokenPlanPresetId } from '@/lib/config/preset-ids';
 import { TOKEN_PLAN_PRESETS, type TokenPlanModality } from '@/lib/config/token-plan-presets';
 import { IMAGE_PROVIDERS } from '@/lib/media/image-providers';
-import { VIDEO_PROVIDERS } from '@/lib/media/video-providers';
+import { VIDEO_PROVIDERS } from '@/lib/media/video-provider-catalog';
 import { PDF_PROVIDERS } from '@/lib/pdf/constants';
 import { WEB_SEARCH_PROVIDERS } from '@/lib/web-search/constants';
 

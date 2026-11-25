@@ -82,6 +82,12 @@ const TYPE_THEME: Record<
     accent: 'bg-amber-500',
     dot: 'bg-amber-400',
   },
+  probe_pack: {
+    chip: 'bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-300',
+    chipHover: 'hover:bg-violet-100/80 dark:hover:bg-violet-500/15',
+    accent: 'bg-violet-500',
+    dot: 'bg-violet-400',
+  },
 };
 
 function normalizeOrder(outlines: SceneOutline[]): SceneOutline[] {

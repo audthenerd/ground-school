@@ -12,7 +12,7 @@ import type { SlotCapability } from '@/lib/config/model-slots';
 import { TOKEN_PLAN_PRESETS } from '@/lib/config/token-plan-presets';
 import { tokenPlanPresetId } from '@/lib/config/preset-ids';
 import { IMAGE_PROVIDERS } from '@/lib/media/image-providers';
-import { VIDEO_PROVIDERS } from '@/lib/media/video-providers';
+import { VIDEO_PROVIDERS } from '@/lib/media/video-provider-catalog';
 import type { ModelSettingsView } from '@/lib/model-settings/client';
 import { entryConfigured, serviceEntries, type ServiceEntry } from '@/lib/model-settings/services';
 import { PDF_PROVIDERS } from '@/lib/pdf/constants';

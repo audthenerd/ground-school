@@ -9,8 +9,6 @@
  * a deployment that provisions this table with its own migration tooling must
  * reproduce it exactly for `ensureUserSkillSchema` to stay the intended no-op.
  */
-import { randomBytes } from 'node:crypto';
-
 import { applySchemaMigrations, type SchemaMigrationSet } from '../pg-migrations.js';
 import type { Queryable, WithTransaction } from '../runtime/pg.js';
 import {
@@ -26,6 +24,21 @@ import {
 } from './types.js';
 
 export type { QueryResult, Queryable, WithTransaction } from '../runtime/pg.js';
+
+/** Mint a skill id without `node:crypto` (keeps the package barrel client-safe). */
+function createUserSkillId(): string {
+  const getRandomValues = globalThis.crypto?.getRandomValues;
+  if (!getRandomValues) {
+    throw new Error(
+      'Web Crypto crypto.getRandomValues is unavailable; skill id allocation requires a secure context.',
+    );
+  }
+  const bytes = new Uint8Array(12);
+  getRandomValues.call(globalThis.crypto, bytes);
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return `usk_${btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')}`;
+}
 
 export interface UserSkillTableNames {
   skills: string;
@@ -250,7 +263,7 @@ export class PgUserSkillStore implements UserSkillStore {
     this.queryable = queryable;
     this.transactionHook = options.withTransaction;
     this.tableNames = resolveTableNames(options.tableNames);
-    this.createId = options.createId ?? (() => `usk_${randomBytes(12).toString('base64url')}`);
+    this.createId = options.createId ?? createUserSkillId;
     this.resolveOwner = options.resolveFinalOwner ?? (async (_transaction, ownerId) => ownerId);
   }
 
